@@ -1,5 +1,7 @@
 ## 平台简介
 
+[前后端分离版：http://106.12.122.249/](http://106.12.122.249/)
+
 >  闲鹿工作流是一款基于 RuoYi 4.x + Activiti 6.x + Spring Boot 2.x + Thymeleaf 3.x 的开源工作流管理系统~
 >
 >  作为技术小菜鸟的我，一直对学习 Activiti 工作流框架求之不得，断断续续入门入了三次。这次能够写出这个项目主要归功于 ☕🐇 的[《Activiti 实战》](https://github.com/henryyan/activiti-in-action-codes)。这本书给予了我很大的帮助。最后但仍然重要的，我要感谢[若依框架](http://www.ruoyi.vip/)，她让我实现快速集成工作流 WEB 应用。—— 一只闲鹿
