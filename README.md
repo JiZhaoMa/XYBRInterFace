@@ -1,5 +1,7 @@
 ## 平台简介
 
+官方文档：[闲鹿技术](http://doc.xianlutech.com)
+
 [前后端分离版：http://106.12.122.249/](http://106.12.122.249/)
 
 >  闲鹿工作流是一款基于 RuoYi 4.x + Activiti 6.x + Spring Boot 2.x + Thymeleaf 3.x 的开源工作流管理系统~
