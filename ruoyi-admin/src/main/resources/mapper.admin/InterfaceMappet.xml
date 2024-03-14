@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.mapper.InterfaceMapper">
+
+	<resultMap type="Order" id="Order">
+		<id     property="productCode"        column="product_code"/>
+		<result property="xybrOrderNo"        column="xybr_order_no"/>
+		<result property="agentOrderNo"       column="agent_order_no"/>
+		<result property="orderNum"           column="order_num"/>
+		<result property="orderOnlineDate"    column="order_online_date"/>
+		<result property="smtNum"      		  column="smt_num"/>
+		<result property="chaJianNum"         column="chaJian_num"/>
+		<result property="ftNum"              column="ft_num"/>
+		<result property="zhongYanNum"        column="zhongYan_num"/>
+		<result property="zuZhuangNum"        column="zuZhuang_num"/>
+		<result property="zhengJiNum"         column="zhengJi_num"/>
+		<result property="laoHuaQianNum"      column="laoHuaQian_num"/>
+		<result property="laoHuaNum"          column="laoHua_num"/>
+		<result property="laoHuaHouNum"       column="laoHuaHou_num"/>
+		<result property="inBound"            column="inBound"/>
+		<result property="agentName"          column="agentName"/>
+	</resultMap>
+
+	<insert id="batchUserPost">
+		insert into sys_user_post(user_id, post_id) values
+		<foreach item="item" index="index" collection="list" separator=",">
+			(#{item.userId},#{item.postId})
+		</foreach>
+	</insert>
+
+</mapper> 
