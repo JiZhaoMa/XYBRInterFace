@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<head>
+    <th:block th:include="include :: header('')" />
+</head>
+<body class="gray-bg" style="background-color: #05244d !important;">
+     <div class="container-div">
+        <div class="row">
+            <div class="col-sm-12 search-collapse">
+                <form id="data-form">
+                    <div class="select-list">
+                        <ul>
+                            <li>
+                                星源订单编号：<input type="text" id="xybrProductOrder" name="xybrProductOrder" th:value="${orderId}"/>
+                            </li>
+                            <li>
+                                <a class="btn btn-primary btn-rounded btn-sm" onclick="$.table.search()"><i class="fa fa-search"></i>&nbsp;搜索</a>
+                                <a class="btn btn-warning btn-rounded btn-sm" onclick="resetPre()"><i class="fa fa-refresh"></i>&nbsp;重置</a>
+                            </li>
+                        </ul>
+                    </div>
+                </form>
+            </div>
+            <div class="col-sm-12 select-table table-striped" style="background-color: #05244d !important;">
+                <table id="bootstrap-table" style="background-color: #05244d !important;"></table>
+            </div>
+        </div>
+    </div>
+    <th:block th:include="include :: footer" />
+    <script th:inline="javascript">
+        var prefix = ctx + "system/xybrOrder";
+        $(function() {
+            var options = {
+                url: prefix + "/getDetailList",
+                modalName: "生产工单管理",
+                queryParams: queryParams,
+                columns: [{
+                    checkbox: true
+                },
+                    {
+                        field: '星源生产po',
+                        title: '星源生产po'
+                    },
+                    {
+                        field: '工厂生产po',
+                        title: '工厂生产po'
+                    },
+                    {
+                        field: '工单数量',
+                        title: '工单数量'
+                    },
+                    {
+                        field: 'smt订单上线时间',
+                        title: 'smt订单上线时间'
+                    },
+                    {
+                        field: 'smt数量',
+                        title: 'smt数量'
+                    },
+                    {
+                        field: '插件数量',
+                        title: '插件数量'
+                    },
+                    {
+                        field: 'ft数量',
+                        title: 'ft数量'
+                    },
+                    {
+                        field: '单板终验数量',
+                        title: '单板终验数量'
+                    },
+                    {
+                        field: '单板组装数量',
+                        title: '单板组装数量'
+                    },
+                    {
+                        field: '创建时间',
+                        title: '创建时间'
+                    },
+                    {
+                        field: '工厂名称',
+                        title: '工厂名称'
+                    }]
+            };
+            $.table.init(options);
+        });
+
+        function queryParams(params) {
+            var search = $.table.queryParams(params);
+            search.dictType = $("#xybrProductOrder").val();
+            return search;
+        }
+    </script>
+</body>
+</html>

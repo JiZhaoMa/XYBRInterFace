@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<head>
+    <th:block th:include="include :: header('')" />
+</head>
+<body class="gray-bg" style="background-color: #05244d !important;">
+<div class="container-div">
+    <div class="row">
+        <div class="col-sm-12 search-collapse" style="background-color: #05244d !important;">
+            <form id="formId">
+                <div class="select-list">
+                    <ul>
+                        <li>
+                            <label style="color: #ffffff">单号：</label>
+                            <input style="color: #ffffff !important" type="text" id="xybrProductOrder" name="xybrProductOrder"/>
+                        </li>
+                        <li class="select-time">
+                            <label style="color: #ffffff !important">时间：</label>
+                            <input type="text" class="time-input" id="startTime" style="color: #ffffff !important" placeholder="开始时间" name="params[begin创建时间]"/>
+                            <span>-</span>
+                            <input type="text" class="time-input" id="endTime" style="color: #ffffff !important" placeholder="结束时间" name="params[end创建时间]"/>
+                        </li>
+                        <li>
+                            <label style="color: #ffffff !important">工厂名称：</label>
+                            <input style="color: #ffffff !important" type="text" id="agentName" name="agentName"/>
+                        </li>
+                        <li>
+                            <a class="btn btn-primary btn-rounded btn-sm" onclick="$.treeTable.search()"><i class="fa fa-search"></i>&nbsp;搜索</a>
+                            <a class="btn btn-warning btn-rounded btn-sm" onclick="$.form.reset()"><i class="fa fa-refresh"></i>&nbsp;重置</a>
+                        </li>
+                    </ul>
+                </div>
+            </form>
+        </div>
+        <div class="col-sm-12 select-table table-striped" style="background-color: #05244d !important;">
+            <table id="bootstrap-tree-table" style="background-color: #05244d !important;"></table>
+        </div>
+    </div>
+</div>
+<th:block th:include="include :: footer" />
+<script th:inline="javascript">
+    var prefix = ctx + "system/xybrOrder";
+    $(function() {
+        var options = {
+            code: "xybrProductOrder",
+            parentCode: "parentId",
+            uniqueId: "xybrProductOrder",
+            expandAll: false,
+            expandFirst: false,
+            url: prefix + "/list",
+            modalName: "生产工单管理",
+            columns: [{
+                field: 'selectItem',
+                radio: true
+            },
+                {
+                    field: 'xybrProductOrder',
+                    title: '生产PO',
+                    width: '15%',
+                },
+                {
+                    field: 'productCode',
+                    title: '产品编码',
+                    width: '15%',
+                },
+                {
+                    field: 'orderNum',
+                    title: '下单数量',
+                    width: '10%',
+                },
+                {
+                    field: 'smtNum',
+                    title: 'SMT',
+                    width: '10%',
+                },
+                {
+                    field: 'chaJianNum',
+                    title: '插件',
+                    width: '10%',
+                },
+                {
+                    field: 'ftNum',
+                    title: 'FT',
+                    width: '10%',
+                },
+                {
+                    field: 'danBanZhongYanNum',
+                    title: '单板终验',
+                    width: '10%',
+                },
+                {
+                    field: 'danBanZuzhuangNum',
+                    title: '单板组装',
+                    width: '10%',
+                },
+                {
+                    field: 'zhengJiZuzhaungNum',
+                    title: '整机组装',
+                    width: '10%',
+                },
+                {
+                    field: 'laoHuaBeforNum',
+                    title: '老化前',
+                    width: '10%',
+                },
+                {
+                    field: 'laoHuaNum',
+                    title: '老化',
+                    width: '10%',
+                },
+                {
+                    field: 'laoHuaAfterNum',
+                    title: '老化后',
+                    width: '10%',
+                },
+                {
+                    field: 'inbound',
+                    title: '入库',
+                    width: '10%',
+                },
+                {
+                    field: 'agentName',
+                    title: '工厂名称',
+                    width: '10%',
+                }]
+        };
+        $.treeTable.init(options);
+    });
+    window.onload = function (){
+        var thead = document.getElementsByTagName('thead');
+
+        // 循环遍历所有获取到的thead元素
+        for (var i = 0; i < thead.length; i++) {
+            // 修改每个thead的样式
+            thead[i].style.color = '#ffffff'; // 改变字体颜色为红色
+            thead[i].style.fontWeight = 'bold !important'; // 改变字体加黑
+            thead[i].style.backgroundColor = '#05244d'; // 改变背景颜色为黄色
+        }
+        var tbody = document.getElementsByTagName('tbody');
+
+        // 循环遍历所有获取到的thead元素
+        for (var i = 0; i < tbody.length; i++) {
+            // 修改每个thead的样式
+            tbody[i].style.color = '#6bdba1'; // 改变字体颜色为红色
+            tbody[i].style.fontWeight = 'bold'; // 改变字体加黑
+            tbody[i].style.backgroundColor = '#05244d'; // 改变背景颜色为黄色
+        }
+
+        const element = document.querySelector('div.fixed-table-pagination');
+        if (element) {
+            element.remove();
+        }
+        const button = document.querySelector('div.columns.columns-right.btn-group.pull-right');
+        if (button) {
+            button.remove();
+        }
+        const buttonArea = document.querySelector('div.btn-group.pull-right');
+        if (buttonArea) {
+            buttonArea.remove();
+        }
+    }
+</script>
+</body>
+</html>

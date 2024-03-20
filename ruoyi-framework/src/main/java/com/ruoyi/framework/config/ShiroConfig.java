@@ -264,6 +264,9 @@ public class ShiroConfig
         filterChainDefinitionMap.put("/runtime/**", "anon");
         filterChainDefinitionMap.put("/management/**", "anon");
 
+        filterChainDefinitionMap.put("/report/plan/**", "anon");
+        filterChainDefinitionMap.put("/system/xybrOrder/**", "anon");
+
         Map<String, Filter> filters = new LinkedHashMap<String, Filter>();
         filters.put("onlineSession", onlineSessionFilter());
         filters.put("syncOnlineSession", syncOnlineSessionFilter());

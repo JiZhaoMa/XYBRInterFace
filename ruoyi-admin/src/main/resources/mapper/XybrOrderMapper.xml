@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.report.mapper.XybrOrderMapper">
+    
+    <resultMap type="XybrOrder" id="XybrOrderResult">
+        <result property="parentId"    column="parentId"    />
+        <result property="productCode"    column="productCode"    />
+        <result property="xybrProductOrder"    column="xybrProductOrder"    />
+        <result property="orderNum"    column="orderNum"    />
+        <result property="zhengJiZuzhaungNum"    column="zhengJiZuzhaungNum"    />
+        <result property="laoHuaBeforNum"    column="laoHuaBeforNum"    />
+        <result property="laoHuaNum"    column="laoHuaNum"    />
+        <result property="laoHuaAfterNum"    column="laoHuaAfterNum"    />
+        <result property="inbound"    column="inbound"    />
+        <result property="createTime"    column="createTime"    />
+        <result property="agentName"    column="agentName"    />
+        <result property="smtOrderOnlineTime"    column="smtOrderOnlineTime"    />
+        <result property="smtNum"    column="smtNum"    />
+        <result property="chaJianNum"    column="chaJianNum"    />
+        <result property="ftNum"    column="ftNum"    />
+        <result property="danBanZhongYanNum"    column="danBanZhongYanNum"    />
+        <result property="danBanZuzhuangNum"    column="danBanZuzhuangNum"    />
+    </resultMap>
+
+    <sql id="selectXybrOrderVo">
+        select "0" AS parentId, 产品编码 AS productCode, 星源生产po AS xybrProductOrder, 下单数量 AS orderNum, 整机组装 AS zhengJiZuzhaungNum,
+               老化前 AS laoHuaBeforNum, 老化 AS laoHuaNum, 老化后 AS laoHuaAfterNum, 入库 AS inbound, 工厂名称 AS agentName,
+            '/' AS orderNum, '/' AS smtNum, '/' AS chaJianNum, '/' AS ftNum, '/' AS danBanZhongYanNum, '/' AS danBanZuzhuangNum
+        from 星源工单表
+    </sql>
+
+    <select id="selectXybrOrderList" parameterType="XybrOrder" resultMap="XybrOrderResult">
+        <include refid="selectXybrOrderVo"/>
+        <where>  
+            <if test="xybrProductOrder != null  and xybrProductOrder != ''"> and 星源生产po = #{xybrProductOrder}</if>
+            <if test="createTime != null "> and 创建时间 = #{createTime}</if>
+            <if test="agentName != null  and agentName != ''"> and 工厂名称 = #{agentName}</if>
+        </where>
+    </select>
+    <sql id="selectAgentOrderVo">
+        select 星源生产PO AS parentId, 工厂生产PO AS xybrProductOrder, 工单数量 AS orderNum, SMT订单上线时间 AS smtOrderOnlineTime,
+               SMT数量 AS smtNum, 插件数量 AS chaJianNum, FT数量 AS ftNum, 单板终验数量 AS danBanZhongYanNum, 单板组装数量 AS danBanZuzhuangNum, 创建时间 AS createTime,
+               '/' AS zhengJiZuzhaungNum, '/' AS laoHuaBeforNum, '/' AS laoHuaNum, '/' AS laoHuaAfterNum, '/' AS inbound
+               from 代工厂工单表
+    </sql>
+    <select id="selectAgentOrderList" parameterType="XybrOrder" resultMap="XybrOrderResult">
+        <include refid="selectAgentOrderVo"/>
+        <where>
+            <if test="xybrProductOrder != null  and xybrProductOrder != ''"> and 星源生产po = #{xybrProductOrder}</if>
+            <if test="createTime != null "> and 创建时间 = #{createTime}</if>
+            <if test="agentName != null  and agentName != ''"> and 工厂名称 = #{agentName}</if>
+        </where>
+    </select>
+</mapper>
