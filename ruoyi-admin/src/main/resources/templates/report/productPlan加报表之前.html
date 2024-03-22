@@ -9,50 +9,7 @@
         <span style="font-size: 18px !important; font-weight: bold;">—— 生产计划</span>
     </div>
     <div id="lineChart">
-        <div id="planSum">
-            <span>总计划</span>
-        </div>
-        <div id="month">
-            <div style="width: 11%; display: inline-block;">
-                <span>7月</span>
-            </div>
-            <div style="width: 11%; display: inline-block;">
-                <span>8月</span>
-            </div>
-            <div style="width: 11%; display: inline-block;">
-                <span>9月</span>
-            </div>
-        </div>
-        <div id="productPlan">
-            <span>生产计划</span>
-            <div style="position: relative;left: 25%;top: -24px;">
-                <div style="width: 11%; display: inline-block;">
-                    <span>9000</span>
-                </div>
-                <div style="width: 11%; display: inline-block;">
-                    <span>8000</span>
-                </div>
-                <div style="width: 11%; display: inline-block;">
-                    <span>9000</span>
-                </div>
-            </div>
-        </div>
-        <div id="complateRate">
-            <div>
-                <span>计划完成率</span>
-            </div>
-            <div style="position: relative;left: 25%;top: -24px;">
-                <div style="width: 11%; display: inline-block;">
-                    <span>90%</span>
-                </div>
-                <div style="width: 11%; display: inline-block;">
-                    <span>80%</span>
-                </div>
-                <div style="width: 11%; display: inline-block;">
-                    <span>90%</span>
-                </div>
-            </div>
-        </div>
+
     </div>
     <div id="productOfMonth">
 
@@ -64,40 +21,6 @@
 
     </div>
 <style>
-    #planSum {
-        height: 20%;
-        color: #FFFFFF;
-        font-size: 20px;
-        font-weight: bold;
-    }
-    #month {
-        height: 15%;
-        top: 5%;
-        left: 49%;
-        position: relative;
-        color: #FFFFFF;
-        font-size: 18px;
-        font-weight: bold;
-    }
-    #productPlan {
-        height: 20%;
-        top: 5%;
-        left: 23%;
-        position: relative;
-        color: #FFFFFF;
-        font-size: 18px;
-        font-weight: bold;
-    }
-    #complateRate {
-        height: 20%;
-        top: 5%;
-        left: 23%;
-        position: relative;
-        color: #FFFFFF;
-        font-size: 18px;
-        font-weight: bold;
-    }
-
     #body {
         height: 620px;
         background: linear-gradient(45deg, #4892cb, #05244d);
@@ -111,16 +34,17 @@
         font-size: 25px;
     }
     #lineChart {
-        width: 35%;
+        width: 40%;
         height: 40%;
         position: relative;
         left: 3%;
         top: 1%;
-        background: linear-gradient(to bottom, #4892cb, #05244d);
+        /*background-color: #05244d;*/
+        /*background: linear-gradient(to bottom, #4892cb, #05244d);*/
         float: left;
     }
     #productOfMonth {
-        width: 55%;
+        width: 50%;
         height: 40%;
         position: relative;
         left: 7%;
@@ -130,7 +54,7 @@
         float: left;
     }
     #faHuoPie {
-        width: 35%;
+        width: 40%;
         height: 40%;
         position: relative;
         left: 3%;
@@ -140,7 +64,7 @@
         float: left;
     }
     #faHuoNumPie {
-        width: 55%;
+        width: 50%;
         height: 40%;
         position: relative;
         left: 7%;
@@ -159,12 +83,12 @@
 <script type="text/javascript" th:src="@{/js/xybr/faHuoNum.js}"></script>
 <script type="text/javascript">
 	//初始化
-	/*let eChart = echarts.init(document.getElementById("lineChart"));*/
+	let eChart = echarts.init(document.getElementById("lineChart"));
     let eChart1 = echarts.init(document.getElementById("productOfMonth"));
     let faHuoPie = echarts.init(document.getElementById("faHuoPie"));
     let faHuoNumPie = echarts.init(document.getElementById("faHuoNumPie"));
 	// 调用
-	/*createProductChart(eChart, {});*/
+	createProductChart(eChart, {});
     createProductOfMonthChart(eChart1, {});
     createFaHuoPie(faHuoPie,{});
     createfaHuoNumPie(faHuoNumPie, {});

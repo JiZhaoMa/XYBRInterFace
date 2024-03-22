@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" >
+<head>
+
+</head>
+<body id="body">
+<div id="lineChart">
+
+</div>
+<div id="productOfMonth">
+
+</div>
+<div id="faHuoPie">
+
+</div>
+<div id="faHuoNumPie">
+
+</div>
+<style>
+    #body {
+        height: 660px;
+        position: relative;
+        background-color: #05244d;
+    }
+    #lineChart {
+        width: 40%;
+        height: 45%;
+        position: relative;
+        left: 3%;
+        top: 1%;
+        background-color: #05244d;
+        float: left;
+        border: 1px solid #FFFF;
+    }
+    #productOfMonth {
+        width: 50%;
+        height: 45%;
+        position: relative;
+        left: 6%;
+        top: 1%;
+        background-color: #05244d;
+        float: left;
+        border: 1px solid #FFFF;
+    }
+    #faHuoPie {
+        width: 40%;
+        height: 45%;
+        position: relative;
+        left: 3%;
+        top: 10%;
+        background-color: #05244d;
+        float: left;
+        border: 1px solid #FFFF;
+    }
+    #faHuoNumPie {
+        width: 50%;
+        height: 45%;
+        position: relative;
+        left: 6%;
+        top: 10%;
+        background-color: #05244d;
+        float: left;
+        border: 1px solid #FFFF;
+    }
+</style>
+
+<script type="text/javascript" th:src="@{/js/plugins/echarts.min.js}"></script>
+<script type="text/javascript" th:src="@{/js/xybr/report.js}"></script>
+<script type="text/javascript" th:src="@{/js/xybr/productPlan.js}"></script>
+<script type="text/javascript" th:src="@{/js/xybr/productPlanOfMonth.js}"></script>
+<script type="text/javascript" th:src="@{/js/xybr/faHuo.js}"></script>
+<script type="text/javascript" th:src="@{/js/xybr/faHuoNum.js}"></script>
+<script type="text/javascript">
+    //初始化
+    let eChart = echarts.init(document.getElementById("lineChart"));
+    let eChart1 = echarts.init(document.getElementById("productOfMonth"));
+    let faHuoPie = echarts.init(document.getElementById("faHuoPie"));
+    let faHuoNumPie = echarts.init(document.getElementById("faHuoNumPie"));
+    // 调用
+    createProductChart(eChart, {});
+    createProductOfMonthChart(eChart1, {});
+    createFaHuoPie(faHuoPie,{});
+    createfaHuoNumPie(faHuoNumPie, {});
+    watermark('XYBR');
+    window.onload = function (){
+        var width = window.innerWidth;
+        var height = window.innerHeight;
+        var body = document.getElementById("body");
+        body.style.height = height - height * 0.11 + 'px';
+    };
+
+</script>
+</body>
+</html>

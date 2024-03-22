@@ -38,7 +38,7 @@ function createProductChart(eChart, res) {
         },
         legend: {
             textStyle:{
-                color:'#15753a',
+                color:'#FFFFFF',
                 fontSize: 14,
                 fontWeight: 'bold'
 
@@ -52,6 +52,8 @@ function createProductChart(eChart, res) {
                 axisLabel: {
                     show: true,
                     textStyle: {
+                        fontSize: '12px',
+                        fontWeight: 'bold',
                         color: '#ffffff'
                     }
                 },
@@ -94,12 +96,23 @@ function createProductChart(eChart, res) {
                 type: 'bar',
                 itemStyle: {
                     normal:{
-                        color:'#86f9cd'
+                        color:'#229168'
                     }
                 },
                 tooltip: {
                     valueFormatter: function (value) {
                         return value;
+                    }
+                },
+                label: {
+                    normal: {
+                        show: true, //数据显示
+                        position: 'insideBottom',
+                        textStyle: {
+                            fontWeight: 'bold',
+                            color: '#FFFFFF',
+                            fontSize: '12px'
+                        }
                     }
                 },
                 data: [
@@ -118,6 +131,16 @@ function createProductChart(eChart, res) {
                 tooltip: {
                     valueFormatter: function (value) {
                         return value;
+                    }
+                },
+                label: {
+                    normal: {
+                        show: true, //数据显示
+                        textStyle: {
+                            fontWeight: 'bold',
+                            color: '#FFFFFF',
+                            fontSize: '12px'
+                        }
                     }
                 },
                 data: [

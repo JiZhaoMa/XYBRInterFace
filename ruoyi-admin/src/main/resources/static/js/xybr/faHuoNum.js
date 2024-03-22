@@ -140,14 +140,14 @@ function createfaHuoNumPie(eChart1, res) {
                 orient: 'horizontal',
                 show: true,//控制滚动条显示隐藏
                 realtime: true, //拖动滚动条时是否动态的更新图表数据
-                height: 5, //滚动条高度
+                height: 0, //滚动条高度
                 start: 0, //滚动条开始位置（共6等份）
                 end: this.endValue,//滚动条结束位置
                 top: '95%',
                 bottom: '4%',
                 zoomLock: false, //指定是否锁定缩放比例。
                 startValue: 0, // 从头开始。
-                endValue: 3,// 一次性展示4个
+                endValue: 5,// 一次性展示4个
                 showDetail: false, // 关闭滚动条提示
                 fillerColor: 'rgba(255, 255, 255,0.5)',
             },
@@ -155,7 +155,7 @@ function createfaHuoNumPie(eChart1, res) {
                 type: 'inside',
                 brushSelect: true,
                 start: 0,
-                end: 6,
+                end: 5,
                 xAxisIndex: [0],
                 moveOnMouseMove: true,//是否只平移不缩放
                 zoomLock: true,// 鼠标移动触发窗口平移

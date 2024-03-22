@@ -50,6 +50,8 @@ function createProductOfMonthChart(eChart1, res) {
                 axisLabel: {
                     show: true,
                     textStyle: {
+                        fontSize: '12px',
+                        fontWeight: 'bold',
                         color: '#ffffff'
                     }
                 },
@@ -95,6 +97,17 @@ function createProductOfMonthChart(eChart1, res) {
                         return value;
                     }
                 },
+                label: {
+                    normal: {
+                        show: true, //数据显示
+                        position: 'insideBottom',
+                        textStyle: {
+                            fontWeight: 'bold',
+                            color: '#FFFFFF',
+                            fontSize: '12px'
+                        }
+                    }
+                },
                 data: [
                     5000, 6000, 3000, 5000, 2000
                 ]
@@ -102,9 +115,25 @@ function createProductOfMonthChart(eChart1, res) {
             {
                 name: '实际完成',
                 type: 'bar',
+                itemStyle: {
+                    normal:{
+                        color:'#229168'
+                    }
+                },
                 tooltip: {
                     valueFormatter: function (value) {
                         return value;
+                    }
+                },
+                label: {
+                    normal: {
+                        show: true, //数据显示
+                        position: 'insideBottom',
+                        textStyle: {
+                            fontWeight: 'bold',
+                            color: '#FFFFFF',
+                            fontSize: '12px'
+                        }
                     }
                 },
                 data: [
@@ -118,6 +147,16 @@ function createProductOfMonthChart(eChart1, res) {
                 tooltip: {
                     valueFormatter: function (value) {
                         return value;
+                    }
+                },
+                label: {
+                    normal: {
+                        show: true, //数据显示
+                        textStyle: {
+                            fontWeight: 'bold',
+                            color: '#FFFFFF',
+                            fontSize: '12px'
+                        }
                     }
                 },
                 data: [4560/5000*100, 5700/6000*100, 3000/3000*100, 4000/5000*100, 2000/2000*100]
