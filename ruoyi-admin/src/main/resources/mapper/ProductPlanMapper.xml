@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.report.mapper.ProductPlanMapper">
+    
+    <resultMap type="ProductPlanOfMonth" id="productPlanOfMonthResult">
+        <result property="parentId"    column="parentId"    />
+        <result property="productCode"    column="productCode"    />
+        <result property="xybrProductOrder"    column="xybrProductOrder"    />
+        <result property="orderNum"    column="orderNum"    />
+        <result property="zhengJiZuzhaungNum"    column="zhengJiZuzhaungNum"    />
+        <result property="laoHuaBeforNum"    column="laoHuaBeforNum"    />
+        <result property="laoHuaNum"    column="laoHuaNum"    />
+        <result property="laoHuaAfterNum"    column="laoHuaAfterNum"    />
+        <result property="inbound"    column="inbound"    />
+        <result property="createTime"    column="createTime"    />
+        <result property="agentName"    column="agentName"    />
+        <result property="smtOrderOnlineTime"    column="smtOrderOnlineTime"    />
+        <result property="smtNum"    column="smtNum"    />
+        <result property="chaJianNum"    column="chaJianNum"    />
+        <result property="ftNum"    column="ftNum"    />
+        <result property="danBanZhongYanNum"    column="danBanZhongYanNum"    />
+        <result property="danBanZuzhuangNum"    column="danBanZuzhuangNum"    />
+    </resultMap>
+
+    <sql id="selectProductPlanOfMonthVo">
+        SELECT
+            a.`产品编码` AS productCode,
+            c.`产品名称` AS  productName,
+            a.plan, ifnull(b.`入库数量`,0) AS actual,
+            ifnull(b.`入库数量`,0)/a.plan AS actualRate
+        FROM
+            (SELECT `产品编码`, SUM(`下单数量`) AS plan FROM `星源工单表` GROUP BY `产品编码`) a
+            LEFT JOIN `入库表` b ON a.`产品编码` = b.`产品编码`
+            LEFT JOIN `产品表` c ON a.`产品编码` = c.`产品编码`
+    </sql>
+
+    <select id="selectproductPlanOfMonthList" parameterType="ProductPlanOfMonth" resultMap="productPlanOfMonthResult">
+        <include refid="selectProductPlanOfMonthVo"/>
+       <!-- <where>
+            <if test="month != null "> and 创建时间 = #{month}</if>
+            <if test="agentName != null  and agentName != ''"> and 工厂名称 = #{agentName}</if>
+        </where>-->
+    </select>
+</mapper>

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<head>
+    <th:block th:include="include :: header('')" />
+</head>
+<body class="gray-bg">
+<div class="container-div">
+    <div class="row">
+        <div class="col-sm-12 search-collapse" style="background: linear-gradient(45deg, #4892cb, #05244d); !important;" hidden="hidden">
+            <form id="formId">
+                <div class="select-list">
+                    <ul>
+                        <li>
+                            <label style="color: #FFFFFF;font-size: 16px;font-weight: bold;">月份：</label>
+                            <input style="color: #FFFFFF;font-size: 16px;font-weight: bold;" type="text" id="month" name="month"/>
+                        </li>
+                        <li>
+                            <label style="color: #FFFFFF;font-size: 16px;font-weight: bold;">工厂：</label>
+                            <input style="color: #FFFFFF;font-size: 16px;font-weight: bold;" type="text" id="agentName" name="agentName"/>
+                        </li>
+                        <li>
+                            <a class="btn btn-primary btn-rounded btn-sm" onclick="$.treeTable.search()"><i class="fa fa-search"></i>&nbsp;搜索</a>
+                            <a class="btn btn-warning btn-rounded btn-sm" onclick="$.form.reset()"><i class="fa fa-refresh"></i>&nbsp;重置</a>
+                        </li>
+                    </ul>
+                </div>
+            </form>
+        </div>
+        <div class="col-sm-12 select-table table-striped" style="background: linear-gradient(45deg, #4892cb, #05244d); !important;">
+            <table id="bootstrap-table"></table>
+        </div>
+    </div>
+</div>
+<th:block th:include="include :: footer" />
+<script th:inline="javascript">
+    var prefix = ctx + "report/plan";
+    $(function() {
+        var options = {
+            url: prefix + "/list",
+            modalName: "月生产计划",
+            columns: [
+                {
+                    field: 'productName',
+                    title: '产品名称',
+                    width: '15%',
+                },
+                {
+                    field: 'plan',
+                    title: '计划完成',
+                    width: '15%',
+                },
+                {
+                    field: 'actual',
+                    title: '实际完成',
+                    width: '10%',
+                },
+                {
+                    field: 'actualRate',
+                    title: '实际完成率',
+                    width: '10%',
+                }]
+        };
+        $.table.init(options);
+    });
+    window.onload = function (){
+        var thead = document.getElementsByTagName('thead');
+
+        // 循环遍历所有获取到的thead元素
+        for (var i = 0; i < thead.length; i++) {
+            // 修改每个thead的样式
+            thead[i].style.color = '#000000'; // 改变字体颜色为红色
+            thead[i].style.fontSize = '16px !important';
+            thead[i].style.fontWeight = 'bold'; // 改变字体加黑
+            /*thead[i].style.backgroundColor = rgba(255,0,0,0.5);*/
+/*
+            thead[i].style.background = linear-gradient(45deg, #4892cb, #05244d); // 改变背景颜色为黄色
+*/
+        }
+        var tbody = document.getElementsByTagName('tbody');
+        // 循环遍历所有获取到的tbody元素
+        for (var i = 0; i < tbody.length; i++) {
+            // 修改每个thead的样式
+            tbody[i].style.color = '#6bdba1';
+            tbody[i].style.fontSize = '16px';
+            tbody[i].style.fontWeight = 'bold'; // 改变字体加黑
+        }
+
+        const element = document.querySelector('div.fixed-table-pagination');
+        if (element) {
+            element.remove();
+        }
+        const button = document.querySelector('div.columns.columns-right.btn-group.pull-right');
+        if (button) {
+            button.remove();
+        }
+        const buttonArea = document.querySelector('div.btn-group.pull-right');
+        if (buttonArea) {F
+            buttonArea.remove();
+        }
+        const option = document.querySelector('div.th-inner ');
+        if (option) {
+            option.remove();
+        }
+    }
+</script>
+</body>
+</html>

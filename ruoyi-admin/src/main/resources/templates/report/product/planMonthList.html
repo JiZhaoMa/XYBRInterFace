@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<head>
+    <th:block th:include="include :: header('')" />
+</head>
+<body style="background: linear-gradient(45deg, #4892cb, #05244d) ">
+<ul>
+    <input type="hidden" id="month" name="month" value="${month}">
+    <input type="hidden" id="agentName" name="agentName" value="${agentName}">
+</ul>
+<table id="bootstrap-table"></table>
+<th:block th:include="include :: footer" />
+<script th:inline="javascript">
+    var prefix = ctx + "report/plan";
+    $(function() {
+        var options = {
+            url: prefix + "/list",
+            modalName: "月生产计划",
+            columns: [
+                {
+                    field: 'productName',
+                    title: '产品名称',
+                    width: '25%',
+                },
+                {
+                    field: 'plan',
+                    title: '计划完成',
+                    width: '25%',
+                },
+                {
+                    field: 'actual',
+                    title: '实际完成',
+                    width: '25%',
+                },
+                {
+                    field: 'actualRate',
+                    title: '实际完成率',
+                    width: '25%',
+                }]
+        };
+        $.table.init(options);
+    });
+    window.onload = function (){
+        var thead = document.getElementsByTagName('thead');
+
+        // 循环遍历所有获取到的thead元素
+        for (var i = 0; i < thead.length; i++) {
+            // 修改每个thead的样式
+            thead[i].style.color = '#FFFFFF'; // 改变字体颜色为红色
+            thead[i].style.fontSize = '16px';
+            thead[i].style.fontWeight = 'bold'; // 改变字体加黑
+        }
+        var tbody = document.getElementsByTagName('tbody');
+        // 循环遍历所有获取到的tbody元素
+        for (var i = 0; i < tbody.length; i++) {
+            // 修改每个thead的样式
+            tbody[i].style.color = '#6bdba1';
+            tbody[i].style.fontSize = '16px';
+            tbody[i].style.fontWeight = 'bold'; // 改变字体加黑
+        }
+
+        const element = document.querySelector('div.fixed-table-pagination');
+        if (element) {
+            element.remove();
+        }
+        const button = document.querySelector('div.columns.columns-right.btn-group.pull-right');
+        if (button) {
+            button.remove();
+        }
+        const buttonArea = document.querySelector('div.btn-group.pull-right');
+        if (buttonArea) {F
+            buttonArea.remove();
+        }
+        const option = document.querySelector('div.th-inner ');
+        if (option) {
+            option.remove();
+        }
+    }
+</script>
+</body>
+</html>

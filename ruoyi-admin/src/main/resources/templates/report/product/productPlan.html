@@ -5,8 +5,31 @@
 </head>
 <body id="body">
     <div id="title">
-        <span>星源博锐供应链看板</span>
-        <span style="font-size: 18px !important; font-weight: bold;">—— 生产计划</span>
+        <div style="width:97.6vw;">
+            <span>星源博锐供应链看板</span>
+            <span style="font-size: 18px !important; font-weight: bold;">—— 生产计划</span>
+        </div>
+        <div style="position: fixed; left: 86%; top: 3%">
+            <select name="selectMonth" id="selectMonth">
+                <option value="1">一月</option>
+                <option value="2">二月</option>
+                <option value="3">三月</option>
+                <option value="4">四月</option>
+                <option value="5">五月</option>
+                <option value="6">六月</option>
+                <option value="7">七月</option>
+                <option value="8">八月</option>
+                <option value="9">九月</option>
+                <option value="10">十月</option>
+                <option value="11">十一月</option>
+                <option value="12">十二月</option>
+            </select>
+            <select name="selectAgent" id="selectAgent">
+                <option value="0">所有</option>
+                <option value="1">天宝</option>
+                <option value="2">卓瑞源</option>
+            </select>
+        </div>
     </div>
     <div id="lineChart">
         <div id="planSum">
@@ -55,26 +78,26 @@
         </div>
     </div>
     <div id="productOfMonth">
-        <!--<div class="select-list">
-            <ul>
-                <li>
-                    <label style="color: #FFFFFF;font-size: 16px;font-weight: bold;">月份：</label>
-                    <input style="color: #FFFFFF;font-size: 16px;font-weight: bold;" type="text" id="month" name="month"/>
-                </li>
-                <li>
-                    <label style="color: #FFFFFF;font-size: 16px;font-weight: bold;">工厂：</label>
-                    <input style="color: #FFFFFF;font-size: 16px;font-weight: bold;" type="text" id="agentName" name="agentName"/>
-                </li>
-                <li>
-                    <a onclick="$.form.search()"><i class="fa fa-search"></i>&nbsp;搜索</a>
-                    <a onclick="$.form.reset()"><i class="fa fa-refresh"></i>&nbsp;重置</a>
-                </li>
-            </ul>
-        </div>-->
-        <div>
-            <iframe src="/report/plan/getProductPlanOfMonth" width="100%" height="100%" frameborder="0">
+        <div style="height: 100%">
+            <iframe src="" width="100%" height="100%" id="productOfMonthIframe">
                 您的浏览器不支持iframe，请升级
             </iframe>
+        </div>
+    </div>
+    <div id="productOfMonthSum">
+        <div style="position: fixed; display: flex; top: 45%">
+            <div style="width:13.6vw; color: #FFFFFF; font-size: 18px; font-weight: bold">
+                <span>合计</span>
+            </div>
+            <div style="width:13.5vw; color: #FFFFFF; font-size: 18px; font-weight: bold">
+                <span>50000</span>
+            </div>
+            <div style="width:13.5vw; color: #FFFFFF; font-size: 18px; font-weight: bold">
+                <span>4900</span>
+            </div>
+            <div style="width:13.6vw; color: #FFFFFF; font-size: 18px; font-weight: bold">
+                <span>98.88%</span>
+            </div>
         </div>
     </div>
     <div id="faHuoPie">
@@ -125,10 +148,11 @@
     #title {
         height: 7%;
         color: #FFFFFF;
-        width: 30%;
+        width: 40%;
         margin-left: auto;
         margin-right: auto;
         font-size: 25px;
+        display: flex;
     }
     #lineChart {
         width: 35%;
@@ -141,12 +165,18 @@
     }
     #productOfMonth {
         width: 55%;
-        height: 40%;
+        height: 35%;
         position: relative;
         left: 7%;
         top: 1%;
         background-color: #05244d;
-        background: linear-gradient(to bottom, #4892cb, #05244d);
+        float: left;
+    }
+    #productOfMonthSum {
+        width: 55%;
+        height: 5%;
+        position: relative;
+        left: 7%;
         float: left;
     }
     #faHuoPie {
@@ -177,6 +207,7 @@
 <script type="text/javascript" th:src="@{/js/xybr/productPlanOfMonth.js}"></script>
 <script type="text/javascript" th:src="@{/js/xybr/faHuo.js}"></script>
 <script type="text/javascript" th:src="@{/js/xybr/faHuoNum.js}"></script>
+    <script type="text/javascript" th:src="@{/js/jquery.min.js}"></script>
 <script type="text/javascript">
 	//初始化
 	/*let eChart = echarts.init(document.getElementById("lineChart"));*/
@@ -193,8 +224,31 @@
         var width = window.innerWidth;
         var height = window.innerHeight;
         var body = document.getElementById("body");
-        body.style.height = height + 'px';
+        body.style.height = height - 20 + 'px';
+
+        //给下拉框初始值
+       var currentDays = new Date();
+       var year = currentDays.getFullYear();
+       var month = currentDays.getMonth();
+       document.getElementById("selectMonth").value = month;
+       document.getElementById("productOfMonthIframe").src = "/report/plan/getProductPlanOfMonth/"+month+"/"+0;
     };
+   $(document).ready(function (){
+       $("#selectMonth").change(function (){
+           debugger;
+           var monthValue = $(this).val();
+           var agentValue = document.getElementById("selectAgent").value;
+           document.getElementById("productOfMonthIframe").src = "/report/plan/getProductPlanOfMonth/"+monthValue+"/"+agentValue;
+           //document.getElementById("productOfMonthIframe").contentWindow.location.reload();
+       });
+       $("#selectAgent").change(function (){
+           debugger;
+           var monthValue = document.getElementById("selectMonth").value;
+           var agentValue = $(this).val();
+           document.getElementById("productOfMonthIframe").src = "/report/plan/getProductPlanOfMonth/"+monthValue+"/"+agentValue;
+           //document.getElementById("productOfMonthIframe").contentWindow.location.reload();
+       });
+   })
 </script>
 </body>
 </html>
