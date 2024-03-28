@@ -3,11 +3,11 @@
 <head>
     <th:block th:include="include :: header('')" />
 </head>
-<body style="background: linear-gradient(45deg, #4892cb, #05244d) ">
-<ul>
+<body style="background-color: rgb(21,51,114) !important; top: -14%; position: relative;">
+<!--<ul>
     <input type="hidden" id="month" name="month" value="${month}">
     <input type="hidden" id="agentName" name="agentName" value="${agentName}">
-</ul>
+</ul>-->
 <table id="bootstrap-table"></table>
 <th:block th:include="include :: footer" />
 <script th:inline="javascript">
@@ -40,6 +40,20 @@
         };
         $.table.init(options);
     });
+    $(document).ready(function() {
+        $("tbody").on("mouseover",function() {
+            var trs = document.querySelector('tbody').querySelectorAll("tr");
+            for(var i=0; i<trs.length; i++){
+                trs[i].style.backgroundColor = 'rgb(21,51,114)';
+            }
+        });
+        $("tbody").on("click",function() {
+            const selectedStyle = document.getElementsByClassName("treetable-selected")[0];
+            if (selectedStyle) {
+                selectedStyle.classList.remove("treetable-selected");
+            }
+        });
+    });
     window.onload = function (){
         var thead = document.getElementsByTagName('thead');
 
@@ -47,18 +61,23 @@
         for (var i = 0; i < thead.length; i++) {
             // 修改每个thead的样式
             thead[i].style.color = '#FFFFFF'; // 改变字体颜色为红色
-            thead[i].style.fontSize = '16px';
+            thead[i].style.fontSize = '18px';
             thead[i].style.fontWeight = 'bold'; // 改变字体加黑
+            thead[i].style.border = 'none !important';
+            thead[i].style.padding = '0 !important';
+            thead[i].style.width = '100%';
         }
         var tbody = document.getElementsByTagName('tbody');
         // 循环遍历所有获取到的tbody元素
         for (var i = 0; i < tbody.length; i++) {
             // 修改每个thead的样式
-            tbody[i].style.color = '#6bdba1';
+            tbody[i].style.color = '#FFFFFF';
             tbody[i].style.fontSize = '16px';
             tbody[i].style.fontWeight = 'bold'; // 改变字体加黑
+            tbody[i].style.border = 'none !important';
+            tbody[i].style.padding = '0 !important';
+            tbody[i].style.width = '100%';
         }
-
         const element = document.querySelector('div.fixed-table-pagination');
         if (element) {
             element.remove();

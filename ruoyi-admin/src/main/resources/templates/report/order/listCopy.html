@@ -3,7 +3,7 @@
 <head>
     <th:block th:include="include :: header('')" />
 </head>
-<body class="gray-bg" style="background-color: rgb(21,51,114) !important;">
+<body class="gray-bg" style="background-color: rgb(19,130,59) !important;">
 <div class="container-div">
     <div class="row">
         <div id="title">
@@ -14,7 +14,7 @@
             <div id="productPlanOfDay">
                 <span>日生产计划</span>
             </div>
-            <div class="col-sm-12 search-collapse" style="background-color: rgb(21,51,114) !important;">
+            <div class="col-sm-12 search-collapse" style="background-color: rgb(19,130,59) !important;">
                 <form id="formId">
                     <div class="select-list">
                         <ul>
@@ -28,7 +28,7 @@
 
                             </li>
                             <li style="position: relative; left: 45%; width:30%">
-                                <select name="selectAgent" id="selectAgent" style="color: #FFFFFF !important; background-color: rgb(21,51,114) !important; width: 25%;">
+                                <select name="selectAgent" id="selectAgent" style="color: #FFFFFF !important; background-color: rgb(19,130,59) !important; width: 25%;">
                                     <option value="0">工厂</option>
                                     <option value="1">天宝</option>
                                     <option value="2">卓瑞源</option>
@@ -42,8 +42,8 @@
                     </div>
                 </form>
             </div>
-            <div class="col-sm-12 table-striped" style="background-color: rgb(21,51,114) !important;">
-                <table id="bootstrap-tree-table" style="background-color: rgb(21,51,114) !important;"></table>
+            <div class="col-sm-12 table-striped" style="background-color: rgb(19,130,59) !important;">
+                <table id="bootstrap-tree-table" style="background-color: rgb(19,130,59) !important;"></table>
             </div>
         </div>
     </div>
@@ -56,8 +56,7 @@
         margin-left: auto;
         margin-right: auto;
         font-size: 25px;
-        background-image: url("http://localhost:80/img/liuhai.jpg");
-        background-position: center;
+        background-color: rgb(19,130,59);
         text-align: center;
     }
     #productPlanOfDay {
@@ -67,7 +66,7 @@
         top: -2%;
         position: relative;
         width: 10%;
-        background-color: rgb(21, 51, 114) !important;
+        background-color: rgb(19,130,59) !important;
         text-align: center;
         left: 5%;
     }
@@ -169,7 +168,7 @@
             // 修改每个thead的样式
             thead[i].style.color = '#FFFFFF'; // 改变字体颜色为红色
             thead[i].style.fontWeight = 'bold !important'; // 改变字体加黑
-            thead[i].style.backgroundColor = 'rgb(21,51,114) !important'; // 改变背景颜色为黄色
+            thead[i].style.backgroundColor = 'rgb(19,130,59) !important'; // 改变背景颜色为黄色
         }
         var tbody = document.getElementsByTagName('tbody');
 
@@ -178,7 +177,7 @@
             // 修改每个thead的样式
             tbody[i].style.color = '#FFFFFF'; // 改变字体颜色为红色
             tbody[i].style.fontWeight = 'bold'; // 改变字体加黑
-            tbody[i].style.backgroundColor = 'rgb(21,51,114) !important'; // 改变背景颜色为黄色
+            tbody[i].style.backgroundColor = 'rgb(19,130,59) !important'; // 改变背景颜色为黄色
         }
 
         const element = document.querySelector('div.fixed-table-pagination');
@@ -202,7 +201,7 @@
         $("tbody").on("mouseover",function() {
             var trs = document.querySelector('tbody').querySelectorAll("tr");
             for(var i=0; i<trs.length; i++){
-                trs[i].style.backgroundColor = 'rgb(21,51,114)';
+                trs[i].style.backgroundColor = 'rgb(19,130,59)';
             }
         });
         $("tbody").on("click",function() {

@@ -31,7 +31,7 @@ import com.ruoyi.common.core.page.TableDataInfo;
 @RequestMapping("/system/xybrOrder")
 public class XybrOrderController extends BaseController
 {
-    private String prefix = "system/xybrOrder";
+    private String prefix = "report/order";
 
     @Autowired
     private IXybrOrderService XybrOrderService;
@@ -41,7 +41,11 @@ public class XybrOrderController extends BaseController
     {
         return prefix + "/list";
     }
-
+    @GetMapping("/getListView01")
+    public String XybrOrder01()
+    {
+        return prefix + "/listCopy";
+    }
     /**
      * 查询【工单】列表
      */

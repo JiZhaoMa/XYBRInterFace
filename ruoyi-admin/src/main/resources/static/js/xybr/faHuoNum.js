@@ -1,23 +1,7 @@
 function createfaHuoNumPie(eChart1, res) {
     let option1 = {
         title:{
-            text:"发货量",
-            textStyle:{
-                color:'#ffffff',//'red'，字体颜色
-                fontStyle:'normal',//'italic'(倾斜) | 'oblique'(倾斜体) ，字体风格
-                fontWeight:'bold',//'bold'(粗体) | 'bolder'(粗体) | 'lighter'(正常粗细) ，字体粗细
-                fontFamily:'sans-serif',//'sans-serif' | 'serif' | 'monospace' | 'Arial' | 'Courier New'
-                // 'Microsoft YaHei'(微软雅黑) ，文字字体
-                fontSize:20,//字体大小
-                lineHeight:8,//字体行高
-            },
-            textAlign:'auto',//整体（包括 text 和 subtext）的水平对齐
-            textVerticalAlign:'auto',//整体（包括 text 和 subtext）的垂直对齐
-            padding:8,//[5,10] | [ 5,6, 7, 8] ,标题内边距
-            left:'auto',//'5' | '5%'，title 组件离容器左侧的距离
-            right:'auto',//'title 组件离容器右侧的距离
-            top:'auto',//title 组件离容器上侧的距离
-            bottom:'auto',//title 组件离容器下侧的距离
+
         },
         tooltip: {
             textStyle: {
@@ -30,14 +14,14 @@ function createfaHuoNumPie(eChart1, res) {
             feature: {
                 //dataView: { show: true, readOnly: false },
                 //magicType: { show: true, type: ['bar', 'bar', 'bar', 'line'] },
-                restore: { show: true },
-                saveAsImage: { show: true }
+                /*restore: { show: true },
+                saveAsImage: { show: true }*/
             }
         },
         legend: {
             textStyle:{
-                color:'#15753a',
-                fontSize: 14,
+                color:'#FFFFFF',
+                fontSize: 16,
                 fontWeight: 'bold'
 
             },
@@ -50,6 +34,7 @@ function createfaHuoNumPie(eChart1, res) {
                 axisLabel: {
                     show: true,
                     textStyle: {
+                        fontSize: 16,
                         color: '#ffffff'
                     }
                 },
@@ -62,11 +47,15 @@ function createfaHuoNumPie(eChart1, res) {
             {
                 type: 'value',
                 name: '数量',
+                nameTextStyle: {
+                    color: '#FFF',
+                },
                 min: 0,
                 max: 10000,
                 interval: 2000,
                 axisLabel: {
                     textStyle: {
+                        fontSize: 12,
                         color: '#ffffff'
                     },
                     formatter: '{value}'
@@ -75,11 +64,15 @@ function createfaHuoNumPie(eChart1, res) {
             {
                 type: 'value',
                 name: '总量',
+                nameTextStyle: {
+                    color: '#FFF',
+                },
                 min: 0,
                 max: 15000,
                 interval: 3000,
                 axisLabel: {
                     textStyle: {
+                        fontSize: 12,
                         color: '#ffffff'
                     },
                     formatter: '{value}'
@@ -127,6 +120,17 @@ function createfaHuoNumPie(eChart1, res) {
                 name: '总量',
                 type: 'line',
                 yAxisIndex: 1,
+                label: {
+                    normal: {
+                        show: true, //数据显示
+                        position: 'insideBottom',
+                        textStyle: {
+                            fontWeight: 'bold',
+                            color: '#FFFFFF',
+                            fontSize: '12px'
+                        }
+                    }
+                },
                 tooltip: {
                     valueFormatter: function (value) {
                         return value;

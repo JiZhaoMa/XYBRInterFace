@@ -25,12 +25,26 @@ public class ProductPlanController extends BaseController {
     private ProductPlanService productPlanService;
     private String prefix = "report/product";
     //@RequiresPermissions("report:productPlan:view")
+    @GetMapping("/getProductPlan01")
+    public String getProductPlan01()
+    {
+        ModelMap mmap = new ModelMap();
+        mmap.put("", "");
+        return prefix + "/productPlanCopy";
+    }
     @GetMapping("/getProductPlan")
     public String getProductPlan()
     {
         ModelMap mmap = new ModelMap();
         mmap.put("", "");
         return prefix + "/productPlan";
+    }
+    @GetMapping("/getProductPlanOfMonth01/{month}/{agent}")
+    public String getProductPlanOfMonth01(@PathVariable("month") String month,@PathVariable("agent") String agent, ModelMap mmap)
+    {
+        mmap.put("month",month);
+        mmap.put("agentName",agent);
+        return prefix + "/planMonthListCopy";
     }
     @GetMapping("/getProductPlanOfMonth/{month}/{agent}")
     public String getProductPlanOfMonth(@PathVariable("month") String month,@PathVariable("agent") String agent, ModelMap mmap)

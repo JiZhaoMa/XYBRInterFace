@@ -31,22 +31,23 @@ function createFaHuoPie(faHuoPie, res) {
                 fontSize: '16px',
                 color: '#000' // 设置文本颜色 默认#FFF
             },
-            formatter: '{a}{b} : {c}个 ({d}%)'
+            formatter: '{a}{b} : {c}个 ({d}%)',
         },
         toolbox: {
             feature: {
                 //dataView: { show: true, readOnly: false },
                 //magicType: { show: true, type: ['line', 'bar'] },
                 //restore: { show: true },
-                saveAsImage: { show: true }
+                /*saveAsImage: { show: true }*/
             }
         },
         legend: {
             orient: 'vertical',
             right: '10%',
+            position: ['80%','80%'],
             textStyle: {
                 color:'#FFFFFF',
-                fontSize: 14,
+                fontSize: 16,
                 fontWeight: 'bold'
             }
         },
@@ -54,16 +55,16 @@ function createFaHuoPie(faHuoPie, res) {
             {
                 name: '发货量',
                 type: 'pie',
-                radius: ['50%','80%'],
+                radius: ['40%','70%'],
                 center: ['50%','50%'],
                 label: {
                     normal: {
                         show: true, //数据显示
-                        formatter: '{b} : {c}({d}%)',
+                        formatter: '{b} : {c}'+ '\n' + '{d}%',
                         textStyle: {
                             fontWeight: 'bold',
                             color: '#FFFFFF',
-                            fontSize: '12px'
+                            fontSize: '16px'
                         }
                     }
                 },

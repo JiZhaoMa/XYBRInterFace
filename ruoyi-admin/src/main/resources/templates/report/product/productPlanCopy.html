@@ -10,7 +10,7 @@
             <span style="font-size: 18px !important; font-weight: bold;">—— 生产计划</span>
         </div>
         <div style="position: fixed; left: 84%; top: 3%">
-            <select name="selectMonth" id="selectMonth" style="background-color: rgb(21,51,114); color: #FFFFFF; border: 0.2px solid #FFF; border-radius: 3px 3px 3px 3px;">
+            <select name="selectMonth" id="selectMonth" style="background-color: rgb(19,130,59); color: #FFFFFF; border: 0.2px solid #FFF; border-radius: 3px 3px 3px 3px;">
                 <option value="1">一月</option>
                 <option value="2">二月</option>
                 <option value="3">三月</option>
@@ -24,7 +24,7 @@
                 <option value="11">十一月</option>
                 <option value="12">十二月</option>
             </select>
-            <select name="selectAgent" id="selectAgent" style="background-color: rgb(21,51,114); color: #FFFFFF; border: 0.2px solid #FFF; border-radius: 3px 3px 3px 3px;">
+            <select name="selectAgent" id="selectAgent" style="background-color: rgb(19,130,59); color: #FFFFFF; border: 0.2px solid #FFF; border-radius: 3px 3px 3px 3px;">
                 <option value="0">所有</option>
                 <option value="1">天宝</option>
                 <option value="2">卓瑞源</option>
@@ -129,7 +129,7 @@
         left: 5%;
         position: relative;
         width: 20%;
-        background-color: rgb(21, 51, 114);
+        background-color: rgb(19,130,59);
         text-align: center;
     }
     #planOfMonth {
@@ -141,7 +141,7 @@
         left: 5%;
         position: relative;
         width: 20%;
-        background-color: rgb(21, 51, 114);
+        background-color: rgb(19,130,59);
         text-align: center;
     }
     #faHuo {
@@ -153,7 +153,7 @@
         left: 5%;
         position: relative;
         width: 20%;
-        background-color: rgb(21, 51, 114);
+        background-color: rgb(19,130,59);
         text-align: center;
     }
     #faHuoNum {
@@ -165,7 +165,7 @@
         left: 5%;
         position: relative;
         width: 20%;
-        background-color: rgb(21, 51, 114);
+        background-color: rgb(19,130,59);
         text-align: center;
     }
     #month {
@@ -198,7 +198,7 @@
 
     #body {
         height: 620px;
-        background-color: rgb(21,51,114) !important;
+        background-color: rgb(19,130,59) !important;
     }
     #title {
         height: 8%;
@@ -208,9 +208,7 @@
         margin-right: auto;
         font-size: 25px;
         display: flex;
-        font-family: '思源-heavy';
-        background-image: url("http://localhost:80/img/liuhai.jpg");
-        background-position: bottom;
+        background-color: rgb(19,130,59);
         text-align: center;
     }
     #lineChart {
@@ -219,7 +217,7 @@
         position: relative;
         left: 3%;
         top: 2%;
-        background-color: rgb(21,51,114) !important;
+        background-color: rgb(19,130,59) !important;
         float: left;
         border: 0.2px solid #FFF;
     }
@@ -229,7 +227,7 @@
         position: relative;
         left: 9%;
         top: 2%;
-        background-color: rgb(21,51,114) !important;
+        background-color: rgb(19,130,59) !important;
         float: left;
         border: 0.2px solid #FFF;
     }
@@ -246,7 +244,7 @@
         position: relative;
         left: 3%;
         top: 8%;
-        background-color: rgb(21,51,114) !important;
+        background-color: rgb(19,130,59) !important;
         float: left;
         border: 0.2px solid #FFF;
     }
@@ -262,7 +260,7 @@
         position: relative;
         left: 9%;
         top: 8%;
-        background-color: rgb(21,51,114) !important;
+        background-color: rgb(19,130,59) !important;
         float: left;
         border: 0.2px solid #FFF;
     }
@@ -303,21 +301,21 @@
        var year = currentDays.getFullYear();
        var month = currentDays.getMonth();
        document.getElementById("selectMonth").value = month;
-       document.getElementById("productOfMonthIframe").src = "/report/plan/getProductPlanOfMonth/"+month+"/"+0;
+       document.getElementById("productOfMonthIframe").src = "/report/plan/getProductPlanOfMonth01/"+month+"/"+0;
     };
    $(document).ready(function (){
        $("#selectMonth").change(function (){
            debugger;
            var monthValue = $(this).val();
            var agentValue = document.getElementById("selectAgent").value;
-           document.getElementById("productOfMonthIframe").src = "/report/plan/getProductPlanOfMonth/"+monthValue+"/"+agentValue;
+           document.getElementById("productOfMonthIframe").src = "/report/plan/getProductPlanOfMonth01/"+monthValue+"/"+agentValue;
            //document.getElementById("productOfMonthIframe").contentWindow.location.reload();
        });
        $("#selectAgent").change(function (){
            debugger;
            var monthValue = document.getElementById("selectMonth").value;
            var agentValue = $(this).val();
-           document.getElementById("productOfMonthIframe").src = "/report/plan/getProductPlanOfMonth/"+monthValue+"/"+agentValue;
+           document.getElementById("productOfMonthIframe").src = "/report/plan/getProductPlanOfMonth01/"+monthValue+"/"+agentValue;
            //document.getElementById("productOfMonthIframe").contentWindow.location.reload();
        });
    })
