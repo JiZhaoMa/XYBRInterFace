@@ -5,8 +5,8 @@
 </head>
 <body style="background-color: rgb(19,130,59) !important; top: -19%; position: relative;">
 <ul>
-    <input type="hidden" id="month" name="month" value="${month}">
-    <input type="hidden" id="agentName" name="agentName" value="${agentName}">
+    <input id="month" name="month" th:value="${month}" type="hidden">
+    <input id="agentName" name="agentName" th:value="${agentName}" type="hidden">
 </ul>
 <table id="bootstrap-table"></table>
 <th:block th:include="include :: footer" />
@@ -14,7 +14,7 @@
     var prefix = ctx + "report/plan";
     $(function() {
         var options = {
-            url: prefix + "/list",
+            url: prefix + "/list/" + $('#month').val() + "/" + $('#agentName').val(),
             modalName: "月生产计划",
             columns: [
                 {

@@ -15,7 +15,7 @@ public class Constants
     /**
      * 通用成功标识
      */
-    public static final String SUCCESS = "0";
+    public static final String SUCCESS = "200";
 
     /**
      * 通用失败标识

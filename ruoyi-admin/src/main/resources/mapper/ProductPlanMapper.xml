@@ -31,14 +31,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             a.plan, ifnull(b.`入库数量`,0) AS actual,
             ifnull(b.`入库数量`,0)/a.plan AS actualRate
         FROM
-            (SELECT `产品编码`, SUM(`下单数量`) AS plan FROM `星源工单表` GROUP BY `产品编码`) a
+            (SELECT `产品编码`, SUM(`计划数量`) AS plan FROM `产品计划表`
+            <where>
+                <if test="month != null "> and DATE_FORMAT(上线时间,'%m') = #{month}</if>
+                <if test="agentName != null  and agentName != ''"> and 代工厂 = #{agentName}</if>
+            </where>
+            GROUP BY `产品编码`) a
             LEFT JOIN `入库表` b ON a.`产品编码` = b.`产品编码`
             LEFT JOIN `产品表` c ON a.`产品编码` = c.`产品编码`
     </sql>
 
     <select id="selectproductPlanOfMonthList" parameterType="ProductPlanOfMonth" resultMap="productPlanOfMonthResult">
         <include refid="selectProductPlanOfMonthVo"/>
-       <!-- <where>
+       <!--<where>
             <if test="month != null "> and 创建时间 = #{month}</if>
             <if test="agentName != null  and agentName != ''"> and 工厂名称 = #{agentName}</if>
         </where>-->

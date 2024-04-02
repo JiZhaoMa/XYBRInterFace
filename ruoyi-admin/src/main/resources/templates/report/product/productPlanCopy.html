@@ -11,23 +11,23 @@
         </div>
         <div style="position: fixed; left: 84%; top: 3%">
             <select name="selectMonth" id="selectMonth" style="background-color: rgb(19,130,59); color: #FFFFFF; border: 0.2px solid #FFF; border-radius: 3px 3px 3px 3px;">
-                <option value="1">一月</option>
-                <option value="2">二月</option>
-                <option value="3">三月</option>
-                <option value="4">四月</option>
-                <option value="5">五月</option>
-                <option value="6">六月</option>
-                <option value="7">七月</option>
-                <option value="8">八月</option>
-                <option value="9">九月</option>
+                <option value="01">一月</option>
+                <option value="02">二月</option>
+                <option value="03">三月</option>
+                <option value="04">四月</option>
+                <option value="05">五月</option>
+                <option value="06">六月</option>
+                <option value="07">七月</option>
+                <option value="08">八月</option>
+                <option value="09">九月</option>
                 <option value="10">十月</option>
                 <option value="11">十一月</option>
                 <option value="12">十二月</option>
             </select>
             <select name="selectAgent" id="selectAgent" style="background-color: rgb(19,130,59); color: #FFFFFF; border: 0.2px solid #FFF; border-radius: 3px 3px 3px 3px;">
-                <option value="0">所有</option>
-                <option value="1">天宝</option>
-                <option value="2">卓瑞源</option>
+                <option value="ALL">所有</option>
+                <option value="天宝">天宝</option>
+                <option value="卓瑞源">卓瑞源</option>
             </select>
         </div>
     </div>
@@ -37,13 +37,13 @@
         </div>
         <div id="month">
             <div style="width: 20%; display: inline-block;">
-                <span>7月</span>
+                <input id="monthOfThird1" name="monthOfThird" th:value="${monthOfFirst}" style="background-color: rgb(19, 130, 59); color: #FFF; position: relative; color: #FFFFFF; font-size: 18px; font-weight: bold; width: 48%; border: none;">
             </div>
             <div style="width: 20%; display: inline-block;">
-                <span>8月</span>
+                <input id="monthOfSecond" name="monthOfSecond" th:value="${monthOfSecond}" style="background-color: rgb(19, 130, 59); color: #FFF; position: relative; color: #FFFFFF; font-size: 18px; font-weight: bold; width: 48%; border: none;">
             </div>
             <div style="width: 20%; display: inline-block;">
-                <span>9月</span>
+                <input id="monthOfThird" name="monthOfThird" th:value="${monthOfThird}" style="background-color: rgb(19, 130, 59); color: #FFF; position: relative; color: #FFFFFF; font-size: 18px; font-weight: bold; width: 48%; border: none;">
             </div>
         </div>
         <div id="productPlan">

@@ -26,17 +26,31 @@ public class ProductPlanController extends BaseController {
     private String prefix = "report/product";
     //@RequiresPermissions("report:productPlan:view")
     @GetMapping("/getProductPlan01")
-    public String getProductPlan01()
+    public String getProductPlan01(ModelMap mmap)
     {
-        ModelMap mmap = new ModelMap();
-        mmap.put("", "");
+        mmap.put("monthOfFirst", "7月");
+        mmap.put("monthOfSecond", "8月");
+        mmap.put("monthOfThird", "9月");
+        mmap.put("monthOfFirstPlan", "9000");
+        mmap.put("monthOfSecondPlan", "8000");
+        mmap.put("monthOfThirdPlan", "9000");
+        mmap.put("monthOfFirstFinsh", "90%");
+        mmap.put("monthOfSecondFinsh", "80%");
+        mmap.put("monthOfThirdFinsh", "99.8%");
         return prefix + "/productPlanCopy";
     }
     @GetMapping("/getProductPlan")
-    public String getProductPlan()
+    public String getProductPlan(ModelMap mmap)
     {
-        ModelMap mmap = new ModelMap();
-        mmap.put("", "");
+        mmap.put("monthOfFirst", "7月");
+        mmap.put("monthOfSecond", "8月");
+        mmap.put("monthOfThird", "9月");
+        mmap.put("monthOfFirstPlan", "9000");
+        mmap.put("monthOfSecondPlan", "8000");
+        mmap.put("monthOfThirdPlan", "9000");
+        mmap.put("monthOfFirstFinsh", "90%");
+        mmap.put("monthOfSecondFinsh", "80%");
+        mmap.put("monthOfThirdFinsh", "99.8%");
         return prefix + "/productPlan";
     }
     @GetMapping("/getProductPlanOfMonth01/{month}/{agent}")
@@ -53,11 +67,14 @@ public class ProductPlanController extends BaseController {
         mmap.put("agentName",agent);
         return prefix + "/planMonthList";
     }
-    @PostMapping("/list")
+    @PostMapping("/list/{month}/{agent}")
     @ResponseBody
-    public TableDataInfo list(ProductPlanOfMonth productPlanOfMonth)
+    public TableDataInfo list(@PathVariable("month") String month,@PathVariable("agent") String agent)
     {
+        ProductPlanOfMonth productPlanOfMonth = new ProductPlanOfMonth();
         startPage();
+        productPlanOfMonth.setMonth(month);
+        productPlanOfMonth.setAgentName(agent);
         List<ProductPlanOfMonth> list = productPlanService.selectproductPlanOfMonthList(productPlanOfMonth);
         list.addAll(list);
         list.addAll(list);

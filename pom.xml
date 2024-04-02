@@ -7,6 +7,7 @@
     <groupId>com.ruoyi</groupId>
     <artifactId>ruoyi</artifactId>
     <version>4.2.0</version>
+	<packaging>pom</packaging>
 
     <name>ruoyi</name>
 	<url>http://www.ruoyi.vip</url>
@@ -228,7 +229,9 @@
         <module>ruoyi-common</module>
 		<module>ruoyi-activiti</module>
 	</modules>
+<!--
     <packaging>pom</packaging>
+-->
 
 
 	<dependencies>
