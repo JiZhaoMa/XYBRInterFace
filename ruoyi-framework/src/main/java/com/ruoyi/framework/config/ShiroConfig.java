@@ -265,6 +265,8 @@ public class ShiroConfig
         filterChainDefinitionMap.put("/management/**", "anon");
 
         filterChainDefinitionMap.put("/report/plan/**", "anon");
+        filterChainDefinitionMap.put("/report/zhiTongRate/**", "anon");
+        filterChainDefinitionMap.put("/report/inventory/**", "anon");
         filterChainDefinitionMap.put("/system/xybrOrder/**", "anon");
 
         Map<String, Filter> filters = new LinkedHashMap<String, Filter>();

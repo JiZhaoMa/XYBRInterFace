@@ -3,6 +3,7 @@ package com.ruoyi.report.web;
 import java.util.Comparator;
 import java.util.List;
 
+import com.ruoyi.common.utils.DateUtils;
 import com.ruoyi.report.domain.AgentOrder;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,6 +55,10 @@ public class XybrOrderController extends BaseController
     public List<XybrOrder> list(XybrOrder XybrOrder)
     {
         startPage();
+        if(XybrOrder.getCreateTime() == null || "".equals(XybrOrder.getCreateTime())){
+            String date = DateUtils.dateTime();
+            XybrOrder.setCreateTime(DateUtils.getNowDate());
+        }
         List<XybrOrder> list = XybrOrderService.selectXybrOrderList(XybrOrder);
         List<XybrOrder> agentOrderList = XybrOrderService.selectAgentOrderList(XybrOrder);
         list.addAll(agentOrderList);

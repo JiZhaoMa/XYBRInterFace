@@ -1,4 +1,4 @@
-function createfaHuoNumPie(eChart1, res) {
+function createfaHuoNum(eChart1, month,agent,urls) {
     let option1 = {
         title:{
 
@@ -30,7 +30,7 @@ function createfaHuoNumPie(eChart1, res) {
         xAxis: [
             {
                 type: 'category',
-                data: ['4月', '5月', '6月', '7月', '8月', '9月'],
+                data: ['', '', '', '', '', ''],
                 axisLabel: {
                     show: true,
                     textStyle: {
@@ -51,8 +51,8 @@ function createfaHuoNumPie(eChart1, res) {
                     color: '#FFF',
                 },
                 min: 0,
-                max: 10000,
-                interval: 2000,
+                max: 1000,
+                interval: 200,
                 axisLabel: {
                     textStyle: {
                         fontSize: 12,
@@ -68,8 +68,8 @@ function createfaHuoNumPie(eChart1, res) {
                     color: '#FFF',
                 },
                 min: 0,
-                max: 15000,
-                interval: 3000,
+                max: 1000,
+                interval: 200,
                 axisLabel: {
                     textStyle: {
                         fontSize: 12,
@@ -89,7 +89,7 @@ function createfaHuoNumPie(eChart1, res) {
                     }
                 },
                 data: [
-                    1000, 2000, 2000, 3000, 2000, 4000
+                    0, 0, 0, 0, 0, 0
                 ]
             },
             {
@@ -101,7 +101,7 @@ function createfaHuoNumPie(eChart1, res) {
                     }
                 },
                 data: [
-                    2000, 4000, 5000, 4000, 3000, 4000
+                    0, 0, 0, 0, 0, 0
                 ]
             },
             {
@@ -113,7 +113,7 @@ function createfaHuoNumPie(eChart1, res) {
                     }
                 },
                 data: [
-                    3000, 4500, 5400, 4100, 3200, 4000
+                    0, 0, 0, 0, 0, 0
                 ]
             },
             {
@@ -136,7 +136,7 @@ function createfaHuoNumPie(eChart1, res) {
                         return value;
                     }
                 },
-                data: [10000, 12000, 9800, 10100, 14000, 9000]
+                data: [0, 0, 0, 0, 0, 0]
             }
         ],
         dataZoom : [
@@ -167,5 +167,69 @@ function createfaHuoNumPie(eChart1, res) {
             },
         ]
     };
+
+    $.ajax({
+        type: "GET",
+        url: urls + "report/plan/getProductPlanData",
+        contentType: "application/json;charset=utf-8",
+        data: {
+            "monthStr": month,
+            "agent": agent
+        },
+        dateType: "json",
+        success: function (data) {
+            option1.xAxis[0].data[0] = data.mmap.monthList[0].substring(4,6) + "月";
+            option1.xAxis[0].data[1] = data.mmap.monthList[1].substring(4,6) + "月";
+            option1.xAxis[0].data[2] = data.mmap.monthList[2].substring(4,6) + "月";
+            option1.xAxis[0].data[3] = data.mmap.monthList[3].substring(4,6) + "月";
+            option1.xAxis[0].data[4] = data.mmap.monthList[4].substring(4,6) + "月";
+            option1.xAxis[0].data[5] = data.mmap.monthList[5].substring(4,6) + "月";
+
+            option1.legend.data[0] = data.mmap.seriseName[0].seriseName;
+            option1.legend.data[1] = data.mmap.seriseName[1].seriseName;
+            option1.legend.data[2] = data.mmap.seriseName[2].seriseName;
+
+            option1.series[0].name = data.mmap.seriseName[0].seriseName;
+            option1.series[1].name = data.mmap.seriseName[1].seriseName;
+            option1.series[2].name = data.mmap.seriseName[2].seriseName;
+
+            option1.series[0].data[0] = data.mmap.FirstMonthList.length > 0 ? data.mmap.FirstMonthList[0].faHuoNum : 0;
+            option1.series[1].data[0] = data.mmap.FirstMonthList.length > 1 ? data.mmap.FirstMonthList[1].faHuoNum : 0;
+            option1.series[2].data[0] = data.mmap.FirstMonthList.length > 2 ? data.mmap.FirstMonthList[2].faHuoNum : 0;
+            option1.series[3].data[0] = Number(data.mmap.FirstMonthList.length > 0 ? data.mmap.FirstMonthList[0].faHuoNum : 0) + Number(data.mmap.FirstMonthList.length > 1 ? data.mmap.FirstMonthList[1].faHuoNum : 0) + Number(data.mmap.FirstMonthList.length > 2 ? data.mmap.FirstMonthList[2].faHuoNum : 0);
+
+            option1.series[0].data[1] = data.mmap.SecondMonthList.length > 0 ? data.mmap.SecondMonthList[0].faHuoNum : 0;
+            option1.series[1].data[1] = data.mmap.SecondMonthList.length > 1 ? data.mmap.SecondMonthList[1].faHuoNum : 0;
+            option1.series[2].data[1] = data.mmap.SecondMonthList.length > 2 ? data.mmap.SecondMonthList[2].faHuoNum : 0;
+            option1.series[3].data[1] = (data.mmap.SecondMonthList.length > 0 ? data.mmap.SecondMonthList[0].faHuoNum : 0) + (data.mmap.SecondMonthList.length > 1 ? data.mmap.SecondMonthList[1].faHuoNum : 0) + (data.mmap.SecondMonthList.length > 2 ? data.mmap.SecondMonthList[2].faHuoNum : 0);
+
+            option1.series[0].data[2] = data.mmap.ThirdMonthList.length > 0 ? data.mmap.ThirdMonthList[0].faHuoNum : 0;
+            option1.series[1].data[2] = data.mmap.ThirdMonthList.length > 1 ? data.mmap.ThirdMonthList[1].faHuoNum : 0;
+            option1.series[2].data[2] = data.mmap.ThirdMonthList.length > 2 ? data.mmap.ThirdMonthList[2].faHuoNum : 0;
+            option1.series[3].data[2] = (data.mmap.ThirdMonthList.length > 0 ? data.mmap.ThirdMonthList[0].faHuoNum : 0) + (data.mmap.ThirdMonthList.length > 1 ? data.mmap.ThirdMonthList[1].faHuoNum : 0) + (data.mmap.ThirdMonthList.length > 2 ? data.mmap.ThirdMonthList[2].faHuoNum : 0);
+
+            option1.series[0].data[3] = data.mmap.FourMonthList.length > 0 ? data.mmap.FourMonthList[0].faHuoNum : 0;
+            option1.series[1].data[3] = data.mmap.FourMonthList.length > 1 ? data.mmap.FourMonthList[1].faHuoNum : 0;
+            option1.series[2].data[3] = data.mmap.FourMonthList.length > 2 ? data.mmap.FourMonthList[2].faHuoNum : 0;
+            option1.series[3].data[3] = (data.mmap.FourMonthList.length > 0 ? data.mmap.FourMonthList[0].faHuoNum : 0) + (data.mmap.FourMonthList.length > 1 ? data.mmap.FourMonthList[1].faHuoNum : 0) + (data.mmap.FourMonthList.length > 2 ? data.mmap.FourMonthList[2].faHuoNum : 0);
+
+            option1.series[0].data[4] = data.mmap.FiveMonthList.length > 0 ? data.mmap.FiveMonthList[0].faHuoNum : 0;
+            option1.series[1].data[4] = data.mmap.FiveMonthList.length > 1 ? data.mmap.FiveMonthList[1].faHuoNum : 0;
+            option1.series[2].data[4] = data.mmap.FiveMonthList.length > 2 ? data.mmap.FiveMonthList[2].faHuoNum : 0;
+            option1.series[3].data[4] = (data.mmap.FiveMonthList.length > 0 ? data.mmap.FiveMonthList[0].faHuoNum : 0) + (data.mmap.FiveMonthList.length > 1 ? data.mmap.FiveMonthList[1].faHuoNum : 0) + (data.mmap.FiveMonthList.length > 2 ? data.mmap.FiveMonthList[2].faHuoNum : 0);
+
+            option1.series[0].data[5] = data.mmap.SixMonthList.length > 0 ? data.mmap.SixMonthList[0].faHuoNum : 0;
+            option1.series[1].data[5] = data.mmap.SixMonthList.length > 1 ? data.mmap.SixMonthList[1].faHuoNum : 0;
+            option1.series[2].data[5] = data.mmap.SixMonthList.length > 2 ? data.mmap.SixMonthList[2].faHuoNum : 0;
+            option1.series[3].data[5] = Number(data.mmap.SixMonthList.length > 0 ? data.mmap.SixMonthList[0].faHuoNum : 0) + Number(data.mmap.SixMonthList.length > 1 ? data.mmap.SixMonthList[1].faHuoNum : 0) + Number(data.mmap.SixMonthList.length > 2 ? data.mmap.SixMonthList[2].faHuoNum : 0);
+
+            eChart1.setOption(option1, true);
+        },
+        error: function (data) {
+            alert("失败");
+        }
+
+    });
     eChart1.setOption(option1, true);
+
 }

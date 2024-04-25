@@ -3,42 +3,52 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ruoyi.report.mapper.ProductPlanMapper">
-    
+
     <resultMap type="ProductPlanOfMonth" id="productPlanOfMonthResult">
-        <result property="parentId"    column="parentId"    />
-        <result property="productCode"    column="productCode"    />
-        <result property="xybrProductOrder"    column="xybrProductOrder"    />
-        <result property="orderNum"    column="orderNum"    />
-        <result property="zhengJiZuzhaungNum"    column="zhengJiZuzhaungNum"    />
-        <result property="laoHuaBeforNum"    column="laoHuaBeforNum"    />
-        <result property="laoHuaNum"    column="laoHuaNum"    />
-        <result property="laoHuaAfterNum"    column="laoHuaAfterNum"    />
-        <result property="inbound"    column="inbound"    />
-        <result property="createTime"    column="createTime"    />
+        <result property="month"    column="month"    />
+        <result property="agent"    column="agent"    />
+        <result property="seriseName"    column="seriseName"    />
+        <result property="actual"    column="actual"    />
+        <result property="planMum"    column="planMum"    />
+        <result property="actualRate"    column="actualRate"    />
+    </resultMap>
+    <resultMap type="MonthPlan" id="monthPlanResult">
         <result property="agentName"    column="agentName"    />
-        <result property="smtOrderOnlineTime"    column="smtOrderOnlineTime"    />
-        <result property="smtNum"    column="smtNum"    />
-        <result property="chaJianNum"    column="chaJianNum"    />
-        <result property="ftNum"    column="ftNum"    />
-        <result property="danBanZhongYanNum"    column="danBanZhongYanNum"    />
-        <result property="danBanZuzhuangNum"    column="danBanZuzhuangNum"    />
+        <result property="plan"    column="seriseName"    />
+        <result property="finshRate"    column="actual"    />
+    </resultMap>
+    <resultMap type="ShippingDataRate" id="shippingDataRateResult">
+        <result property="SERISE"    column="SERISE"    />
+        <result property="num"    column="num"    />
+        <result property="agent"    column="agent"    />
+    </resultMap>
+    <resultMap type="ShippingNumOfMonth" id="shippingNumOfMonthResult">
+        <result property="seriseName"    column="seriseName"    />
+        <result property="faHuoNum"    column="faHuoNum"    />
+        <result property="month"    column="month"    />
+        <result property="agent"    column="agent"    />
     </resultMap>
 
+
     <sql id="selectProductPlanOfMonthVo">
-        SELECT
-            a.`产品编码` AS productCode,
-            c.`产品名称` AS  productName,
-            a.plan, ifnull(b.`入库数量`,0) AS actual,
-            ifnull(b.`入库数量`,0)/a.plan AS actualRate
-        FROM
-            (SELECT `产品编码`, SUM(`计划数量`) AS plan FROM `产品计划表`
+    SELECT * FROM (
+            SELECT
+                h.`系列ID`,
+                SUM(a.`入库数量`) AS actual,
+                SUM(h.plan) AS planMum,
+                ifnull(SUM(a.`入库数量`),0)/SUM(h.plan) AS actualRate
+            FROM
+            (SELECT c.`系列ID`, a.`计划数量` AS plan FROM `tlk_产品计划表` a, `tlk_产品表` b, `tlk_产品系列表` c
             <where>
-                <if test="month != null "> and DATE_FORMAT(上线时间,'%m') = #{month}</if>
-                <if test="agentName != null  and agentName != ''"> and 代工厂 = #{agentName}</if>
+                a.`产品编码` = b.`产品编码` AND b.`产品系列ID` = c.`系列ID`
+                <if test="month != null "> and DATE_FORMAT(a.`上线时间`,'%m') = #{month}</if>
+                <if test="agent != null  and agent != ''"> and a.代工厂 = #{agent}</if>
             </where>
-            GROUP BY `产品编码`) a
-            LEFT JOIN `入库表` b ON a.`产品编码` = b.`产品编码`
-            LEFT JOIN `产品表` c ON a.`产品编码` = c.`产品编码`
+            ) h, `入库表` a, `tlk_产品表` b
+            WHERE a.`产品编码` = b.`产品编码` AND b.`产品系列ID` = h.`系列ID`
+            GROUP BY h.`系列ID`
+            ) f
+        ORDER BY actual
     </sql>
 
     <select id="selectproductPlanOfMonthList" parameterType="ProductPlanOfMonth" resultMap="productPlanOfMonthResult">
@@ -47,5 +57,51 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="month != null "> and 创建时间 = #{month}</if>
             <if test="agentName != null  and agentName != ''"> and 工厂名称 = #{agentName}</if>
         </where>-->
+    </select>
+
+    <select id="monthOfPlan" parameterType="MonthPlan" resultMap="monthPlanResult">
+        SELECT
+        SUM(b.`入库数量`) AS plan,
+        SUM(b.`入库数量`)/SUM(a.`计划数量`) AS finshRate,
+        DATE_FORMAT(b.`入库时间`, '%Y%m') AS month
+        FROM `tlk_产品计划表` a, `入库表` b
+        <where>
+            a.`产品编码` = b.`产品编码`
+            <if test="month != null and month != ''"> AND DATE_FORMAT(b.`入库时间`, '%Y%m') = #{month} </if>
+        </where>
+        GROUP BY DATE_FORMAT(b.`入库时间`, '%Y%m')
+    </select>
+
+    <select id="shippingDataRate" parameterType="ShippingDataRate" resultMap="shippingDataRateResult">
+        SELECT a.`系列名称` AS SERISE,SUM( c.`发货数量` ) AS NUM
+        FROM `tlk_产品系列表` a
+        LEFT JOIN `tlk_产品表` b ON b.`产品系列ID` = a.`系列ID`
+        LEFT JOIN `发货表` c ON	b.`产品编码` = c.`产品编码`
+        AND DATE_FORMAT( `发货时间`, '%Y' ) = DATE_FORMAT( NOW( ), '%Y' )
+        <if test="agent != null and agent != ''"> AND c.`工厂名称` = #{agent} </if>
+        GROUP BY a.`系列名称`
+        LIMIT 3
+    </select>
+
+    <select id="getShippingNumOfMonth" resultMap="shippingNumOfMonthResult">
+        SELECT
+            c.`系列名称` AS seriseName,
+            SUM(a.`发货数量`) AS faHuoNum,
+            DATE_FORMAT(a.`发货时间`,'%Y%m') AS `month`
+        FROM `发货表` a, `tlk_产品表` b, `tlk_产品系列表` c
+        <where>
+            AND DATE_FORMAT(a.`发货时间`,'%Y%m') IN
+            <foreach collection="monthList" index="index" item="item" open="(" separator="," close=")">
+                #{item}
+            </foreach>
+            <if test="agent != null and agent != ''"> AND a.`工厂名称` = #{agent} </if>
+            AND a.`产品编码` = b.`产品编码` AND b.`产品系列ID` = c.`系列ID`
+            GROUP BY DATE_FORMAT(a.`发货时间`,'%Y%m'), c.`系列名称`
+        </where>
+    </select>
+    <select id="getSeriseName" resultMap="shippingNumOfMonthResult">
+        SELECT
+        `系列名称` AS seriseName
+        FROM `tlk_产品系列表` LIMIT 3
     </select>
 </mapper>

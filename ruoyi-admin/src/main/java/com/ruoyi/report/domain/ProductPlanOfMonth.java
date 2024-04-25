@@ -13,42 +13,28 @@ import java.util.Date;
  */
 public class ProductPlanOfMonth extends BaseEntity
 {
-    private String productCode;
+    private String seriseName;
 
-    private String productName;
-
-    private String plan;
+    private String planMum;
 
     private String actual;
 
     private String actualRate;
 
-    private String month;
-
-    private String agentName;
-
-    public String getProductCode() {
-        return productCode;
+    public String getSeriseName() {
+        return seriseName;
     }
 
-    public void setProductCode(String productCode) {
-        this.productCode = productCode;
+    public void setSeriseName(String seriseName) {
+        this.seriseName = seriseName;
     }
 
-    public String getProductName() {
-        return productName;
+    public String getPlanMum() {
+        return planMum;
     }
 
-    public void setProductName(String productName) {
-        this.productName = productName;
-    }
-
-    public String getPlan() {
-        return plan;
-    }
-
-    public void setPlan(String plan) {
-        this.plan = plan;
+    public void setPlanMum(String planMum) {
+        this.planMum = planMum;
     }
 
     public String getActual() {
@@ -75,11 +61,16 @@ public class ProductPlanOfMonth extends BaseEntity
         this.month = month;
     }
 
-    public String getAgentName() {
-        return agentName;
+    private String month;
+
+    public String getAgent() {
+        return agent;
     }
 
-    public void setAgentName(String agentName) {
-        this.agentName = agentName;
+    public void setAgent(String agent) {
+        this.agent = agent;
     }
+
+    private String agent;
+
 }

@@ -35,7 +35,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <include refid="selectXybrOrderVo"/>
         <where>  
             <if test="xybrProductOrder != null  and xybrProductOrder != ''"> and 星源生产po = #{xybrProductOrder}</if>
-            <if test="createTime != null "> and 创建时间 = #{createTime}</if>
+            <if test="createTime != null "> and DATE_FORMAT(创建时间,'%Y%m%d') = DATE_FORMAT(#{createTime},'%Y%m%d')</if>
             <if test="agentName != null  and agentName != ''"> and 工厂名称 = #{agentName}</if>
         </where>
     </select>
@@ -49,7 +49,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <include refid="selectAgentOrderVo"/>
         <where>
             <if test="xybrProductOrder != null  and xybrProductOrder != ''"> and 星源生产po = #{xybrProductOrder}</if>
-            <if test="createTime != null "> and 创建时间 = #{createTime}</if>
+            <if test="createTime != null "> and DATE_FORMAT(创建时间,'%Y%m%d') = DATE_FORMAT(#{createTime},'%Y%m%d')</if>
             <if test="agentName != null  and agentName != ''"> and 工厂名称 = #{agentName}</if>
         </where>
     </select>

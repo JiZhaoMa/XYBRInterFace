@@ -3,38 +3,39 @@
 <head>
     <th:block th:include="include :: header('')" />
 </head>
-<body style="background-color: rgb(19,130,59) !important; top: -19%; position: relative;">
+<body style="background-color: rgb(21,51,114) !important; top: -14%; position: relative;">
 <ul>
     <input id="month" name="month" th:value="${month}" type="hidden">
     <input id="agentName" name="agentName" th:value="${agentName}" type="hidden">
+    <input id="stage" name="stage" th:value="${stage}" type="hidden">
 </ul>
 <table id="bootstrap-table"></table>
 <th:block th:include="include :: footer" />
 <script th:inline="javascript">
-    var prefix = ctx + "report/plan";
+    var prefix = ctx + "report/zhiTongRate";
     $(function() {
         var options = {
-            url: prefix + "/list/" + $('#month').val() + "/" + $('#agentName').val(),
-            modalName: "月生产计划",
+            url: prefix + "/list/" + $('#month').val() + "/" + $('#agentName').val() + "/" + $('#stage').val(),
+            modalName: "系列一次直通率",
             columns: [
                 {
-                    field: 'productName',
-                    title: '产品名称',
+                    field: 'seriesName',
+                    title: '系列',
                     width: '25%',
                 },
                 {
-                    field: 'plan',
-                    title: '计划完成',
+                    field: 'testNum',
+                    title: '测试数量',
                     width: '25%',
                 },
                 {
-                    field: 'actual',
-                    title: '实际完成',
+                    field: 'zhiTongNum',
+                    title: '直通数量',
                     width: '25%',
                 },
                 {
-                    field: 'actualRate',
-                    title: '实际完成率',
+                    field: 'zhiTongRate',
+                    title: '直通率',
                     width: '25%',
                 }]
         };
@@ -44,7 +45,7 @@
         $("tbody").on("mouseover",function() {
             var trs = document.querySelector('tbody').querySelectorAll("tr");
             for(var i=0; i<trs.length; i++){
-                trs[i].style.backgroundColor = 'rgb(19,130,59)';
+                trs[i].style.backgroundColor = 'rgb(21,51,114)';
             }
         });
         $("tbody").on("click",function() {
@@ -87,7 +88,7 @@
             button.remove();
         }
         const buttonArea = document.querySelector('div.btn-group.pull-right');
-        if (buttonArea) {F
+        if (buttonArea) {
             buttonArea.remove();
         }
         const option = document.querySelector('div.th-inner ');

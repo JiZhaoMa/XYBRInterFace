@@ -1,6 +1,6 @@
 package com.ruoyi.mapper;
 
-import com.ruoyi.domain.Order;
+import com.ruoyi.domain.*;
 import org.mapstruct.Mapper;
 
 import java.util.List;
@@ -10,7 +10,13 @@ import java.util.List;
  * @Author: majizhao
  * @date: 2024/3/13 11:28
  */
-@Mapper
 public interface InterfaceMapper {
-    public int insertOrderList(List<Order> list);
+    public int insertOrderList(List<InterFaceOrder> list);
+    public int insertAgentOrderList(List<InterFaceAgentOrder> list);
+    public int insertProcessDataList(List<InterFaceProcessData> list);
+    public int insertInstoreDataList(List<InterFaceInStoreData> list);
+    public int insertShippingDataList(List<InterFaceShippingData> list);
+    public int insertStockDataList(List<InterFaceStockData> list);
+    public int deleteStockData();
+    public int insertHistoryStockDataList(List<InterFaceStockData> list);
 }

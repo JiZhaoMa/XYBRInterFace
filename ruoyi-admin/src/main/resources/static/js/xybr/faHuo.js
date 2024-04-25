@@ -1,5 +1,5 @@
 //饼图
-function createFaHuoPie(faHuoPie, res) {
+function createFaHuoPie(faHuoPie, agent) {
     let echartsCumNum = 0;
     let option = {
         title:{
@@ -43,7 +43,7 @@ function createFaHuoPie(faHuoPie, res) {
         },
         legend: {
             orient: 'vertical',
-            right: '10%',
+            right: '0',
             position: ['80%','80%'],
             textStyle: {
                 color:'#FFFFFF',
@@ -55,7 +55,7 @@ function createFaHuoPie(faHuoPie, res) {
             {
                 name: '发货量',
                 type: 'pie',
-                radius: ['40%','70%'],
+                radius: ['40%','60%'],
                 center: ['50%','50%'],
                 label: {
                     normal: {
@@ -69,9 +69,9 @@ function createFaHuoPie(faHuoPie, res) {
                     }
                 },
                 data: [
-                    { value: 1048, name: 'A产品' },
-                    { value: 735, name: 'B产品' },
-                    { value: 580, name: 'C产品' }
+                    { value: 0, name: '' },
+                    { value: 0, name: '' },
+                    { value: 0, name: '' }
                 ],
                 color: ['#7EC0EE', '#FF9F7F', '#FFD700'],//饼图区域的颜色
                 emphasis: {
@@ -86,9 +86,11 @@ function createFaHuoPie(faHuoPie, res) {
     };
     //option.series[0].label.formatter = '{b}: {c} ({d}%)\ntotal:' + 1000;
     option.series[0].data.forEach(v => {
-        echartsCumNum += v.value;
+        if(v.value != null){
+            echartsCumNum += parseInt(v.value)
+        }
     });
-    option.title.subtext = option.title.subtext + echartsCumNum;
+    option.title.subtext = echartsCumNum;
     faHuoPie.setOption(option, true);
 
     let echartsArr = []; //点击图例后所剩的数据名
@@ -108,11 +110,42 @@ function createFaHuoPie(faHuoPie, res) {
         option.series[0].data.forEach(item => {
             echartsArr.forEach(v => {
                 if (item.name === v) {
-                    echartsCumNum += item.value
+                    if(item.value != null){
+                        echartsCumNum += parseInt(item.value)
+                    }
                 }
             })
         })
         option.title.subtext = echartsCumNum //最后将其赋值给主标题即可
         faHuoPie.setOption(option);
-    })
+    });
+
+    $.ajax({
+        type: "GET",
+        url: "http://localhost/report/plan/getShippingData",
+        contentType: "application/json;charset=utf-8",
+        data: {
+            "agent": agent
+        },
+        dateType: "json",
+        success: function (data) {
+            option.series[0].data[0].value = data.mmap.shippingDataNumFirst;
+            option.series[0].data[0].name = data.mmap.shippingFirstSerise;
+            option.series[0].data[1].value = data.mmap.shippingDataNumSecond;
+            option.series[0].data[1].name = data.mmap.shippingSecondSerise;
+            option.series[0].data[2].value = data.mmap.shippingDataNumThird;
+            option.series[0].data[2].name = data.mmap.shippingThirdSerise;
+            option.series[0].data.forEach(v => {
+                if(v.value != null){
+                    echartsCumNum += parseInt(v.value);
+                }
+            });
+            option.title.subtext = echartsCumNum;
+            faHuoPie.setOption(option, true);
+        },
+        error: function (data) {
+            alert("失败");
+        }
+
+    });
 }

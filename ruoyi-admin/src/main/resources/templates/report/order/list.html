@@ -24,17 +24,16 @@
                             </li>
                             <li class="select-time" style="position: relative; left: 43%;">
                                 <label style="color: #FFFFFF !important">日期：</label>
-                                <input type="text" class="time-input" id="date" style="color: #FFFFFF !important" name="params[date]"/>
-
+                                <input type="text" class="time-input" id="createTime" style="color: #FFFFFF !important" name="createTime"/>
                             </li>
                             <li style="position: relative; left: 45%; width:30%">
-                                <select name="selectAgent" id="selectAgent" style="color: #FFFFFF !important; background-color: rgb(21,51,114) !important; width: 25%;">
-                                    <option value="0">工厂</option>
-                                    <option value="1">天宝</option>
-                                    <option value="2">卓瑞源</option>
+                                <select name="agentName" id="agentName" style="color: #FFFFFF !important; background-color: rgb(21,51,114) !important; width: 25%;">
+                                    <option value="">工厂</option>
+                                    <option value="天宝">天宝</option>
+                                    <option value="卓瑞源">卓瑞源</option>
                                 </select>
                             </li>
-                            <li style="position: relative; left: 25%;">
+                            <li style="position: relative; left: 23%;">
                                 <a class="btn btn-primary btn-rounded btn-sm" onclick="$.treeTable.search()"><i class="fa fa-search"></i>&nbsp;搜索</a>
                                 <a class="btn btn-warning btn-rounded btn-sm" onclick="$.form.reset()"><i class="fa fa-refresh"></i>&nbsp;重置</a>
                             </li>
@@ -91,17 +90,17 @@
                 {
                     field: 'xybrProductOrder',
                     title: '生产PO',
-                    width: '15%',
+                    width: '20%',
                 },
                 {
                     field: 'productCode',
                     title: '产品编码',
-                    width: '15%',
+                    width: '11%',
                 },
                 {
                     field: 'orderNum',
                     title: '下单数量',
-                    width: '10%',
+                    width: '9%',
                 },
                 {
                     field: 'smtNum',

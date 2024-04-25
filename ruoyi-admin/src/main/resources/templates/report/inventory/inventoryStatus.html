@@ -11,31 +11,36 @@
 <table id="bootstrap-table"></table>
 <th:block th:include="include :: footer" />
 <script th:inline="javascript">
-    var prefix = ctx + "report/plan";
+    var prefix = ctx + "report/inventory";
     $(function() {
         var options = {
             url: prefix + "/list/" + $('#month').val() + "/" + $('#agentName').val(),
-            modalName: "月生产计划",
+            modalName: "库存状态",
             columns: [
                 {
+                    field: 'productCode',
+                    title: '产品编码',
+                    width: '25%',
+                },
+                {
                     field: 'productName',
-                    title: '',
-                    width: '25%',
+                    title: '产品名称',
+                    width: '20%',
                 },
                 {
-                    field: 'plan',
-                    title: '计划完成',
-                    width: '25%',
+                    field: 'inventory',
+                    title: '成品数量',
+                    width: '15%',
                 },
                 {
-                    field: 'actual',
-                    title: '实际完成',
-                    width: '25%',
+                    field: 'hardwareVersion',
+                    title: '硬件版本',
+                    width: '20%',
                 },
                 {
-                    field: 'actualRate',
-                    title: '实际完成率',
-                    width: '25%',
+                    field: 'softVersion',
+                    title: '软件版本',
+                    width: '20%',
                 }]
         };
         $.table.init(options);

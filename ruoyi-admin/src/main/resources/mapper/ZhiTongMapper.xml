@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.report.mapper.ZhiTongRateMapper">
+
+    <resultMap type="CurrentZhiTongRate" id="currentZhiTongRateResult">
+        <result property="month"    column="month"    />
+        <result property="agent"    column="agent"    />
+        <result property="seriesName"    column="seriesName"    />
+        <result property="seriesNum"    column="seriesNum"    />
+
+        <result property="laoHuaqianTestNum"    column="laoHuaqianTestNum"    />
+        <result property="laoHuaqianZhiTongNum"    column="laoHuaqianZhiTongNum"    />
+        <result property="laoHuaTestNum"    column="laoHuaTestNum"    />
+        <result property="laoHuaZhiTongNum"    column="laoHuaZhiTongNum"    />
+        <result property="laoHuaHouTestNum"    column="laoHuaHouTestNum"    />
+        <result property="laoHuaHouZhiTongNum"    column="laoHuaHouZhiTongNum"    />
+        <result property="naiYaTestNum"    column="naiYaTestNum"    />
+        <result property="naiYaZhiTongNum"    column="naiYaZhiTongNum"    />
+    </resultMap>
+    <resultMap type="SeriesFirstZhiTongRate" id="seriesFirstZhiTongRateResult">
+        <result property="agent"    column="agent"    />
+        <result property="month"    column="month"    />
+        <result property="seriesName"    column="seriesName"    />
+        <result property="testNum"    column="testNum"    />
+        <result property="zhiTongNum"    column="zhiTongNum"    />
+        <result property="zhiTongRate"    column="zhiTongRate"    />
+    </resultMap>
+    <resultMap type="CurYearSumZhiTongRate" id="curYearSumZhiTongRate">
+        <result property="startMonth"    column="startMonth"    />
+        <result property="endMonth"    column="endMonth"    />
+        <result property="agent"    column="agent"    />
+        <result property="seriesName"    column="seriesName"    />
+        <result property="productSum"    column="productSum"    />
+        <result property="zhiTongRate"    column="zhiTongRate"    />
+        <result property="seriesOfSumFirst"    column="seriesOfSumFirst"    />
+        <result property="seriesOfSumSecond"    column="seriesOfSumSecond"    />
+        <result property="seriesOfSumThird"    column="seriesOfSumThird"    />
+        <result property="seriesOfRateFirst"    column="seriesOfRateFirst"    />
+        <result property="seriesOfRateSecond"    column="seriesOfRateSecond"    />
+        <result property="seriesOfRateThird"    column="seriesOfRateThird"    />
+    </resultMap>
+    <resultMap type="MonthOfZhiTongRate" id="monthOfZhiTongRateResult">
+        <result property="month"    column="month"    />
+        <result property="agent"    column="agent"    />
+        <result property="seriesName"    column="seriesName"    />
+        <result property="productSum"    column="productSum"    />
+        <result property="zhiTongRate"    column="zhiTongRate"    />
+    </resultMap>
+
+    <select id="getCurMonZhiTongRate" parameterType="CurrentZhiTongRate" resultMap="currentZhiTongRateResult">
+        SELECT
+        a.`系列名称` AS seriesName,
+        ((
+        SUM( c.`老化前测试一次直通数量` ) + SUM( c.`老化后测试一次直通数量` ) + SUM( c.`老化直通数量` ) + SUM( c.`耐压直通数量` )
+        )/(SELECT
+        ( SUM( `老化前测试一次直通数量` ) + SUM( `老化后测试一次直通数量` ) + SUM( `老化直通数量` ) + SUM( `耐压直通数量` ) )
+        FROM
+        `直通率表`
+        WHERE
+        1 = 1
+        <if test="month != null and month !=''"> AND DATE_FORMAT( `创建时间`, '%Y%m' ) = #{month}</if>
+        <if test="agent != null and agent !=''"> AND `工厂名称` = #{agent}</if>)) AS seriesNum
+        FROM `tlk_产品系列表` a
+        LEFT JOIN `tlk_产品表` b ON a.`系列ID` = b.`产品系列ID`
+        LEFT JOIN `直通率表` c ON c.`产品编码` = b.`产品编码`
+        <if test="month != null and month !=''"> AND DATE_FORMAT( c.`创建时间`, '%Y%m' ) = #{month}</if>
+        <if test="agent != null and agent !=''"> AND c.`工厂名称` = #{agent}</if>
+        GROUP BY a.`系列名称`
+    </select>
+    <select id="getZongHeZhiTongRate" parameterType="CurrentZhiTongRate" resultMap="currentZhiTongRateResult">
+        SELECT
+            SUM(`老化前测试一次直通数量`) AS laoHuaqianZhiTongNum,
+            SUM(`老化前测试数量`) AS laoHuaqianTestNum,
+            SUM(`老化后测试一次直通数量`) AS laoHuaHouZhiTongNum,
+            SUM(`老化后测试数量`) AS laoHuaHouTestNum,
+            SUM(`老化直通数量`) AS laoHuaZhiTongNum,
+            SUM(`老化测试数量`) AS laoHuaTestNum,
+            SUM(`耐压直通数量`) AS naiYaZhiTongNum,
+            SUM(`耐压测试数量`) AS naiYaTestNum
+        FROM `直通率表`
+        WHERE 1 = 1
+        <if test="month != null and month !=''"> AND DATE_FORMAT( `创建时间`, '%Y%m' ) = #{month}</if>
+        <if test="agent != null and agent !=''"> AND `工厂名称` = #{agent}</if>
+    </select>
+    <select id="getSeriesFirstZhiTongRate" parameterType="SeriesFirstZhiTongRate" resultMap="seriesFirstZhiTongRateResult">
+        SELECT
+            c.`系列名称` AS seriesName,
+            <if test="stageTest == '综合'">
+                SUM(a.老化前测试数量) + SUM(a.老化测试数量) + SUM(a.老化后测试数量) + SUM(a.耐压测试数量) AS testNum,
+                SUM(a.老化前测试一次直通数量) + SUM(a.老化直通数量) + SUM(a.老化后测试一次直通数量) + SUM(a.耐压直通数量) AS zhiTongNum,
+                CONCAT(TRUNCATE(((SUM(a.老化前测试一次直通数量) + SUM(a.老化直通数量) + SUM(a.老化后测试一次直通数量) + SUM(a.耐压直通数量)) * 100)/(SUM(a.老化前测试数量) + SUM(a.老化测试数量) + SUM(a.老化后测试数量) + SUM(a.耐压测试数量)), 2), '%') AS zhiTongRate
+            </if>
+            <if test="stageTest != '综合'">
+                SUM(a.${stageTest}) AS testNum,
+                SUM(a.${stageZhiTong}) AS zhiTongNum,
+                CONCAT(
+                    ROUND(
+                        SUM(a.${stageZhiTong}) * 100 /SUM(a.${stageTest})
+                        , 2
+                    ), '%') AS zhiTongRate
+            </if>
+        FROM `直通率表` a, `tlk_产品表` b, `tlk_产品系列表` c
+        <where>
+            a.`产品编码` = b.`产品编码` AND b.`产品系列ID` = c.`系列ID`
+            <if test="month != null and month !=''"> AND DATE_FORMAT(`创建时间`,'%Y%m') = #{month}</if>
+            <if test="agent != null and agent !=''"> AND `工厂名称` = #{agent}</if>
+        </where>
+        GROUP BY c.`系列名称`
+    </select>
+    <select id="getCurYearSumZhiTongRate" parameterType="ShippingDataRate" resultMap="curYearSumZhiTongRate">
+        SELECT
+        f.seriesName,
+        f.productSum,
+        SUM(m.`老化前直通数量` + m.`老化直通数量` + m.`老化后直通数量` + m.`耐压直通数量`)/SUM(m.`老化前测试数量` + m.`老化测试数量` + m.`老化后测试数量` + m.`耐压测试数量`) AS zhiTongRate
+        FROM
+        (SELECT
+        a.`系列名称` AS seriesName,
+        a.`系列ID` AS 	seriesID,
+        SUM(c.`入库数量`) AS productSum FROM `tlk_产品系列表` a
+        LEFT JOIN `tlk_产品表` b ON a.`系列ID` = b.`产品系列ID`
+        LEFT JOIN `入库表` c ON c.`产品编码` = b.`产品编码`
+        <if test="startMonth != null and startMonth !='' and endMonth != null and endMonth !=''"> AND DATE_FORMAT(c.`入库时间`,'%Y%m') BETWEEN #{startMonth} AND #{endMonth}</if>
+        <if test="agent != null and agent !=''"> AND c.`工厂名称` = #{agent}</if> GROUP BY a.`系列名称`, a.`系列ID`) f
+        LEFT JOIN `tlk_产品表` n ON f.seriesID = n.`产品系列ID`
+        LEFT JOIN `直通率表` m ON m.`产品编码` = n.`产品编码`
+        <if test="startMonth != null and startMonth !='' and endMonth != null and endMonth !=''"> AND DATE_FORMAT(m.`创建时间`,'%Y%m') BETWEEN #{startMonth} AND #{endMonth}</if>
+        <if test="agent != null and agent !=''"> AND m.`工厂名称` = #{agent}</if>
+        GROUP BY f.seriesName, f.productSum
+    </select>
+
+    <select id="getMonthOfZhiTongRate" resultMap="monthOfZhiTongRateResult">
+        SELECT
+        f.`系列名称` AS seriesName,
+        SUM( m.`老化前直通数量` + m.`老化直通数量` + m.`老化后直通数量` + m.`耐压直通数量` ) / SUM( m.`老化前测试数量` + m.`老化测试数量` + m.`老化后测试数量` + m.`耐压测试数量` ) AS zhiTongRate,
+        DATE_FORMAT( m.`创建时间`, '%Y%m' ) AS month
+        FROM
+        `tlk_产品系列表` f
+        LEFT JOIN `tlk_产品表` n ON f.`系列ID` = n.`产品系列ID`
+        LEFT JOIN `直通率表` m ON m.`产品编码` = n.`产品编码`
+        AND DATE_FORMAT(m.`创建时间`,'%Y%m') IN
+        <foreach collection="monthList" index="index" item="item" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+        <if test="agent != null and agent !=''"> AND m.`工厂名称` = #{agent}</if>
+        GROUP BY
+        f.`系列名称`,
+        DATE_FORMAT( m.`创建时间`, '%Y%m' )
+    </select>
+    <select id="getMonthOfStock" resultMap="monthOfZhiTongRateResult">
+        SELECT
+            a.`系列名称` AS seriesName,
+            a.`系列ID` AS seriesID,
+            DATE_FORMAT( c.`入库时间`, '%Y%m' ) AS month,
+            SUM( c.`入库数量` ) AS productSum
+        FROM
+            `tlk_产品系列表` a
+                LEFT JOIN `tlk_产品表` b ON a.`系列ID` = b.`产品系列ID`
+                LEFT JOIN `入库表` c ON c.`产品编码` = b.`产品编码`
+                AND DATE_FORMAT(c.`入库时间`,'%Y%m') IN
+                <foreach collection="monthList" index="index" item="item" open="(" separator="," close=")">
+                    #{item}
+                </foreach>
+                <if test="seriesName != null and seriesName !=''"> AND a.`系列名称` = #{seriesName}</if>
+                <if test="agent != null and agent !=''"> AND c.`工厂名称` = #{agent}</if>
+        GROUP BY
+            a.`系列名称`,
+            a.`系列ID`,
+            DATE_FORMAT( c.`入库时间`, '%Y%m' )
+    </select>
+</mapper>

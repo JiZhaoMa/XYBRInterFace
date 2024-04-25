@@ -77,6 +77,16 @@ public class XybrOrder extends BaseEntity
     @Excel(name = "创建时间", readConverterExp = "$column.readConverterExp()")
     private Date createTime;
 
+    public String getYyyyMMdd() {
+        return yyyyMMdd;
+    }
+
+    public void setYyyyMMdd(String yyyyMMdd) {
+        this.yyyyMMdd = yyyyMMdd;
+    }
+
+    private String yyyyMMdd;
+
     public String getProductCode() {
         return productCode;
     }

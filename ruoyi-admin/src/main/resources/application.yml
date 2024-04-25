@@ -139,3 +139,18 @@ config:
     - /report/plan
 
 
+#天宝参数
+TianBao:
+  HOST: http://119.146.70.115:28888/
+  API: api/v1/xy_data/
+  Tenant_Id: 272026
+  Authorization: Basic eGluZ3l1YW46eGluZ3l1YW5AMjAyNA==
+  grant_type: password
+  scope: all
+  username: xingyuan
+  password: 4b3db8dd1afde4b985b3830c18600bd4
+
+
+
+
+

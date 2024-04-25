@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.report.mapper.InventoryMapper">
+
+    <resultMap type="InventoryTurnoverData" id="inventoryTurnoverDataResult">
+        <result property="month"    column="month"    />
+        <result property="agent"    column="agent"    />
+        <result property="currYearShipping"    column="currYearShipping"    />
+        <result property="monthInventory"    column="monthInventory"    />
+        <result property="currentInventoryNum"    column="currentInventoryNum"    />
+        <result property="inventoryTurnoverNum"    column="inventoryTurnoverNum"    />
+    </resultMap>
+    <resultMap type="InventoryStatus" id="inventoryStatusResult">
+        <result property="agent"    column="agent"    />
+        <result property="month"    column="month"    />
+        <result property="productCode"    column="productCode"    />
+        <result property="productName"    column="productName"    />
+        <result property="inventory"    column="inventory"    />
+        <result property="hardwareVersion"    column="hardwareVersion"    />
+        <result property="softVersion"    column="softVersion"    />
+    </resultMap>
+    <resultMap type="InventoryOfMonth" id="inventoryOfMonthResult">
+        <result property="month"    column="month"    />
+        <result property="agent"    column="agent"    />
+        <result property="inventoryOfMonthNum"    column="inventoryOfMonthNum"    />
+    </resultMap>
+    <resultMap type="InventoryOfCurrent" id="inventoryOfCurrentResult">
+        <result property="month"    column="month"    />
+        <result property="agent"    column="agent"    />
+        <result property="productName"    column="productName"    />
+        <result property="actInventory"    column="actInventory"    />
+        <result property="safeInventory"    column="safeInventory"    />
+    </resultMap>
+
+    <select id="getInventoryTurnoverData" parameterType="InventoryTurnoverData" resultMap="inventoryTurnoverDataResult">
+        SELECT
+        SUM(`库存`) AS monthInventory,
+        (SELECT SUM(`库存`) FROM `库存表` WHERE DATE_FORMAT(`库存时间`,'%Y%m%d') = DATE_FORMAT(NOW(),'%Y%m%d') <if test="agent != null and agent !=''"> AND `工厂名称` = #{agent}</if>) AS currentInventoryNum,
+        (SELECT SUM(`发货数量`) FROM `发货表` WHERE DATE_FORMAT(`发货时间`,'%Y') = DATE_FORMAT(NOW(),'%Y') AND DATE_FORMAT(`发货时间`,'%Y%m') &lt; DATE_FORMAT(NOW(),'%Y%m')
+        <if test="agent != null and agent !=''"> AND `工厂名称` = #{agent}</if>
+        ) AS currYearShipping
+        FROM `库存表` WHERE DATE_FORMAT(`库存时间`,'%Y') = DATE_FORMAT(NOW(),'%Y') AND DATE_FORMAT(`库存时间`,'%Y%m') &lt; DATE_FORMAT(NOW(),'%Y%m')
+        <if test="agent != null and agent !=''"> AND `工厂名称` = #{agent}</if>
+    </select>
+    <select id="getInventoryStatusList" parameterType="InventoryStatus" resultMap="inventoryStatusResult">
+        SELECT
+            a.`产品编码` AS productCode,
+            a.`产品名称` AS productName,
+            b.`库存` AS inventory,
+            b.`产品硬件版本` AS hardwareVersion,
+            b.`产品软件版本` AS softVersion
+        FROM `tlk_产品表` a
+        LEFT JOIN `库存表` b ON b.产品编号 = a.`产品编码` AND DATE_FORMAT(b.`库存时间`,'%Y%m%d') = DATE_FORMAT(NOW(),'%Y%m%d')
+        <if test="month != null and month !=''"> AND DATE_FORMAT( b.`库存时间`, '%Y%m' ) = #{month}</if>
+        <if test="agent != null and agent !=''"> AND b.`工厂名称` = #{agent}</if>
+    </select>
+    <select id="getInventoryOfMonth" parameterType="InventoryOfMonth" resultMap="inventoryOfMonthResult">
+        SELECT SUM(`库存`) AS inventoryOfMonthNum FROM `库存表` WHERE 1 = 1
+        <if test="month != null and month !=''"> AND `库存时间` = DATE_FORMAT(#{month},'%Y%m')</if>
+        <if test="agent != null and agent !=''"> AND `工厂名称` = #{agent}</if>
+    </select>
+
+    <select id="getInventoryOfCurrent" parameterType="InventoryOfCurrent" resultMap="inventoryOfCurrentResult">
+        SELECT
+        a.`产品名称` AS productName,
+        SUM(b.`库存`) AS actInventory,
+        a.`安全库存` AS safeInventory
+        FROM `tlk_产品表` a
+        LEFT JOIN `库存表` b ON b.产品编号 = a.`产品编码` AND DATE_FORMAT(b.`库存时间`,'%Y%m%d') = DATE_FORMAT(NOW(),'%Y%m%d')
+        <if test="agent != null and agent !=''"> AND b.`工厂名称` = #{agent}</if>
+        GROUP BY a.`产品名称`, a.`安全库存`
+        ORDER BY SUM(b.`库存`) DESC
+    </select>
+</mapper>

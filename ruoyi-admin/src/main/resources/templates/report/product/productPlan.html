@@ -7,7 +7,7 @@
     <div id="title">
         <div style="width:97.6vw;">
             <span>星源博锐供应链看板</span>
-            <span style="font-size: 18px !important; font-weight: bold;">—— 生产计划</span>
+            <span style="font-size: 18px !important; font-weight: bold;">—— 月度生产计划及发货</span>
         </div>
         <div style="position: fixed; left: 84%; top: 3%">
             <select name="selectMonth" id="selectMonth" style="background-color: rgb(21,51,114); color: #FFFFFF; border: 0.2px solid #FFF; border-radius: 3px 3px 3px 3px;">
@@ -25,7 +25,7 @@
                 <option value="12">十二月</option>
             </select>
             <select name="selectAgent" id="selectAgent" style="background-color: rgb(21,51,114); color: #FFFFFF; border: 0.2px solid #FFF; border-radius: 3px 3px 3px 3px;">
-                <option value="ALL">所有</option>
+                <option value="">所有</option>
                 <option value="天宝">天宝</option>
                 <option value="卓瑞源">卓瑞源</option>
             </select>
@@ -37,26 +37,26 @@
         </div>
         <div id="month">
             <div style="width: 20%; display: inline-block;">
-                <input id="monthOfThird1" name="monthOfThird" th:value="${monthOfFirst}" style="background-color: rgb(21, 51, 114); color: #FFF; position: relative; color: #FFFFFF; font-size: 18px; font-weight: bold; width: 48%; border: none;">
+                <span id="monthOfFirst"></span>
             </div>
             <div style="width: 20%; display: inline-block;">
-                <input id="monthOfSecond" name="monthOfSecond" th:value="${monthOfSecond}" style="background-color: rgb(21, 51, 114); color: #FFF; position: relative; color: #FFFFFF; font-size: 18px; font-weight: bold; width: 48%; border: none;">
+                <span id="monthOfSecond"></span>
             </div>
             <div style="width: 20%; display: inline-block;">
-                <input id="monthOfThird" name="monthOfThird" th:value="${monthOfThird}" style="background-color: rgb(21, 51, 114); color: #FFF; position: relative; color: #FFFFFF; font-size: 18px; font-weight: bold; width: 48%; border: none;">
+                <span id="monthOfThird"></span>
             </div>
         </div>
         <div id="productPlan">
             <span>生产计划</span>
             <div style="position: relative;left: 25%;top: -24px;">
                 <div style="width: 20%; display: inline-block;">
-                    <span>9000</span>
+                    <span id="monthOfFirstPlan"></span>
                 </div>
                 <div style="width: 20%; display: inline-block;">
-                    <span>8000</span>
+                    <span id="monthOfSecondPlan"></span>
                 </div>
                 <div style="width: 20%; display: inline-block;">
-                    <span>9000</span>
+                    <span id="monthOfThirdPlan"></span>
                 </div>
             </div>
         </div>
@@ -66,13 +66,13 @@
             </div>
             <div style="position: relative;left: 25%;top: -24px;">
                 <div style="width: 20%; display: inline-block;">
-                    <span>90%</span>
+                    <span id="monthOfFirstFinsh"></span>
                 </div>
                 <div style="width: 20%; display: inline-block;">
-                    <span>80%</span>
+                    <span id="monthOfSecondFinsh"></span>
                 </div>
                 <div style="width: 20%; display: inline-block;">
-                    <span>90%</span>
+                    <span id="monthOfThirdFinsh"></span>
                 </div>
             </div>
         </div>
@@ -105,7 +105,7 @@
     </div>
     <div id="faHuoDiv">
         <div id="faHuo">
-            <span>发货</span>
+            <span>当年累计发货</span>
         </div>
         <div id="faHuoPie">
 
@@ -113,7 +113,7 @@
     </div>
     <div id="faHuoNumDiv">
         <div id="faHuoNum">
-            <span>发货量</span>
+            <span>月滚动发货量</span>
         </div>
         <div id="faHuoNumPie">
 
@@ -152,7 +152,7 @@
         top: -4%;
         left: 5%;
         position: relative;
-        width: 20%;
+        width: 30%;
         background-color: rgb(21, 51, 114);
         text-align: center;
     }
@@ -164,7 +164,7 @@
         top: -4%;
         left: 5%;
         position: relative;
-        width: 20%;
+        width: 30%;
         background-color: rgb(21, 51, 114);
         text-align: center;
     }
@@ -237,7 +237,7 @@
         width: 50%;
         height: 8%;
         position: relative;
-        left: 9%;
+        left: 10%;
         float: left;
     }
     #faHuoDiv {
@@ -281,6 +281,7 @@
 <script type="text/javascript" th:src="@{/js/xybr/faHuoNum.js}"></script>
 <script type="text/javascript" th:src="@{/js/jquery.min.js}"></script>
 <script type="text/javascript">
+    var urls = "http://localhost/";
 	//初始化
 	/*let eChart = echarts.init(document.getElementById("lineChart"));*/
     /*let eChart1 = echarts.init(document.getElementById("productOfMonth"));*/
@@ -289,8 +290,8 @@
 	// 调用
 	/*createProductChart(eChart, {});*/
     /*createProductOfMonthChart(eChart1, {});*/
-    createFaHuoPie(faHuoPie,{});
-    createfaHuoNumPie(faHuoNumPie, {});
+    //createFaHuoPie(faHuoPie,{});
+    //createfaHuoNum(faHuoNumPie, month,);
     watermark('XYBR');
    window.onload = function (){
         var width = window.innerWidth;
@@ -305,29 +306,76 @@
        if(month < 10){
            month = '0' + month;
        }
+       //总计划
+       getPlanSum(month,"");
+       //月生产计划
        document.getElementById("selectMonth").value = month;
        document.getElementById("productOfMonthIframe").src = "/report/plan/getProductPlanOfMonth/"+month+"/"+0;
        //document.getElementById("productOfMonthIframe").src = "http://192.168.31.52:8084/xybrInterFace/report/plan/getProductPlanOfMonth/"+month+"/"+0;
        //document.getElementById("productOfMonthIframe").src = "http://192.168.31.52:8084/xybrInterFace/report/plan/getProductPlanOfMonth/"+month+"/"+0;
+       //初始化
+       let faHuoPie = echarts.init(document.getElementById("faHuoPie"));
+       let faHuoNumPie = echarts.init(document.getElementById("faHuoNumPie"));
+       //当年累计发货
+       createFaHuoPie(faHuoPie,document.getElementById("selectAgent").value);
+       //月滚动发货量
+       createfaHuoNum(faHuoNumPie, document.getElementById("selectMonth").value, document.getElementById("selectAgent").value, urls);
     };
    $(document).ready(function (){
        $("#selectMonth").change(function (){
-           debugger;
            var monthValue = $(this).val();
            var agentValue = document.getElementById("selectAgent").value;
+           if(agentValue == ""){
+               agentValue = "0";
+           }
            document.getElementById("productOfMonthIframe").src = "/report/plan/getProductPlanOfMonth/"+monthValue+"/"+agentValue;
+           getPlanSum(monthValue,agentValue);
+           createfaHuoNum(faHuoNumPie, document.getElementById("selectMonth").value, document.getElementById("selectAgent").value, urls);
            //document.getElementById("productOfMonthIframe").src = "http://192.168.31.52:8084/xybrInterFace/report/plan/getProductPlanOfMonth/"+monthValue+"/"+agentValue;
            //document.getElementById("productOfMonthIframe").src = "http://192.168.31.52:8084/xybrInterFace/report/plan/getProductPlanOfMonth/"+monthValue+"/"+agentValue;
        });
        $("#selectAgent").change(function (){
-           debugger;
            var monthValue = document.getElementById("selectMonth").value;
            var agentValue = $(this).val();
+           if(agentValue == ""){
+               agentValue = "0";
+           }
            document.getElementById("productOfMonthIframe").src = "/report/plan/getProductPlanOfMonth/"+monthValue+"/"+agentValue;
+           getPlanSum(monthValue,agentValue);
+           createFaHuoPie(faHuoPie,document.getElementById("selectAgent").value);
+           createfaHuoNum(faHuoNumPie, document.getElementById("selectMonth").value, document.getElementById("selectAgent").value, urls);
            //document.getElementById("productOfMonthIframe").src = "http://192.168.31.52:8084/xybrInterFace/report/plan/getProductPlanOfMonth/"+monthValue+"/"+agentValue;
            //document.getElementById("productOfMonthIframe").src = "http://192.168.31.52:8084/xybrInterFace/report/plan/getProductPlanOfMonth/"+monthValue+"/"+agentValue;
        });
    })
+
+    function getPlanSum(monthValue,agentValue) {
+        $.ajax({
+            type: "GET",
+            url: urls + "report/plan/getPlanSumData",
+            contentType: "application/json;charset=utf-8",
+            data: {
+                "monthStr": monthValue,
+                "agent": agentValue
+            },
+            dateType: "json",
+            success: function (data) {
+                document.getElementById('monthOfFirst').innerText = data.mmap.monthOfFirst;
+                document.getElementById('monthOfSecond').innerText = data.mmap.monthOfSecond;
+                document.getElementById('monthOfThird').innerText = data.mmap.monthOfThird;
+                document.getElementById('monthOfFirstPlan').innerText = data.mmap.monthOfFirstPlan;
+                document.getElementById('monthOfSecondPlan').innerText = data.mmap.monthOfSecondPlan;
+                document.getElementById('monthOfThirdPlan').innerText = data.mmap.monthOfThirdPlan;
+                document.getElementById('monthOfFirstFinsh').innerText = data.mmap.monthOfFirstFinsh;
+                document.getElementById('monthOfSecondFinsh').innerText = data.mmap.monthOfSecondFinsh;
+                document.getElementById('monthOfThirdFinsh').innerText = data.mmap.monthOfThirdFinsh;
+            },
+            error: function (data) {
+                alert("失败");
+            }
+
+        });
+    }
 </script>
 </body>
 </html>

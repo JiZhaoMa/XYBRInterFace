@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" >
+<head>
+
+</head>
+<body id="body">
+    <div id="title">
+        <div style="width:97.6vw;">
+            <span>星源博锐供应链看板</span>
+            <span style="font-size: 18px !important; font-weight: bold;">—— 直通率</span>
+        </div>
+        <div style="position: fixed; left: 84%; top: 3%">
+            <select name="selectMonth" id="selectMonth" style="background-color: rgb(21,51,114); color: #FFFFFF; border: 0.2px solid #FFF; border-radius: 3px 3px 3px 3px;">
+                <option value="01">一月</option>
+                <option value="02">二月</option>
+                <option value="03">三月</option>
+                <option value="04">四月</option>
+                <option value="05">五月</option>
+                <option value="06">六月</option>
+                <option value="07">七月</option>
+                <option value="08">八月</option>
+                <option value="09">九月</option>
+                <option value="10">十月</option>
+                <option value="11">十一月</option>
+                <option value="12">十二月</option>
+            </select>
+            <select name="selectAgent" id="selectAgent" style="background-color: rgb(21,51,114); color: #FFFFFF; border: 0.2px solid #FFF; border-radius: 3px 3px 3px 3px;">
+                <option value="">所有</option>
+                <option value="天宝">天宝</option>
+                <option value="卓瑞源">卓瑞源</option>
+            </select>
+            <select name="selectStage" id="selectStage" style="background-color: rgb(21,51,114); color: #FFFFFF; border: 0.2px solid #FFF; border-radius: 3px 3px 3px 3px;">
+                <option value="老化前">老化前</option>
+                <option value="老化">老化</option>
+                <option value="老化后">老化后</option>
+                <option value="耐压">耐压</option>
+                <option value="综合">综合</option>
+            </select>
+        </div>
+    </div>
+    <div id="currentMonth">
+        <div id="currentMonthRate">
+            <span>当月直通率</span>
+        </div>
+        <div id="seriesName">
+            <div style="width: 20%; display: inline-block;">
+                <span id="seriesNameOfFirst"></span>
+            </div>
+            <div style="width: 20%; display: inline-block;">
+                <span id="seriesNameOfSecond"></span>
+            </div>
+            <div style="width: 20%; display: inline-block;">
+                <span id="seriesNameOfThird"></span>
+            </div>
+        </div>
+        <div id="firstZhiTongRate">
+            <span>一次直通率占比</span>
+            <div style="position: relative;left: 28%;top: -24px;">
+                <div style="width: 20%; display: inline-block;">
+                    <span id="seriesOfFirst">90%</span>
+                </div>
+                <div style="width: 20%; display: inline-block;">
+                    <span id="seriesOfSecond">93%</span>
+                </div>
+                <div style="width: 20%; display: inline-block;">
+                    <span id="seriesOfThird">95%</span>
+                </div>
+            </div>
+        </div>
+        <div id="currentZhiTongRate">
+            <div>
+                <span>当月直通率</span>
+            </div>
+            <div style="position: relative;left: 28%;top: -24px;">
+                <div style="width: 20%; display: inline-block;">
+                    <span id="zhiTongRateCurrMonth">97%</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="serisFirstZhiTong">
+        <div id="serisFirstZhiTongRate">
+            <span>系列一次直通率</span>
+        </div>
+        <div style="height: 94%">
+            <iframe src="" width="100%" height="100%" id="serisRate" style="border: none">
+                您的浏览器不支持iframe，请升级
+            </iframe>
+        </div>
+    </div>
+    <div id="serisFirstZhiTongSum">
+        <div style="position: fixed; display: flex; top: 39%">
+            <div style="width:12.2vw; color: #FFFFFF; font-size: 18px; font-weight: bold">
+                <span>合计</span>
+            </div>
+            <div style="width:12.2vw; color: #FFFFFF; font-size: 18px; font-weight: bold">
+                <span id="seriesTestNum">50000</span>
+            </div>
+            <div style="width:12.2vw; color: #FFFFFF; font-size: 18px; font-weight: bold">
+                <span id="seriesZhiTongNum">4900</span>
+            </div>
+            <div style="width:12.2vw; color: #FFFFFF; font-size: 18px; font-weight: bold">
+                <span id="seriesZhiTongRate">98.88%</span>
+            </div>
+        </div>
+    </div>
+    <div id="currYearSumDiv">
+        <div id="currYearSumZhiTongRate">
+            <span>当年累计直通率</span>
+        </div>
+        <div id="seriesNameCurrYear">
+            <div style="width: 20%; display: inline-block;">
+                <span id="seriesNameFirst"></span>
+            </div>
+            <div style="width: 20%; display: inline-block;">
+                <span id="seriesNameSecond"></span>
+            </div>
+            <div style="width: 20%; display: inline-block;">
+                <span id="seriesNameThird"></span>
+            </div>
+        </div>
+        <div id="sumProduct">
+            <span>总产量</span>
+            <div style="position: relative;left: 28%;top: -24px;">
+                <div style="width: 20%; display: inline-block;">
+                    <span id="seriesOfSumFirst">90%</span>
+                </div>
+                <div style="width: 20%; display: inline-block;">
+                    <span id="seriesOfSumSecond">93%</span>
+                </div>
+                <div style="width: 20%; display: inline-block;">
+                    <span id="seriesOfSumThird">95%</span>
+                </div>
+            </div>
+        </div>
+        <div id="sumZhiTongRate">
+            <span>累计直通率</span>
+            <div style="position: relative;left: 28%;top: -24px;">
+                <div style="width: 20%; display: inline-block;">
+                    <span id="seriesOfRateFirst">97%</span>
+                </div>
+                <div style="width: 20%; display: inline-block;">
+                    <span id="seriesOfRateSecond">97%</span>
+                </div>
+                <div style="width: 20%; display: inline-block;">
+                    <span id="seriesOfRateThird">97%</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="monthOfRateDiv">
+        <select name="selectSeries" id="selectSeries" style="background-color: rgb(21,51,114); color: #FFFFFF; border: 0.2px solid #FFF; border-radius: 3px 3px 3px 3px; position: absolute; right: 10px; top: 10px">
+            <option value="20kW">20kW</option>
+            <option value="30kW">30kW</option>
+            <option value="40kW">40kW</option>
+        </select>
+        <div id="monthOfRate">
+            <span>月滚动直通率</span>
+        </div>
+        <div id="monthOfRateLine">
+
+        </div>
+    </div>
+<style>
+    #currentMonthRate {
+        height: 20%;
+        color: #FFFFFF;
+        font-size: 20px;
+        font-weight: bold;
+        top: -6%;
+        left: 5%;
+        position: relative;
+        width: 30%;
+        background-color: rgb(21, 51, 114);
+        text-align: center;
+    }
+    #serisFirstZhiTongRate {
+        height: 6%;
+        color: #FFFFFF;
+        font-size: 20px;
+        font-weight: bold;
+        top: -6%;
+        left: 5%;
+        position: relative;
+        width: 30%;
+        background-color: rgb(21, 51, 114);
+        text-align: center;
+    }
+    #currYearSumZhiTongRate {
+        height: 20%;
+        color: #FFFFFF;
+        font-size: 20px;
+        font-weight: bold;
+        top: -4%;
+        left: 5%;
+        position: relative;
+        width: 30%;
+        background-color: rgb(21, 51, 114);
+        text-align: center;
+    }
+    #monthOfRate {
+        height: 10%;
+        color: #FFFFFF;
+        font-size: 20px;
+        font-weight: bold;
+        top: -4%;
+        left: 5%;
+        position: relative;
+        width: 30%;
+        background-color: rgb(21, 51, 114);
+        text-align: center;
+    }
+    #seriesNameCurrYear {
+        height: 15%;
+        top: 0%;
+        left: 38%;
+        position: relative;
+        color: #FFFFFF;
+        font-size: 18px;
+        font-weight: bold;
+    }
+    #seriesName {
+        height: 15%;
+        top: 0%;
+        left: 38%;
+        position: relative;
+        color: #FFFFFF;
+        font-size: 18px;
+        font-weight: bold;
+    }
+    #sumProduct {
+        height: 20%;
+        top: 8%;
+        left: 10%;
+        position: relative;
+        color: #FFFFFF;
+        font-size: 18px;
+        font-weight: bold;
+    }
+    #firstZhiTongRate {
+        height: 20%;
+        top: 8%;
+        left: 10%;
+        position: relative;
+        color: #FFFFFF;
+        font-size: 18px;
+        font-weight: bold;
+    }
+    #sumZhiTongRate {
+        height: 20%;
+        top: 13%;
+        left: 10%;
+        position: relative;
+        color: #FFFFFF;
+        font-size: 18px;
+        font-weight: bold;
+    }
+    #currentZhiTongRate {
+        height: 20%;
+        top: 13%;
+        left: 10%;
+        position: relative;
+        color: #FFFFFF;
+        font-size: 18px;
+        font-weight: bold;
+    }
+
+    #body {
+        height: 620px;
+        background-color: rgb(21,51,114) !important;
+    }
+    #title {
+        height: 8%;
+        color: #FFFFFF;
+        width: 40%;
+        margin-left: auto;
+        margin-right: auto;
+        font-size: 25px;
+        display: flex;
+        font-family: '思源-heavy';
+        background-image: url("http://localhost:80/img/liuhai.jpg");
+        background-position: bottom;
+        text-align: center;
+    }
+    #currentMonth {
+        width: 35%;
+        height: 32%;
+        position: relative;
+        left: 4%;
+        top: 2%;
+        background-color: rgb(21,51,114) !important;
+        float: left;
+        border: 0.2px solid #FFF;
+    }
+    #serisFirstZhiTong {
+        width: 50%;
+        height: 25%;
+        position: relative;
+        left: 10%;
+        top: 2%;
+        background-color: rgb(21,51,114) !important;
+        float: left;
+        border: 0.2px solid #FFF;
+    }
+    #serisFirstZhiTongSum {
+        width: 50%;
+        height: 8%;
+        position: relative;
+        left: 11%;
+        float: left;
+    }
+    #currYearSumDiv {
+        width: 35%;
+        height: 42%;
+        position: relative;
+        left: 4%;
+        top: 8%;
+        background-color: rgb(21,51,114) !important;
+        float: left;
+        border: 0.2px solid #FFF;
+    }
+    #monthOfRateDiv {
+        width: 50%;
+        height: 42%;
+        position: relative;
+        left: 10%;
+        top: 8%;
+        background-color: rgb(21,51,114) !important;
+        float: left;
+        border: 0.2px solid #FFF;
+    }
+    #monthOfRateLine {
+        width: 100%;
+        height: 100%;
+        position: relative;
+    }
+</style>
+
+<script type="text/javascript" th:src="@{/js/plugins/echarts.min.js}"></script>
+<script type="text/javascript" th:src="@{/js/xybr/zhiTongRate/faHuoNum.js}"></script>
+<script type="text/javascript" th:src="@{/js/jquery.min.js}"></script>
+<script type="text/javascript">
+    var urls = "http://localhost/";
+    // 初始化
+    let monthOfRateLine = echarts.init(document.getElementById("monthOfRateLine"));
+    createfaHuoNum(monthOfRateLine, document.getElementById("selectMonth").value, document.getElementById("selectAgent").value, document.getElementById("selectSeries").value,urls);
+    // 调用
+    window.onload = function (){
+        var width = window.innerWidth;
+        var height = window.innerHeight;
+        var body = document.getElementById("body");
+        body.style.height = height - 20 + 'px';
+
+        //给下拉框初始值
+        var currentDays = new Date();
+        var year = currentDays.getFullYear();
+        var month = currentDays.getMonth();
+        var seriesValue = document.getElementById("selectSeries").value;
+        var agentValue = document.getElementById("selectAgent").value;
+        var agent = agentValue;
+        if(agent == ""){
+            agent = "0";
+        }
+        var stage = document.getElementById("selectStage").value;
+        if(month < 10){
+            month = '0' + month;
+        }
+        //总计划
+        getMonthZhiTongRate(month,"");
+        getYearZhiTongRate(month,"");
+        //月生产计划
+        document.getElementById("selectMonth").value = month;
+        document.getElementById("serisRate").src = "/report/zhiTongRate/getSeriesFirstZhiTongRate/"+month+"/"+agent+"/"+stage;
+        //document.getElementById("productOfMonthIframe").src = "http://192.168.31.52:8084/xybrInterFace/report/plan/getProductPlanOfMonth/"+month+"/"+0;
+        //document.getElementById("productOfMonthIframe").src = "http://192.168.31.52:8084/xybrInterFace/report/plan/getProductPlanOfMonth/"+month+"/"+0;
+        //初始化
+        createfaHuoNum(monthOfRateLine, document.getElementById("selectMonth").value, document.getElementById("selectAgent").value, seriesValue, urls);
+    };
+    $(document).ready(function (){
+        $("#selectMonth").change(function (){
+            var monthValue = $(this).val();
+            var seriesValue = document.getElementById("selectSeries").value;
+            var agentValue = document.getElementById("selectAgent").value;
+            var agent = agentValue;
+            if(agent == ""){
+                agent = "0";
+            }
+            var stage = document.getElementById("selectStage").value;
+            document.getElementById("serisRate").src = "/report/zhiTongRate/getSeriesFirstZhiTongRate/"+monthValue+"/"+agent+"/"+stage;
+            getMonthZhiTongRate(monthValue,agentValue);
+            getYearZhiTongRate(monthValue,agentValue);
+            createfaHuoNum(monthOfRateLine, document.getElementById("selectMonth").value, document.getElementById("selectAgent").value,seriesValue, urls);
+            //document.getElementById("productOfMonthIframe").src = "http://192.168.31.52:8084/xybrInterFace/report/plan/getProductPlanOfMonth/"+monthValue+"/"+agentValue;
+            //document.getElementById("productOfMonthIframe").src = "http://192.168.31.52:8084/xybrInterFace/report/plan/getProductPlanOfMonth/"+monthValue+"/"+agentValue;
+        });
+        $("#selectAgent").change(function (){
+            var seriesValue = document.getElementById("selectSeries").value;
+            var monthValue = document.getElementById("selectMonth").value;
+            var agentValue = $(this).val();
+            var agent = agentValue;
+            if(agent == ""){
+                agent = "0";
+            }
+            var stage = document.getElementById("selectStage").value;
+            document.getElementById("serisRate").src = "/report/zhiTongRate/getSeriesFirstZhiTongRate/"+monthValue+"/"+agent+"/"+stage;
+            getMonthZhiTongRate(monthValue,agentValue);
+            getYearZhiTongRate(monthValue,agentValue);
+            createfaHuoNum(monthOfRateLine, document.getElementById("selectMonth").value, document.getElementById("selectAgent").value,seriesValue, urls);
+            //document.getElementById("productOfMonthIframe").src = "http://192.168.31.52:8084/xybrInterFace/report/plan/getProductPlanOfMonth/"+monthValue+"/"+agentValue;
+            //document.getElementById("productOfMonthIframe").src = "http://192.168.31.52:8084/xybrInterFace/report/plan/getProductPlanOfMonth/"+monthValue+"/"+agentValue;
+        });
+        $("#selectStage").change(function (){
+            var monthValue = document.getElementById("selectMonth").value;
+            var agentValue = document.getElementById("selectAgent").value;
+            var agent = agentValue;
+            if(agent == ""){
+                agent = "0";
+            }
+            var stage= $(this).val();
+            document.getElementById("serisRate").src = "/report/zhiTongRate/getSeriesFirstZhiTongRate/"+monthValue+"/"+agent+"/"+stage;
+            getMonthZhiTongRate(monthValue,agentValue);
+        });
+        $("#selectSeries").change(function (){
+            var seriesValue= $(this).val();
+            var agentValue = document.getElementById("selectAgent").value;
+            var monthValue = document.getElementById("selectMonth").value;
+            createfaHuoNum(monthOfRateLine, monthValue, agentValue, seriesValue, urls);
+        });
+    })
+
+    function getMonthZhiTongRate(monthValue,agentValue) {
+        $.ajax({
+            type: "GET",
+            url: urls + "report/zhiTongRate/getFirstZhiTongRate",
+            contentType: "application/json;charset=utf-8",
+            data: {
+                "monthStr": monthValue,
+                "agent": agentValue
+            },
+            dateType: "json",
+            success: function (data) {
+                document.getElementById('seriesNameOfFirst').innerText = data.mmap.seriesNameOfFirst;
+                document.getElementById('seriesNameOfSecond').innerText = data.mmap.seriesNameOfSecond;
+                document.getElementById('seriesNameOfThird').innerText = data.mmap.seriesNameOfThird;
+                document.getElementById('seriesOfFirst').innerText = (data.mmap.seriesOfFirst * 100).toFixed(2) + "%";
+                document.getElementById('seriesOfSecond').innerText = (data.mmap.seriesOfSecond * 100).toFixed(2) + "%";
+                document.getElementById('seriesOfThird').innerText = (data.mmap.seriesOfThird * 100).toFixed(2) + "%";
+                document.getElementById('zhiTongRateCurrMonth').innerText = (data.mmap.zhiTongRateCurrMonth * 100).toFixed(2) + "%";
+
+                var laoHuaQianTestNum = data.mmap.laoHuaqianTestNum == null ? 0 : data.mmap.laoHuaqianTestNum;
+                var laoHuaQianZhiTongNum = data.mmap.laoHuaqianZhiTongNum == null ? 0 : data.mmap.laoHuaqianZhiTongNum;
+                var laoHuaTestNum = data.mmap.laoHuaTestNum == null ? 0 : data.mmap.laoHuaTestNum;
+                var laoHuaZhiTongNum = data.mmap.laoHuaZhiTongNum == null ? 0 : data.mmap.laoHuaZhiTongNum;
+                var laoHuaHouTestNum = data.mmap.laoHuaHouTestNum == null ? 0 : data.mmap.laoHuaHouTestNum;
+                var laoHuaHouZhiTongNum = data.mmap.laoHuaHouZhiTongNum == null ? 0 : data.mmap.laoHuaHouZhiTongNum;
+                var naiYaTestNum = data.mmap.naiYaTestNum == null ? 0 : data.mmap.naiYaTestNum;
+                var naiYaZhiTongNum = data.mmap.naiYaZhiTongNum == null ? 0 : data.mmap.naiYaZhiTongNum;
+
+                var laoHuaQianZhiTongRate = laoHuaQianTestNum == 0 ? 0 : laoHuaQianZhiTongNum/laoHuaQianTestNum;
+                var laoHuaZhiTongRate = laoHuaTestNum == 0 ? 0 : laoHuaZhiTongNum/laoHuaTestNum;
+                var laoHuaHouZhiTongRate = laoHuaHouTestNum == 0 ? 0 : laoHuaHouZhiTongNum/laoHuaHouTestNum;
+                var naiYaZhiTongRate = naiYaTestNum == 0 ? 0 : naiYaZhiTongNum/naiYaTestNum;
+                document.getElementById('zhiTongRateCurrMonth').innerText = (laoHuaQianZhiTongRate * laoHuaZhiTongRate * laoHuaHouZhiTongRate * naiYaZhiTongRate * 100).toFixed(2) + "%";
+
+                var stage = document.getElementById("selectStage").value;
+                if(stage == "老化前"){
+                    document.getElementById('seriesTestNum').innerText = Number(laoHuaQianTestNum);
+                    document.getElementById('seriesZhiTongNum').innerText = Number(laoHuaQianZhiTongNum);
+                    document.getElementById('seriesZhiTongRate').innerText = (laoHuaQianZhiTongRate * 100).toFixed(2) + "%";
+                }
+                if(stage == "老化"){
+                    document.getElementById('seriesTestNum').innerText = Number(laoHuaTestNum);
+                    document.getElementById('seriesZhiTongNum').innerText = Number(laoHuaZhiTongNum);
+                    document.getElementById('seriesZhiTongRate').innerText = (laoHuaZhiTongRate * 100).toFixed(2) + "%";
+                }
+                if(stage == "老化后"){
+                    document.getElementById('seriesTestNum').innerText = Number(laoHuaHouTestNum);
+                    document.getElementById('seriesZhiTongNum').innerText = Number(laoHuaHouZhiTongNum);
+                    document.getElementById('seriesZhiTongRate').innerText = (laoHuaHouZhiTongRate * 100).toFixed(2) + "%";
+                }
+                if(stage == "耐压"){
+                    document.getElementById('seriesTestNum').innerText = Number(naiYaTestNum);
+                    document.getElementById('seriesZhiTongNum').innerText = Number(naiYaZhiTongNum);
+                    document.getElementById('seriesZhiTongRate').innerText = (naiYaZhiTongRate * 100).toFixed(2) + "%";
+                }
+                if(stage == "综合"){
+                    document.getElementById('seriesTestNum').innerText = Number(laoHuaQianTestNum) + Number(laoHuaTestNum) + Number(laoHuaHouTestNum) + Number(naiYaTestNum);
+                    document.getElementById('seriesZhiTongNum').innerText = Number(laoHuaQianZhiTongNum) + Number(laoHuaZhiTongNum) + Number(laoHuaHouZhiTongNum) + Number(naiYaZhiTongNum);
+                    document.getElementById('seriesZhiTongRate').innerText = (Number(laoHuaQianTestNum )+ Number(laoHuaTestNum) + Number(laoHuaHouTestNum) + Number(naiYaTestNum)) == 0 ? 0 : ((Number(laoHuaQianZhiTongNum) + Number(laoHuaZhiTongNum) + Number(laoHuaHouZhiTongNum) + Number(naiYaZhiTongNum)) / (Number(laoHuaQianTestNum )+ Number(laoHuaTestNum) + Number(laoHuaHouTestNum) + Number(naiYaTestNum))).toFixed(2) + "%";
+                }
+            },
+            error: function (data) {
+                alert("失败");
+            }
+
+        });
+    }
+    function getYearZhiTongRate(monthValue,agentValue) {
+        $.ajax({
+            type: "GET",
+            url: urls + "report/zhiTongRate/getCurYearSumZhiTongRate",
+            contentType: "application/json;charset=utf-8",
+            data: {
+                "monthStr": monthValue,
+                "agent": agentValue
+            },
+            dateType: "json",
+            success: function (data) {
+                document.getElementById('seriesNameFirst').innerText = data.mmap.seriesNameFirst;
+                document.getElementById('seriesNameSecond').innerText = data.mmap.seriesNameSecond;
+                document.getElementById('seriesNameThird').innerText = data.mmap.seriesNameThird;
+                document.getElementById('seriesOfSumFirst').innerText = Number(data.mmap.seriesOfSumFirst);
+                document.getElementById('seriesOfSumSecond').innerText = Number(data.mmap.seriesOfSumSecond);
+                document.getElementById('seriesOfSumThird').innerText = Number(data.mmap.seriesOfSumThird);
+                document.getElementById('seriesOfRateFirst').innerText = (data.mmap.seriesOfRateFirst * 100).toFixed(2) + "%";
+                document.getElementById('seriesOfRateSecond').innerText = (data.mmap.seriesOfRateSecond * 100).toFixed(2) + "%";
+                document.getElementById('seriesOfRateThird').innerText = (data.mmap.seriesOfRateThird * 100).toFixed(2) + "%";
+            },
+            error: function (data) {
+                alert("失败");
+            }
+
+        });
+    }
+</script>
+</body>
+</html>

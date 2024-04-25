@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" >
+<head>
+
+</head>
+<body id="body">
+    <div id="title">
+        <div style="width:97.6vw;">
+            <span>星源博锐供应链看板</span>
+            <span style="font-size: 18px !important; font-weight: bold;">—— 整机库存</span>
+        </div>
+        <div style="position: fixed; left: 84%; top: 3%">
+            <select name="selectMonth" id="selectMonth" style="background-color: rgb(21,51,114); color: #FFFFFF; border: 0.2px solid #FFF; border-radius: 3px 3px 3px 3px;">
+                <option value="01">一月</option>
+                <option value="02">二月</option>
+                <option value="03">三月</option>
+                <option value="04">四月</option>
+                <option value="05">五月</option>
+                <option value="06">六月</option>
+                <option value="07">七月</option>
+                <option value="08">八月</option>
+                <option value="09">九月</option>
+                <option value="10">十月</option>
+                <option value="11">十一月</option>
+                <option value="12">十二月</option>
+            </select>
+            <select name="selectAgent" id="selectAgent" style="background-color: rgb(21,51,114); color: #FFFFFF; border: 0.2px solid #FFF; border-radius: 3px 3px 3px 3px;">
+                <option value="">所有</option>
+                <option value="天宝">天宝</option>
+                <option value="卓瑞源">卓瑞源</option>
+            </select>
+        </div>
+    </div>
+    <div id="inventoryTurnoverDiv">
+        <div id="inventoryTurnoverTitle">
+            <span>库存周转率</span>
+        </div>
+        <div id="currentInventory">
+            <span>当前库存</span>
+            <div style="position: relative;left: 30%;top: -24px;">
+                <div style="width: 20%; display: inline-block;">
+                    <span id="currentInventoryNum"></span>
+                </div>
+            </div>
+        </div>
+        <div id="inventoryTurnover">
+            <div>
+                <span>库存周转率</span>
+            </div>
+            <div style="position: relative;left: 30%;top: -24px;">
+                <div style="width: 20%; display: inline-block;">
+                    <span id="inventoryTurnoverNum"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="inventoryStatusDiv">
+        <div id="inventoryStatusTitle">
+            <span>库存状态</span>
+        </div>
+        <div style="height: 94%">
+            <iframe src="" width="100%" height="100%" id="inventoryStatus" style="border: none">
+                您的浏览器不支持iframe，请升级
+            </iframe>
+        </div>
+    </div>
+    <div id="inventoryOfMonth">
+        <div id="inventoryOfMonthTitle">
+            <span>月度库存</span>
+        </div>
+        <div id="inventoryOfMonthTitleEcharts">
+
+        </div>
+    </div>
+    <div id="inventoryOfCurrent">
+        <div id="inventoryOfCurrentTitle">
+            <span>安全库存</span>
+        </div>
+        <div id="inventoryOfCurrentEcharts">
+
+        </div>
+    </div>
+<style>
+    #inventoryTurnoverTitle {
+        height: 20%;
+        color: #FFFFFF;
+        font-size: 20px;
+        font-weight: bold;
+        top: -6%;
+        left: 5%;
+        position: relative;
+        width: 25%;
+        background-color: rgb(21, 51, 114);
+        text-align: center;
+    }
+    #inventoryStatusTitle {
+        height: 6%;
+        color: #FFFFFF;
+        font-size: 20px;
+        font-weight: bold;
+        top: -6%;
+        left: 5%;
+        position: relative;
+        width: 20%;
+        background-color: rgb(21, 51, 114);
+        text-align: center;
+    }
+    #faHuo {
+        height: 4%;
+        color: #FFFFFF;
+        font-size: 20px;
+        font-weight: bold;
+        top: -4%;
+        left: 5%;
+        position: relative;
+        width: 30%;
+        background-color: rgb(21, 51, 114);
+        text-align: center;
+    }
+    #inventoryOfMonthTitle {
+        height: 4%;
+        color: #FFFFFF;
+        font-size: 20px;
+        font-weight: bold;
+        top: -4%;
+        left: 5%;
+        position: relative;
+        width: 25%;
+        background-color: rgb(21, 51, 114);
+        text-align: center;
+    }
+    #inventoryOfCurrentTitle {
+        height: 4%;
+        color: #FFFFFF;
+        font-size: 20px;
+        font-weight: bold;
+        top: -4%;
+        left: 5%;
+        position: relative;
+        width: 20%;
+        background-color: rgb(21, 51, 114);
+        text-align: center;
+    }
+    #month {
+        height: 15%;
+        top: 0%;
+        left: 35%;
+        position: relative;
+        color: #FFFFFF;
+        font-size: 18px;
+        font-weight: bold;
+    }
+    #currentInventory {
+        height: 20%;
+        top: 7%;
+        left: 30%;
+        position: relative;
+        color: #FFFFFF;
+        font-size: 18px;
+        font-weight: bold;
+    }
+    #inventoryTurnover {
+        height: 20%;
+        top: 17%;
+        left: 30%;
+        position: relative;
+        color: #FFFFFF;
+        font-size: 18px;
+        font-weight: bold;
+    }
+
+    #body {
+        height: 620px;
+        background-color: rgb(21,51,114) !important;
+    }
+    #title {
+        height: 8%;
+        color: #FFFFFF;
+        width: 40%;
+        margin-left: auto;
+        margin-right: auto;
+        font-size: 25px;
+        display: flex;
+        font-family: '思源-heavy';
+        background-image: url("http://localhost:80/img/liuhai.jpg");
+        background-position: bottom;
+        text-align: center;
+    }
+    #inventoryTurnoverDiv {
+        width: 30%;
+        height: 30%;
+        position: relative;
+        left: 6%;
+        top: 3%;
+        background-color: rgb(21,51,114) !important;
+        float: left;
+        border: 0.2px solid #FFF;
+    }
+    #inventoryStatusDiv {
+        width: 50%;
+        height: 30%;
+        position: relative;
+        left: 12%;
+        top: 3%;
+        background-color: rgb(21,51,114) !important;
+        float: left;
+        border: 0.2px solid #FFF;
+    }
+    #productOfMonthSum {
+        width: 50%;
+        height: 8%;
+        position: relative;
+        left: 9%;
+        float: left;
+    }
+    #faHuoDiv {
+        width: 40%;
+        height: 45%;
+        position: relative;
+        left: 3%;
+        top: 8%;
+        background-color: rgb(21,51,114) !important;
+        float: left;
+        border: 0.2px solid #FFF;
+    }
+    #faHuoPie {
+        width: 100%;
+        height: 100%;
+        left:-5%;
+        position: relative;
+    }
+    #inventoryOfMonth {
+        width: 30%;
+        height: 45%;
+        position: relative;
+        left: 6%;
+        top: 12%;
+        background-color: rgb(21,51,114) !important;
+        float: left;
+        border: 0.2px solid #FFF;
+    }
+    #inventoryOfCurrent {
+        width: 50%;
+        height: 45%;
+        position: relative;
+        left: 12%;
+        top: 12%;
+        background-color: rgb(21,51,114) !important;
+        float: left;
+        border: 0.2px solid #FFF;
+    }
+    #inventoryOfMonthTitleEcharts {
+        width: 100%;
+        height: 100%;
+        position: relative;
+    }
+    #inventoryOfCurrentEcharts {
+        width: 100%;
+        height: 100%;
+        position: relative;
+    }
+</style>
+
+<script type="text/javascript" th:src="@{/js/plugins/echarts.min.js}"></script>
+<script type="text/javascript" th:src="@{/js/xybr/report.js}"></script>
+<script type="text/javascript" th:src="@{/js/xybr/inventory/monthInventory.js}"></script>
+<script type="text/javascript" th:src="@{/js/xybr/inventory/cunrrentInventory.js}"></script>
+<script type="text/javascript" th:src="@{/js/jquery.min.js}"></script>
+<script type="text/javascript">
+    var urls = "http://localhost/";
+
+    let inventoryOfCurrentEcharts = echarts.init(document.getElementById("inventoryOfCurrentEcharts"));
+    let inventoryOfMonthTitleEcharts = echarts.init(document.getElementById("inventoryOfMonthTitleEcharts"));
+
+   window.onload = function (){
+        var width = window.innerWidth;
+        var height = window.innerHeight;
+        var body = document.getElementById("body");
+        body.style.height = height - 20 + 'px';
+
+        //给下拉框初始值
+       var currentDays = new Date();
+       var year = currentDays.getFullYear();
+       var month = currentDays.getMonth();
+       if(month < 10){
+           month = '0' + month;
+       }
+       getPlanSum(month,"");
+       document.getElementById("selectMonth").value = month;
+       document.getElementById("inventoryStatus").src = "/report/inventory/getInventoryStatusList/"+month+"/"+0;
+
+       createCurrentInventory(inventoryOfCurrentEcharts, document.getElementById("selectMonth").value, document.getElementById("selectAgent").value, urls);
+       createMonthInventory(inventoryOfMonthTitleEcharts, document.getElementById("selectMonth").value, document.getElementById("selectAgent").value, urls);
+    };
+   $(document).ready(function (){
+       $("#selectMonth").change(function (){
+           var monthValue = $(this).val();
+           var agentValue = document.getElementById("selectAgent").value;
+           var agent = agentValue;
+           if(agentValue == ""){
+               agent = "0";
+           }
+           document.getElementById("inventoryStatus").src = "/report/inventory/getInventoryStatusList/"+monthValue+"/"+agent;
+           getPlanSum(monthValue,agentValue);
+           createCurrentInventory(inventoryOfCurrentEcharts, document.getElementById("selectMonth").value, document.getElementById("selectAgent").value, urls);
+           createMonthInventory(inventoryOfMonthTitleEcharts, document.getElementById("selectMonth").value, document.getElementById("selectAgent").value, urls);
+       });
+       $("#selectAgent").change(function (){
+           var monthValue = document.getElementById("selectMonth").value;
+           var agentValue = $(this).val();
+           var agent = agentValue;
+           if(agentValue == ""){
+               agent = "0";
+           }
+           document.getElementById("inventoryStatus").src = "/report/inventory/getInventoryStatusList/"+monthValue+"/"+agent;
+           getPlanSum(monthValue,agentValue);
+           createCurrentInventory(inventoryOfCurrentEcharts, document.getElementById("selectMonth").value, document.getElementById("selectAgent").value, urls);
+           createMonthInventory(inventoryOfMonthTitleEcharts, document.getElementById("selectMonth").value, document.getElementById("selectAgent").value, urls);
+       });
+   })
+
+    function getPlanSum(monthValue,agentValue) {
+        $.ajax({
+            type: "GET",
+            url: urls + "report/inventory/getInventoryTurnoverData",
+            contentType: "application/json;charset=utf-8",
+            data: {
+                "monthStr": monthValue,
+                "agent": agentValue
+            },
+            dateType: "json",
+            success: function (data) {
+                document.getElementById('currentInventoryNum').innerText = data.mmap.currentInventoryNum;
+                document.getElementById('inventoryTurnoverNum').innerText = data.mmap.inventoryTurnoverNum;
+            },
+            error: function (data) {
+                alert("失败");
+            }
+
+        });
+    }
+</script>
+</body>
+</html>
