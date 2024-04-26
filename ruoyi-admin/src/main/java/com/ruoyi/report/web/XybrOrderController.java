@@ -56,7 +56,6 @@ public class XybrOrderController extends BaseController
     {
         startPage();
         if(XybrOrder.getCreateTime() == null || "".equals(XybrOrder.getCreateTime())){
-            String date = DateUtils.dateTime();
             XybrOrder.setCreateTime(DateUtils.getNowDate());
         }
         List<XybrOrder> list = XybrOrderService.selectXybrOrderList(XybrOrder);

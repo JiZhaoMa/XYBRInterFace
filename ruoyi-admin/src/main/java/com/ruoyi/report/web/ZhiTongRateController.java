@@ -81,7 +81,6 @@ public class ZhiTongRateController extends BaseController {
     @ResponseBody
     public TableDataInfo list(@PathVariable("month") String month,@PathVariable("agent") String agent,@PathVariable("stage") String stage)
     {
-        startPage();
         if("0".equals(agent)){
             agent = "";
         }

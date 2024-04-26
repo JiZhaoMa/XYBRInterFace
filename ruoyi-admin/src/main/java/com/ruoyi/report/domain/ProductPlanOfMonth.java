@@ -3,6 +3,7 @@ package com.ruoyi.report.domain;
 import com.ruoyi.common.annotation.Excel;
 import com.ruoyi.common.core.domain.BaseEntity;
 
+import java.text.DecimalFormat;
 import java.util.Date;
 
 /**
@@ -30,7 +31,13 @@ public class ProductPlanOfMonth extends BaseEntity
     }
 
     public String getPlanMum() {
-        return planMum;
+        if(planMum == null){
+            return "0";
+        }else{
+            double number = Double.parseDouble(planMum);
+            DecimalFormat df = new DecimalFormat("#0");
+            return String.valueOf(df.format(number));
+        }
     }
 
     public void setPlanMum(String planMum) {
@@ -38,7 +45,13 @@ public class ProductPlanOfMonth extends BaseEntity
     }
 
     public String getActual() {
-        return actual;
+        if(actual == null){
+            return "0";
+        }else{
+            double number = Double.parseDouble(actual);
+            DecimalFormat df = new DecimalFormat("#0");
+            return String.valueOf(df.format(number));
+        }
     }
 
     public void setActual(String actual) {
@@ -46,7 +59,14 @@ public class ProductPlanOfMonth extends BaseEntity
     }
 
     public String getActualRate() {
-        return actualRate;
+        if(actualRate == null){
+            return "0.00%";
+        }else{
+            double number = Double.parseDouble(actualRate);
+            DecimalFormat df = new DecimalFormat("#0.00");
+            return String.valueOf(df.format(number * 100)) + "%";
+        }
+
     }
 
     public void setActualRate(String actualRate) {

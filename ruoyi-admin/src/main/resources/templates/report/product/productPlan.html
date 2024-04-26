@@ -93,13 +93,13 @@
                 <span>合计</span>
             </div>
             <div style="width:12.2vw; color: #FFFFFF; font-size: 18px; font-weight: bold">
-                <span>50000</span>
+                <span id="currentMonthPlan">50000</span>
             </div>
             <div style="width:12.2vw; color: #FFFFFF; font-size: 18px; font-weight: bold">
-                <span>4900</span>
+                <span id="currentMonthFinish">4900</span>
             </div>
             <div style="width:12.2vw; color: #FFFFFF; font-size: 18px; font-weight: bold">
-                <span>98.88%</span>
+                <span id="currentMonthFinishRate">98.88%</span>
             </div>
         </div>
     </div>
@@ -363,12 +363,16 @@
                 document.getElementById('monthOfFirst').innerText = data.mmap.monthOfFirst;
                 document.getElementById('monthOfSecond').innerText = data.mmap.monthOfSecond;
                 document.getElementById('monthOfThird').innerText = data.mmap.monthOfThird;
-                document.getElementById('monthOfFirstPlan').innerText = data.mmap.monthOfFirstPlan;
-                document.getElementById('monthOfSecondPlan').innerText = data.mmap.monthOfSecondPlan;
-                document.getElementById('monthOfThirdPlan').innerText = data.mmap.monthOfThirdPlan;
-                document.getElementById('monthOfFirstFinsh').innerText = data.mmap.monthOfFirstFinsh;
-                document.getElementById('monthOfSecondFinsh').innerText = data.mmap.monthOfSecondFinsh;
-                document.getElementById('monthOfThirdFinsh').innerText = data.mmap.monthOfThirdFinsh;
+                document.getElementById('monthOfFirstPlan').innerText = data.mmap.monthOfFirstPlan == null ? 0 : data.mmap.monthOfFirstPlan;
+                document.getElementById('monthOfSecondPlan').innerText = data.mmap.monthOfSecondPlan == null ? 0 : data.mmap.monthOfSecondPlan;
+                document.getElementById('monthOfThirdPlan').innerText = data.mmap.monthOfThirdPlan == null ? 0 : data.mmap.monthOfThirdPlan;
+                document.getElementById('monthOfFirstFinsh').innerText = data.mmap.monthOfFirstFinsh == null ? "0.00%" : (data.mmap.monthOfFirstFinsh * 100).toFixed(2) + "%";
+                document.getElementById('monthOfSecondFinsh').innerText = data.mmap.monthOfSecondFinsh == null ? "0.00%" : (data.mmap.monthOfSecondFinsh * 100).toFixed(2) + "%";
+                document.getElementById('monthOfThirdFinsh').innerText = data.mmap.monthOfThirdFinsh == null ? "0.00%" : (data.mmap.monthOfThirdFinsh * 100).toFixed(2) + "%";
+
+                document.getElementById('currentMonthPlan').innerText = data.mmap.monthOfFourPlan == null ? "0" : data.mmap.monthOfFourPlan;
+                document.getElementById('currentMonthFinish').innerText = data.mmap.monthOfFourFinsh == null ? "0" : data.mmap.monthOfFourFinsh;
+                document.getElementById('currentMonthFinishRate').innerText = (data.mmap.monthOfFourPlan == null || data.mmap.monthOfFourPlan == 0)? "0" : ((data.mmap.monthOfFourFinsh/data.mmap.monthOfFourPlan)*100).toFixed(2) + "%";
             },
             error: function (data) {
                 alert("失败");

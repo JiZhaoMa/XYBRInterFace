@@ -58,7 +58,7 @@
     </select>
     <select id="getInventoryOfMonth" parameterType="InventoryOfMonth" resultMap="inventoryOfMonthResult">
         SELECT SUM(`库存`) AS inventoryOfMonthNum FROM `库存表` WHERE 1 = 1
-        <if test="month != null and month !=''"> AND `库存时间` = DATE_FORMAT(#{month},'%Y%m')</if>
+        <if test="month != null and month !=''"> AND DATE_FORMAT(`库存时间`,'%Y%m') = #{month}</if>
         <if test="agent != null and agent !=''"> AND `工厂名称` = #{agent}</if>
     </select>
 

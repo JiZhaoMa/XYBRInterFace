@@ -1,5 +1,7 @@
 package com.ruoyi.report.domain;
 
+import java.text.DecimalFormat;
+
 public class SeriesFirstZhiTongRate {
     private String month;
     private String agent;
@@ -50,7 +52,13 @@ public class SeriesFirstZhiTongRate {
     }
 
     public String getTestNum() {
-        return testNum;
+        if(testNum == null){
+            return testNum;
+        }else{
+            double number = Double.parseDouble(testNum);
+            DecimalFormat df = new DecimalFormat("#0");
+            return String.valueOf(df.format(number));
+        }
     }
 
     public void setTestNum(String testNum) {
@@ -58,7 +66,13 @@ public class SeriesFirstZhiTongRate {
     }
 
     public String getZhiTongNum() {
-        return zhiTongNum;
+        if(zhiTongNum == null){
+            return zhiTongNum;
+        }else{
+            double number = Double.parseDouble(zhiTongNum);
+            DecimalFormat df = new DecimalFormat("#0");
+            return String.valueOf(df.format(number));
+        }
     }
 
     public void setZhiTongNum(String zhiTongNum) {

@@ -1,10 +1,18 @@
 package com.ruoyi.report.domain;
 
+import java.text.DecimalFormat;
+
 public class ShippingDataRate {
     private String SERISE;
 
     public String getNum() {
-        return num;
+        if(num == null){
+            return num;
+        }else{
+            double number = Double.parseDouble(num);
+            DecimalFormat df = new DecimalFormat("#0");
+            return String.valueOf(df.format(number));
+        }
     }
 
     public void setNum(String num) {

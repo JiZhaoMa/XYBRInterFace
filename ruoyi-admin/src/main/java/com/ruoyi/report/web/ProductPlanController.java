@@ -149,11 +149,13 @@ public class ProductPlanController extends BaseController {
         String paramFirst = "";
         String paramSecond = "";
         String paramThird = "";
+        String paramFour = "";
         String date = DateUtils.dateTime();
         int years = Integer.parseInt(date.substring(0,4));
         int month = Integer.parseInt(monthStr);
 
         if(month == 1){
+            paramFour = "" + years + "01";
             years = years - 1;
             paramFirst = "" + years + "10";
             paramSecond = "" + years + "11";
@@ -165,6 +167,7 @@ public class ProductPlanController extends BaseController {
             paramSecond = "" + years + "12";
             years = years + 1;
             paramThird = "" + years + "01";
+            paramFour = "" + years + "02";
         }
         if(month == 3){
             years = years - 1;
@@ -172,16 +175,22 @@ public class ProductPlanController extends BaseController {
             years = years + 1;
             paramSecond = "" + years + "01";
             paramThird = "" + years + "02";
+            paramFour = "" + years + "03";
         }
         if(month > 3){
-            paramFirst = "" + years + "0" + String.valueOf(Integer.parseInt(monthStr) - 3);
-            paramSecond = "" + years + "0" + String.valueOf(Integer.parseInt(monthStr) - 2);
-            paramThird = "" + years + "0" + String.valueOf(Integer.parseInt(monthStr) - 1);
+            paramFirst = "" + years + ((Integer.parseInt(monthStr) - 3) > 9 ? (Integer.parseInt(monthStr) - 3) : "0" + String.valueOf(Integer.parseInt(monthStr) - 3));
+            paramSecond = "" + years + ((Integer.parseInt(monthStr) - 2) > 9 ? (Integer.parseInt(monthStr) - 2) : "0" + String.valueOf(Integer.parseInt(monthStr) - 2));
+            paramThird = "" + years + ((Integer.parseInt(monthStr) - 1) > 9 ? (Integer.parseInt(monthStr) - 1) : "0" + String.valueOf(Integer.parseInt(monthStr) - 1));
+            paramFour = "" + years + monthStr;
         }
         MonthPlan monthPlan = new MonthPlan();
         mmap.put("monthOfFirst", paramFirst.substring(4,6)+"月");
         mmap.put("monthOfSecond", paramSecond.substring(4,6)+"月");
         mmap.put("monthOfThird", paramThird.substring(4,6)+"月");
+        mmap.put("paramFour", paramFour.substring(4,6)+"月");
+        if(agent.equals("0")){
+            agent = "";
+        }
         monthPlan.setAgent(agent);
         monthPlan.setMonth(paramFirst);
         MonthPlan firstResult = productPlanService.monthOfPlan(monthPlan);
@@ -189,6 +198,8 @@ public class ProductPlanController extends BaseController {
         MonthPlan secondResult = productPlanService.monthOfPlan(monthPlan);
         monthPlan.setMonth(paramThird);
         MonthPlan thirdResult = productPlanService.monthOfPlan(monthPlan);
+        monthPlan.setMonth(paramFour);
+        MonthPlan fourResult = productPlanService.monthOfPlan(monthPlan);
         if(firstResult == null){
             mmap.put("monthOfFirstPlan", "0");
             mmap.put("monthOfFirstFinsh", "0");
@@ -209,6 +220,13 @@ public class ProductPlanController extends BaseController {
         }else{
             mmap.put("monthOfThirdPlan", thirdResult.getPlan());
             mmap.put("monthOfThirdFinsh", thirdResult.getFinshRate());
+        }
+        if(fourResult == null){
+            mmap.put("monthOfFourPlan", "0");
+            mmap.put("monthOfFourFinsh", "0");
+        }else{
+            mmap.put("monthOfFourPlan", fourResult.getPlan());
+            mmap.put("monthOfFourFinsh", fourResult.getFinish());
         }
         /*mmap.put("monthOfFirstPlan", "9000");
         mmap.put("monthOfSecondPlan", "10000");
@@ -256,15 +274,15 @@ public class ProductPlanController extends BaseController {
     public TableDataInfo list(@PathVariable("month") String month,@PathVariable("agent") String agent)
     {
         ProductPlanOfMonth productPlanOfMonth = new ProductPlanOfMonth();
-        startPage();
         if("0".equals(agent)){
             agent = "";
         }
+        String date = DateUtils.dateTime();
+        int years = Integer.parseInt(date.substring(0,4));
+        month = years + month;
         productPlanOfMonth.setMonth(month);
         productPlanOfMonth.setAgent(agent);
         List<ProductPlanOfMonth> list = productPlanService.selectproductPlanOfMonthList(productPlanOfMonth);
-        list.addAll(list);
-        list.addAll(list);
         return getDataTable(list);
     }
 }

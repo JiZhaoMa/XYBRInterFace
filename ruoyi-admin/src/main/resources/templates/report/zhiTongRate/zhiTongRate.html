@@ -486,7 +486,7 @@
                 if(stage == "综合"){
                     document.getElementById('seriesTestNum').innerText = Number(laoHuaQianTestNum) + Number(laoHuaTestNum) + Number(laoHuaHouTestNum) + Number(naiYaTestNum);
                     document.getElementById('seriesZhiTongNum').innerText = Number(laoHuaQianZhiTongNum) + Number(laoHuaZhiTongNum) + Number(laoHuaHouZhiTongNum) + Number(naiYaZhiTongNum);
-                    document.getElementById('seriesZhiTongRate').innerText = (Number(laoHuaQianTestNum )+ Number(laoHuaTestNum) + Number(laoHuaHouTestNum) + Number(naiYaTestNum)) == 0 ? 0 : ((Number(laoHuaQianZhiTongNum) + Number(laoHuaZhiTongNum) + Number(laoHuaHouZhiTongNum) + Number(naiYaZhiTongNum)) / (Number(laoHuaQianTestNum )+ Number(laoHuaTestNum) + Number(laoHuaHouTestNum) + Number(naiYaTestNum))).toFixed(2) + "%";
+                    document.getElementById('seriesZhiTongRate').innerText = (Number(laoHuaQianTestNum )+ Number(laoHuaTestNum) + Number(laoHuaHouTestNum) + Number(naiYaTestNum)) == 0 ? 0 : ((Number(laoHuaQianZhiTongNum) + Number(laoHuaZhiTongNum) + Number(laoHuaHouZhiTongNum) + Number(naiYaZhiTongNum)) * 100 / (Number(laoHuaQianTestNum )+ Number(laoHuaTestNum) + Number(laoHuaHouTestNum) + Number(naiYaTestNum))).toFixed(2) + "%";
                 }
             },
             error: function (data) {

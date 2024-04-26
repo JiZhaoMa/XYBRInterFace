@@ -1,5 +1,7 @@
 package com.ruoyi.report.domain;
 
+import java.text.DecimalFormat;
+
 public class InventoryStatus {
     private String month;
     private String agent;
@@ -41,7 +43,13 @@ public class InventoryStatus {
     }
 
     public String getInventory() {
-        return inventory;
+        if(inventory == null){
+            return inventory;
+        }else{
+            double number = Double.parseDouble(inventory);
+            DecimalFormat df = new DecimalFormat("#0");
+            return String.valueOf(df.format(number));
+        }
     }
 
     public void setInventory(String inventory) {

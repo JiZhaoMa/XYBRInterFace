@@ -51,8 +51,8 @@ function createfaHuoNum(eChart1, month,agent,urls) {
                     color: '#FFF',
                 },
                 min: 0,
-                max: 1000,
-                interval: 200,
+                max: 5000,
+                interval: 1000,
                 axisLabel: {
                     textStyle: {
                         fontSize: 12,
@@ -68,8 +68,8 @@ function createfaHuoNum(eChart1, month,agent,urls) {
                     color: '#FFF',
                 },
                 min: 0,
-                max: 1000,
-                interval: 200,
+                max: 5000,
+                interval: 1000,
                 axisLabel: {
                     textStyle: {
                         fontSize: 12,
@@ -201,22 +201,22 @@ function createfaHuoNum(eChart1, month,agent,urls) {
             option1.series[0].data[1] = data.mmap.SecondMonthList.length > 0 ? data.mmap.SecondMonthList[0].faHuoNum : 0;
             option1.series[1].data[1] = data.mmap.SecondMonthList.length > 1 ? data.mmap.SecondMonthList[1].faHuoNum : 0;
             option1.series[2].data[1] = data.mmap.SecondMonthList.length > 2 ? data.mmap.SecondMonthList[2].faHuoNum : 0;
-            option1.series[3].data[1] = (data.mmap.SecondMonthList.length > 0 ? data.mmap.SecondMonthList[0].faHuoNum : 0) + (data.mmap.SecondMonthList.length > 1 ? data.mmap.SecondMonthList[1].faHuoNum : 0) + (data.mmap.SecondMonthList.length > 2 ? data.mmap.SecondMonthList[2].faHuoNum : 0);
+            option1.series[3].data[1] = Number(data.mmap.SecondMonthList.length > 0 ? data.mmap.SecondMonthList[0].faHuoNum : 0) + Number(data.mmap.SecondMonthList.length > 1 ? data.mmap.SecondMonthList[1].faHuoNum : 0) + Number(data.mmap.SecondMonthList.length > 2 ? data.mmap.SecondMonthList[2].faHuoNum : 0);
 
             option1.series[0].data[2] = data.mmap.ThirdMonthList.length > 0 ? data.mmap.ThirdMonthList[0].faHuoNum : 0;
             option1.series[1].data[2] = data.mmap.ThirdMonthList.length > 1 ? data.mmap.ThirdMonthList[1].faHuoNum : 0;
             option1.series[2].data[2] = data.mmap.ThirdMonthList.length > 2 ? data.mmap.ThirdMonthList[2].faHuoNum : 0;
-            option1.series[3].data[2] = (data.mmap.ThirdMonthList.length > 0 ? data.mmap.ThirdMonthList[0].faHuoNum : 0) + (data.mmap.ThirdMonthList.length > 1 ? data.mmap.ThirdMonthList[1].faHuoNum : 0) + (data.mmap.ThirdMonthList.length > 2 ? data.mmap.ThirdMonthList[2].faHuoNum : 0);
+            option1.series[3].data[2] = Number(data.mmap.ThirdMonthList.length > 0 ? data.mmap.ThirdMonthList[0].faHuoNum : 0) + Number(data.mmap.ThirdMonthList.length > 1 ? data.mmap.ThirdMonthList[1].faHuoNum : 0) + Number(data.mmap.ThirdMonthList.length > 2 ? data.mmap.ThirdMonthList[2].faHuoNum : 0);
 
             option1.series[0].data[3] = data.mmap.FourMonthList.length > 0 ? data.mmap.FourMonthList[0].faHuoNum : 0;
             option1.series[1].data[3] = data.mmap.FourMonthList.length > 1 ? data.mmap.FourMonthList[1].faHuoNum : 0;
             option1.series[2].data[3] = data.mmap.FourMonthList.length > 2 ? data.mmap.FourMonthList[2].faHuoNum : 0;
-            option1.series[3].data[3] = (data.mmap.FourMonthList.length > 0 ? data.mmap.FourMonthList[0].faHuoNum : 0) + (data.mmap.FourMonthList.length > 1 ? data.mmap.FourMonthList[1].faHuoNum : 0) + (data.mmap.FourMonthList.length > 2 ? data.mmap.FourMonthList[2].faHuoNum : 0);
+            option1.series[3].data[3] = Number(data.mmap.FourMonthList.length > 0 ? data.mmap.FourMonthList[0].faHuoNum : 0) + Number(data.mmap.FourMonthList.length > 1 ? data.mmap.FourMonthList[1].faHuoNum : 0) + Number(data.mmap.FourMonthList.length > 2 ? data.mmap.FourMonthList[2].faHuoNum : 0);
 
             option1.series[0].data[4] = data.mmap.FiveMonthList.length > 0 ? data.mmap.FiveMonthList[0].faHuoNum : 0;
             option1.series[1].data[4] = data.mmap.FiveMonthList.length > 1 ? data.mmap.FiveMonthList[1].faHuoNum : 0;
             option1.series[2].data[4] = data.mmap.FiveMonthList.length > 2 ? data.mmap.FiveMonthList[2].faHuoNum : 0;
-            option1.series[3].data[4] = (data.mmap.FiveMonthList.length > 0 ? data.mmap.FiveMonthList[0].faHuoNum : 0) + (data.mmap.FiveMonthList.length > 1 ? data.mmap.FiveMonthList[1].faHuoNum : 0) + (data.mmap.FiveMonthList.length > 2 ? data.mmap.FiveMonthList[2].faHuoNum : 0);
+            option1.series[3].data[4] = Number(data.mmap.FiveMonthList.length > 0 ? data.mmap.FiveMonthList[0].faHuoNum : 0) + Number(data.mmap.FiveMonthList.length > 1 ? data.mmap.FiveMonthList[1].faHuoNum : 0) + Number(data.mmap.FiveMonthList.length > 2 ? data.mmap.FiveMonthList[2].faHuoNum : 0);
 
             option1.series[0].data[5] = data.mmap.SixMonthList.length > 0 ? data.mmap.SixMonthList[0].faHuoNum : 0;
             option1.series[1].data[5] = data.mmap.SixMonthList.length > 1 ? data.mmap.SixMonthList[1].faHuoNum : 0;

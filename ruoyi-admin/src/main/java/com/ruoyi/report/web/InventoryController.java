@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -28,6 +29,9 @@ public class InventoryController extends BaseController {
     {
         return prefix + "/inventory";
     }
+    /*
+    库存周转率
+     */
     @GetMapping("/getInventoryTurnoverData")
     @ResponseBody
     public JSONObject getInventoryTurnoverData(String monthStr, String agent, ModelMap mmap)
@@ -36,7 +40,7 @@ public class InventoryController extends BaseController {
         InventoryOfMonth inventoryOfMonth = new InventoryOfMonth(); //
         int monthInventory = 0;
         int currYearShipping = 0;
-        float inventoryTurnoverNum = 0.0f;
+        double inventoryTurnoverNum = 0.0;
         String date = DateUtils.dateTime();
         String years = date.substring(0,4);
         monthStr = years + monthStr;
@@ -44,13 +48,14 @@ public class InventoryController extends BaseController {
         inventoryTurnoverData.setMonth(monthStr);
         inventoryTurnoverData = inventoryService.getInventoryTurnoverData(inventoryTurnoverData);
         if(inventoryTurnoverData != null){
-            int index = inventoryTurnoverData.getCurrYearShipping().indexOf(".");
-            currYearShipping = Integer.parseInt(inventoryTurnoverData.getCurrYearShipping().substring(0,index)); //发货量
+            currYearShipping = Integer.parseInt(inventoryTurnoverData.getCurrYearShipping()); //发货量
             monthInventory = inventoryTurnoverData.getMonthInventory() == null ? 0 : Integer.parseInt(inventoryTurnoverData.getMonthInventory()); //前几个月的库存之和
             int month = Integer.parseInt(monthStr);
             inventoryTurnoverNum = monthInventory == 0 ? 0 : currYearShipping/(monthInventory/(month - 1));
             mmap.put("currentInventoryNum", inventoryTurnoverData.getCurrentInventoryNum());
-            mmap.put("inventoryTurnoverNum", inventoryTurnoverNum);
+
+            DecimalFormat df = new DecimalFormat("#0.00");
+            mmap.put("inventoryTurnoverNum", String.valueOf(df.format(inventoryTurnoverNum * 100)) + "%");
         }else{
             mmap.put("currentInventoryNum", "0");
             mmap.put("inventoryTurnoverNum", "0.00%");

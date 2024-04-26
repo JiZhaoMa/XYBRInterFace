@@ -1,10 +1,12 @@
 package com.ruoyi.report.domain;
 
+import java.text.DecimalFormat;
+
 public class InventoryTurnoverData {
     private String month;
     private String agent;
-    private String currentInventoryNum;
-    private String currYearShipping;
+    private String currentInventoryNum; //当前库存
+    private String currYearShipping; //当年发货量
 
     public String getCurrYearInventory() {
         return currYearInventory;
@@ -14,10 +16,16 @@ public class InventoryTurnoverData {
         this.currYearInventory = currYearInventory;
     }
 
-    private String currYearInventory;
+    private String currYearInventory; //当年月末库存之和
 
-    public String getCurrYearShipping() {
-        return currYearShipping;
+    public String getCurrYearShipping() {//////
+        if(currYearShipping == null){
+            return "0";
+        }else{
+            double number = Double.parseDouble(currYearShipping);
+            DecimalFormat df = new DecimalFormat("#0");
+            return String.valueOf(df.format(number));
+        }
     }
 
     public void setCurrYearShipping(String currYearShipping) {
@@ -32,7 +40,7 @@ public class InventoryTurnoverData {
         this.monthInventory = monthInventory;
     }
 
-    private String monthInventory;
+    private String monthInventory; //月度库存
 
     public String getMonth() {
         return month;
@@ -50,8 +58,14 @@ public class InventoryTurnoverData {
         this.agent = agent;
     }
 
-    public String getCurrentInventoryNum() {
-        return currentInventoryNum;
+    public String getCurrentInventoryNum() {  ///////
+        if(currentInventoryNum == null){
+            return "0";
+        }else{
+            double number = Double.parseDouble(currentInventoryNum);
+            DecimalFormat df = new DecimalFormat("#0");
+            return String.valueOf(df.format(number));
+        }
     }
 
     public void setCurrentInventoryNum(String currentInventoryNum) {

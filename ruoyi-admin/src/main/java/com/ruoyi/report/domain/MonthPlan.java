@@ -1,12 +1,25 @@
 package com.ruoyi.report.domain;
 
+import java.text.DecimalFormat;
+
 public class MonthPlan {
     private String plan;
     private String finshRate;
     private String agent;
+    private String finish;
+    public String getFinish() {
+        double number = Double.parseDouble(finish);
+        DecimalFormat df = new DecimalFormat("#0");
+        return String.valueOf(df.format(number));
+    }
 
+    public void setFinish(String finish) {
+        this.finish = finish;
+    }
     public String getPlan() {
-        return plan;
+        double number = Double.parseDouble(plan);
+        DecimalFormat df = new DecimalFormat("#0");
+        return String.valueOf(df.format(number));
     }
 
     public void setPlan(String plan) {

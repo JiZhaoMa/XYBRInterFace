@@ -1,5 +1,6 @@
 package com.ruoyi.report.domain;
 
+import java.text.DecimalFormat;
 import java.util.List;
 
 public class MonthOfZhiTongRate {
@@ -19,7 +20,13 @@ public class MonthOfZhiTongRate {
     }
 
     public String getProductSum() {
-        return productSum;
+        if(productSum == null){
+            return productSum;
+        }else{
+            double number = Double.parseDouble(productSum);
+            DecimalFormat df = new DecimalFormat("#0");
+            return String.valueOf(df.format(number));
+        }
     }
 
     public void setProductSum(String productSum) {

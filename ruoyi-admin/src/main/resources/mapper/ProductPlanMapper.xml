@@ -14,8 +14,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </resultMap>
     <resultMap type="MonthPlan" id="monthPlanResult">
         <result property="agentName"    column="agentName"    />
-        <result property="plan"    column="seriseName"    />
-        <result property="finshRate"    column="actual"    />
+        <result property="plan"    column="plan"    />
+        <result property="finish"    column="finish"    />
+        <result property="finshRate"    column="finshRate"    />
+        <result property="month"    column="month"    />
     </resultMap>
     <resultMap type="ShippingDataRate" id="shippingDataRateResult">
         <result property="SERISE"    column="SERISE"    />
@@ -31,24 +33,34 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 
     <sql id="selectProductPlanOfMonthVo">
-    SELECT * FROM (
-            SELECT
-                h.`系列ID`,
-                SUM(a.`入库数量`) AS actual,
-                SUM(h.plan) AS planMum,
-                ifnull(SUM(a.`入库数量`),0)/SUM(h.plan) AS actualRate
-            FROM
-            (SELECT c.`系列ID`, a.`计划数量` AS plan FROM `tlk_产品计划表` a, `tlk_产品表` b, `tlk_产品系列表` c
-            <where>
-                a.`产品编码` = b.`产品编码` AND b.`产品系列ID` = c.`系列ID`
-                <if test="month != null "> and DATE_FORMAT(a.`上线时间`,'%m') = #{month}</if>
-                <if test="agent != null  and agent != ''"> and a.代工厂 = #{agent}</if>
-            </where>
-            ) h, `入库表` a, `tlk_产品表` b
-            WHERE a.`产品编码` = b.`产品编码` AND b.`产品系列ID` = h.`系列ID`
-            GROUP BY h.`系列ID`
-            ) f
-        ORDER BY actual
+        SELECT
+            f.`系列名称` AS seriseName,
+            f.plan AS planMum,
+            SUM(c.`入库数量`) AS actual,
+            ifnull(SUM(c.`入库数量`),0)/f.plan AS actualRate
+        FROM
+        (SELECT
+        c.`系列名称`,
+        c.`系列ID`,
+        SUM(a.`计划数量`) AS plan
+        FROM
+        `tlk_产品计划表` a,
+        `tlk_产品表` b,
+        `tlk_产品系列表` c
+        WHERE
+        a.`产品编码` = b.`产品编码`
+        AND b.`产品系列ID` = c.`系列ID`
+        <if test="month != null "> AND DATE_FORMAT( a.`上线时间`, '%Y%m' ) = #{month}</if>
+        <if test="agent != null  and agent != ''"> AND a.代工厂 = #{agent}</if>
+        GROUP BY
+        c.`系列名称`,
+        c.`系列ID`) f
+        LEFT JOIN `tlk_产品表` b ON b.`产品系列ID` = f.`系列ID`
+        LEFT JOIN `入库表` c ON b.`产品编码` = c.`产品编码`
+        <if test="month != null "> AND DATE_FORMAT( c.`入库时间`, '%Y%m' ) = #{month}</if>
+        <if test="agent != null  and agent != ''"> AND c.代工厂 = #{agent}</if>
+        GROUP BY f.`系列名称`, f.plan
+        ORDER BY actual DESC
     </sql>
 
     <select id="selectproductPlanOfMonthList" parameterType="ProductPlanOfMonth" resultMap="productPlanOfMonthResult">
@@ -60,16 +72,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </select>
 
     <select id="monthOfPlan" parameterType="MonthPlan" resultMap="monthPlanResult">
-        SELECT
-        SUM(b.`入库数量`) AS plan,
-        SUM(b.`入库数量`)/SUM(a.`计划数量`) AS finshRate,
-        DATE_FORMAT(b.`入库时间`, '%Y%m') AS month
-        FROM `tlk_产品计划表` a, `入库表` b
-        <where>
-            a.`产品编码` = b.`产品编码`
-            <if test="month != null and month != ''"> AND DATE_FORMAT(b.`入库时间`, '%Y%m') = #{month} </if>
-        </where>
-        GROUP BY DATE_FORMAT(b.`入库时间`, '%Y%m')
+        SELECT plan,month,SUM(b.`入库数量`) AS finish, SUM(b.`入库数量`)/plan AS finshRate  FROM
+        (SELECT
+        SUM(a.`计划数量`) AS plan,
+        DATE_FORMAT(a.`上线时间`, '%Y%m') AS month
+        FROM `tlk_产品计划表` a
+        WHERE 1=1
+        <if test="month != null and month != ''"> AND DATE_FORMAT(a.`上线时间`, '%Y%m') = #{month} </if>
+        <if test="agent != null and agent != ''"> AND a.`工厂名称` = #{agent} </if>
+        GROUP BY DATE_FORMAT(a.`上线时间`, '%Y%m')) f
+        LEFT JOIN `入库表` b ON f.month = DATE_FORMAT(b.`入库时间`, '%Y%m')
+        <if test="agent != null and agent != ''"> AND b.`工厂名称` = #{agent} </if>
+        GROUP BY plan,month
     </select>
 
     <select id="shippingDataRate" parameterType="ShippingDataRate" resultMap="shippingDataRateResult">
