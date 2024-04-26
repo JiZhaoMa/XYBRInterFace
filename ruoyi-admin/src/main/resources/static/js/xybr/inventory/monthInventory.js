@@ -86,7 +86,7 @@ function createMonthInventory(eChart1, month,agent,urls) {
                     5000, 8000, 6500, 9000, 5678, 5643
                 ],
                 itemStyle: {
-                    color: '#d9e774'
+                    color: '#e15656'
                 }
             }
         ]

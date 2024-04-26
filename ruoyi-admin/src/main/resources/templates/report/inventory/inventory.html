@@ -267,7 +267,8 @@
 <script type="text/javascript" th:src="@{/js/xybr/inventory/cunrrentInventory.js}"></script>
 <script type="text/javascript" th:src="@{/js/jquery.min.js}"></script>
 <script type="text/javascript">
-    var urls = "http://localhost/";
+    var urls = "http://192.168.31.52:8084/xybrInterFace/";
+    //var urls = "http://localhost/";
 
     let inventoryOfCurrentEcharts = echarts.init(document.getElementById("inventoryOfCurrentEcharts"));
     let inventoryOfMonthTitleEcharts = echarts.init(document.getElementById("inventoryOfMonthTitleEcharts"));
@@ -287,7 +288,7 @@
        }
        getPlanSum(month,"");
        document.getElementById("selectMonth").value = month;
-       document.getElementById("inventoryStatus").src = "/report/inventory/getInventoryStatusList/"+month+"/"+0;
+       document.getElementById("inventoryStatus").src =urls + "report/inventory/getInventoryStatusList/"+month+"/"+0;
 
        createCurrentInventory(inventoryOfCurrentEcharts, document.getElementById("selectMonth").value, document.getElementById("selectAgent").value, urls);
        createMonthInventory(inventoryOfMonthTitleEcharts, document.getElementById("selectMonth").value, document.getElementById("selectAgent").value, urls);
@@ -300,7 +301,7 @@
            if(agentValue == ""){
                agent = "0";
            }
-           document.getElementById("inventoryStatus").src = "/report/inventory/getInventoryStatusList/"+monthValue+"/"+agent;
+           document.getElementById("inventoryStatus").src =urls + "report/inventory/getInventoryStatusList/"+monthValue+"/"+agent;
            getPlanSum(monthValue,agentValue);
            createCurrentInventory(inventoryOfCurrentEcharts, document.getElementById("selectMonth").value, document.getElementById("selectAgent").value, urls);
            createMonthInventory(inventoryOfMonthTitleEcharts, document.getElementById("selectMonth").value, document.getElementById("selectAgent").value, urls);
@@ -312,7 +313,7 @@
            if(agentValue == ""){
                agent = "0";
            }
-           document.getElementById("inventoryStatus").src = "/report/inventory/getInventoryStatusList/"+monthValue+"/"+agent;
+           document.getElementById("inventoryStatus").src =urls + "report/inventory/getInventoryStatusList/"+monthValue+"/"+agent;
            getPlanSum(monthValue,agentValue);
            createCurrentInventory(inventoryOfCurrentEcharts, document.getElementById("selectMonth").value, document.getElementById("selectAgent").value, urls);
            createMonthInventory(inventoryOfMonthTitleEcharts, document.getElementById("selectMonth").value, document.getElementById("selectAgent").value, urls);

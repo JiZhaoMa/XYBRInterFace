@@ -340,7 +340,8 @@
 <script type="text/javascript" th:src="@{/js/xybr/zhiTongRate/faHuoNum.js}"></script>
 <script type="text/javascript" th:src="@{/js/jquery.min.js}"></script>
 <script type="text/javascript">
-    var urls = "http://localhost/";
+    var urls = "http://192.168.31.52:8084/xybrInterFace/";
+    //var urls = "http://localhost/";
     // 初始化
     let monthOfRateLine = echarts.init(document.getElementById("monthOfRateLine"));
     createfaHuoNum(monthOfRateLine, document.getElementById("selectMonth").value, document.getElementById("selectAgent").value, document.getElementById("selectSeries").value,urls);
@@ -370,7 +371,7 @@
         getYearZhiTongRate(month,"");
         //月生产计划
         document.getElementById("selectMonth").value = month;
-        document.getElementById("serisRate").src = "/report/zhiTongRate/getSeriesFirstZhiTongRate/"+month+"/"+agent+"/"+stage;
+        document.getElementById("serisRate").src = urls + "report/zhiTongRate/getSeriesFirstZhiTongRate/"+month+"/"+agent+"/"+stage;
         //document.getElementById("productOfMonthIframe").src = "http://192.168.31.52:8084/xybrInterFace/report/plan/getProductPlanOfMonth/"+month+"/"+0;
         //document.getElementById("productOfMonthIframe").src = "http://192.168.31.52:8084/xybrInterFace/report/plan/getProductPlanOfMonth/"+month+"/"+0;
         //初始化
@@ -386,7 +387,7 @@
                 agent = "0";
             }
             var stage = document.getElementById("selectStage").value;
-            document.getElementById("serisRate").src = "/report/zhiTongRate/getSeriesFirstZhiTongRate/"+monthValue+"/"+agent+"/"+stage;
+            document.getElementById("serisRate").src = urls + "/report/zhiTongRate/getSeriesFirstZhiTongRate/"+monthValue+"/"+agent+"/"+stage;
             getMonthZhiTongRate(monthValue,agentValue);
             getYearZhiTongRate(monthValue,agentValue);
             createfaHuoNum(monthOfRateLine, document.getElementById("selectMonth").value, document.getElementById("selectAgent").value,seriesValue, urls);
@@ -402,7 +403,7 @@
                 agent = "0";
             }
             var stage = document.getElementById("selectStage").value;
-            document.getElementById("serisRate").src = "/report/zhiTongRate/getSeriesFirstZhiTongRate/"+monthValue+"/"+agent+"/"+stage;
+            document.getElementById("serisRate").src = urls + "/report/zhiTongRate/getSeriesFirstZhiTongRate/"+monthValue+"/"+agent+"/"+stage;
             getMonthZhiTongRate(monthValue,agentValue);
             getYearZhiTongRate(monthValue,agentValue);
             createfaHuoNum(monthOfRateLine, document.getElementById("selectMonth").value, document.getElementById("selectAgent").value,seriesValue, urls);
@@ -417,7 +418,7 @@
                 agent = "0";
             }
             var stage= $(this).val();
-            document.getElementById("serisRate").src = "/report/zhiTongRate/getSeriesFirstZhiTongRate/"+monthValue+"/"+agent+"/"+stage;
+            document.getElementById("serisRate").src = urls + "/report/zhiTongRate/getSeriesFirstZhiTongRate/"+monthValue+"/"+agent+"/"+stage;
             getMonthZhiTongRate(monthValue,agentValue);
         });
         $("#selectSeries").change(function (){

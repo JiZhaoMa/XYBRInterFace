@@ -78,7 +78,7 @@ function createCurrentInventory(eChart1, month,agent,urls) {
                 ],
                 barWidth: '30%',
                 itemStyle: {
-                    color: '#7d2117'
+                    color: '#89be89'
                 }
             },
             {
@@ -104,7 +104,7 @@ function createCurrentInventory(eChart1, month,agent,urls) {
                     3000, 2000, 3000, 2000, 7000, 3000, 4000, 5000
                 ],
                 itemStyle: {
-                    color: '#d9e774'
+                    color: '#e15656'
                 }
             }
         ],

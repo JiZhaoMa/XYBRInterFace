@@ -199,6 +199,7 @@
     #body {
         height: 620px;
         background-color: rgb(21,51,114) !important;
+        content: none;
     }
     #title {
         height: 8%;
@@ -281,19 +282,11 @@
 <script type="text/javascript" th:src="@{/js/xybr/faHuoNum.js}"></script>
 <script type="text/javascript" th:src="@{/js/jquery.min.js}"></script>
 <script type="text/javascript">
-    var urls = "http://localhost/";
-	//初始化
-	/*let eChart = echarts.init(document.getElementById("lineChart"));*/
-    /*let eChart1 = echarts.init(document.getElementById("productOfMonth"));*/
+    var urls = "http://192.168.31.52:8084/xybrInterFace/";
+    //var urls = "http://localhost/";
     let faHuoPie = echarts.init(document.getElementById("faHuoPie"));
     let faHuoNumPie = echarts.init(document.getElementById("faHuoNumPie"));
-	// 调用
-	/*createProductChart(eChart, {});*/
-    /*createProductOfMonthChart(eChart1, {});*/
-    //createFaHuoPie(faHuoPie,{});
-    //createfaHuoNum(faHuoNumPie, month,);
-    watermark('XYBR');
-   window.onload = function (){
+    window.onload = function (){
         var width = window.innerWidth;
         var height = window.innerHeight;
         var body = document.getElementById("body");
@@ -310,14 +303,14 @@
        getPlanSum(month,"");
        //月生产计划
        document.getElementById("selectMonth").value = month;
-       document.getElementById("productOfMonthIframe").src = "/report/plan/getProductPlanOfMonth/"+month+"/"+0;
+       document.getElementById("productOfMonthIframe").src = urls + "report/plan/getProductPlanOfMonth/"+month+"/"+0;
        //document.getElementById("productOfMonthIframe").src = "http://192.168.31.52:8084/xybrInterFace/report/plan/getProductPlanOfMonth/"+month+"/"+0;
        //document.getElementById("productOfMonthIframe").src = "http://192.168.31.52:8084/xybrInterFace/report/plan/getProductPlanOfMonth/"+month+"/"+0;
        //初始化
        let faHuoPie = echarts.init(document.getElementById("faHuoPie"));
        let faHuoNumPie = echarts.init(document.getElementById("faHuoNumPie"));
        //当年累计发货
-       createFaHuoPie(faHuoPie,document.getElementById("selectAgent").value);
+       createFaHuoPie(faHuoPie,document.getElementById("selectAgent").value, urls);
        //月滚动发货量
        createfaHuoNum(faHuoNumPie, document.getElementById("selectMonth").value, document.getElementById("selectAgent").value, urls);
     };
@@ -328,7 +321,7 @@
            if(agentValue == ""){
                agentValue = "0";
            }
-           document.getElementById("productOfMonthIframe").src = "/report/plan/getProductPlanOfMonth/"+monthValue+"/"+agentValue;
+           document.getElementById("productOfMonthIframe").src = urls + "report/plan/getProductPlanOfMonth/"+monthValue+"/"+agentValue;
            getPlanSum(monthValue,agentValue);
            createfaHuoNum(faHuoNumPie, document.getElementById("selectMonth").value, document.getElementById("selectAgent").value, urls);
            //document.getElementById("productOfMonthIframe").src = "http://192.168.31.52:8084/xybrInterFace/report/plan/getProductPlanOfMonth/"+monthValue+"/"+agentValue;
@@ -340,9 +333,9 @@
            if(agentValue == ""){
                agentValue = "0";
            }
-           document.getElementById("productOfMonthIframe").src = "/report/plan/getProductPlanOfMonth/"+monthValue+"/"+agentValue;
+           document.getElementById("productOfMonthIframe").src = urls + "report/plan/getProductPlanOfMonth/"+monthValue+"/"+agentValue;
            getPlanSum(monthValue,agentValue);
-           createFaHuoPie(faHuoPie,document.getElementById("selectAgent").value);
+           createFaHuoPie(faHuoPie,document.getElementById("selectAgent").value, urls);
            createfaHuoNum(faHuoNumPie, document.getElementById("selectMonth").value, document.getElementById("selectAgent").value, urls);
            //document.getElementById("productOfMonthIframe").src = "http://192.168.31.52:8084/xybrInterFace/report/plan/getProductPlanOfMonth/"+monthValue+"/"+agentValue;
            //document.getElementById("productOfMonthIframe").src = "http://192.168.31.52:8084/xybrInterFace/report/plan/getProductPlanOfMonth/"+monthValue+"/"+agentValue;

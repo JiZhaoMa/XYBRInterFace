@@ -122,7 +122,7 @@ function createFaHuoPie(faHuoPie, agent) {
 
     $.ajax({
         type: "GET",
-        url: "http://localhost/report/plan/getShippingData",
+        url: urls + "report/plan/getShippingData",
         contentType: "application/json;charset=utf-8",
         data: {
             "agent": agent
