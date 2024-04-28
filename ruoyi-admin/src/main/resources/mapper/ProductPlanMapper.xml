@@ -79,7 +79,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         FROM `tlk_产品计划表` a
         WHERE 1=1
         <if test="month != null and month != ''"> AND DATE_FORMAT(a.`上线时间`, '%Y%m') = #{month} </if>
-        <if test="agent != null and agent != ''"> AND a.`工厂名称` = #{agent} </if>
+        <if test="agent != null and agent != ''"> AND a.`代工厂` = #{agent} </if>
         GROUP BY DATE_FORMAT(a.`上线时间`, '%Y%m')) f
         LEFT JOIN `入库表` b ON f.month = DATE_FORMAT(b.`入库时间`, '%Y%m')
         <if test="agent != null and agent != ''"> AND b.`工厂名称` = #{agent} </if>
