@@ -157,7 +157,7 @@ public class Tianbao {
         String orderResult = response.body();
         log.info("【调用天宝接口获取"+ apiName +"信息】,返回结果：{}",orderResult);
         JSONObject jsonObject = JSON.parseObject(orderResult);
-        if(StringUtils.isEmpty(orderResult) && !jsonObject.get("code").equals(Constants.SUCCESS)){
+        if(StringUtils.isEmpty(orderResult) && !jsonObject.get("code").equals(Constants.APISUCCESS)){
             throw new Exception(StringUtils.format("调用天宝接口获取"+ apiName +"信息失败。", jsonObject.get("msg")));
         }
         list = (List<?>)jsonObject.get("data");

@@ -58,7 +58,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         LEFT JOIN `tlk_产品表` b ON b.`产品系列ID` = f.`系列ID`
         LEFT JOIN `入库表` c ON b.`产品编码` = c.`产品编码`
         <if test="month != null "> AND DATE_FORMAT( c.`入库时间`, '%Y%m' ) = #{month}</if>
-        <if test="agent != null  and agent != ''"> AND c.代工厂 = #{agent}</if>
+        <if test="agent != null  and agent != ''"> AND c.`工厂名称` = #{agent}</if>
         GROUP BY f.`系列名称`, f.plan
         ORDER BY actual DESC
     </sql>
