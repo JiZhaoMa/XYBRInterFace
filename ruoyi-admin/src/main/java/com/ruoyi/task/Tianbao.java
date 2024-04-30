@@ -132,9 +132,9 @@ public class Tianbao {
         List<InterFaceStockData> stockList = new ArrayList<>();
         stockList = (List<InterFaceStockData>) api("库存",begin_date,end_date,"stock_data",stockList);
         if(stockList.size() > 0){
+            interfaceService.deleteStockData();
             interfaceService.insertStockDataList(stockList);
             interfaceService.insertHistoryStockDataList(stockList);
-            interfaceService.deleteStockData();
         }
     }
 
