@@ -49,8 +49,8 @@ public class InventoryController extends BaseController {
         inventoryTurnoverData = inventoryService.getInventoryTurnoverData(inventoryTurnoverData);
         if(inventoryTurnoverData != null){
             currYearShipping = Integer.parseInt(inventoryTurnoverData.getCurrYearShipping()); //发货量
-            monthInventory = inventoryTurnoverData.getMonthInventory() == null ? 0 : Integer.parseInt(inventoryTurnoverData.getMonthInventory()); //前几个月的库存之和
-            int month = Integer.parseInt(monthStr);
+            monthInventory = inventoryTurnoverData.getMonthInventory() == null ? 0 : Integer.parseInt(inventoryTurnoverData.getMonthInventory().substring(0,inventoryTurnoverData.getMonthInventory().indexOf("."))); //前几个月的库存之和
+            int month = Integer.parseInt(date.substring(5,6));
             inventoryTurnoverNum = monthInventory == 0 ? 0 : currYearShipping/(monthInventory/(month - 1));
             mmap.put("currentInventoryNum", inventoryTurnoverData.getCurrentInventoryNum());
 
