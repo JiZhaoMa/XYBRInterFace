@@ -130,8 +130,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         GROUP BY f.seriesName, f.productSum
     </select>
 
-    <select id="getMonthOfZhiTongRate" resultMap="monthOfZhiTongRateResult">
-        SELECT
+    <select id="getMonthOfZhiTongRate" parameterType="MonthOfZhiTongRate" resultMap="monthOfZhiTongRateResult">
+SELECT * FROM
+    (SELECT
         f.`系列名称` AS seriesName,
         SUM( m.`老化前直通数量` + m.`老化直通数量` + m.`老化后直通数量` + m.`耐压直通数量` ) / SUM( m.`老化前测试数量` + m.`老化测试数量` + m.`老化后测试数量` + m.`耐压测试数量` ) AS zhiTongRate,
         DATE_FORMAT( m.`创建时间`, '%Y%m' ) AS month
@@ -146,10 +147,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <if test="agent != null and agent !=''"> AND m.`工厂名称` = #{agent}</if>
         GROUP BY
         f.`系列名称`,
-        DATE_FORMAT( m.`创建时间`, '%Y%m' )
+        DATE_FORMAT( m.`创建时间`, '%Y%m' )) h
+        <if test="seriesName != null and seriesName !=''"> WHERE h.seriesName = #{seriesName}</if>
     </select>
-    <select id="getMonthOfStock" resultMap="monthOfZhiTongRateResult">
-        SELECT
+    <select id="getMonthOfStock" parameterType="MonthOfZhiTongRate" resultMap="monthOfZhiTongRateResult">
+        SELECT * FROM
+        (SELECT
             a.`系列名称` AS seriesName,
             a.`系列ID` AS seriesID,
             DATE_FORMAT( c.`入库时间`, '%Y%m' ) AS month,
@@ -162,11 +165,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
                 <foreach collection="monthList" index="index" item="item" open="(" separator="," close=")">
                     #{item}
                 </foreach>
-                <if test="seriesName != null and seriesName !=''"> AND a.`系列名称` = #{seriesName}</if>
                 <if test="agent != null and agent !=''"> AND c.`工厂名称` = #{agent}</if>
         GROUP BY
             a.`系列名称`,
             a.`系列ID`,
-            DATE_FORMAT( c.`入库时间`, '%Y%m' )
+            DATE_FORMAT( c.`入库时间`, '%Y%m' )) h
+        <if test="seriesName != null and seriesName !=''"> WHERE h.seriesName = #{seriesName}</if>
     </select>
 </mapper>

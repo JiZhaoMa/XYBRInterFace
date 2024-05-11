@@ -54,8 +54,7 @@ public class InventoryController extends BaseController {
             inventoryTurnoverNum = monthInventory == 0 ? 0 : currYearShipping/(monthInventory/(month - 1));
             mmap.put("currentInventoryNum", inventoryTurnoverData.getCurrentInventoryNum());
 
-            DecimalFormat df = new DecimalFormat("#0.00");
-            mmap.put("inventoryTurnoverNum", String.valueOf(df.format(inventoryTurnoverNum * 100)) + "%");
+            mmap.put("inventoryTurnoverNum", inventoryTurnoverNum);
         }else{
             mmap.put("currentInventoryNum", "0");
             mmap.put("inventoryTurnoverNum", "0.00%");
