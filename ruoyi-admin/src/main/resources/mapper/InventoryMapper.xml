@@ -52,7 +52,7 @@
             b.`产品硬件版本` AS hardwareVersion,
             b.`产品软件版本` AS softVersion
         FROM `tlk_产品表` a
-        LEFT JOIN `库存表` b ON b.产品编号 = a.`产品编码` AND DATE_FORMAT(b.`库存时间`,'%Y%m%d') = DATE_FORMAT(NOW(),'%Y%m%d')
+        LEFT JOIN `库存表` b ON b.产品编号 = a.`产品编码`
         <if test="month != null and month !=''"> AND DATE_FORMAT( b.`库存时间`, '%Y%m' ) = #{month}</if>
         <if test="agent != null and agent !=''"> AND b.`工厂名称` = #{agent}</if>
     </select>

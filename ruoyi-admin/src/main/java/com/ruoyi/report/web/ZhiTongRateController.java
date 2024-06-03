@@ -205,11 +205,19 @@ public class ZhiTongRateController extends BaseController {
             paramSix = "" + years + "05";
         }
         if(month >= 6){
-            paramFirst = "" + years + String.valueOf(Integer.parseInt(monthStr) - 5);
-            paramSecond = "" + years + String.valueOf(Integer.parseInt(monthStr) - 4);
-            paramThird = "" + years + String.valueOf(Integer.parseInt(monthStr) - 3);
-            paramFour = "" + years + String.valueOf(Integer.parseInt(monthStr) - 2);
-            paramFive = "" + years + String.valueOf(Integer.parseInt(monthStr) - 1);
+            paramFirst = "" + years + "0" + String.valueOf(Integer.parseInt(monthStr) - 5);
+            paramSecond = "" + years + "0" + String.valueOf(Integer.parseInt(monthStr) - 4);
+            paramThird = "" + years + "0" + String.valueOf(Integer.parseInt(monthStr) - 3);
+            if(Integer.parseInt(monthStr) - 2 > 9){
+                paramFour = "" + years + String.valueOf(Integer.parseInt(monthStr) - 2 );
+            }else{
+                paramFour = "" + years + "0" + String.valueOf(Integer.parseInt(monthStr) - 2 );
+            }
+            if(Integer.parseInt(monthStr) - 1 > 9){
+                paramFive = "" + years + String.valueOf(Integer.parseInt(monthStr) - 1);
+            }else{
+                paramFive = "" + years + "0" + String.valueOf(Integer.parseInt(monthStr) - 1);
+            }
             paramSix = "" + years + monthStr;
         }
         monthList.add(paramFirst);

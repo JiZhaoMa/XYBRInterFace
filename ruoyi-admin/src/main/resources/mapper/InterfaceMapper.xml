@@ -70,7 +70,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		</foreach>
 	</insert>
 	<insert id="deleteStockData">
-		delete from 库存表 where DATE_FORMAT(`创建时间`,'%Y%m%d') != DATE_FORMAT(NOW(),'%Y%m%d')
+		delete from 库存表 where DATE_FORMAT(`创建时间`,'%Y%m') = DATE_FORMAT(NOW(),'%Y%m')
 	</insert>
 	<insert id="insertHistoryStockDataList">
 		insert into 库存历史表(产品编号, 产品硬件版本, 产品软件版本, 库存, 库存时间, 工厂名称) values

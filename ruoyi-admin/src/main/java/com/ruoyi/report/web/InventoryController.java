@@ -49,13 +49,12 @@ public class InventoryController extends BaseController {
         inventoryTurnoverData = inventoryService.getInventoryTurnoverData(inventoryTurnoverData);
         if(inventoryTurnoverData != null){
             currYearShipping = Integer.parseInt(inventoryTurnoverData.getCurrYearShipping()); //发货量
-            monthInventory = inventoryTurnoverData.getMonthInventory() == null ? 0 : Integer.parseInt(inventoryTurnoverData.getMonthInventory()); //前几个月的库存之和
-            int month = Integer.parseInt(monthStr);
+            monthInventory = inventoryTurnoverData.getMonthInventory() == null ? 0 : Integer.parseInt(inventoryTurnoverData.getMonthInventory().substring(0,inventoryTurnoverData.getMonthInventory().indexOf("."))); //前几个月的库存之和
+            int month = Integer.parseInt(date.substring(5,6));
             inventoryTurnoverNum = monthInventory == 0 ? 0 : currYearShipping/(monthInventory/(month - 1));
             mmap.put("currentInventoryNum", inventoryTurnoverData.getCurrentInventoryNum());
 
-            DecimalFormat df = new DecimalFormat("#0.00");
-            mmap.put("inventoryTurnoverNum", String.valueOf(df.format(inventoryTurnoverNum * 100)) + "%");
+            mmap.put("inventoryTurnoverNum", inventoryTurnoverNum);
         }else{
             mmap.put("currentInventoryNum", "0");
             mmap.put("inventoryTurnoverNum", "0.00%");
@@ -156,11 +155,19 @@ public class InventoryController extends BaseController {
             paramSix = "" + years + "05";
         }
         if(month >= 6){
-            paramFirst = "" + years + String.valueOf(Integer.parseInt(monthStr) - 5);
-            paramSecond = "" + years + String.valueOf(Integer.parseInt(monthStr) - 4);
-            paramThird = "" + years + String.valueOf(Integer.parseInt(monthStr) - 3);
-            paramFour = "" + years + String.valueOf(Integer.parseInt(monthStr) - 2);
-            paramFive = "" + years + String.valueOf(Integer.parseInt(monthStr) - 1);
+            paramFirst = "" + years + "0" + String.valueOf(Integer.parseInt(monthStr) - 5);
+            paramSecond = "" + years + "0" + String.valueOf(Integer.parseInt(monthStr) - 4);
+            paramThird = "" + years + "0" + String.valueOf(Integer.parseInt(monthStr) - 3);
+            if(Integer.parseInt(monthStr) - 2 > 9){
+                paramFour = "" + years + String.valueOf(Integer.parseInt(monthStr) - 2 );
+            }else{
+                paramFour = "" + years + "0" + String.valueOf(Integer.parseInt(monthStr) - 2 );
+            }
+            if(Integer.parseInt(monthStr) - 1 > 9){
+                paramFive = "" + years + String.valueOf(Integer.parseInt(monthStr) - 1);
+            }else{
+                paramFive = "" + years + "0" + String.valueOf(Integer.parseInt(monthStr) - 1);
+            }
             paramSix = "" + years + monthStr;
         }
         monthList.add(paramFirst);
