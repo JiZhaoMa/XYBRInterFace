@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" >
+<head>
+
+</head>
+<body id="body" class="body">
+    <div id="fullScreenBg" class="fullScreenBg">
+        <div>
+            <div class="title">
+                <span>星源经营管理驾驶舱</span>
+            </div>
+        </div>
+        <div class="content">
+            <div class="left">
+                <div class="left-01">
+                    <div class="left-01-top">
+                        <div style="color: #FFFFFF;width: 25%;height: 15%;position: absolute;top: -10%;background-color: rgb(21, 51, 114);text-align: center;left: 3%;">
+                            <span>客户变化率</span>
+                        </div>
+                        <div style="width: 5%; color: #FFFFFF; top: 10%; position: relative; left: 3%; font-weight: 600">
+                            <span>十大客户</span>
+                        </div>
+                        <div id="tenClient" class="left-01-top-01">
+                            <ul id="comment1">
+                                <li>客户一</li>
+                                <li>客户二</li>
+                                <li>客户三</li>
+                                <li>客户四</li>
+                                <li>客户五</li>
+                                <li>客户六</li>
+                                <li>客户七</li>
+                                <li>客户八</li>
+                                <li>客户九</li>
+                                <li>客户十</li>
+                            </ul>
+                            <ul id="comment2"></ul>
+                        </div>
+                        <div class="left-01-top-02">
+                            <div style="height: 10%; text-align: center; color: #FFFFFF">
+                               <span>年度新客户占比</span>
+                            </div>
+                            <div style="height: 85%; top: 4%; position:relative ;display: flex; align-items: center;" id="newClientPie">
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="left-01-down">
+                        <div style="color: #FFFFFF;width: 25%;height: 12%;position: absolute;top: -5%;background-color: rgb(21, 51, 114);text-align: center;left: 3%;">
+                            <span>逾期客户</span>
+                        </div>
+                        <div style="height: 20%; width: 50%;position: absolute;display: flex; left: 30%">
+                            <div style="color: #FFFFFF;font-weight: 800; align-items: center">
+                                <span>逾期总金额(：万元)</span>
+                            </div>
+                            <div style="font-weight: 800; font-size: x-large; background: linear-gradient(to right, #ff0000, #ffff00); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-family: fantasy; position:relative;; left: 5%">
+                                <span>1004</span>
+                            </div>
+                        </div>
+                        <div style="width: 100%; height: 80%; display:flex;align-items: center; top: 20%" id="yuQiClient">
+
+                        </div>
+                    </div>
+                </div>
+                <div class="left-02">
+                    <div style="display: flex;top: 5%; position:relative;align-items: center;left: 5%;top: 10%;">
+                        <div style="color: #FFFFFF;font-weight: 800;">
+                            <span>营销费用率</span>
+                        </div>
+                        <div style="font-size: x-large;left: 5% ; font-weight: 800;position: relative; background: linear-gradient(to right, #ff0000, #ffff00); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-family: fantasy;">
+                            <span>99.99%</span>
+                        </div>
+                        <div style="color: #FFFFFF;font-weight: 800; left: 10%;position: relative">
+                            <span>人均销售额（：万元）</span>
+                        </div>
+                        <div style="font-size: x-large;left: 12% ; font-weight: 800;position: relative; background: linear-gradient(to right, #ff0000, #ffff00); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-family: fantasy;">
+                            <span>2000</span>
+                        </div>
+                    </div>
+                    <div style="display: flex;bottom: 5%; position:relative;align-items: center;left: 5%;top: 15%">
+                        <div style="color: #FFFFFF;font-weight: 800">
+                            <span>及时回款率</span>
+                        </div>
+                        <div style="font-size: x-large;left: 5% ; font-weight: 800;position: relative; background: linear-gradient(to right, #ff0000, #ffff00); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-family: fantasy;">
+                            <span>99.99%</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="left-03">
+                    <div style="color: #FFFFFF;width: 25%;height: 12%;position: absolute;top: -5%;background-color: rgb(21, 51, 114);text-align: center;left: 3%;">
+                        <span>库存</span>
+                    </div>
+                    <div style="height: 40%;width: 40%;text-align: center; color: #FFFFFF; background-image: url('http://localhost:80/img/stockBack.png'); background-size: cover;top: 30%;position: relative;">
+                        <div style="color: #FFFFFF;font-weight: 800;top: 20%; position: relative; ">
+                            <span>库存金额（：万元）</span>
+                        </div>
+                        <div style="font-size: x-large; font-weight: 800; top: 25%; position: relative; background: linear-gradient(to right, #ff0000, #ffff00); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-family: fantasy;">
+                            <span>900</span>
+                        </div>
+                    </div>
+                    <div style="height: 90%;width: 80%;top: 5%; display: flex; align-items: center" id="stockPie">
+
+                    </div>
+                </div>
+            </div>
+            <div class="middle">
+                <div class="middle-01">
+                    <div style="height: 100%;width:100%; display: flex; justify-content: center; align-items: center; text-align: center">
+                        <div style="color: #FFFFFF;font-weight: 800;">
+                            <span>销售目标(：万元)</span>
+                        </div>
+                        <div style="font-size: xx-large; font-weight: 800; background: linear-gradient(to right, #ff0000, #ffff00); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-family: fantasy;">
+                            <span>40000</span>
+                        </div>
+                        <div style="color: #FFFFFF;font-weight: 800; left: 1%; position: relative">
+                            <span>已完成销售额(：万元)</span>
+                        </div>
+                        <div style="font-size: xx-large;  left: 1%; position: relative; font-weight: 800;background: linear-gradient(to right, #ff0000, #ffff00); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-family: fantasy;">
+                            <span>20000</span>
+                        </div>
+                    </div>
+                </div>
+                <div style="height: 1%; width:100%; display: flex; top: -8%; position:relative;">
+                    <div style="top: 20%;color: red;display: list-item; left: 7%; position:absolute;">
+                        <span>同比</span>
+                        <span>8%</span>
+                    </div>
+                    <div style="top: 20%;color: red;display: list-item; position:absolute;right: 7%;">
+                        <span>环比</span>
+                        <span>8%</span>
+                    </div>
+                </div>
+                <div class="middle-02">
+                    <div id="chinaMap" style="width: 100%; height: 100%; display: flex; align-items: center"></div>
+                </div>
+                <div class="middle-03">
+                    <div style="left: 3%;width: 45%; height: 90%;display: flex; position: relative;z-index: 1;top: 2%;border: 0.2px solid rgba(50, 255, 238, .7);" >
+                        <div style="color: #FFFFFF;width: 50%;height: 10%;position: absolute;top: -5%;background-color: rgb(21, 51, 114);text-align: center;left: 3%;">
+                            <span>降本目标达成率</span>
+                        </div>
+                        <div id="muBiaoDaChengRate" style="width: 100%;height: 100%; display: flex; align-items: center">
+
+                        </div>
+                    </div>
+                    <div style="left: 5%; width: 45%; height: 90%;display: flex; position: relative;z-index: 1;top: 2%;border: 0.2px solid rgba(50, 255, 238, .7);" >
+                        <div style="color: #FFFFFF;width: 50%;height: 10%;position: absolute;top: -5%;background-color: rgb(21, 51, 114);text-align: center;left: 3%;">
+                            <span>按时交付率</span>
+                        </div>
+                        <div id="jiaoFuRate" style="width: 100%;height: 100%;  display: flex; align-items: center">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="right">
+                <div class="right-01">
+                    <div style="color: #FFFFFF;width: 15%;height: 20%;position: absolute;top: -10%;background-color: rgb(21, 51, 114);text-align: center;left: 3%;">
+                        <span>毛利率</span>
+                    </div>
+                    <div style="width: 40%; height: 80%; left: 10%; position: relative; top: 15%">
+                        <div style="color: #FFFFFF;font-weight: 800;top: 20%; position: relative; ">
+                            <span>目标值（：万元）</span>
+                        </div>
+                        <div style="font-size: x-large; font-weight: 800; top: 25%; position: relative; background: linear-gradient(to right, #ff0000, #ffff00); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-family: fantasy;">
+                            <span>900</span>
+                        </div>
+                    </div>
+                    <div style="width: 40%; height: 80%; left: 10%; position: relative; top: 15%">
+                        <div style="color: #FFFFFF;font-weight: 800;top: 20%; position: relative; ">
+                            <span>达成值（：万元）</span>
+                        </div>
+                        <div style="font-size: x-large; font-weight: 800; top: 25%; position: relative; background: linear-gradient(to right, #ff0000, #ffff00); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-family: fantasy;">
+                            <span>900</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="right-02">
+                    <div style="color: #FFFFFF;width: 30%;height: 10%;position: absolute;top: -5%;background-color: rgb(21, 51, 114);text-align: center;left: 3%;">
+                        <span>毛利率（分产品）</span>
+                    </div>
+                    <div id="maoLiRate" class="maoLiRate">
+
+                    </div>
+                </div>
+                <div class="right-03">
+                    <div style="color: #FFFFFF;width: 30%;height: 10%;position: absolute;top: -5%;background-color: rgb(21, 51, 114);text-align: center;left: 3%;">
+                        <span>期间费用率</span>
+                    </div>
+                    <div id="qiJianFeiYongRate" style="width: 100%;height: 100%; display:flex; align-items: center"></div>
+                </div>
+
+                <div class="right-04">
+                    <!--<div style="color: #FFFFFF;width: 30%;height: 10%;position: absolute;top: -5%;background-color: rgb(21, 51, 114);text-align: center;left: 3%;">
+                        <span>期间费用率</span>
+                    </div>-->
+                    <div style="display: flex;position:relative;align-items: center;left: 5%;top: 10%">
+                        <div style="color: #FFFFFF;font-weight: 800;">
+                            <span>预算执行率：</span>
+                        </div>
+                        <div style="font-size: x-large;left: 2% ; font-weight: 800;position: relative; background: linear-gradient(to right, #ff0000, #ffff00); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-family: fantasy;">
+                            <span>99.99%</span>
+                        </div>
+                        <div style="color: #FFFFFF;font-weight: 800; left: 9%;position: relative">
+                            <span>超出预算（：万元）</span>
+                        </div>
+                        <div style="font-size: x-large;left: 11% ; font-weight: 800;position: relative; background: linear-gradient(to right, #ff0000, #ffff00); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-family: fantasy;">
+                            <span>1.2</span>
+                        </div>
+                    </div>
+                    <div style="display: flex;position:relative;align-items: center;left: 9%;top: 15%">
+                        <div style="color: #FFFFFF;font-weight: 800;">
+                            <span>费用金额：</span>
+                        </div>
+                        <div style="font-size: x-large;left: 2% ; font-weight: 800;position: relative; background: linear-gradient(to right, #ff0000, #ffff00); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-family: fantasy;">
+                            <span>100</span>
+                        </div>
+                        <div style="color: #FFFFFF;font-weight: 800; left: 10%;position: relative">
+                            <span>当月费用支出（：万元）</span>
+                        </div>
+                        <div style="font-size: x-large;left: 12% ; font-weight: 800;position: relative; background: linear-gradient(to right, #ff0000, #ffff00); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-family: fantasy;">
+                            <span>200</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<style>
+    .body {
+        height: 700px;
+        top: 0%;
+    }
+    .fullScreenBg {
+        height: 100%;
+        width: 100%;
+        background-image: url("http://localhost:80/img/backImage.jpg");
+        background-size: cover;
+        overflow: hidden;
+    }
+    .title {
+        height: 8%;
+        color: #FFFFFF;
+        font-size: 40px;
+        text-align: center;
+        font-weight: 600;
+    }
+    .content {
+        height: 100%;
+        display: flex;
+        top: 5%;
+        position: relative;
+    }
+    .left {
+        width: 30%;
+        height: 100%;
+
+    }
+    .left-01 {
+        width: 100%;
+        height: 45%;
+    }
+    .left-01-top {
+        height: 50%;
+        display: flex;
+        position: relative;
+        z-index: 1;
+        bottom: 2%;
+        border: 0.2px solid rgba(50, 255, 238, .7);
+    }
+    .left-01-top-01 {
+        height: 90%;
+        width: 40%;
+        overflow-x: auto;
+        color: #FFFFFF;
+        left: 5%;
+        position: relative;
+        top: 10%;
+    }
+    .left-01-top-02 {
+        height: 100%;
+        width: 60%;
+    }
+    .left-01-down {
+        height: 50%;
+        display: flex;
+        position: relative;
+        z-index: 1;
+        bottom: 2%;
+        border: 0.2px solid rgba(50, 255, 238, .7);
+        top: 2%;
+    }
+    .left-02 {
+        width: 100%;
+        height: 10%;
+        top: 3%;
+        position: relative;
+        border: 0.2px solid rgba(50, 255, 238, .7);
+    }
+    .left-02-01 {
+        height: 100%;
+        width: 100%;
+        overflow-x: auto;
+        color: #FFFFFF;
+        position: relative;
+        left: 5%;
+    }
+    /*.left-02-02 {
+        height: 100%;
+        width: 60%;
+        display: flex;
+        top: 15%;
+        position: relative;
+    }*/
+    .left-03 {
+        width: 100%;
+        height: 24%;
+        display: flex;
+        top: 5%;
+        position: relative;
+        z-index: 1;
+        bottom: 2%;
+        border: 0.2px solid rgba(50, 255, 238, .7);
+    }
+    .middle {
+        width: 40%;
+        height: 100%;
+    }
+    .middle-01 {
+        width: 100%;
+        height: 10%;
+        display: flex;
+        position: relative;
+        z-index: 1;
+        top: -6%;
+    }
+    .middle-02 {
+        width: 100%;
+        height: 46%;
+        position: relative;
+        z-index: 1;
+        color: #FFFFFF;
+        font-size: 12px;
+        text-align: center;
+    }
+    .middle-03 {
+        width: 100%;
+        height: 30%;
+        display: flex;
+    }
+    .right {
+        width: 30%;
+        height: 100%;
+    }
+    .right-01 {
+        width: 100%;
+        height: 10%;
+        display: flex;
+        position: relative;
+        z-index: 1;
+        bottom: 2%;
+        border: 0.2px solid rgba(50, 255, 238, .7);
+    }
+    .right-02 {
+        width: 100%;
+        height: 26%;
+        display: flex;
+        position: relative;
+        z-index: 1;
+        bottom: 2%;
+        top: 2%;
+        border: 0.2px solid rgba(50, 255, 238, .7);
+    }
+    .maoLiRate {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+    }
+    .right-03 {
+        width: 100%;
+        height: 26%;
+        display: flex;
+        position: relative;
+        z-index: 1;
+        bottom: 2%;
+        top: 6%;
+        border: 0.2px solid rgba(50, 255, 238, .7);
+    }
+    .right-04 {
+        width: 100%;
+        height: 12%;
+        position: relative;
+        z-index: 1;
+        bottom: 2%;
+        top: 10%;
+        border: 0.2px solid rgba(50, 255, 238, .7);
+    }
+    table {
+        width: 100%; /* 设置table宽度 */
+        border-collapse: collapse; /* 边框合并 */
+        overflow: auto;
+    }
+    th{
+        border: 0px; /* 设置单元格边框 */
+        padding: 8px; /* 设置单元格内边距 */
+        text-align: center; /* 单元格内文本对齐方式 */
+        position: sticky;
+        top: 0;
+    }
+    td {
+        border: 0px; /* 设置单元格边框 */
+        padding: 8px; /* 设置单元格内边距 */
+        text-align: center; /* 单元格内文本对齐方式 */
+        text-align: left;
+    }
+    ::-webkit-scrollbar{
+        width: 12px;
+        height: 24px;
+    }
+    th {
+        text-align: left;
+        /*background-color: rgb(21,51,114);*/
+    }
+</style>
+
+<script type="text/javascript" th:src="@{/js/plugins/echarts.min.js}"></script>
+<script type="text/javascript" th:src="@{/js/plugins/china.js}"></script>
+<script type="text/javascript" th:src="@{/js/xybr/report.js}"></script>
+<script type="text/javascript" th:src="@{/js/jquery.min.js}"></script>
+    <script type="text/javascript" th:src="@{/js/xybr/cockpit/newClient.js}"></script>
+    <script type="text/javascript" th:src="@{/js/xybr/cockpit/yuQiClient.js}"></script>
+    <script type="text/javascript" th:src="@{/js/xybr/cockpit/jishiHuiKuanRate.js}"></script>
+    <script type="text/javascript" th:src="@{/js/xybr/cockpit/stock.js}"></script>
+    <script type="text/javascript" th:src="@{/js/xybr/cockpit/chinaMap.js}"></script>
+    <script type="text/javascript" th:src="@{/js/xybr/cockpit/jiangBenMuBiaoDaChengRate.js}"></script>
+    <script type="text/javascript" th:src="@{/js/xybr/cockpit/jiaoFuRate.js}"></script>
+    <script type="text/javascript" th:src="@{/js/xybr/cockpit/maoLiRate.js}"></script>
+    <script type="text/javascript" th:src="@{/js/xybr/cockpit/qiJianFeiYongRate.js}"></script>
+
+<script type="text/javascript">
+    var urls = "http://localhost/";
+    let newClientPie = echarts.init(document.getElementById("newClientPie"));
+    createNewClient(newClientPie, "2024");
+    let yuQiClient = echarts.init(document.getElementById("yuQiClient"));
+    createyuQiClient(yuQiClient, "2024");
+    /*let jishiHuiKuanRate = echarts.init(document.getElementById("jishiHuiKuanRate"));
+    createJishiHuiKuanRate(jishiHuiKuanRate, "2024");*/
+    let stockPie = echarts.init(document.getElementById("stockPie"));
+    createStockPie(stockPie, "2024");
+    let chinaMap = echarts.init(document.getElementById("chinaMap"));
+    createChinaMap(chinaMap, "2024");
+    let muBiaoDaChengRate = echarts.init(document.getElementById("muBiaoDaChengRate"));
+    createMuBiaoDaChengRate(muBiaoDaChengRate, "2024");
+    let jiaoFuRate = echarts.init(document.getElementById("jiaoFuRate"));
+    createJiaoFuRate(jiaoFuRate, "2024");
+    let maoLiRate = echarts.init(document.getElementById("maoLiRate"));
+    createMaoLiRate(maoLiRate, "2024");
+    let qiJianFeiYongRate = echarts.init(document.getElementById("qiJianFeiYongRate"));
+    createQiJianFeiYongRate(qiJianFeiYongRate, "2024");
+
+    function roll(t) {
+        var ul1 = document.getElementById("comment1");
+        var ul2 = document.getElementById("comment2");
+        var ulbox = document.getElementById("tenClient");
+        ul2.innerHTML = ul1.innerHTML;
+        ulbox.scrollTop = 0; // 开始无滚动时设为0
+        var timer = setInterval(rollStart, t); // 设置定时器，参数t用在这为间隔时间（单位毫秒），参数t越小，滚动速度越快
+        // 鼠标移入div时暂停滚动
+        ulbox.onmouseover = function () {
+            clearInterval(timer);
+        }
+        // 鼠标移出div后继续滚动
+        ulbox.onmouseout = function () {
+            timer = setInterval(rollStart, t);
+        }
+    }
+
+    // 开始滚动函数
+    function rollStart() {
+        // 上面声明的DOM对象为局部对象需要再次声明
+        var ul1 = document.getElementById("comment1");
+        var ul2 = document.getElementById("comment2");
+        var ulbox = document.getElementById("tenClient");
+        // 正常滚动不断给scrollTop的值+1,当滚动高度大于列表内容高度时恢复为0
+        if (ulbox.scrollTop >= ul1.scrollHeight) {
+            ulbox.scrollTop = 0;
+        } else {
+            ulbox.scrollTop += 1;
+        }
+    }
+    window.onload = function (){
+        var height = window.innerHeight;
+        var element = document.getElementById("body");
+        element.style.height = height - 20 + 'px';
+        roll(20);
+    }
+    //进入全屏
+    //全屏功能
+    document.getElementById("fullScreenBg").ondblclick = function() {
+        var elem = document.getElementById("fullScreenBg");
+        elem.style.width = "100%";
+        elem.style.height = "100%";
+        elem.style.overflowY = "scroll";
+        elem.style.overflow = "hidden";
+        elem.style.backgroundSize = "cover";
+        elem.style.backgroundImage = "url('http://localhost:80/img/backImage.jpg')";
+        requestFullScreen(elem); // 某个页面元素
+        //requestFullScreen(document.documentElement); // 整个网页
+    };
+    function requestFullScreen(element) {
+        // 判断各种浏览器，找到正确的方法
+        var requestMethod = element.requestFullScreen || //W3C
+            element.webkitRequestFullScreen || //FireFox
+            element.mozRequestFullScreen || //Chrome等
+            element.msRequestFullScreen; //IE11
+        if (requestMethod) {
+            requestMethod.call(element);
+        } else if (typeof window.ActiveXObject !== "undefined") { //for Internet Explorer
+            var wscript = new ActiveXObject("WScript.Shell");
+            if (wscript !== null) {
+                wscript.SendKeys("{F11}");
+            }
+        }
+    }
+    //退出全屏 判断浏览器种类
+    function exitFull() {
+        // 判断各种浏览器，找到正确的方法
+        var exitMethod = document.exitFullscreen || //W3C
+            document.mozCancelFullScreen || //FireFox
+            document.webkitExitFullscreen || //Chrome等
+            document.webkitExitFullscreen; //IE11
+        if (exitMethod) {
+            exitMethod.call(document);
+        } else if (typeof window.ActiveXObject !== "undefined") { //for Internet Explorer
+            var wscript = new ActiveXObject("WScript.Shell");
+            if (wscript !== null) {
+                wscript.SendKeys("{F11}");
+            }
+        }
+    }
+</script>
+</body>
+</html>

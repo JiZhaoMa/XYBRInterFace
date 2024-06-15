@@ -268,6 +268,7 @@ public class ShiroConfig
         filterChainDefinitionMap.put("/report/zhiTongRate/**", "anon");
         filterChainDefinitionMap.put("/report/inventory/**", "anon");
         filterChainDefinitionMap.put("/system/xybrOrder/**", "anon");
+        filterChainDefinitionMap.put("/system/cockpit/**", "anon");
 
         Map<String, Filter> filters = new LinkedHashMap<String, Filter>();
         filters.put("onlineSession", onlineSessionFilter());
