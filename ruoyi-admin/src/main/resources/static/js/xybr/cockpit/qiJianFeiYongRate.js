@@ -1,11 +1,11 @@
 function createQiJianFeiYongRate(qiJianFeiYongRate, month) {
     // mock数据
     const dataArr = {
-        xdata: ['管理费用', '研发费用'],
-        vaccination: [1000, 1300],
-        unvaccinated: [700, 800],
-        unvaccinatedTwo: [400, 300],
-        rateDataOne: [54, 46],
+        xdata: ['管理费用', '研发费用','销售费用'],
+        vaccination: [1000, 1300, 1200],
+        unvaccinated: [700, 800, 500],
+        unvaccinatedTwo: [400, 300, 500],
+        rateDataOne: [50, 30, 20],
     }
 
 // tooltip

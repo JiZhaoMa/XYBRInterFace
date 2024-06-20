@@ -25,8 +25,18 @@ public class CoclpitController extends BaseController
 {
     private String prefix = "report/businessManagementCockpit";
     @GetMapping("/getView")
-    public String XybrOrder()
+    public String getCockpit()
+    {
+        return prefix + "/cockpit";
+    }
+    @GetMapping("/get001View")
+    public String get001View()
     {
         return prefix + "/cockpit001";
+    }
+    @GetMapping("/get002View")
+    public String get002View()
+    {
+        return prefix + "/cockpit002";
     }
 }

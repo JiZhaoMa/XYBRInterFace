@@ -12,20 +12,20 @@ spring:
                 #username: xybr
                 #password: xybr@2024
 
-                url: jdbc:mysql://localhost:3307/activity?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8&nullCatalogMeansCurrent=true
-                username: root
-                password: China2022@
-
-                #url: jdbc:mysql://localhost:3306/activity?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8&nullCatalogMeansCurrent=true
+                #url: jdbc:mysql://localhost:3307/activity?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8&nullCatalogMeansCurrent=true
                 #username: root
-                #password: chirspaul@3
+                #password: China2022@
+
+                url: jdbc:mysql://localhost:3306/activity?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8&nullCatalogMeansCurrent=true
+                username: root
+                password: chirspaul@3
             # 从库数据源
             slave:
                 # 从数据源开关/默认关闭
-                enabled: false
-                url:
-                username:
-                password:
+                enabled: true
+                url: jdbc:mysql://192.168.31.52:3306/oa?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8&nullCatalogMeansCurrent=true
+                username: xybr
+                password: xybr@2024
             # 初始连接数
             initialSize: 5
             # 最小连接池数量

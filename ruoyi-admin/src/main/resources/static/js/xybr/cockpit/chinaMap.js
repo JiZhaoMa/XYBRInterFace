@@ -97,7 +97,7 @@ function createChinaMap(myChart, month) {
             calculable: true,
             show:false,
             inRange: {
-                color: ['#FFF', '#6c50f3', '#6c50f3', '#2fffa4', '#468EFD', '#00c7ff', '#00c7ff', '#468EFD'],
+                color: ['#FFF', '#210A57', '#210A57', '#330440', '#264240', '#213E66', '#213E66', '#264240'],
             }
             //华北      西南    华中     东北     华东    西北     华南
         },
@@ -264,7 +264,7 @@ function createChinaMap(myChart, month) {
                 z: 0,
                 itemStyle:{
                     normal: {
-                        areaColor: '#350'
+                        areaColor: '#0C0333'
                     }
                 }
             },

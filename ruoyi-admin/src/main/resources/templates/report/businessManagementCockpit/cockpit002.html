@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" >
+<head>
+
+</head>
+<body id="body" class="body">
+    <div id="002" class="content02">
+        <div class="left02">
+            <div class="left02-01">
+                <div style="color: #FFFFFF;width: 25%;height: 3%;position: absolute;top: -1%;background-color: rgb(21, 51, 114);text-align: center;left: 3%;align-items: center;justify-content:center ;display: flex">
+                    <span>产品直通率</span>
+                </div>
+                <div style="width: 100%; height: 100%;display: flex; align-items: center;" id="chanPinZhiTongRate">
+
+                </div>
+            </div>
+            <div class="left02-02">
+                <div style="color: #FFFFFF;width: 25%;height: 12%;position: absolute;top: -5%;background-color: rgb(21, 51, 114);text-align: center;left: 3%;align-items: center;justify-content:center ;display: flex">
+                    <span>市场故障率</span>
+                </div>
+                <div style="width: 100%; height: 100%;display: flex; align-items: center;" id="shiChangGuZhangRate">
+
+                </div>
+            </div>
+            <div class="left02-03">
+                <div style="color: #FFFFFF;width: 25%;height: 12%;position: absolute;top: -5%;background-color: rgb(21, 51, 114);text-align: center;left: 3%;align-items: center;justify-content:center ;display: flex">
+                    <span>开箱不良率</span>
+                </div>
+                <div style="width: 100%; height: 100%;display: flex; align-items: center;" id="kaiXiangBuLiangRate">
+
+                </div>
+            </div>
+        </div>
+        <div class="middle02">
+            <div class="middle02-01" id="xiangMuGuanLi">
+                <div style="color: #FFFFFF;width: 25%;height: 3%;position: absolute;top: -1%;background-color: rgb(21, 51, 114);text-align: center;left: 3%;align-items: center;justify-content:center ;display: flex">
+                    <span>项目管理</span>
+                </div>
+                <div style="width: 100%;height: 50%; display: flex">
+                    <div style="width: 50%;height: 100%; background-image: url('http://localhost:80/img/zanTing.png'); background-size: 100% 100%;display: flex;justify-content: center; align-items: center; ">
+                        <div style="color: #34da62; width: 70%; height: 50%;display: flex;justify-content: center; align-items: center;top: 10%;position: relative;">
+                            <div style="font-size: x-large; font-weight: 600; margin: 5%">
+                                <span>总数量</span>
+                            </div>
+                            <div style="font-size: xx-large; font-weight: 800; margin: 5%">
+                                <span>40</span>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div style="width: 50%;height: 100%; background-image: url('http://localhost:80/img/zanTing.png'); background-size: 100% 100%;display: flex;justify-content: center; align-items: center;">
+                        <div style="color: #33FFCC; width: 70%; height: 50%;display: flex;justify-content: center; align-items: center;top: 10%;position: relative;">
+                            <div style="font-size: x-large; font-weight: 600; margin: 5%">
+                                <span>在研</span>
+                            </div>
+                            <div style="font-size: xx-large; font-weight: 800; margin: 5%">
+                                <span>40</span>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div style="width: 100%;height: 50%; display: flex">
+                    <div style="width: 50%;height: 100%; background-image: url('http://localhost:80/img/zanTing.png'); background-size: 100% 100%;display: flex;justify-content: center; align-items: center;">
+                        <div style="color: #d0a00e; width: 70%; height: 50%;display: flex;justify-content: center; align-items: center;top: 10%;position: relative;">
+                            <div style="font-size: x-large; font-weight: 600; margin: 5%">
+                                <span>结项</span>
+                            </div>
+                            <div style="font-size: xx-large; font-weight: 800; margin: 5%">
+                                <span>40</span>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div style="width: 50%;height: 100%; background-image: url('http://localhost:80/img/zanTing.png'); background-size: 100% 100%;display: flex;justify-content: center; align-items: center;">
+                        <div style="color: #eb3600; width: 70%; height: 50%;display: flex;justify-content: center; align-items: center;top: 10%;position: relative;">
+                            <div style="font-size: x-large; font-weight: 600; margin: 5%">
+                                <span>暂停</span>
+                            </div>
+                            <div style="font-size: xx-large; font-weight: 800; margin: 5%">
+                                <span>40</span>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="middle02-02">
+                <div style="color: #FFFFFF;width: 25%;height: 10%;position: absolute;top: -5%;background-color: rgb(21, 51, 114);text-align: center;left: 3%;align-items: center;justify-content:center ;display: flex">
+                    <span>年度新增专利</span>
+                </div>
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>专利名称</th>
+                        <th>发明人</th>
+                        <th>证书日期</th>
+                    </tr>
+                    </thead>
+                </table>
+
+                <div class="scroll-box">
+                    <table class="scroll-tab">
+                        <tbody class="scrollContent"></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="right02">
+            <div class="right02-01">
+                <div style="color: #FFFFFF;width: 25%;height: 3%;position: absolute;top: -1%;background-color: rgb(21, 51, 114);text-align: center;left: 3%;align-items: center;justify-content:center ;display: flex">
+                    <span>组织绩效得分</span>
+                </div>
+                <table class="table-01">
+                    <thead>
+                    <tr>
+                        <th>排名</th>
+                        <th>部门</th>
+                        <th>得分</th>
+                        <th>等级</th>
+                    </tr>
+                    </thead>
+                </table>
+
+                <div class="scroll-box-01">
+                    <table class="scroll-tab-01">
+                        <tbody class="scrollContent-01"></tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="right02-02">
+                <div style="color: #FFFFFF;width: 25%;height: 7%;position: absolute;top: -3%;background-color: rgb(21, 51, 114);text-align: center;left: 3%;align-items: center;justify-content:center ;display: flex">
+                    <span>人力资源管理</span>
+                </div>
+                <div style="width: 100%;height: 25%; display: flex;top: 10%; position: relative;align-items: center;">
+                    <div style="width: 45%;height: 100%; background-image: url('http://localhost:80/img/displayData04.png'); background-size: 100% 100%;left: 4%; position: relative;display: flex;">
+                        <div style="width: 50%; height: 30%; color: #FFF; font-size: large; left: 3%; position: relative; top: 7%;background-color: #eb3600;text-align: center;">
+                            <span>薪酬总额</span>
+                        </div>
+                        <div style="width: 50%; height: 75%; color: #FFF; font-size: x-large; left: 3%; position: relative;align-items: center; display: flex;position: absolute; top: 25%;">
+                            <span>243万</span>
+                        </div>
+                        <div style="width: 50%; height: 75%; color: #FFF; font-size: medium; left: 50%; position: relative;align-items: center; display: flex;position: absolute; top: 25%; color: #00a65a">
+                            <span>环比</span>
+                            <span style="left: 5%; position:relative;">8%</span>
+                        </div>
+                    </div>
+                    <div style="width: 45%;height: 100%; background-image: url('http://localhost:80/img/displayData04.png'); background-size: 100% 100%;left: 7%; position: relative;display: flex;">
+                        <div style="width: 50%; height: 30%; color: #FFF; font-size: large; left: 3%; position: relative; top: 7%;background-color: #eb3600;text-align: center;">
+                            <span>员工总数</span>
+                        </div>
+                        <div style="width: 50%; height: 75%; color: #FFF; font-size: x-large; left: 3%; position: relative;align-items: center; display: flex;position: absolute; top: 25%;">
+                            <span>164</span>
+                        </div>
+                        <div style="width: 50%; height: 75%; color: #FFF; font-size: medium; left: 50%; position: relative;align-items: center; display: flex;position: absolute; top: 25%; color: #00a65a">
+                            <span>环比</span>
+                            <span style="left: 5%; position:relative;">8%</span>
+                        </div>
+                    </div>
+                </div>
+                <div style="width: 100%;height: 25%; display: flex;top: 15%; position: relative;align-items: center;">
+                    <div style="width: 45%;height: 100%; background-image: url('http://localhost:80/img/displayData04.png'); background-size: 100% 100%;left: 4%; position: relative;display: flex;">
+                        <div style="width: 50%; height: 30%; color: #FFF; font-size: large; left: 3%; position: relative; top: 7%;background-color: #eb3600;text-align: center;">
+                            <span>招聘完成率</span>
+                        </div>
+                        <div style="width: 50%; height: 75%; color: #FFF; font-size: x-large; left: 3%; position: relative;align-items: center; display: flex;position: absolute; top: 25%;">
+                            <span>100%</span>
+                        </div>
+                        <div style="width: 50%; height: 75%; color: #FFF; font-size: medium; left: 50%; position: relative;align-items: center; display: flex;position: absolute; top: 25%; color: #00a65a">
+                            <span>环比</span>
+                            <span style="left: 5%; position:relative;">8%</span>
+                        </div>
+                    </div>
+                    <div style="width: 45%;height: 100%; background-image: url('http://localhost:80/img/displayData04.png'); background-size: 100% 100%;left: 7%; position: relative;display: flex;">
+                        <div style="width: 50%; height: 30%; color: #FFF; font-size: large; left: 3%; position: relative; top: 7%;background-color: #eb3600;text-align: center;">
+                            <span>人员流失率</span>
+                        </div>
+                        <div style="width: 50%; height: 75%; color: #FFF; font-size: x-large; left: 3%; position: relative;align-items: center; display: flex;position: absolute; top: 25%;">
+                            <span>1%</span>
+                        </div>
+                        <div style="width: 50%; height: 75%; color: #FFF; font-size: medium; left: 50%; position: relative;align-items: center; display: flex;position: absolute; top: 25%; color: #00a65a">
+                            <span>环比</span>
+                            <span style="left: 5%; position:relative;">8%</span>
+                        </div>
+                    </div>
+                </div>
+                <div style="width: 100%;height: 25%; display: flex;top: 20%; position: relative;align-items: center;">
+                    <div style="width: 45%;height: 100%; background-image: url('http://localhost:80/img/displayData04.png'); background-size: 100% 100%;left: 4%; position: relative;display: flex;">
+                        <div style="width: 50%; height: 30%; color: #FFF; font-size: large; left: 3%; position: relative; top: 7%;background-color: #eb3600;text-align: center;">
+                            <span>研发占比</span>
+                        </div>
+                        <div style="width: 50%; height: 75%; color: #FFF; font-size: x-large; left: 3%; position: relative;align-items: center; display: flex;position: absolute; top: 25%;">
+                            <span>50%</span>
+                        </div>
+                        <div style="width: 50%; height: 75%; color: #FFF; font-size: medium; left: 50%; position: relative;align-items: center; display: flex;position: absolute; top: 25%; color: #00a65a">
+                            <span>环比</span>
+                            <span style="left: 5%; position:relative;">8%</span>
+                        </div>
+                    </div>
+                    <div style="width: 45%;height: 100%; background-image: url('http://localhost:80/img/displayData04.png'); background-size: 100% 100%;left: 7%; position: relative;display: flex;">
+                        <div style="width: 50%; height: 30%; color: #FFF; font-size: large; left: 3%; position: relative; top: 7%;background-color: #eb3600;text-align: center;">
+                            <span>培训完成率</span>
+                        </div>
+                        <div style="width: 50%; height: 75%; color: #FFF; font-size: x-large; left: 3%; position: relative;align-items: center; display: flex;position: absolute; top: 25%;">
+                            <span>100%</span>
+                        </div>
+                        <div style="width: 50%; height: 75%; color: #FFF; font-size: medium; left: 50%; position: relative;align-items: center; display: flex;position: absolute; top: 25%; color: #00a65a">
+                            <span>环比</span>
+                            <span style="left: 5%; position:relative;">8%</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="right02-03">
+                <div style="color: #FFFFFF;width: 30%;height: 20%;position: absolute;top: -8%;background-color: rgb(21, 51, 114);text-align: center;left: 3%;align-items: center;justify-content:center ;display: flex">
+                    <span>已规划产品启动率</span>
+                </div>
+                <div style="width: 100%; height: 90%; position:relative; top: 10%" id="guiHuaChanPinQidongRate">
+
+                </div>
+            </div>
+        </div>
+    </div>
+<style>
+    .body {
+        height: 700px;
+        top: 0%;
+        overflow: hidden;
+    }
+    .content02 {
+        height: 100%;
+        display: flex;
+        position: relative;
+    }
+    .left02 {
+        width: 30%;
+        height: 95%;
+        left: 2%;
+        position: relative;
+    }
+    .left02-01 {
+        width: 100%;
+        height: 28%;
+        border: 0.2px solid rgba(50, 255, 238, .7);
+        display: flex;
+        align-items: center;
+    }
+    .left02-02 {
+        width: 100%;
+        height: 28%;
+        top: 3%;
+        position: relative;
+        border: 0.2px solid rgba(50, 255, 238, .7);
+        display: flex;
+        align-items: center;
+    }
+    .left02-03 {
+        width: 100%;
+        height: 28%;
+        top: 6%;
+        position: relative;
+        border: 0.2px solid rgba(50, 255, 238, .7);
+        display: flex;
+        align-items: center;
+    }
+    .middle02 {
+        width: 30%;
+        height: 95%;
+        left: 5%;
+        position: relative;
+    }
+    .middle02-01 {
+        width: 100%;
+        height: 50%;
+        border: 0.2px solid rgba(50, 255, 238, .7);
+    }
+    .middle02-02 {
+        width: 100%;
+        height: 35%;
+        top: 3%;
+        position: relative;
+        border: 0.2px solid rgba(50, 255, 238, .7);
+    }
+    .right02 {
+        width: 30%;
+        height: 95%;
+        left: 8%;
+        position: relative;
+    }
+    .right02-01 {
+        width: 100%;
+        height: 20%;
+        border: 0.2px solid rgba(50, 255, 238, .7);
+    }
+    .right02-02 {
+        width: 100%;
+        height: 44%;
+        top: 3%;
+        position: relative;
+        border: 0.2px solid rgba(50, 255, 238, .7);
+    }
+    .right02-03 {
+        width: 100%;
+        height: 20%;
+        top: 6%;
+        position: relative;
+        border: 0.2px solid rgba(50, 255, 238, .7);
+        align-items: center;
+        display: flex;
+    }
+    .cotable table tbody::-webkit-scrollbar {
+        /* width: 0; 隐藏滚动条 */
+    }
+
+    .scroll-box {
+        height: 80%;
+        width: 100%;
+        overflow-y: auto;
+        position: relative;
+        top: 5%;
+    }
+    .scroll-box-01 {
+        height: 65%;
+        width: 100%;
+        overflow-y: auto;
+        position: relative;
+        top: 5%;
+    }
+    table {
+        width: 100%; /* 设置table宽度 */
+        border-collapse: collapse; /* 边框合并 */
+        overflow: auto;
+        top: 6%;
+        position: relative;
+    }
+    table-01 {
+        width: 100%; /* 设置table宽度 */
+        border-collapse: collapse; /* 边框合并 */
+        overflow: auto;
+        top: 6%;
+        position: relative;
+    }
+    th{
+        border: 0px; /* 设置单元格边框 */
+        padding: 8px; /* 设置单元格内边距 */
+        text-align: center; /* 单元格内文本对齐方式 */
+        position: sticky;
+        top: 0;
+    }
+    td {
+        border: 0px; /* 设置单元格边框 */
+        padding: 8px; /* 设置单元格内边距 */
+        text-align: center; /* 单元格内文本对齐方式 */
+        color: #FFFFFF;
+        width: 28%;
+    }
+    ::-webkit-scrollbar{
+        width: 12px;
+        height: 24px;
+    }
+    th {
+        text-align: center;
+        color: #FFFFFF;
+        width: 28%;
+        /*background-color: rgb(21,51,114);*/
+    }
+</style>
+
+<script type="text/javascript" th:src="@{/js/plugins/echarts.min.js}"></script>
+<script type="text/javascript" th:src="@{/js/jquery.min.js}"></script>
+<script type="text/javascript" th:src="@{/js/xybr/cockpit/chanPinZhiTongRate.js}"></script>
+<script type="text/javascript" th:src="@{/js/xybr/cockpit/shiChangGuZhangRate.js}"></script>
+<script type="text/javascript" th:src="@{/js/xybr/cockpit/kaiXiangBuLiangRate.js}"></script>
+<script type="text/javascript" th:src="@{/js/xybr/cockpit/guiHuaChanPinQiDongRate.js}"></script>
+<script type="text/javascript">
+    var urls = "http://localhost/";
+    let chanPinZhiTongRate = echarts.init(document.getElementById("chanPinZhiTongRate"));
+    createChanPinZhiTongRate(chanPinZhiTongRate, "2024");
+    let shiChangGuZhangRate = echarts.init(document.getElementById("shiChangGuZhangRate"));
+    createShiChangGuZhangRate(shiChangGuZhangRate, "2024");
+    let kaiXiangBuLiangRate = echarts.init(document.getElementById("kaiXiangBuLiangRate"));
+    createKaiXiangBuLiangRate(kaiXiangBuLiangRate, "2024");
+    let guiHuaChanPinQidongRate = echarts.init(document.getElementById("guiHuaChanPinQidongRate"));
+    createGuiHuaChanPinQiDongRate(guiHuaChanPinQidongRate, "2024");
+
+    window.onload = function (){
+        var height = window.innerHeight;
+        var element = document.getElementById("body");
+        element.style.height = height - 20 + 'px';
+    }
+
+    /*const table = document.querySelector("table");
+    for (let i = 0; i < 100; i++) {
+        const row = table.insertRow();
+        const cell1 = row.insertCell();
+        const cell2 = row.insertCell();
+        const cell3 = row.insertCell();
+        cell1.innerHTML = `Row ${i + 1} Column 1`;
+        cell2.innerHTML = `Row ${i + 1} Column 2`;
+        cell3.innerHTML = `Row ${i + 1} Column 3`;
+    }*/
+
+    let str1 = '';
+    var scrollContent= document.getElementsByClassName('scroll-box').item(0);
+    var table = document.getElementsByClassName('scroll-tab').item(0);
+    let str101 = '';
+    var scrollContent01= document.getElementsByClassName('scroll-box-01').item(0);
+    var table01 = document.getElementsByClassName('scroll-tab-01').item(0);
+
+    //模拟数据
+    let data12 = {
+        data: [{ zhaunli: '专利1', name: '11', date: '11' }, { zhaunli: '专利1', name: '22', date: '22' }, { zhaunli: '专利1', name: '33', date: '33' }, { zhaunli: '专利1', name: '44', date: '444' },
+            { zhaunli: '专利1', name: '55', date: '55' }, { zhaunli: '专利1', name: '66', date: '66' },{ zhaunli: '专利1', name: '77', date: '77' },{ zhaunli: '专利1', name: '88', date: '88' }],
+    };
+    let data01 = {
+        data: [{ paiMing: '1', bumen: '供应链',    score: '2.4',  dengJi: 'A' },
+               { paiMing: '2', bumen: '财务部',    score: '2.33', dengJi: 'A' },
+               { paiMing: '3', bumen: '运营管理部', score: '2.23', dengJi: 'B' },
+               { paiMing: '4', bumen: '质量部',    score: '2.01', dengJi: 'B' },
+               { paiMing: '5', bumen: '国内市场部', score: '2.00', dengJi: 'C' },
+               { paiMing: '6', bumen: '人力资源部', score: '1.89', dengJi: 'C' },
+               { paiMing: '7', bumen: '研发部',    score: '1.88', dengJi: 'C' }],
+    };
+    for (let n = 0; n < data12.data.length; n++) {
+        str1 +=
+            '<tr class="swiper-slide" style="height: 48px;"><td>' +
+            data12.data[n].zhaunli +
+            '</td><td>' +
+            data12.data[n].name +
+            '</td><td>' +
+            data12.data[n].date +
+            '</td></tr>';
+    }
+    for (let n = 0; n < data01.data.length; n++) {
+        str101 +=
+            '<tr class="swiper-slide" style="height: 48px;"><td>' +
+            data01.data[n].paiMing +
+            '</td><td>' +
+            data01.data[n].bumen +
+            '</td><td>' +
+            data01.data[n].score +
+            '</td><td>' +
+            data01.data[n].dengJi +
+            '</td></tr>';
+    }
+
+    $('.scrollContent').append(str1);
+    $('.scrollContent').append(str1);//不能使用innerHtml  插入两次 目的是复制一份数据 使滚动区域高度大于容器高度 实现滚动效果
+    $('.scrollContent-01').append(str101);
+    $('.scrollContent-01').append(str101);//不能使用innerHtml  插入两次 目的是复制一份数据 使滚动区域高度大于容器高度 实现滚动效果
+
+    //滚动函数
+    function roll(t) {
+
+        var timer = setInterval(rollStart, t); // 间隔时间t
+        // 鼠标移入table时暂停滚动
+        table.onmouseover = function () {
+            clearInterval(timer);
+        };
+        // 鼠标移出table后继续滚动
+        table.onmouseout = function () {
+            timer = setInterval(rollStart, t);
+        };
+        table01.onmouseover = function () {
+            clearInterval(timer);
+        };
+        // 鼠标移出table后继续滚动
+        table01.onmouseout = function () {
+            timer = setInterval(rollStart, t);
+        };
+    }
+
+    // 开始滚动函数
+    function rollStart() {
+
+        // 正常滚动不断给scrollTop的值+1,当滚动高度大于列表内容高度时恢复为0
+        if (scrollContent.scrollTop >= scrollContent.scrollHeight / 2) {
+            //注此处高度相当于为俩个tbody高度 需除2
+            scrollContent.scrollTop = 0;
+        } else {
+            scrollContent.scrollTop++;
+        }
+        // 正常滚动不断给scrollTop的值+1,当滚动高度大于列表内容高度时恢复为0
+        if (scrollContent01.scrollTop >= scrollContent01.scrollHeight / 2) {
+            //注此处高度相当于为俩个tbody高度 需除2
+            scrollContent01.scrollTop = 0;
+        } else {
+            scrollContent01.scrollTop++;
+        }
+    }
+    //执行函数
+    roll(50);
+</script>
+</body>
+</html>
