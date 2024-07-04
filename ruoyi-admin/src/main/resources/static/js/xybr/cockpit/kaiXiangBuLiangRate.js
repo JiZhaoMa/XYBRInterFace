@@ -1,5 +1,5 @@
-function createKaiXiangBuLiangRate(line, month) {
-    option = {
+function createKaiXiangBuLiangRate(line, monthList) {
+    let option = {
         backgroundColor: 'rgb(21,51,114, 0)',
         tooltip: {
             trigger: 'axis',
@@ -8,7 +8,7 @@ function createKaiXiangBuLiangRate(line, month) {
             }
         },
         legend: {
-            data: ['20kW', '30kW', '40kW'],
+            data: ['量产一年内', '量产一年外'],
             top: '5%',
             align: 'right',
             right: 10,
@@ -68,7 +68,7 @@ function createKaiXiangBuLiangRate(line, month) {
             },
         }],
         series: [{
-            name: '20kW',
+            name: '量产一年内',
             type: 'line',
             // smooth: true, //是否平滑
             showAllSymbol: true,
@@ -118,7 +118,7 @@ function createKaiXiangBuLiangRate(line, month) {
             data: [88, 89, 79, 80, 58, 99 ]
         },
             {
-                name: '30kW',
+                name: '量产一年外',
                 type: 'line',
                 // smooth: true, //是否平滑
                 showAllSymbol: true,
@@ -167,59 +167,43 @@ function createKaiXiangBuLiangRate(line, month) {
                     }
                 },
                 data: [90, 58, 48, 90, 78, 80 ],
-            },
+            }
+        ],
+        dataZoom : [
             {
-                name: '40kW',
-                type: 'line',
-                // smooth: true, //是否平滑
-                showAllSymbol: true,
-                // symbol: 'image://./static/images/guang-circle.png',
-                symbol: 'circle',
-                symbolSize: 5,
-                lineStyle: {
-                    normal: {
-                        color: "#FF5733",
-                        shadowColor: 'rgba(0, 0, 0, .3)',
-                        shadowBlur: 0,
-                        shadowOffsetY: 5,
-                        shadowOffsetX: 5,
-                    },
-                },
-                label: {
-                    show: true,
-                    position: 'top',
-                    textStyle: {
-                        color: '#FF5733',
-                    }
-                },
-
-                itemStyle: {
-                    color: "#FF5733",
-                    borderColor: "#fff",
-                    borderWidth: 3,
-                    shadowColor: 'rgba(255,87,51, 0.1)',
-                    shadowBlur: 0,
-                    shadowOffsetY: 2,
-                    shadowOffsetX: 2,
-                },
-                areaStyle: {
-                    normal: {
-                        color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
-                            offset: 0,
-                            color: 'rgba(255,87,51, 0.1)'
-                        },
-                            {
-                                offset: 1,
-                                color: 'rgba(0,202,149,0)'
-                            }
-                        ], false),
-                        shadowColor: 'rgba(255,87,51, 0.1)',
-                        shadowBlur: 5
-                    }
-                },
-                data: [58, 20, 48, 90, 48, 88 ],
-            },
+                orient: 'horizontal',
+                show: true,//控制滚动条显示隐藏
+                realtime: true, //拖动滚动条时是否动态的更新图表数据
+                height: 0, //滚动条高度
+                start: 0, //滚动条开始位置（共6等份）
+                end: this.endValue,//滚动条结束位置
+                top: '95%',
+                bottom: '4%',
+                zoomLock: false, //指定是否锁定缩放比例。
+                startValue: 0, // 从头开始。
+                endValue: 4,// 一次性展示4个
+                showDetail: false, // 关闭滚动条提示
+                fillerColor: 'rgba(255, 255, 255,0.5)',
+            }
         ]
     };
-    line.setOption(option,true);
+    $.ajax({
+        type: "GET",
+        url: urls + "/system/cockpit/getKaiXiangBuLiangRate",
+        contentType: "application/json;charset=utf-8",
+        data: {
+            "monthStr": monthList
+        },
+        dateType: "json",
+        success: function (data) {
+            option.xAxis[0].data = data.monthLists;
+            option.series[0].data = data.listIn;
+            option.series[1].data = data.listOut;
+            line.setOption(option,true);
+        },
+        error: function (data) {
+            alert("失败");
+        }
+
+    });
 }

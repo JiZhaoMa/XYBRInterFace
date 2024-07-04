@@ -1,5 +1,5 @@
 function createJishiHuiKuanRate(line, month) {
-    option = {
+    let option = {
 
         title: [{
             text: '已完成',

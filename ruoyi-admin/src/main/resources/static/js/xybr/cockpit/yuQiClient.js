@@ -1,7 +1,7 @@
-function createyuQiClient(yuQiClientBar, month) {
+function createyuQiClient(yuQiClientBar, monthStr) {
     xData = ['客户一', '客户二', '客户三', '客户四', '客户五', '客户六'];
     yData = [5752, 1230, 425, 2443, 1230, 5547];
-    option = {
+    let option = {
         backgroundColor: 'rgb(21,51,114, 0)',
         grid: {
             top: '25%',
@@ -148,7 +148,46 @@ function createyuQiClient(yuQiClientBar, month) {
                 data: yData,
             },
         ],
+        dataZoom : [
+            {
+                orient: 'horizontal',
+                show: true,//控制滚动条显示隐藏
+                realtime: true, //拖动滚动条时是否动态的更新图表数据
+                height: 0, //滚动条高度
+                start: 0, //滚动条开始位置（共6等份）
+                end: this.endValue,//滚动条结束位置
+                top: '95%',
+                bottom: '4%',
+                zoomLock: false, //指定是否锁定缩放比例。
+                startValue: 0, // 从头开始。
+                endValue: 4,// 一次性展示5个
+                showDetail: false, // 关闭滚动条提示
+                fillerColor: 'rgba(255, 255, 255,0.5)',
+            }
+        ]
     };
+    $.ajax({
+        type: "GET",
+        url: urls + "/system/cockpit/getYuQiData",
+        contentType: "application/json;charset=utf-8",
+        data: {
+            "monthStr": monthStr
+        },
+        dateType: "json",
+        success: function (data) {
+            xData = data.nameList;
+            yData = data.valueList;
+            option.xAxis[0].data = xData;
+            option.series[0].data = yData;
+            option.series[1].data = yData;
+            option.series[2].data = yData;
+            option.series[3].data = yData;
+            option.series[4].data = yData;
+            yuQiClientBar.setOption(option, true);
+        },
+        error: function (data) {
+            alert("失败");
+        }
 
-    yuQiClientBar.setOption(option, true);
+    });
 }

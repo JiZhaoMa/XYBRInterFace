@@ -1,5 +1,5 @@
 //饼图
-function createNewClient(newClientPie, agent) {
+function createNewClient(newClientPie, cockpitData) {
     let option = {
         tooltip: {
             trigger: 'item'
@@ -39,12 +39,14 @@ function createNewClient(newClientPie, agent) {
                     show: false
                 },
                 data: [
-                    { value: 50, name: '新客户', selected:true },
-                    { value: 200, name: '老客户' }
+                    { value: 0, name: '新客户', selected:true },
+                    { value: 0, name: '老客户' }
                 ],
                 color: ['#2DB1EF', '#2fffa4'],
             }
         ]
     };
+    option.series[0].data[0].value = cockpitData.cockpit001;
+    option.series[0].data[1].value = cockpitData.cockpit002;
     newClientPie.setOption(option, true);
 }
