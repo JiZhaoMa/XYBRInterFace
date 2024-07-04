@@ -1,5 +1,5 @@
-function createMaoLiRate(chart, month) {
-    option = {
+function createMaoLiRate(chart, monthList) {
+    let option = {
         backgroundColor: 'rgb(21,51,114, 0)',
         tooltip: {
             trigger: 'axis',
@@ -8,7 +8,7 @@ function createMaoLiRate(chart, month) {
             }
         },
         legend: {
-            data: ['20Kw', '30Kw', '40Kw'],
+            data: ['20kW', '30kW', '40kW'],
             align: 'right',
             right: 10,
             textStyle: {
@@ -74,7 +74,7 @@ function createMaoLiRate(chart, month) {
             }
         }],
         series: [{
-            name: '20Kw',
+            name: '20kW',
             type: 'bar',
             data: [20, 50, 80, 58, 83, 120],
             barWidth: 10, //柱子宽度
@@ -92,7 +92,7 @@ function createMaoLiRate(chart, month) {
                 }
             }
         }, {
-            name: '30Kw',
+            name: '30kW',
             type: 'bar',
             data: [50, 70, 60, 61, 75, 87],
             barWidth: 10,
@@ -110,7 +110,7 @@ function createMaoLiRate(chart, month) {
                 }
             }
         }, {
-            name: '40Kw',
+            name: '40kW',
             type: 'bar',
             data: [70, 48, 73, 68, 53, 47],
             barWidth: 10,
@@ -146,5 +146,24 @@ function createMaoLiRate(chart, month) {
             }
         ]
     };
-    chart.setOption(option,true);
+    $.ajax({
+        type: "GET",
+        url: urls + "/system/cockpit/getMaoLi",
+        contentType: "application/json;charset=utf-8",
+        data: {
+            "monthStr": monthList
+        },
+        dateType: "json",
+        success: function (data) {
+            option.xAxis[0].data = data.monthLists;
+            option.series[0].data = data.list20kW;
+            option.series[1].data = data.list30kW;
+            option.series[2].data = data.list40kW;
+            chart.setOption(option,true);
+        },
+        error: function (data) {
+            alert("失败");
+        }
+
+    });
 }

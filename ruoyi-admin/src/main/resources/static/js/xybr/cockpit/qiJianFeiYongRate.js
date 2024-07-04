@@ -1,4 +1,4 @@
-function createQiJianFeiYongRate(qiJianFeiYongRate, month) {
+function createQiJianFeiYongRate(qiJianFeiYongRate, monthList) {
     // mock数据
     const dataArr = {
         xdata: ['管理费用', '研发费用','销售费用'],
@@ -190,6 +190,6 @@ function createQiJianFeiYongRate(qiJianFeiYongRate, month) {
         },
         data: dataArr.rateDataOne
     }]
-    option = { tooltip, xAxis, yAxis, series, grid, legend, backgroundColor: 'rgb(21,51,114, 0)', }
+    let option = { tooltip, xAxis, yAxis, series, grid, legend, backgroundColor: 'rgb(21,51,114, 0)', }
     qiJianFeiYongRate.setOption(option, true);
 }

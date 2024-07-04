@@ -1,0 +1,365 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.report.mapper.CockpitMapper">
+    <resultMap type="CockPitData" id="CockPitDataResult">
+        <result property="cockpit001"    column="cockpit001"/>
+        <result property="cockpit002"    column="cockpit002"/>
+        <result property="cockpit003"    column="cockpit003"/>
+        <result property="cockpit004"    column="cockpit004"/>
+        <result property="cockpit005"    column="cockpit005"/>
+        <result property="cockpit006"    column="cockpit006"/>
+        <result property="cockpit007"    column="cockpit007"/>
+        <result property="cockpit008"    column="cockpit008"/>
+        <result property="cockpit009"    column="cockpit009"/>
+        <result property="cockpit010"    column="cockpit010"/>
+        <result property="cockpit011"    column="cockpit011"/>
+        <result property="cockpit012"    column="cockpit012"/>
+        <result property="cockpit013"    column="cockpit013"/>
+        <result property="cockpit014"    column="cockpit014"/>
+        <result property="cockpit015"    column="cockpit015"/>
+        <result property="cockpit016"    column="cockpit016"/>
+        <result property="cockpit017"    column="cockpit017"/>
+        <result property="cockpit018"    column="cockpit018"/>
+        <result property="cockpit019"    column="cockpit019"/>
+        <result property="cockpit020"    column="cockpit020"/>
+        <result property="cockpit021"    column="cockpit021"/>
+        <result property="cockpit022"    column="cockpit022"/>
+        <result property="cockpit023"    column="cockpit023"/>
+        <result property="cockpit024"    column="cockpit024"/>
+        <result property="cockpit025"    column="cockpit025"/>
+        <result property="cockpit026"    column="cockpit026"/>
+        <result property="cockpit049"    column="cockpit049"/>
+        <result property="cockpit027"    column="cockpit027"/>
+        <result property="cockpit028"    column="cockpit028"/>
+        <result property="cockpit029"    column="cockpit029"/>
+        <result property="cockpit030"    column="cockpit030"/>
+        <result property="cockpit031"    column="cockpit031"/>
+        <result property="cockpit032"    column="cockpit032"/>
+        <result property="cockpit033"    column="cockpit033"/>
+        <result property="cockpit034"    column="cockpit034"/>
+        <result property="cockpit035"    column="cockpit035"/>
+        <result property="cockpit036"    column="cockpit036"/>
+        <result property="cockpit037"    column="cockpit037"/>
+        <result property="cockpit038"    column="cockpit038"/>
+        <result property="cockpit039"    column="cockpit039"/>
+        <result property="cockpit040"    column="cockpit040"/>
+        <result property="cockpit041"    column="cockpit041"/>
+        <result property="cockpit042"    column="cockpit042"/>
+        <result property="cockpit043"    column="cockpit043"/>
+        <result property="cockpit044"    column="cockpit044"/>
+        <result property="cockpit045"    column="cockpit045"/>
+        <result property="cockpit046"    column="cockpit046"/>
+        <result property="cockpit047"    column="cockpit047"/>
+        <result property="cockpit048"    column="cockpit048"/>
+        <result property="monthList"         column="monthList"/>
+    </resultMap>
+    <resultMap type="TenClient" id="TenClientResult">
+        <result property="name"    column="ITEM_客户名称"/>
+        <result property="sale"    column="ITEM_销售额"/>
+        <result property="month"    column="ITEM_月份"/>
+    </resultMap>
+    <resultMap type="Patent" id="PatentResult">
+        <result property="patentName"    column="ITEM_专利名称"/>
+        <result property="patentPerson"    column="ITEM_发明人"/>
+        <result property="patentDate"    column="证书日期"/>
+    </resultMap>
+    <resultMap type="Performance" id="PerformanceResult">
+        <result property="rank"    column="ITEM_排名"/>
+        <result property="department"    column="ITEM_部门"/>
+        <result property="score"    column="ITEM_得分"/>
+        <result property="level"    column="ITEM_等级"/>
+    </resultMap>
+    <resultMap type="ProjectInfo" id="ProjectInfoResult">
+        <result property="department"    column="ITEM_研发部"/>
+        <result property="projectName"    column="ITEM_项目名称"/>
+        <result property="projectAdmin"    column="ITEM_项目经理"/>
+        <result property="jiXian"    column="ITEM_基线"/>
+        <result property="gunDong"    column="ITEM_滚动"/>
+        <result property="zhuanLiangChan"    column="ITEM_转量产"/>
+    </resultMap>
+    <resultMap type="JiangBneMuBiao" id="JiangBneMuBiaoResult">
+        <result property="product"    column="ITEM_产品名称"/>
+        <result property="value"    column="ITEM_达成率"/>
+        <result property="month"    column="month"/>
+    </resultMap>
+    <resultMap type="AnShiJiaoFu" id="AnShiJiaoFuResult">
+        <result property="product"    column="ITEM_产品名称"/>
+        <result property="value"    column="ITEM_交付率"/>
+        <result property="month"    column="month"/>
+    </resultMap>
+    <resultMap type="MaoLi" id="MaoLiResult">
+        <result property="product"    column="ITEM_产品名称"/>
+        <result property="value"    column="ITEM_毛利"/>
+        <result property="month"    column="month"/>
+    </resultMap>
+    <resultMap type="QIJianFeiYongRate" id="QIJianFeiYongRateResult">
+        <result property="type"    column="ITEM_费用类别"/>
+        <result property="value"    column="ITEM_费用"/>
+        <result property="rate"    column="ITEM_占比"/>
+        <result property="month"    column="month"/>
+    </resultMap>
+    <resultMap type="ChanPinZhiTongRate" id="ChanPinZhiTongRateResult">
+        <result property="product"    column="ITEM_产品名称"/>
+        <result property="value"    column="ITEM_直通率"/>
+        <result property="month"    column="month"/>
+    </resultMap>
+    <resultMap type="ShiChangGuZhangRate" id="ShiChangGuZhangRateResult">
+        <result property="product"    column="ITEM_量产周期"/>
+        <result property="value"    column="ITEM_故障率"/>
+        <result property="month"    column="month"/>
+    </resultMap>
+    <resultMap type="KaiXiangBuLiangRate" id="KaiXiangBuLiangRateResult">
+        <result property="product"    column="ITEM_量产周期"/>
+        <result property="value"    column="ITEM_开箱不良率"/>
+        <result property="month"    column="month"/>
+    </resultMap>
+    <resultMap type="ChanPinQiDongRate" id="ChanPinQiDongRateResult">
+        <result property="qiDongRateDepartment"  column="ITEM_研发部"/>
+        <result property="guiHuaNum"    column="ITEM_规划产品数量"/>
+        <result property="qiDongNum"    column="ITEM_启动产品数量"/>
+    </resultMap>
+    <resultMap type="YuQiClientData" id="YuQiClientDataResult">
+        <result property="value"    column="ITEM_销售额"/>
+        <result property="yuQi001"    column="ONETONINE"/>
+        <result property="yuQi002"    column="NINETOTWEL"/>
+        <result property="yuQi003"    column="TWELUP"/>
+        <result property="name"    column="ITEM_客户名称"/>
+    </resultMap>
+    <resultMap type="StockData" id="StockDataResult">
+        <result property="stock001"    column="stock001"/>
+        <result property="stock002"    column="stock002"/>
+        <result property="stock003"    column="stock003"/>
+        <result property="stock004"    column="stock004"/>
+        <result property="stock005"    column="stock005"/>
+        <result property="stock006"    column="stock006"/>
+        <result property="stock007"    column="stock007"/>
+        <result property="stock008"    column="stock008"/>
+        <result property="stock009"    column="stock009"/>
+        <result property="stock010"    column="stock010"/>
+        <result property="stock011"    column="stock011"/>
+        <result property="stock012"    column="stock012"/>
+        <result property="stock013"    column="stock013"/>
+        <result property="stock014"    column="stock014"/>
+        <result property="stock015"    column="stock015"/>
+        <result property="stock016"    column="stock016"/>
+        <result property="stock017"    column="stock017"/>
+        <result property="stock018"    column="stock018"/>
+        <result property="stock019"    column="stock019"/>
+        <result property="stock020"    column="stock020"/>
+        <result property="stock021"    column="stock021"/>
+        <result property="stock022"    column="stock022"/>
+        <result property="stock023"    column="stock023"/>
+        <result property="stock024"    column="stock024"/>
+        <result property="stock025"    column="stock025"/>
+        <result property="stock026"    column="stock026"/>
+        <result property="stock027"    column="stock027"/>
+        <result property="stock028"    column="stock028"/>
+        <result property="stock029"    column="stock029"/>
+        <result property="stock030"    column="stock030"/>
+        <result property="stock031"    column="stock031"/>
+        <result property="stock032"    column="stock032"/>
+        <result property="stock033"    column="stock033"/>
+        <result property="stock034"    column="stock034"/>
+        <result property="stock035"    column="stock035"/>
+        <result property="stock036"    column="stock036"/>
+        <result property="stock037"    column="stock037"/>
+        <result property="stock038"    column="stock038"/>
+        <result property="stock039"    column="stock039"/>
+        <result property="stock040"    column="stock040"/>
+        <result property="stock041"    column="stock041"/>
+        <result property="stock042"    column="stock042"/>
+        <result property="stock043"    column="stock043"/>
+        <result property="stock044"    column="stock044"/>
+        <result property="stock045"    column="stock045"/>
+        <result property="stock046"    column="stock046"/>
+        <result property="stock047"    column="stock047"/>
+    </resultMap>
+
+
+    <select id="getTenClient" parameterType="String" resultMap="TenClientResult">
+        SELECT ITEM_客户名称,
+               ITEM_销售额,
+               ITEM_月份
+        FROM tlk_十大客户 WHERE DATE_FORMAT(ITEM_月份,'%Y%m') = '202406'
+        order by ITEM_销售额 desc
+    </select>
+    <select id="getPatent" parameterType="String" resultMap="PatentResult">
+        SELECT ITEM_专利名称,
+               ITEM_发明人,
+               DATE_FORMAT(ITEM_证书日期,'%Y-%m-%d') AS 证书日期
+        FROM tlk_年度新增专利
+    </select>
+    <select id="getProjectInfo" parameterType="String" resultMap="ProjectInfoResult">
+        SELECT ITEM_研发部,ITEM_项目名称,ITEM_项目经理,DATE_FORMAT(ITEM_基线,'%Y-%m-%d') AS  ITEM_基线,DATE_FORMAT(ITEM_滚动,'%Y-%m-%d') AS  ITEM_滚动,ITEM_转量产
+        FROM tlk_经营管理项目看板
+        WHERE DATE_FORMAT(ITEM_月份,'%Y%m') = '202406'
+    </select>
+    <select id="getPerformance" parameterType="String" resultMap="PerformanceResult">
+        SELECT ITEM_排名,
+               ITEM_部门,
+               ITEM_得分,
+               ITEM_等级
+        FROM tlk_组织绩效得分 WHERE DATE_FORMAT(ITEM_月份,'%Y%m') = '202406'
+        order by ITEM_得分 desc
+    </select>
+    <select id="getCockpitData" parameterType="String" resultMap="CockPitDataResult">
+        SELECT
+            ROUND(ITEM_新客户数量,0) AS cockpit001,
+            ROUND(ITEM_老客户数量,0) AS cockpit002,
+            ITEM_营销费用率 AS cockpit003,
+            ROUND(ITEM_人均销售额,2) AS cockpit004,
+            ITEM_及时回款率 AS cockpit005,
+            ROUND(ITEM_销售目标,2) AS cockpit006,
+            ROUND(ITEM_已完成销售额,2) AS cockpit007,
+            ITEM_同比 AS cockpit008,
+            ITEM_环比 AS cockpit009,
+            ROUND(ITEM_西北销售额,2) AS cockpit010,
+            ROUND(ITEM_华北销售额,2) AS cockpit011,
+            ROUND(ITEM_东北销售额,2) AS cockpit012,
+            ROUND(ITEM_华东销售额,2) AS cockpit013,
+            ROUND(ITEM_华南销售额,2) AS cockpit014,
+                ROUND(ITEM_西南销售额,2) AS cockpit015,
+            ROUND(ITEM_华中销售额,2) AS cockpit016,
+            ROUND(ITEM_西北销售目标,2) AS cockpit042,
+            ROUND(ITEM_华北销售目标,2) AS cockpit043,
+            ROUND(ITEM_东北销售目标,2) AS cockpit044,
+            ROUND(ITEM_华东销售目标,2) AS cockpit045,
+            ROUND(ITEM_华南销售目标,2) AS cockpit046,
+            ROUND(ITEM_西南销售目标,2) AS cockpit047,
+            ROUND(ITEM_华中销售目标,2) AS cockpit048,
+            ITEM_毛利率20kW AS cockpit017,
+            ITEM_毛利率30kW AS cockpit018,
+            ITEM_毛利率40kW AS cockpit019,
+            ROUND(ITEM_超出预算,2) AS cockpit020,
+            ROUND(ITEM_费用金额,2) AS cockpit021,
+            ROUND(ITEM_当月费用支出,2) AS cockpit022,
+            ROUND(ITEM_项目总数量,0) AS cockpit023,
+            ROUND(ITEM_在研项目,0) AS cockpit024,
+            ROUND(ITEM_已结项项目,0) AS cockpit025,
+            ROUND(ITEM_暂停项目,0) AS cockpit026,
+            ROUND(ITEM_终止项目,0) AS cockpit049,
+            ROUND(ITEM_薪酬总额,2) AS cockpit027,
+            ROUND(ITEM_员工总数,0) AS cockpit028,
+            ITEM_招聘完成率 AS cockpit029,
+            ITEM_人员流失率 AS cockpit030,
+            ITEM_预算执行率 AS cockpit031,
+            ITEM_研发占比 AS cockpit032,
+            ITEM_培训完成率 AS cockpit033,
+            ITEM_薪酬总额环比 AS cockpit034,
+            ITEM_员工总数环比 AS cockpit035,
+            ITEM_招聘完成率环比 AS cockpit036,
+            ITEM_人员流失率环比 AS cockpit037,
+            ITEM_研发占比环比 AS cockpit038,
+            ITEM_培训完成率环比 AS cockpit039,
+            ROUND(ITEM_逾期总金额,2) AS cockpit040,
+            ROUND(ITEM_库存金额,2) AS cockpit041,
+            concat(ITEM_first,',',ITEM_second,',',ITEM_third,',',ITEM_fourth,',',ITEM_fifth,',',ITEM_sixth) AS monthList
+        FROM `tlk_报表数据统计` WHERE DATE_FORMAT(ITEM_月份,'%Y%m') = '202405'
+    </select>
+    <select id="getYuQiClientData" parameterType="String" resultMap="YuQiClientDataResult">
+        SELECT DATE_FORMAT(ITEM_月份,'%Y%m'), `ITEM_销售额`, `ITEM_客户名称`,
+               ROUND(ITEM_ONETONINE,2) AS ONETONINE,ROUND(ITEM_NINETOTWEL,2) AS NINETOTWEL,ROUND(ITEM_TWELUP,2) AS TWELUP FROM `tlk_逾期客户`
+        WHERE DATE_FORMAT(ITEM_月份,'%Y%m') = '202405'
+        ORDER BY `ITEM_销售额` DESC
+    </select>
+    <select id="getStockData" parameterType="String" resultMap="StockDataResult">
+        SELECT
+            ROUND(`ITEM_整机库存金额`,2) AS stock001,
+            ROUND(`ITEM_整机20KW`,2) AS stock002,
+            ROUND(`ITEM_整机20KW001`,2) AS stock003,
+            ROUND(`ITEM_整机20KW002`,2) AS stock004,
+            ROUND(`ITEM_整机20KW003`,2) AS stock005,
+            ROUND(`ITEM_整机20KW004`,2) AS stock006,
+            ROUND(`ITEM_整机20KW005`,2) AS stock007,
+            ROUND(`ITEM_整机30KW`,2) AS stock008,
+            ROUND(`ITEM_整机30KW001`,2) AS stock009,
+            ROUND(`ITEM_整机30KW002`,2) AS stock010,
+            ROUND(`ITEM_整机30KW003`,2) AS stock011,
+            ROUND(`ITEM_整机30KW004`,2) AS stock012,
+            ROUND(`ITEM_整机30KW005`,2) AS stock013,
+            ROUND(`ITEM_整机40KW`,2) AS stock014,
+            ROUND(`ITEM_整机40KW001`,2) AS stock015,
+            ROUND(`ITEM_整机40KW002`,2) AS stock016,
+            ROUND(`ITEM_整机40KW003`,2) AS stock017,
+            ROUND(`ITEM_整机40KW004`,2) AS stock018,
+            ROUND(`ITEM_整机40KW005`,2) AS stock019,
+            ROUND(`ITEM_材料库存金额`,2) AS stock020,
+            ROUND(`ITEM_TOP1`,2) AS stock021,
+            ROUND(`ITEM_TOP2`,2) AS stock022,
+            ROUND(`ITEM_TOP3`,2) AS stock023,
+            ROUND(`ITEM_OTHERS`,2) AS stock024,
+            ROUND(`ITEM_TOP1001`,2) AS stock025,
+            ROUND(`ITEM_TOP1002`,2) AS stock026,
+            ROUND(`ITEM_TOP1003`,2) AS stock027,
+            ROUND(`ITEM_TOP1004`,2) AS stock028,
+            ROUND(`ITEM_TOP1005`,2) AS stock029,
+            ROUND(`ITEM_TOP2001`,2) AS stock030,
+            ROUND(`ITEM_TOP2002`,2) AS stock031,
+            ROUND(`ITEM_TOP2003`,2) AS stock032,
+            ROUND(`ITEM_TOP2004`,2) AS stock033,
+            ROUND(`ITEM_TOP2005`,2) AS stock034,
+            ROUND(`ITEM_TOP3001`,2) AS stock035,
+            ROUND(`ITEM_TOP3002`,2) AS stock036,
+            ROUND(`ITEM_TOP3003`,2) AS stock037,
+            ROUND(`ITEM_TOP3004`,2) AS stock038,
+            ROUND(`ITEM_TOP3005`,2) AS stock039,
+            ROUND(`ITEM_OTHERS001`,2) AS stock040,
+            ROUND(`ITEM_OTHERS002`,2) AS stock041,
+            ROUND(`ITEM_OTHERS003`,2) AS stock042,
+            ROUND(`ITEM_OTHERS004`,2) AS stock043,
+            ROUND(`ITEM_OTHERS005`,2) AS stock044,
+            `ITEM_TOP1NAME` AS stock045,
+            `ITEM_TOP2NAME` AS stock046,
+            `ITEM_TOP3NAME` AS stock047,
+            ITEM_月份
+        FROM `tlk_库存结构`
+        WHERE DATE_FORMAT(ITEM_月份,'%Y%m') = '202405'
+    </select>
+    <select id="getJiangBneMuBiao" parameterType="java.util.List" resultMap="JiangBneMuBiaoResult">
+        SELECT RIGHT(DATE_FORMAT(`ITEM_月份`,'%Y%m'),2) AS month, `ITEM_达成率`, `ITEM_产品名称` FROM `tlk_降本目标达成率` WHERE
+        DATE_FORMAT(`ITEM_月份`,'%Y') = DATE_FORMAT(NOW(),'%Y')
+        order by ITEM_月份
+    </select>
+    <select id="getAnShiJiaoFu" parameterType="java.util.List" resultMap="AnShiJiaoFuResult">
+        SELECT RIGHT(DATE_FORMAT(`ITEM_月份`,'%Y%m'),2) AS month, `ITEM_交付率`, `ITEM_产品名称` FROM `tlk_按时交付率` WHERE
+        DATE_FORMAT(`ITEM_月份`,'%Y') = DATE_FORMAT(NOW(),'%Y')
+        order by ITEM_月份
+    </select>
+    <select id="getMaoLi" parameterType="java.util.List" resultMap="MaoLiResult">
+        SELECT RIGHT(DATE_FORMAT(`ITEM_月份`,'%Y%m'),2) AS month, `ITEM_毛利`, `ITEM_产品名称` FROM `tlk_毛利` WHERE
+        DATE_FORMAT(`ITEM_月份`,'%Y') = DATE_FORMAT(NOW(),'%Y')
+        order by ITEM_月份
+    </select>
+    <select id="getQIJianFeiYongRate" parameterType="java.util.List" resultMap="QIJianFeiYongRateResult">
+        SELECT DATE_FORMAT(`ITEM_月份`,'%Y%m') AS month, `ITEM_费用`, `ITEM_费用类别`, `ITEM_占比` FROM `tlk_期间费用率` WHERE
+        DATE_FORMAT(`ITEM_月份`,'%Y%m')  IN
+        <foreach collection="list" index="index" item="item" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </select>
+    <select id="getChanPinZhiTongRate" parameterType="java.util.List" resultMap="ChanPinZhiTongRateResult">
+        SELECT RIGHT(DATE_FORMAT(`ITEM_月份`,'%Y%m'),2) AS month, `ITEM_直通率`, `ITEM_产品名称` FROM `tlk_产品直通率` WHERE
+        DATE_FORMAT(`ITEM_月份`,'%Y') =  DATE_FORMAT(NOW(),'%Y')
+        order by ITEM_月份
+    </select>
+    <select id="getShiChangGuZhangRate" parameterType="java.util.List" resultMap="ShiChangGuZhangRateResult">
+        SELECT RIGHT(DATE_FORMAT(`ITEM_月份`,'%Y%m'),2) AS month, `ITEM_故障率`, `ITEM_量产周期` FROM `tlk_市场故障率` WHERE
+        DATE_FORMAT(`ITEM_月份`,'%Y') = DATE_FORMAT(NOW(),'%Y')
+        order by ITEM_月份
+    </select>
+    <select id="getKaiXiangBuLiangRate" parameterType="java.util.List" resultMap="KaiXiangBuLiangRateResult">
+        SELECT RIGHT(DATE_FORMAT(`ITEM_月份`,'%Y%m'),2) AS month, `ITEM_开箱不良率`, `ITEM_量产周期` FROM `tlk_开箱不良率` WHERE
+        DATE_FORMAT(`ITEM_月份`,'%Y') = DATE_FORMAT(NOW(),'%Y')
+        order by ITEM_月份
+    </select>
+    <select id="getChanPinQiDongRate" parameterType="String" resultMap="ChanPinQiDongRateResult">
+        SELECT ITEM_研发部,
+               ROUND(ITEM_规划产品数量,0) AS ITEM_规划产品数量,
+                     ROUND(ITEM_启动产品数量,0) AS ITEM_启动产品数量,
+            RIGHT(DATE_FORMAT(ITEM_月份,'%Y%m'),2) AS month
+        FROM tlk_已规划产品启动率 WHERE DATE_FORMAT(ITEM_月份,'%Y%m') = '202406'
+        order by ITEM_规划产品数量
+    </select>
+</mapper>
