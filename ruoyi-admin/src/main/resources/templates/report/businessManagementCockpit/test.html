@@ -1,61 +1,1245 @@
 <!DOCTYPE html>
 <html lang="zh" xmlns:th="http://www.thymeleaf.org" >
-    <head>
+<head>
     <link rel="stylesheet" href="/css/swiper-bundle.min.css">
-    </head>
+    <link rel="stylesheet" href="/css/idangerous.swiper.3dflow.css">
+    <link rel="stylesheet" href="/css/idangerous.swiper.css">
+</head>
 <body id="body" class="body">
-<div id="fullScreenBg" class="swiper">
+<div id="fullScreenBg" class="swiper content">
     <div>
         <div class="title">
             <span>星源经营管理驾驶舱</span>
         </div>
     </div>
     <div class="swiper-wrapper">
-        <div class="swiper-slide" style="color: #FFF">Slide 1</div>
-        <div class="swiper-slide" style="color: #FFF">Slide 2</div>
-        <div class="swiper-slide" style="color: #FFF">Slide 3</div>
+        <div class="swiper-slide contentMain" id="001">
+            <div class="left">
+                <div class="left-01">
+                    <div class="left-01-top">
+                        <div style="color: #FFFFFF;width: 25%;height: 15%;position: absolute;top: -10%;background-color: rgb(21, 51, 114);text-align: center;left: 3%;">
+                            <span>客户变化率</span>
+                        </div>
+                        <div style="width: 42%; height: 90%; left: 2%; position:relative;">
+                            <table class="table">
+                                <thead>
+                                <tr>
+                                    <th>客户名称</th>
+                                    <th>销售额(万)</th>
+                                </tr>
+                                </thead>
+                            </table>
+
+                            <div class="scroll-box-02">
+                                <table class="scroll-tab-02">
+                                    <tbody class="scrollContent-02"></tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <div class="left-01-top-02">
+                            <div style="height: 10%; text-align: center; color: #FFFFFF">
+                                <span>年度新客户占比</span>
+                            </div>
+                            <div style="height: 85%; top: 4%; position:relative ;display: flex; align-items: center;" id="newClientPie">
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="left-01-down">
+                        <div style="color: #FFFFFF;width: 25%;height: 12%;position: absolute;top: -5%;background-color: rgb(21, 51, 114);text-align: center;left: 3%;">
+                            <span>逾期客户</span>
+                        </div>
+                        <div style="height: 15%; width: 50%;position: absolute;display: flex; left: 30%">
+                            <div style="color: #FFFFFF;font-weight: 800; align-items: center">
+                                <span>逾期总金额(万)</span>
+                            </div>
+                            <div style="font-weight: 800; font-size: x-large; background: linear-gradient(to right, #ff0000, #ffff00); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-family: fantasy; position:relative;; left: 5%">
+                                <span id="cockpit040"></span>
+                            </div>
+                        </div>
+                        <div style="width: 100%; height: 85%; display:flex;align-items: center; top: 20%" id="yuQiClient">
+
+                        </div>
+                    </div>
+                </div>
+                <div class="left-02">
+                    <div style="display: flex;top: 5%; position:relative;align-items: center;left: 5%;top: 10%;">
+                        <div style="color: #FFFFFF;font-weight: 800;">
+                            <span>营销费用率</span>
+                        </div>
+                        <div style="font-size: x-large;left: 5% ; font-weight: 800;position: relative; background: linear-gradient(to right, #ff0000, #ffff00); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-family: fantasy;">
+                            <span id="cockpit003"></span>
+                        </div>
+                        <div style="color: #FFFFFF;font-weight: 800; left: 10%;position: relative">
+                            <span>人均销售额(万)</span>
+                        </div>
+                        <div style="font-size: x-large;left: 12% ; font-weight: 800;position: relative; background: linear-gradient(to right, #ff0000, #ffff00); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-family: fantasy;">
+                            <span id="cockpit004"></span>
+                        </div>
+                    </div>
+                    <div style="display: flex;bottom: 5%; position:relative;align-items: center;left: 5%;top: 15%">
+                        <div style="color: #FFFFFF;font-weight: 800">
+                            <span>及时回款率</span>
+                        </div>
+                        <div style="font-size: x-large;left: 5% ; font-weight: 800;position: relative; background: linear-gradient(to right, #ff0000, #ffff00); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-family: fantasy;">
+                            <span id="cockpit005"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="left-03">
+                    <div style="color: #FFFFFF;width: 25%;height: 12%;position: absolute;top: -5%;background-color: rgb(21, 51, 114);text-align: center;left: 3%;">
+                        <span>库存</span>
+                    </div>
+                    <div style="height: 40%;width: 40%;text-align: center; color: #FFFFFF; background-image: url('/img/stockBack.png'); background-size: cover;top: 30%;position: relative;">
+                        <div style="color: #FFFFFF;font-weight: 800;top: 20%; position: relative; ">
+                            <span>库存金额（万）</span>
+                        </div>
+                        <div style="font-size: x-large; font-weight: 800; top: 25%; position: relative; background: linear-gradient(to right, #ff0000, #ffff00); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-family: fantasy;">
+                            <span  id="cockpit041"></span>
+                        </div>
+                    </div>
+                    <div style="height: 90%;width: 80%;top: 5%; display: flex; align-items: center" id="stockPie">
+
+                    </div>
+                </div>
+                <!--<div style="width: 10%; height: 10%; position:absolute; justify-content: center">
+                    <span class="swiper-pagination-bullet" tabindex="0" role="button" aria-label="Go to slide 1"></span>
+                    <span class="swiper-pagination-bullet swiper-pagination-bullet-active" tabindex="0" role="button" aria-label="Go to slide 2"></span>
+                </div>-->
+            </div>
+            <div class="middle">
+                <div class="middle-01">
+                    <div style="height: 100%;width:100%; display: flex; justify-content: center; align-items: center; text-align: center">
+                        <div style="color: #FFFFFF;font-weight: 800;">
+                            <span>销售目标(万)</span>
+                        </div>
+                        <div style="left: 1%;position:relative; font-size: xx-large; font-weight: 800; background: linear-gradient(to right, #ff0000, #ffff00); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-family: fantasy;">
+                            <span id="cockpit006"></span>
+                        </div>
+                    </div>
+                </div>
+                <div style="height: 4%; width:100%; display: flex; top: -2%; position:relative; align-items: center">
+                    <div style="color: red;left: 16%; position:absolute; font-weight: 600; font-size: large;background: linear-gradient(to right, #ff0000, #ffff00); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-family: fantasy;">
+                        <span>同比</span>
+                        <span id="cockpit008"></span>
+                    </div>
+                    <div style="justify-content: center; display: flex;width: 100%;align-items: center;">
+                        <div style="color: #FFFFFF;font-weight: 800; left: 1%; position: relative">
+                            <span>已完成销售额(万)</span>
+                        </div>
+                        <div style="font-size: xx-large; left: 2%; position: relative; font-weight: 800;background: linear-gradient(to right, #ff0000, #ffff00); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-family: fantasy;">
+                            <span id="cockpit007"></span>
+                        </div>
+                    </div>
+                    <div style="color: red;position:absolute;right: 13%; font-weight: 600; font-size: large;background: linear-gradient(to right, #ff0000, #ffff00); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-family: fantasy;">
+                        <span>环比</span>
+                        <span id="cockpit009"></span>
+                    </div>
+                </div>
+                <div class="middle-02">
+                    <div id="chinaMap" style="width: 100%; height: 100%; display: flex; align-items: center"></div>
+                </div>
+                <div class="middle-03">
+                    <div style="left: 3%;width: 45%; height: 90%;display: flex; position: relative;z-index: 1;top: 2%;border: 0.2px solid rgba(50, 255, 238, .7);" >
+                        <div style="color: #FFFFFF;width: 50%;height: 10%;position: absolute;top: -5%;background-color: rgb(21, 51, 114);text-align: center;left: 3%;">
+                            <span>降本目标达成率</span>
+                        </div>
+                        <div id="muBiaoDaChengRate" style="width: 100%;height: 100%; display: flex; align-items: center">
+
+                        </div>
+                    </div>
+                    <div style="left: 5%; width: 45%; height: 90%;display: flex; position: relative;z-index: 1;top: 2%;border: 0.2px solid rgba(50, 255, 238, .7);" >
+                        <div style="color: #FFFFFF;width: 50%;height: 10%;position: absolute;top: -5%;background-color: rgb(21, 51, 114);text-align: center;left: 3%;">
+                            <span>按时交付率</span>
+                        </div>
+                        <div id="jiaoFuRate" style="width: 100%;height: 100%;  display: flex; align-items: center">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="right">
+                <div class="right-01">
+                    <div style="color: #FFFFFF;width: 15%;height: 20%;position: absolute;top: -10%;background-color: rgb(21, 51, 114);text-align: center;left: 3%;">
+                        <span>毛利率</span>
+                    </div>
+                    <div style="width:100%; display: flex;top: 5%; position:relative;align-items: center;left: 5%;top: 10%;">
+                        <div style="color: #FFFFFF;font-weight: 800;">
+                            <span>20kW</span>
+                        </div>
+                        <div style="font-size: x-large;left: 2% ; font-weight: 800;position: relative; background: linear-gradient(to right, #ff0000, #ffff00); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-family: fantasy;">
+                            <span id="cockpit017"></span>
+                        </div>
+                        <div style="color: #FFFFFF;font-weight: 800; left: 7%;position: relative">
+                            <span>30kW</span>
+                        </div>
+                        <div style="font-size: x-large;left: 9% ; font-weight: 800;position: relative; background: linear-gradient(to right, #ff0000, #ffff00); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-family: fantasy;">
+                            <span id="cockpit018"></span>
+                        </div>
+                        <div style="color: #FFFFFF;font-weight: 800;left: 12%;position: relative">
+                            <span>40kW</span>
+                        </div>
+                        <div style="font-size: x-large;left: 14% ; font-weight: 800;position: relative; background: linear-gradient(to right, #ff0000, #ffff00); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-family: fantasy;">
+                            <span id="cockpit019"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="right-02">
+                    <div style="color: #FFFFFF;width: 30%;height: 10%;position: absolute;top: -5%;background-color: rgb(21, 51, 114);text-align: center;left: 3%;">
+                        <span>毛利(万)</span>
+                    </div>
+                    <div id="maoLiRate" class="maoLiRate">
+
+                    </div>
+                </div>
+                <div class="right-03">
+                    <div style="color: #FFFFFF;width: 30%;height: 10%;position: absolute;top: -5%;background-color: rgb(21, 51, 114);text-align: center;left: 3%;">
+                        <span>期间费用率</span>
+                    </div>
+                    <div id="qiJianFeiYongRate" style="width: 100%;height: 100%; display:flex; align-items: center"></div>
+                </div>
+
+                <div class="right-04">
+                    <!--<div style="color: #FFFFFF;width: 30%;height: 10%;position: absolute;top: -5%;background-color: rgb(21, 51, 114);text-align: center;left: 3%;">
+                        <span>期间费用率</span>
+                    </div>-->
+                    <div style="display: flex;position:relative;align-items: center;left: 5%;top: 10%">
+                        <div style="color: #FFFFFF;font-weight: 800;">
+                            <span>预算执行率：</span>
+                        </div>
+                        <div style="font-size: x-large;left: 2% ; font-weight: 800;position: relative; background: linear-gradient(to right, #ff0000, #ffff00); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-family: fantasy;">
+                            <span id="cockpit031"></span>
+                        </div>
+                        <div style="color: #FFFFFF;font-weight: 800; left: 9%;position: relative">
+                            <span>超出预算(万)</span>
+                        </div>
+                        <div style="font-size: x-large;left: 11% ; font-weight: 800;position: relative; background: linear-gradient(to right, #ff0000, #ffff00); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-family: fantasy;">
+                            <span id="cockpit020"></span>
+                        </div>
+                    </div>
+                    <div style="display: flex;position:relative;align-items: center;left: 3%;top: 15%">
+                        <div style="color: #FFFFFF;font-weight: 800;">
+                            <span>费用金额(万)：</span>
+                        </div>
+                        <div style="font-size: x-large;left: 2% ; font-weight: 800;position: relative; background: linear-gradient(to right, #ff0000, #ffff00); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-family: fantasy;">
+                            <span id="cockpit021"></span>
+                        </div>
+                        <div style="color: #FFFFFF;font-weight: 800; left: 10%;position: relative">
+                            <span>当月费用支出(万)</span>
+                        </div>
+                        <div style="font-size: x-large;left: 12% ; font-weight: 800;position: relative; background: linear-gradient(to right, #ff0000, #ffff00); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-family: fantasy;">
+                            <span id="cockpit022"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="002" class="swiper-slide contentMain">
+            <div class="left02">
+                <div class="left02-02">
+                    <div style="color: #FFFFFF;width: 25%;height: 3%;position: absolute;top: -1%;background-color: rgb(21, 51, 114);text-align: center;left: 3%;align-items: center;justify-content:center ;display: flex">
+                        <span>市场故障率</span>
+                    </div>
+                    <div style="width: 100%; height: 100%;display: flex; align-items: center;" id="shiChangGuZhangRate">
+
+                    </div>
+                </div>
+                <div class="left02-03">
+                    <div style="color: #FFFFFF;width: 25%;height: 12%;position: absolute;top: -5%;background-color: rgb(21, 51, 114);text-align: center;left: 3%;align-items: center;justify-content:center ;display: flex">
+                        <span>开箱不良率</span>
+                    </div>
+                    <div style="width: 100%; height: 100%;display: flex; align-items: center;" id="kaiXiangBuLiangRate">
+
+                    </div>
+                </div>
+                <div class="left02-01">
+                    <div style="color: #FFFFFF;width: 25%;height: 12%;position: absolute;top: -5%;background-color: rgb(21, 51, 114);text-align: center;left: 3%;align-items: center;justify-content:center ;display: flex">
+                        <span>产品直通率</span>
+                    </div>
+                    <div style="width: 100%; height: 100%;display: flex; align-items: center;" id="chanPinZhiTongRate">
+
+                    </div>
+                </div>
+            </div>
+            <div class="middle02">
+                <div class="middle02-01" id="xiangMuGuanLi">
+                    <div style="color: #FFFFFF;width: 25%;height: 3%;position: absolute;top: -1%;background-color: rgb(21, 51, 114);text-align: center;left: 3%;align-items: center;justify-content:center ;display: flex">
+                        <span>项目管理</span>
+                    </div>
+                    <div style="width: 100%; height: 20%;position: absolute;">
+                        <div style="width: 100%;height: 50%; display: flex">
+                            <div style="width: 50%;height: 100%; background-image: url('/img/zanTing.png'); background-size: 100% 100%;display: flex;justify-content: center; align-items: center; ">
+                                <div style="color: #1A2C78; width: 70%; height: 50%;display: flex;justify-content: center; align-items: center;top: 10%;position: relative;">
+                                    <div style="font-size: x-large; font-weight: 600; margin: 5%">
+                                        <span>在研</span>
+                                    </div>
+                                    <div style="font-size: xx-large; font-weight: 800; margin: 5%">
+                                        <span id="cockpit024"></span>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div style="width: 50%;height: 100%; background-image: url('/img/zanTing.png'); background-size: 100% 100%;display: flex;justify-content: center; align-items: center;">
+                                <div style="color: #33FFCC; width: 70%; height: 50%;display: flex;justify-content: center; align-items: center;top: 10%;position: relative;">
+                                    <div style="font-size: x-large; font-weight: 600; margin: 5%">
+                                        <span>转产</span>
+                                    </div>
+                                    <div style="font-size: xx-large; font-weight: 800; margin: 5%">
+                                        <span id="cockpit025"></span>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div style="width: 100%;height: 50%; display: flex">
+                            <div style="width: 50%;height: 100%; background-image: url('/img/zanTing.png'); background-size: 100% 100%;display: flex;justify-content: center; align-items: center;">
+                                <div style="color: #FFEB3B; width: 70%; height: 50%;display: flex;justify-content: center; align-items: center;top: 10%;position: relative;">
+                                    <div style="font-size: x-large; font-weight: 600; margin: 5%">
+                                        <span>暂停</span>
+                                    </div>
+                                    <div style="font-size: xx-large; font-weight: 800; margin: 5%">
+                                        <span id="cockpit026"></span>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div style="width: 50%;height: 100%; background-image: url('/img/zanTing.png'); background-size: 100% 100%;display: flex;justify-content: center; align-items: center;">
+                                <div style="color: #eb3600; width: 70%; height: 50%;display: flex;justify-content: center; align-items: center;top: 10%;position: relative;">
+                                    <div style="font-size: x-large; font-weight: 600; margin: 5%">
+                                        <span>终止</span>
+                                    </div>
+                                    <div style="font-size: xx-large; font-weight: 800; margin: 5%">
+                                        <span id="cockpit049"></span>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="top: 2%;left: 33%;width: 34%;height: 20%;justify-content: center;align-items: center;display: flex;position: absolute;">
+                        <div style="color: #8a1f11;font-size: x-large; font-weight: 600; margin: 5%">
+                            <span>总数量</span>
+                        </div>
+                        <div style="color: #8a1f11;font-size: xx-large; font-weight: 800; margin: 5%">
+                            <span id="cockpit023"></span>
+                        </div>
+                    </div>
+                    <div style="width: 100%;height: 40%;top:20%;position:absolute;">
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th rowspan="2" style="font-size: 12px; width: 12%;font-weight: 400;text-align: center">研发部</th>
+                                <th rowspan="2"  style="font-size: 12px; width: 30%;font-weight: 400;text-align: center">项目名称</th>
+                                <th rowspan="2"  style="font-size: 12px; width: 12%;font-weight: 400;text-align: center">项目经理</th>
+                                <th colspan="2"  style="font-size: 12px; width: 34%;font-weight: 400;text-align: center">转中试</th>
+                                <th rowspan="2"  style="font-size: 12px; width: 14%;font-weight: 400;text-align: center">转量产</th>
+                            </tr>
+                            <tr>
+                                <th style="font-size: 12px; width: 16%;font-weight: 400;text-align: center">基线</th>
+                                <th style="font-size: 12px; width: 16%;font-weight: 400;text-align: center">滚动</th>
+                            </tr>
+                            </thead>
+                        </table>
+
+                        <div class="scroll-box-03">
+                            <table class="scroll-tab-03" id="content03">
+                                <tbody class="scrollContent-03"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="middle02-02">
+                    <div style="color: #FFFFFF;width: 15%;heigh t: 10%;position: absolute;top: -5%;background-color: rgb(21, 51, 114);text-align: center;left: 3%;align-items: center;justify-content:center ;display: flex">
+                        <span>专利</span>
+                    </div>
+                    <div style="height: 20%; width: 100%; position: absolute; left: 10%">
+                        <div style="height: 50%;width: 100%;position:relative;float: left;display: inline-flex;">
+                            <div style="left: 8%;width:12%;position: relative;color: #FFFFFF;font-weight: 400;/* font-size: x-large; */">
+                                <span>累计</span>
+                            </div>
+                            <div style="color: #FFFFFF;left: 12%;width: 20%;position: relative;">
+                                <span>总专利数</span>
+                                <span id="cockpit051" style="font-size: medium;left: 5%;font-weight: 800;position: relative;background: linear-gradient(to right, #ff0000, #ffff00);-webkit-background-clip: text;-webkit-text-fill-color: transparent;font-family: fantasy;"></span>
+                            </div>
+                            <div style="color: #FFFFFF;left: 12%;width: 15%;position: relative;/* font-weight: 800; */top: 10%">
+                                <span>发明</span>
+                                <span id="cockpit052"  style="font-size: medium;left: 5%;font-weight: 800;position: relative;background: linear-gradient(to right, #ff0000, #ffff00);-webkit-background-clip: text;-webkit-text-fill-color: transparent;font-family: fantasy;"></span>
+                            </div>
+                            <div style="left: 12%;width: 20%;position: relative;color: #FFFFFF;/* font-weight: 800; */">
+                                <span>实用新型</span>
+                                <span id="cockpit053"  style="font-size: medium;left: 5%;font-weight: 800;position: relative;background: linear-gradient(to right, #ff0000, #ffff00);-webkit-background-clip: text;-webkit-text-fill-color: transparent;font-family: fantasy;"></span>
+                            </div>
+                            <div style="left: 12%;width: 15%;position: relative;color: #FFFFFF;/* font-weight: 800; */">
+                                <span>外观</span>
+                                <span id="cockpit054"  style="font-size: medium;left: 5%;font-weight: 800;position: relative;background: linear-gradient(to right, #ff0000, #ffff00);-webkit-background-clip: text;-webkit-text-fill-color: transparent;font-family: fantasy;"></span>
+                            </div>
+                        </div>
+                        <div style="height: 50%;width: 100%;position:relative;display: inline-flex;float: left;">
+                            <div style="left: 8%;width:12%;position: relative;color: #FFFFFF;font-weight: 400;/* font-size: x-large; */">
+                                <span>年度新增</span>
+                            </div>
+                            <div style="color: #FFFFFF;/* font-weight: 800; */left: 12%;width: 20%;position: relative;">
+                                <span style="width: 70%;">申请</span>
+                                <span id="cockpit055"  style="width: 30%;font-size: medium;left: 5%;font-weight: 800;position: relative;background: linear-gradient(to right, #ff0000, #ffff00);-webkit-background-clip: text;-webkit-text-fill-color: transparent;font-family: fantasy;"></span>
+                            </div>
+                            <div style="left: 12%;width: 15%;position: relative;color: #FFFFFF;/* font-weight: 800; */">
+                                <span style="width: 70%;">发明</span>
+                                <span id="cockpit056"  style="width: 30%;font-size: medium;left: 5%;font-weight: 800;position: relative;background: linear-gradient(to right, #ff0000, #ffff00);-webkit-background-clip: text;-webkit-text-fill-color: transparent;font-family: fantasy;"></span>
+                            </div>
+                            <div style="left: 12%;width: 20%;position: relative;color: #FFFFFF;/* font-weight: 800; */">
+                                <span style="width: 70%;">实用新型</span>
+                                <span id="cockpit057"  style="width: 30%;font-size: medium;left: 5%;font-weight: 800;position: relative;background: linear-gradient(to right, #ff0000, #ffff00);-webkit-background-clip: text;-webkit-text-fill-color: transparent;font-family: fantasy;"></span>
+                            </div>
+                            <div style="left: 12%;width: 15%;position: relative;color: #FFFFFF;/* font-weight: 800; */">
+                                <span style="width: 70%;">外观</span>
+                                <span id="cockpit058"  style="width: 30%;font-size: medium;left: 5%;font-weight: 800;position: relative;background: linear-gradient(to right, #ff0000, #ffff00);-webkit-background-clip: text;-webkit-text-fill-color: transparent;font-family: fantasy;"></span>
+                            </div>
+                        </div>
+                        <!--<div style="height: 50%; width: 100%; position:relative;float: left">
+                            <div style="color: #FFFFFF;font-weight: 800">
+                                <span>总专利数</span>
+                                <span style="font-size: x-large;left: 5% ; font-weight: 800;position: relative; background: linear-gradient(to right, #ff0000, #ffff00); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-family: fantasy;">20</span>
+                            </div>
+                            <div style="color: #FFFFFF;font-weight: 800;top: 10%">
+                                <span>发明</span>
+                                <span style="font-size: x-large;left: 5% ; font-weight: 800;position: relative; background: linear-gradient(to right, #ff0000, #ffff00); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-family: fantasy;">20</span>
+                            </div>
+                            <div style="color: #FFFFFF;font-weight: 800">
+                                <span>实用新型</span>
+                                <span style="font-size: x-large;left: 5% ; font-weight: 800;position: relative; background: linear-gradient(to right, #ff0000, #ffff00); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-family: fantasy;">20</span>
+                            </div>
+                            <div style="color: #FFFFFF;font-weight: 800">
+                                <span>外观</span>
+                                <span style="font-size: x-large;left: 5% ; font-weight: 800;position: relative; background: linear-gradient(to right, #ff0000, #ffff00); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-family: fantasy;">20</span>
+                            </div>
+                        </div>
+                        <div style="height: 50%; width: 100%; position:relative;display: inline">
+                            <div style="color: #FFFFFF;font-weight: 400; font-size: x-large">
+                                <span>年度新增</span>
+                            </div>
+                            <div style="color: #FFFFFF;font-weight: 800">
+                                <span style="width: 70%;">申请</span>
+                                <span style="width: 30%;font-size: x-large;left: 5% ; font-weight: 800;position: relative; background: linear-gradient(to right, #ff0000, #ffff00); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-family: fantasy;">20</span>
+                            </div>
+                            <div style="color: #FFFFFF;font-weight: 800">
+                                <span style="width: 70%;">发明</span>
+                                <span style="width: 30%;font-size: x-large;left: 5% ; font-weight: 800;position: relative; background: linear-gradient(to right, #ff0000, #ffff00); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-family: fantasy;">20</span>
+                            </div>
+                            <div style="color: #FFFFFF;font-weight: 800">
+                                <span style="width: 70%;">实用新型</span>
+                                <span style="width: 30%;font-size: x-large;left: 5% ; font-weight: 800;position: relative; background: linear-gradient(to right, #ff0000, #ffff00); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-family: fantasy;">20</span>
+                            </div>
+                            <div style="color: #FFFFFF;font-weight: 800">
+                                <span style="width: 70%;">外观</span>
+                                <span style="width: 30%;font-size: x-large;left: 5% ; font-weight: 800;position: relative; background: linear-gradient(to right, #ff0000, #ffff00); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-family: fantasy;">20</span>
+                            </div>
+                        </div>-->
+                    </div>
+                    <div class="xuanZhuanMuMa swiper">
+                        <div class="swiper-wrapper xuanZhuanMuMaWrapper">
+                            <div class="swiper-slide imgSlide">
+                                <img src="/img/zhuanli01.png"/>
+                            </div>
+                            <div class="swiper-slide imgSlide">
+                                <img src="/img/zhuanli01.png"/>
+                            </div>
+                            <div class="swiper-slide imgSlide">
+                                <img src="/img/zhuanli01.png"/>
+                            </div>
+                            <div class="swiper-slide imgSlide">
+                                <img src="/img/zhuanli01.png"/>
+                            </div>
+                            <div class="swiper-slide imgSlide">
+                                <img src="/img/zhuanli01.png"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="right02">
+                <div class="right02-01">
+                    <div style="color: #FFFFFF;width: 30%;height: 3%;position: absolute;top: -1%;background-color: rgb(21, 51, 114);text-align: center;left: 3%;align-items: center;justify-content:center ;display: flex">
+                        <span>组织绩效得分</span>
+                    </div>
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th style="font-size: 12px; width: 20%;font-weight: 400;text-align: center">排名</th>
+                            <th style="font-size: 12px; width: 40%;font-weight: 400;text-align: center">部门</th>
+                            <th style="font-size: 12px; width: 20%;font-weight: 400;text-align: center">得分</th>
+                            <th style="font-size: 12px; width: 20%;font-weight: 400;text-align: center">等级</th>
+                        </tr>
+                        </thead>
+                    </table>
+
+                    <div class="scroll-box-01">
+                        <table class="scroll-tab-01" id="content01">
+                            <tbody class="scrollContent-01"></tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="right02-02">
+                    <div style="color: #FFFFFF;width: 30%;height: 7%;position: absolute;top: -3%;background-color: rgb(21, 51, 114);text-align: center;left: 3%;align-items: center;justify-content:center ;display: flex">
+                        <span>人力资源管理</span>
+                    </div>
+                    <div style="width: 100%;height: 25%; display: flex;top: 10%; position: relative;align-items: center;">
+                        <div style="width: 45%;height: 100%; background-image: url('/img/displayData04.png'); background-size: 100% 100%;left: 4%; position: relative;display: flex;">
+                            <div style="width: 60%; height: 35%; color: #FFF; font-size: large; left: 3%; position: relative; top: 7%;background-color: rgba(0,202,149,1);text-align: center;">
+                                <span>薪酬总额</span>
+                            </div>
+                            <div style="width: 55%; height: 75%; color: #FFF; font-size: large; left: 3%; position: relative;align-items: center; display: flex;position: absolute; top: 35%;">
+                                <span id="cockpit027"></span>
+                                <span>万</span>
+                            </div>
+                            <div style="width: 45%; height: 75%; color: #FFF; font-size: medium; right: 0%; position: relative;align-items: center; display: flex;position: absolute; top: 35%; color: #00a65a">
+                                <span>环比</span>
+                                <span style="left: 5%; position:relative;" id="cockpit034"></span>
+                            </div>
+                        </div>
+                        <div style="width: 45%;height: 100%; background-image: url('/img/displayData04.png'); background-size: 100% 100%;left: 7%; position: relative;display: flex;">
+                            <div style="width: 60%; height: 35%; color: #FFF; font-size: large; left: 3%; position: relative; top: 7%;background-color: rgba(0,202,149,1);text-align: center;">
+                                <span>员工总数</span>
+                            </div>
+                            <div style="width: 55%; height: 75%; color: #FFF; font-size: large; left: 3%; position: relative;align-items: center; display: flex;position: absolute; top: 35%;">
+                                <span id="cockpit028"></span>
+                            </div>
+                            <div style="width: 45%; height: 75%; color: #FFF; font-size: medium; right: 0%; position: relative;align-items: center; display: flex;position: absolute; top: 35%; color: #00a65a">
+                                <span>环比</span>
+                                <span style="left: 5%; position:relative;" id="cockpit035"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="width: 100%;height: 25%; display: flex;top: 15%; position: relative;align-items: center;">
+                        <div style="width: 45%;height: 100%; background-image: url('/img/displayData04.png'); background-size: 100% 100%;left: 4%; position: relative;display: flex;">
+                            <div style="width: 60%; height: 35%; color: #FFF; font-size: large; left: 3%; position: relative; top: 7%;background-color: rgba(0,202,149,1);text-align: center;">
+                                <span>招聘完成率</span>
+                            </div>
+                            <div style="width: 55%; height: 75%; color: #FFF; font-size: large; left: 3%; position: relative;align-items: center; display: flex;position: absolute; top: 35%;">
+                                <span id="cockpit029"></span>
+                            </div>
+                            <div style="width: 45%; height: 75%; color: #FFF; font-size: medium; right: 0%; position: relative;align-items: center; display: flex;position: absolute; top: 35%; color: #00a65a">
+                                <span>环比</span>
+                                <span style="left: 5%; position:relative;" id="cockpit036"></span>
+                            </div>
+                        </div>
+                        <div style="width: 45%;height: 100%; background-image: url('/img/displayData04.png'); background-size: 100% 100%;left: 7%; position: relative;display: flex;">
+                            <div style="width: 60%; height: 35%; color: #FFF; font-size: large; left: 3%; position: relative; top: 7%;background-color: rgba(0,202,149,1);text-align: center;">
+                                <span>人员流失率</span>
+                            </div>
+                            <div style="width: 55%; height: 75%; color: #FFF; font-size: large; left: 3%; position: relative;align-items: center; display: flex;position: absolute; top: 35%;">
+                                <span id="cockpit030"></span>
+                            </div>
+                            <div style="width: 45%; height: 75%; color: #FFF; font-size: medium; right: 0%; position: relative;align-items: center; display: flex;position: absolute; top: 35%; color: #00a65a">
+                                <span>环比</span>
+                                <span style="left: 5%; position:relative;" id="cockpit037"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="width: 100%;height: 25%; display: flex;top: 20%; position: relative;align-items: center;">
+                        <div style="width: 45%;height: 100%; background-image: url('/img/displayData04.png'); background-size: 100% 100%;left: 4%; position: relative;display: flex;">
+                            <div style="width: 60%; height: 35%; color: #FFF; font-size: large; left: 3%; position: relative; top: 7%;background-color: rgba(0,202,149,1);text-align: center;">
+                                <span>研发占比</span>
+                            </div>
+                            <div style="width: 55%; height: 75%; color: #FFF; font-size: large; left: 3%; position: relative;align-items: center; display: flex;position: absolute; top: 35%;">
+                                <span id="cockpit032"></span>
+                            </div>
+                            <div style="width: 45%; height: 75%; color: #FFF; font-size: medium; right: 0%; position: relative;align-items: center; display: flex;position: absolute; top: 35%; color: #00a65a">
+                                <span>环比</span>
+                                <span style="left: 5%; position:relative;" id="cockpit038"></span>
+                            </div>
+                        </div>
+                        <div style="width: 45%;height: 100%; background-image: url('/img/displayData04.png'); background-size: 100% 100%;left: 7%; position: relative;display: flex;">
+                            <div style="width: 60%; height: 35%; color: #FFF; font-size: large; left: 3%; position: relative; top: 7%;background-color: rgba(0,202,149,1);text-align: center;">
+                                <span>培训完成率</span>
+                            </div>
+                            <div style="width: 55%; height: 75%; color: #FFF; font-size: large; left: 3%; position: relative;align-items: center; display: flex;position: absolute; top: 35%;">
+                                <span id="cockpit033"></span>
+                            </div>
+                            <div style="width: 45%; height: 75%; color: #FFF; font-size: medium; right: 0%; position: relative;align-items: center; display: flex;position: absolute; top: 35%; color: #00a65a">
+                                <span>环比</span>
+                                <span style="left: 5%; position:relative;" id="cockpit039"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="right02-03">
+                    <div style="color: #FFFFFF;width: 40%;height: 20%;position: absolute;top: -8%;background-color: rgb(21, 51, 114);text-align: center;left: 3%;align-items: center;justify-content:center ;display: flex">
+                        <span>已规划产品启动率</span>
+                    </div>
+                    <div style="font-size: x-large;font-weight: 800; width: 25%; height: 25%; position:absolute; top: 5%; left: 55%; background: linear-gradient(to right, #ff0000, #ffff00); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-family: fantasy;">
+                        <span id="cockpit050"></span>
+                    </div>
+                    <div style="width: 100%; height: 85%; position:relative; top: 15%" id="guiHuaChanPinQidongRate">
+
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
     <!-- 如果需要分页器 -->
     <div class="swiper-pagination"></div>
 
     <!-- 如果需要导航按钮 -->
-    <div class="swiper-button-prev"></div>
-    <div class="swiper-button-next"></div>
+    <div class="swiper-button-prev" style="top: 5%;"></div>
+    <div class="swiper-button-next" style="top: 5%;"></div>
 
     <!-- 如果需要滚动条 -->
-    <div class="swiper-scrollbar"></div>
+    <!--<div class="swiper-scrollbar" style="background-color: #FFFFFF"></div>-->
 </div>
 <style>
     .body {
-    height: 700px;
-    top: 0%;
-}
-    .swiper {
-    height: 100%;
-    width: 100%;
-    background-image: url("http://localhost:80/img/backImage.jpg");
-    background-size: cover;
-    overflow: hidden;
-}
+        height: 700px;
+        top: 0%;
+    }
+    .content {
+        height: 100%;
+        width: 100%;
+        background-image: url("/img/backImage.jpg");
+        background-size: cover;
+        overflow: hidden;
+    }
+    .swiper-wrapper {
+        height: 100%;
+        width: 100%;
+    }
+    .img {
+        top: 20%;
+        height: 80% !important;
+        width: 95% !important;
+    }
     .title {
-    height: 8%;
-    color: #FFFFFF;
-    font-size: 40px;
-    text-align: center;
-    font-weight: 600;
-}
+        height: 8%;
+        color: #FFFFFF;
+        font-size: 40px;
+        text-align: center;
+        font-weight: 600;
+    }
+    .swiper-slide {
+        height: 100%;
+        display: flex;
+        position: relative;
+    }
+    .contentMain {
+        top: 5%;
+    }
+    .left {
+        width: 30%;
+        height: 100%;
+        left: 1%;
+        position: relative;
+    }
+    .left-01 {
+        width: 100%;
+        height: 45%;
+    }
+    .left-01-top {
+        height: 50%;
+        display: flex;
+        position: relative;
+        z-index: 1;
+        bottom: 2%;
+        border: 0.2px solid rgba(50, 255, 238, .7);
+    }
+    .left-01-top-01 {
+        height: 90%;
+        width: 40%;
+        overflow-x: auto;
+        color: #FFFFFF;
+        left: 5%;
+        position: relative;
+        top: 10%;
+    }
+    .left-01-top-02 {
+        height: 100%;
+        width: 60%;
+        left: 50%;
+        position: absolute;
+    }
+    .left-01-down {
+        height: 50%;
+        display: flex;
+        position: relative;
+        z-index: 1;
+        bottom: 2%;
+        border: 0.2px solid rgba(50, 255, 238, .7);
+        top: 2%;
+    }
+    .left-02 {
+        width: 100%;
+        height: 10%;
+        top: 3%;
+        position: relative;
+        border: 0.2px solid rgba(50, 255, 238, .7);
+    }
+    .left-03 {
+        width: 100%;
+        height: 26%;
+        display: flex;
+        top: 5%;
+        position: relative;
+        z-index: 1;
+        bottom: 2%;
+        border: 0.2px solid rgba(50, 255, 238, .7);
+    }
+    .middle {
+        width: 38%;
+        height: 100%;
+        left: 1%;
+        position: relative;
+    }
+    .middle-01 {
+        width: 100%;
+        height: 4%;
+        display: flex;
+        position: relative;
+        z-index: 1;
+        top: -3%;
+    }
+    .middle-02 {
+        width: 100%;
+        height: 46%;
+        position: relative;
+        z-index: 1;
+        color: #FFFFFF;
+        font-size: 12px;
+        text-align: center;
+    }
+    .middle-03 {
+        width: 100%;
+        height: 35%;
+        display: flex;
+    }
+    .right {
+        width: 30%;
+        height: 100%;
+        position: relative;
+        left: 1%;
+    }
+    .right-01 {
+        width: 100%;
+        height: 10%;
+        display: flex;
+        position: relative;
+        z-index: 1;
+        bottom: 2%;
+        border: 0.2px solid rgba(50, 255, 238, .7);
+    }
+    .right-02 {
+        width: 100%;
+        height: 26%;
+        display: flex;
+        position: relative;
+        z-index: 1;
+        bottom: 2%;
+        top: 2%;
+        border: 0.2px solid rgba(50, 255, 238, .7);
+    }
+    .maoLiRate {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+    }
+    .right-03 {
+        width: 100%;
+        height: 26%;
+        display: flex;
+        position: relative;
+        z-index: 1;
+        bottom: 2%;
+        top: 6%;
+        border: 0.2px solid rgba(50, 255, 238, .7);
+    }
+    .right-04 {
+        width: 100%;
+        height: 13%;
+        position: relative;
+        z-index: 1;
+        bottom: 2%;
+        top: 10%;
+        border: 0.2px solid rgba(50, 255, 238, .7);
+    }
+    /*  table {
+          width: 100%; !* 设置table宽度 *!
+          border-collapse: collapse; !* 边框合并 *!
+          overflow: auto;
+      }
+      th{
+          border: 0px; !* 设置单元格边框 *!
+          padding: 8px; !* 设置单元格内边距 *!
+          text-align: center; !* 单元格内文本对齐方式 *!
+          position: sticky;
+          top: 0;
+      }
+      td {
+          border: 0px; !* 设置单元格边框 *!
+          padding: 8px; !* 设置单元格内边距 *!
+          text-align: center; !* 单元格内文本对齐方式 *!
+          text-align: left;
+      }
+      ::-webkit-scrollbar{
+          width: 12px;
+          height: 24px;
+      }
+      th {
+          text-align: left;
+          !*background-color: rgb(21,51,114);*!
+      }*/
+    .left02 {
+        width: 25%;
+        height: 95%;
+        left: 2%;
+        position: relative;
+    }
+    .left02-02 {
+        width: 100%;
+        height: 28%;
+        border: 0.2px solid rgba(50, 255, 238, .7);
+        display: flex;
+        align-items: center;
+    }
+    .left02-03 {
+        width: 100%;
+        height: 28%;
+        top: 3%;
+        position: relative;
+        border: 0.2px solid rgba(50, 255, 238, .7);
+        display: flex;
+        align-items: center;
+    }
+    .left02-01 {
+        width: 100%;
+        height: 28%;
+        top: 6%;
+        position: relative;
+        border: 0.2px solid rgba(50, 255, 238, .7);
+        display: flex;
+        align-items: center;
+    }
+    .middle02 {
+        width: 40%;
+        height: 95%;
+        left: 5%;
+        position: relative;
+    }
+    .middle02-01 {
+        width: 100%;
+        height: 55%;
+        border: 0.2px solid rgba(50, 255, 238, .7);
+        display: flex;
+    }
+    .middle02-02 {
+        width: 100%;
+        height: 33%;
+        top: 3%;
+        position: relative;
+        border: 0.2px solid rgba(50, 255, 238, .7);
+        display: flex;
+    }
+    .xuanZhuanMuMa {
+        width: 40%;
+        height: 100%;
+        left: 5%;
+    }
+    .imgSlide {
+
+    }
+    .xuanZhuanMuMaWrapper {
+        height: 100%;
+        width:100%;/*根据内容调整宽度*/
+        position: fixed;
+        z-index: 100;
+    }
+    .right02 {
+        width: 25%;
+        height: 95%;
+        left: 8%;
+        position: relative;
+    }
+    .right02-01 {
+        width: 100%;
+        height: 20%;
+        border: 0.2px solid rgba(50, 255, 238, .7);
+    }
+    .right02-02 {
+        width: 100%;
+        height: 44%;
+        top: 3%;
+        position: relative;
+        border: 0.2px solid rgba(50, 255, 238, .7);
+    }
+    .right02-03 {
+        width: 100%;
+        height: 20%;
+        top: 6%;
+        position: relative;
+        border: 0.2px solid rgba(50, 255, 238, .7);
+        align-items: center;
+        display: flex;
+    }
+    .cotable table tbody::-webkit-scrollbar {
+        /* width: 0; 隐藏滚动条 */
+    }
+
+    .scroll-box {
+        height: 80%;
+        width: 100%;
+        overflow-y: auto;
+        position: relative;
+        top: 5%;
+    }
+    .scroll-box-01 {
+        height: 65%;
+        width: 100%;
+        overflow-y: auto;
+        position: relative;
+        top: 5%;
+    }
+    .scroll-box-02 {
+        height: 80%;
+        width: 100%;
+        overflow-y: auto;
+        position: relative;
+        top: 5%;
+    }
+    .scroll-box-03 {
+        height: 60%;
+        width: 100%;
+        overflow-y: auto;
+        position: relative;
+        top: 5%;
+        display: flex;
+    }
+    table {
+        width: 100%; /* 设置table宽度 */
+        border-collapse: collapse; /* 边框合并 */
+        overflow: auto;
+        top: 6%;
+        position: relative;
+    }
+    /*table-01 {
+        width: 100%; !* 设置table宽度 *!
+        border-collapse: collapse; !* 边框合并 *!
+        overflow: auto;
+        top: 6%;
+        position: relative;
+    }
+    table-02 {
+        width: 100%; !* 设置table宽度 *!
+        border-collapse: collapse; !* 边框合并 *!
+        overflow: auto;
+        top: 6%;
+        position: relative;
+        height: 10%;
+    }*/
+    th{
+        border: 0px; /* 设置单元格边框 */
+        padding: 8px; /* 设置单元格内边距 */
+        text-align: center; /* 单元格内文本对齐方式 */
+        position: sticky;
+        top: 0;
+    }
+    td {
+        border: 0px; /* 设置单元格边框 */
+        padding: 8px; /* 设置单元格内边距 */
+        text-align: center; /* 单元格内文本对齐方式 */
+        color: #FFFFFF;
+        width: 28%;
+    }
+    ::-webkit-scrollbar{
+        width: 1px;
+        height: 24px;
+    }
+    th {
+        text-align: center;
+        color: #FFFFFF;
+        width: 28%;
+        /*background-color: rgb(21,51,114);*/
+    }
 </style>
 
 <script type="text/javascript" th:src="@{/js/swiper/swiper-bundle.min.js}"></script>
-<script>
-    var mySwiper = new Swiper ('.swiper', {
+<script type="text/javascript" th:src="@{/js/swiper/idangerous.swiper.3dflow-2.0.js}"></script>
+<script type="text/javascript" th:src="@{/js/swiper/idangerous.swiper-2.0.min.js}"></script>
+<script type="text/javascript" th:src="@{/js/plugins/echarts.min.js}"></script>
+<script type="text/javascript" th:src="@{/js/plugins/china.js}"></script>
+<script type="text/javascript" th:src="@{/js/xybr/report.js}"></script>
+<script type="text/javascript" th:src="@{/js/jquery.min.js}"></script>
+<script type="text/javascript" th:src="@{/js/xybr/cockpit/newClient.js}"></script>
+<script type="text/javascript" th:src="@{/js/xybr/cockpit/yuQiClient01.js}"></script>
+<script type="text/javascript" th:src="@{/js/xybr/cockpit/jishiHuiKuanRate.js}"></script>
+<script type="text/javascript" th:src="@{/js/xybr/cockpit/stock.js}"></script>
+<script type="text/javascript" th:src="@{/js/xybr/cockpit/chinaMap.js}"></script>
+<script type="text/javascript" th:src="@{/js/xybr/cockpit/jiangBenMuBiaoDaChengRate.js}"></script>
+<script type="text/javascript" th:src="@{/js/xybr/cockpit/jiaoFuRate.js}"></script>
+<script type="text/javascript" th:src="@{/js/xybr/cockpit/maoLiRate.js}"></script>
+<script type="text/javascript" th:src="@{/js/xybr/cockpit/qiJianFeiYongRate.js}"></script>
+
+<script type="text/javascript" th:src="@{/js/xybr/cockpit/chanPinZhiTongRate.js}"></script>
+<script type="text/javascript" th:src="@{/js/xybr/cockpit/shiChangGuZhangRate.js}"></script>
+<script type="text/javascript" th:src="@{/js/xybr/cockpit/kaiXiangBuLiangRate.js}"></script>
+<script type="text/javascript" th:src="@{/js/xybr/cockpit/guiHuaChanPinQiDongRate.js}"></script>
+
+<script type="text/javascript" th:src="@{/js/xybr/cockpit/common.js}"></script>
+
+<script type="text/javascript">
+    var urls = "http://localhost/";
+    //var urls = "http://192.168.31.52:8084/xybrInterFace/";
+    var monthStr = "202405";
+    var jsonObject = '';
+    var zhuanLiUrl = '';
+    /*let projectInfoStr = '';
+    var scrollContent= document.getElementsByClassName('scroll-box').item(0);*/
+    var table = document.getElementsByClassName('scroll-tab-01').item(0);
+    let zuZhiJiXiaoStr = '';
+    var scrollContent01= document.getElementsByClassName('scroll-box-01').item(0);
+    let tenClientDataStr = '';
+    var scrollContent02= document.getElementsByClassName('scroll-box-02').item(0);
+    let projectManageStr = '';
+    var scrollContent03= document.getElementsByClassName('scroll-box-03').item(0);
+    window.onload = function (){
+        var height = window.innerHeight;
+        var element = document.getElementById("body");
+        element.style.height = height - 20 + 'px'; //根据窗口的大小设置body的高
+    }
+    $.ajax({
+        type: "GET",
+        url: urls + "/system/cockpit/getViewData",
+        contentType: "application/json;charset=utf-8",
+        data: {
+            "monthStr": "2024-06-01"
+        },
+        dateType: "json",
+        success: function (data) {
+            jsonObject = data;
+            fillData();
+            fillDataTable();
+            tenClientPie();
+            chinaMap();
+        },
+        error: function (data) {
+            alert("失败");
+        }
+    });
+    function fillData() {
+        document.getElementById('cockpit003').innerText = jsonObject.cockpitData.cockpit003;
+        document.getElementById('cockpit004').innerText = jsonObject.cockpitData.cockpit004;
+        document.getElementById('cockpit005').innerText = jsonObject.cockpitData.cockpit005;
+        document.getElementById('cockpit006').innerText = jsonObject.cockpitData.cockpit006;
+        document.getElementById('cockpit007').innerText = jsonObject.cockpitData.cockpit007;
+        document.getElementById('cockpit008').innerText = jsonObject.cockpitData.cockpit008;
+        document.getElementById('cockpit009').innerText = jsonObject.cockpitData.cockpit009;
+        document.getElementById('cockpit017').innerText = jsonObject.cockpitData.cockpit017;
+        document.getElementById('cockpit018').innerText = jsonObject.cockpitData.cockpit018;
+        document.getElementById('cockpit019').innerText = jsonObject.cockpitData.cockpit019;
+        document.getElementById('cockpit020').innerText = jsonObject.cockpitData.cockpit020;
+        document.getElementById('cockpit021').innerText = jsonObject.cockpitData.cockpit021;
+        document.getElementById('cockpit022').innerText = jsonObject.cockpitData.cockpit022;
+        document.getElementById('cockpit023').innerText = jsonObject.cockpitData.cockpit023;
+        document.getElementById('cockpit024').innerText = jsonObject.cockpitData.cockpit024;
+        document.getElementById('cockpit025').innerText = jsonObject.cockpitData.cockpit025;
+        document.getElementById('cockpit026').innerText = jsonObject.cockpitData.cockpit026;
+        document.getElementById('cockpit027').innerText = jsonObject.cockpitData.cockpit027;
+        document.getElementById('cockpit028').innerText = jsonObject.cockpitData.cockpit028;
+        document.getElementById('cockpit029').innerText = jsonObject.cockpitData.cockpit029;
+        document.getElementById('cockpit030').innerText = jsonObject.cockpitData.cockpit030;
+        document.getElementById('cockpit031').innerText = jsonObject.cockpitData.cockpit031;
+        document.getElementById('cockpit032').innerText = jsonObject.cockpitData.cockpit032;
+        document.getElementById('cockpit033').innerText = jsonObject.cockpitData.cockpit033;
+        document.getElementById('cockpit034').innerText = jsonObject.cockpitData.cockpit034;
+        document.getElementById('cockpit035').innerText = jsonObject.cockpitData.cockpit035;
+        document.getElementById('cockpit036').innerText = jsonObject.cockpitData.cockpit036;
+        document.getElementById('cockpit037').innerText = jsonObject.cockpitData.cockpit037;
+        document.getElementById('cockpit038').innerText = jsonObject.cockpitData.cockpit038;
+        document.getElementById('cockpit039').innerText = jsonObject.cockpitData.cockpit039;
+        document.getElementById('cockpit040').innerText = jsonObject.cockpitData.cockpit040;
+        document.getElementById('cockpit041').innerText = jsonObject.cockpitData.cockpit041;
+        document.getElementById('cockpit049').innerText = jsonObject.cockpitData.cockpit049;
+        document.getElementById('cockpit050').innerText = jsonObject.cockpitData.cockpit050;
+        document.getElementById('cockpit051').innerText = jsonObject.cockpitData.cockpit051;
+        document.getElementById('cockpit052').innerText = jsonObject.cockpitData.cockpit052;
+        document.getElementById('cockpit053').innerText = jsonObject.cockpitData.cockpit053;
+        document.getElementById('cockpit054').innerText = jsonObject.cockpitData.cockpit054;
+        document.getElementById('cockpit055').innerText = jsonObject.cockpitData.cockpit055;
+        document.getElementById('cockpit056').innerText = jsonObject.cockpitData.cockpit056;
+        document.getElementById('cockpit057').innerText = jsonObject.cockpitData.cockpit057;
+        document.getElementById('cockpit058').innerText = jsonObject.cockpitData.cockpit058;
+        /*第一个界面的内容*/
+        let yuQiClient = echarts.init(document.getElementById("yuQiClient"));//逾期客户
+        createyuQiClient(yuQiClient, monthStr);
+        let stockPie = echarts.init(document.getElementById("stockPie"));//库存
+        createStockPie(stockPie, monthStr);
+        let muBiaoDaChengRate = echarts.init(document.getElementById("muBiaoDaChengRate"));//目标达成率
+        createMuBiaoDaChengRate(muBiaoDaChengRate, jsonObject.monthList);
+        let jiaoFuRate = echarts.init(document.getElementById("jiaoFuRate"));//交付率
+        createJiaoFuRate(jiaoFuRate, jsonObject.monthList);
+        let maoLiRate = echarts.init(document.getElementById("maoLiRate"));//毛利率
+        createMaoLiRate(maoLiRate, jsonObject.monthList);
+        let qiJianFeiYongRate = echarts.init(document.getElementById("qiJianFeiYongRate"));//期间费用率
+        createQiJianFeiYongRate(qiJianFeiYongRate, jsonObject.cockpitData.currentMonth, jsonObject.cockpitData.yearsAgoMonth, jsonObject.cockpitData.agoMonth);
+        /*第一个界面的内容*/
+        let chanPinZhiTongRate = echarts.init(document.getElementById("chanPinZhiTongRate"));//产品直通率
+        createChanPinZhiTongRate(chanPinZhiTongRate, jsonObject.monthList);
+        let shiChangGuZhangRate = echarts.init(document.getElementById("shiChangGuZhangRate"));//市场故障率
+        createShiChangGuZhangRate(shiChangGuZhangRate, jsonObject.monthList);
+        let kaiXiangBuLiangRate = echarts.init(document.getElementById("kaiXiangBuLiangRate"));//开箱不良率
+        createKaiXiangBuLiangRate(kaiXiangBuLiangRate, jsonObject.monthList);
+        let guiHuaChanPinQidongRate = echarts.init(document.getElementById("guiHuaChanPinQidongRate"));//已规划产品启动率
+        createGuiHuaChanPinQiDongRate(guiHuaChanPinQidongRate, monthStr);
+    }
+    function tenClientPie() {
+        let newClientPie = echarts.init(document.getElementById("newClientPie"));//新客户占比
+        createNewClient(newClientPie, jsonObject.cockpitData);
+    }
+    function chinaMap() {
+        let chinaMap = echarts.init(document.getElementById("chinaMap"));//中国地图
+        createChinaMap(chinaMap, jsonObject.cockpitData);
+    }
+    function fillDataTable() {
+        //模拟数据
+        //let zhuanLiData = jsonObject.patentList;
+        let zuZhiJiXiaoData = jsonObject.performaneList;
+        let projectInfoList = jsonObject.projectInfoList;
+        let tenClientData = jsonObject.tenClientList;
+        let zhuanLiData = jsonObject.zhuanLiList;
+        for (let n = 0; n < projectInfoList.length; n++) {
+            projectManageStr +=
+                '<tr style="height: 48px;"><td style="font-size: 12px; width: 12%;font-weight: 400;text-align: center">' +
+                projectInfoList[n].department +
+                '</td><td style="font-size: 12px; width: 30%;font-weight: 400;text-align: center">' +
+                projectInfoList[n].projectName +
+                '</td><td style="font-size: 12px; width: 12%;font-weight: 400;text-align: center">' +
+                projectInfoList[n].projectAdmin +
+                '</td><td style="font-size: 12px; width: 16%;font-weight: 400;text-align: center">' +
+                projectInfoList[n].jiXian +
+                '</td><td style="font-size: 12px; width: 16%;font-weight: 400;text-align: center">' +
+                projectInfoList[n].gunDong +
+                '</td><td style="font-size: 12px; width: 14%;font-weight: 400;text-align: center">' +
+                projectInfoList[n].zhuanLiangChan +
+                '</td></tr>';
+        }
+        for (let n = 0; n < zuZhiJiXiaoData.length; n++) {
+            zuZhiJiXiaoStr +=
+                '<tr style="height: 24px;"><td style="font-size: 12px; width: 20%;font-weight: 400;text-align: center">' +
+                zuZhiJiXiaoData[n].rank +
+                '</td><td style="font-size: 12px; width: 40%;font-weight: 400;text-align: center">' +
+                zuZhiJiXiaoData[n].department +
+                '</td><td style="font-size: 12px; width: 20%;font-weight: 400;text-align: center">' +
+                zuZhiJiXiaoData[n].score +
+                '</td><td style="font-size: 12px; width: 20%;font-weight: 400;text-align: center">' +
+                zuZhiJiXiaoData[n].level +
+                '</td></tr>';
+        }
+        for (let n = 0; n < tenClientData.length; n++) {
+            tenClientDataStr +=
+                '<tr style="height: 10px;"><td>' +
+                tenClientData[n].name +
+                '</td><td>' +
+                tenClientData[n].sale +
+                '</td></tr>';
+        }
+        for (let n = 0; n < zhuanLiData.length; n++) {
+            zhuanLiUrl +=
+                '<div class="swiper-slide imgSlide"><img src="http://192.168.31.52:8089/' +
+                JSON.parse(zhuanLiData[n].url)[0].url +
+                '"/></div>';
+        }
+
+        /*$('.scrollContent').append(zhuanLiStr);
+        $('.scrollContent').append(zhuanLiStr);//不能使用innerHtml  插入两次 目的是复制一份数据 使滚动区域高度大于容器高度 实现滚动效果*/
+        $('.scrollContent-01').append(zuZhiJiXiaoStr);
+        $('.scrollContent-01').append(zuZhiJiXiaoStr);//不能使用innerHtml  插入两次 目的是复制一份数据 使滚动区域高度大于容器高度 实现滚动效果
+        $('.scrollContent-02').append(tenClientDataStr);
+        $('.scrollContent-02').append(tenClientDataStr);//不能使用innerHtml  插入两次 目的是复制一份数据 使滚动区域高度大于容器高度 实现滚动效果
+        $('.scrollContent-03').append(projectManageStr);
+        $('.scrollContent-03').append(projectManageStr);//不能使用innerHtml  插入两次 目的是复制一份数据 使滚动区域高度大于容器高度 实现滚动效果
+        $('.xuanZhuanMuMaWrapper').append(zhuanLiUrl);
+        /*mySwiper02.update();*/
+    }
+    //全屏功能
+    document.getElementById("fullScreenBg").ondblclick = function() {
+        var elem = document.getElementById("fullScreenBg");
+        elem.style.width = "100%";
+        elem.style.height = "100%";
+        elem.style.overflowY = "scroll";
+        elem.style.overflow = "hidden";
+        elem.style.backgroundSize = "cover";
+        elem.style.backgroundImage = "url('/img/backImage.jpg')";
+        requestFullScreen(elem); // 某个页面元素
+    };
+    //全屏方法
+    function requestFullScreen(element) {
+        // 判断各种浏览器，找到正确的方法
+        var requestMethod = element.requestFullScreen || //W3C
+            element.webkitRequestFullScreen || //FireFox
+            element.mozRequestFullScreen || //Chrome等
+            element.msRequestFullScreen; //IE11
+        if (requestMethod) {
+            requestMethod.call(element);
+        } else if (typeof window.ActiveXObject !== "undefined") { //for Internet Explorer
+            var wscript = new ActiveXObject("WScript.Shell");
+            if (wscript !== null) {
+                wscript.SendKeys("{F11}");
+            }
+        }
+    }
+
+    roll(20);
+    //滚动函数
+    function roll(t) {
+
+        var timer = setInterval(rollStart, t); // 间隔时间t
+        // 鼠标移入table时暂停滚动
+        table.onmouseover = function () {
+            clearInterval(timer);
+        };
+        // 鼠标移出table后继续滚动
+        table.onmouseout = function () {
+            timer = setInterval(rollStart, t);
+        };
+    }
+    // 开始滚动函数
+    function rollStart() {
+
+        // 正常滚动不断给scrollTop的值+1,当滚动高度大于列表内容高度时恢复为0
+        /*if (scrollContent.scrollTop >= scrollContent.scrollHeight / 2) {
+            //注此处高度相当于为俩个tbody高度 需除2
+            scrollContent.scrollTop = 0;
+        } else {
+            scrollContent.scrollTop++;
+        }*/
+        // 正常滚动不断给scrollTop的值+1,当滚动高度大于列表内容高度时恢复为0
+        if (scrollContent01.scrollTop >= scrollContent01.scrollHeight / 2) {
+            //注此处高度相当于为俩个tbody高度 需除2
+            scrollContent01.scrollTop = 0;
+        } else {
+            scrollContent01.scrollTop++;
+        }
+
+        if (scrollContent02.scrollTop >= scrollContent02.scrollHeight / 2) {
+            //注此处高度相当于为俩个tbody高度 需除2
+            scrollContent02.scrollTop = 0;
+        } else {
+            scrollContent02.scrollTop++;
+        }
+
+        if (scrollContent03.scrollTop >= scrollContent03.scrollHeight / 2) {
+            //注此处高度相当于为俩个tbody高度 需除2
+            scrollContent03.scrollTop = 0;
+        } else {
+            scrollContent03.scrollTop++;
+        }
+    }
+
+    var mySwiper01 = new Swiper ('.swiper', {
         direction: 'horizontal', // 垂直切换选项
         loop: true, // 循环模式选项
 
         // 如果需要分页器
-        pagination: {
+        /*pagination: {
             el: '.swiper-pagination',
-        },
+        },*/
 
         // 如果需要前进后退按钮
         navigation: {
@@ -64,10 +1248,38 @@
         },
 
         // 如果需要滚动条
-        scrollbar: {
+        /*scrollbar: {
             el: '.swiper-scrollbar',
-        },
+        },*/
+
+        /*autoplay: {
+            deplay: 1000,
+            disableOnInteraction: true
+        },*/
+
+        speed: 2000,
     })
+    var mySwiper02 = new Swiper ('.xuanZhuanMuMa', {
+        autoplay: {
+            deplay: 1000,
+            disableOnInteraction: true
+        },
+        loop: true,
+        speed: 2000,
+        tdFlow: {
+            rotate : 50,
+            stretch :0,
+            depth: 100,
+            modifier : 1,
+            shadows : true
+        }
+    })
+    var imageContainers = document.querySelectorAll('.section');
+    imageContainers.forEach(function(container) {
+        container.addEventListener('dblclick', function() {
+            requestFullScreen(this.querySelector('.img'));
+        });
+    });
 </script>
 </body>
 </html>

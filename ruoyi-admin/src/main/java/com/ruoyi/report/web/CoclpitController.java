@@ -46,13 +46,13 @@ public class CoclpitController extends BaseController
         JSONObject jsonObject = new JSONObject();
         CockpitData cockpitData = cockpitService.getCockpitData(monthStr);
         List<TenClient> tenClientList = cockpitService.getTenClient(monthStr);
-        List<Patent> patentList = cockpitService.getPatent(monthStr);
         List<Performance> performaneList = cockpitService.getPerformance(monthStr);
         List<ProjectInfo> projectInfoList = cockpitService.getProjectInfo(monthStr);
+        List<ZhuanLi> zhuanLiList = cockpitService.getZhuanLiList(monthStr);
+        jsonObject.put("zhuanLiList",zhuanLiList);
         jsonObject.put("cockpitData",cockpitData);
         jsonObject.put("monthList",cockpitData.getMonthList());
         jsonObject.put("tenClientList",tenClientList);
-        jsonObject.put("patentList",patentList);
         jsonObject.put("performaneList",performaneList);
         jsonObject.put("projectInfoList",projectInfoList);
         return jsonObject;
@@ -163,16 +163,24 @@ public class CoclpitController extends BaseController
     }
     @GetMapping("/getQIJianFeiYongRate")
     @ResponseBody
-    public JSONObject getQIJianFeiYongRate(String monthStr)
+    public JSONObject getQIJianFeiYongRate(String currentMonth,String yearsAgoMonth,String agoMonth)
     {
-        List<String> monthList = new ArrayList<>();
-        String[] arrStr = monthStr.split(",");
-        for(String str : arrStr){
-            monthList.add(str);
-        }
         JSONObject jsonObject = new JSONObject();
-        List<QIJianFeiYongRate> qIJianFeiYongRateData = cockpitService.getQIJianFeiYongRate(monthList);
-        jsonObject.put("qIJianFeiYongRateData",qIJianFeiYongRateData);
+        CockpitData cockpitData = new CockpitData();
+        cockpitData.setCurrentMonth(currentMonth);
+        cockpitData.setYearsAgoMonth(yearsAgoMonth);
+        cockpitData.setAgoMonth(agoMonth);
+        List<QIJianFeiYongRate> qIJianFeiYongRateData = cockpitService.getQIJianFeiYongRate(cockpitData);
+        List<QIJianFeiYongRate> yearsAgoList = qIJianFeiYongRateData.stream().filter(item -> yearsAgoMonth.equals(item.getMonth())).collect(Collectors.toList());
+        List<QIJianFeiYongRate> monthAgoList = qIJianFeiYongRateData.stream().filter(item -> agoMonth.equals(item.getMonth())).collect(Collectors.toList());
+        List<QIJianFeiYongRate> monthCurrList = qIJianFeiYongRateData.stream().filter(item -> currentMonth.equals(item.getMonth())).collect(Collectors.toList());
+        List<String> ratelist = monthCurrList.stream().map(QIJianFeiYongRate::getRate).collect(Collectors.toList());
+        List<String> typelist = monthCurrList.stream().map(QIJianFeiYongRate::getType).collect(Collectors.toList());
+        jsonObject.put("yearsAgoList",yearsAgoList);
+        jsonObject.put("monthAgoList",monthAgoList);
+        jsonObject.put("monthCurrList",monthCurrList);
+        jsonObject.put("ratelist",ratelist);
+        jsonObject.put("typelist",typelist);
         return jsonObject;
     }
     @GetMapping("/getChanPinZhiTongRate")
@@ -253,6 +261,15 @@ public class CoclpitController extends BaseController
         jsonObject.put("departmentList",departmentList);
         jsonObject.put("qiDongList",qiDongList);
         jsonObject.put("guiHuaList",guiHuaList);
+        return jsonObject;
+    }
+    @GetMapping("/getZhuanLiData")
+    @ResponseBody
+    public JSONObject getZhuanLiData(String monthStr)
+    {
+        JSONObject jsonObject = new JSONObject();
+        List<ZhuanLi> zhuanLiList = cockpitService.getZhuanLiList(monthStr);
+        jsonObject.put("zhuanLiList",zhuanLiList);
         return jsonObject;
     }
 }

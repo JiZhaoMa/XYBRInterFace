@@ -9,7 +9,7 @@ function createChanPinZhiTongRate(line, monthList) {
         },
         legend: {
             data: ['20kW', '30kW', '40kW'],
-            top: '5%',
+            //top: '5%',
             align: 'right',
             right: 10,
             textStyle: {
@@ -23,7 +23,8 @@ function createChanPinZhiTongRate(line, monthList) {
             top: '20%',
             left: '5%',
             right: '5%',
-            bottom: '15%',
+            bottom: '4%',
+            containLabel: true
         },
         xAxis: [{
             type: 'category',

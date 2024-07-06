@@ -7,7 +7,6 @@ import java.util.List;
 public interface CockpitService {
     public CockpitData getCockpitData(String month);
     public List<TenClient> getTenClient(String month);
-    public List<Patent> getPatent(String month);
     public List<Performance> getPerformance(String month);
 
     List<YuQiClientData> getYuQiClientData(String monthStr);
@@ -20,7 +19,7 @@ public interface CockpitService {
 
     List<MaoLi> getMaoLi(List<String> monthList);
 
-    List<QIJianFeiYongRate> getQIJianFeiYongRate(List<String> monthList);
+    List<QIJianFeiYongRate> getQIJianFeiYongRate(CockpitData cockpitData);
 
     List<ChanPinZhiTongRate> getChanPinZhiTongRate(List<String> monthList);
 
@@ -31,4 +30,6 @@ public interface CockpitService {
     List<ChanPinQiDongRate> getChanPinQiDongRate(String monthStr);
 
     List<ProjectInfo> getProjectInfo(String monthStr);
+
+    List<ZhuanLi> getZhuanLiList(String monthStr);
 }

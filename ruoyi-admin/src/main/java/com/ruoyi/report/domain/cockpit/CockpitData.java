@@ -51,7 +51,115 @@ public class CockpitData {
     private String cockpit047;
     private String cockpit048;
     private String cockpit049;
+    private String cockpit050;
+    private String cockpit051;
+    private String cockpit052;
+    private String cockpit053;
+    private String cockpit054;
+    private String cockpit055;
+    private String cockpit056;
+    private String cockpit057;
+    private String cockpit058;
     private String monthList;
+    private String currentMonth;
+    private String yearsAgoMonth;
+    private String agoMonth;
+
+    public String getCockpit051() {
+        return cockpit051;
+    }
+
+    public void setCockpit051(String cockpit051) {
+        this.cockpit051 = cockpit051;
+    }
+
+    public String getCockpit052() {
+        return cockpit052;
+    }
+
+    public void setCockpit052(String cockpit052) {
+        this.cockpit052 = cockpit052;
+    }
+
+    public String getCockpit053() {
+        return cockpit053;
+    }
+
+    public void setCockpit053(String cockpit053) {
+        this.cockpit053 = cockpit053;
+    }
+
+    public String getCockpit054() {
+        return cockpit054;
+    }
+
+    public void setCockpit054(String cockpit054) {
+        this.cockpit054 = cockpit054;
+    }
+
+    public String getCockpit055() {
+        return cockpit055;
+    }
+
+    public void setCockpit055(String cockpit055) {
+        this.cockpit055 = cockpit055;
+    }
+
+    public String getCockpit056() {
+        return cockpit056;
+    }
+
+    public void setCockpit056(String cockpit056) {
+        this.cockpit056 = cockpit056;
+    }
+
+    public String getCockpit057() {
+        return cockpit057;
+    }
+
+    public void setCockpit057(String cockpit057) {
+        this.cockpit057 = cockpit057;
+    }
+
+    public String getCockpit058() {
+        return cockpit058;
+    }
+
+    public void setCockpit058(String cockpit058) {
+        this.cockpit058 = cockpit058;
+    }
+
+    public String getCockpit050() {
+        return cockpit050;
+    }
+
+    public void setCockpit050(String cockpit050) {
+        this.cockpit050 = cockpit050;
+    }
+
+    public String getCurrentMonth() {
+        return currentMonth;
+    }
+
+    public void setCurrentMonth(String currentMonth) {
+        this.currentMonth = currentMonth;
+    }
+
+    public String getYearsAgoMonth() {
+        return yearsAgoMonth;
+    }
+
+    public void setYearsAgoMonth(String yearsAgoMonth) {
+        this.yearsAgoMonth = yearsAgoMonth;
+    }
+
+    public String getAgoMonth() {
+        return agoMonth;
+    }
+
+    public void setAgoMonth(String agoMonth) {
+        this.agoMonth = agoMonth;
+    }
 
     public String getMonthList() {
         return monthList;

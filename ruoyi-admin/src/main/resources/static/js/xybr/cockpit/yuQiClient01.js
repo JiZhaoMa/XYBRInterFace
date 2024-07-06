@@ -14,7 +14,7 @@ function createyuQiClient(yuQiClientBar, monthStr) {
         },
         legend: {
             data: ['1-6个月', '6-12个月','12个月以上'],
-            top: '-1%',
+            top: '-3%',
             align: 'right',
             right: 10,
             textStyle: {
@@ -56,7 +56,7 @@ function createyuQiClient(yuQiClientBar, monthStr) {
         },
         series: [
             {
-                name: '6-9个月',
+                name: '1-6个月',
                 type: 'bar',
                 stack: '总量',
                 barWidth: 15,
@@ -79,7 +79,7 @@ function createyuQiClient(yuQiClientBar, monthStr) {
                 z:  10,
             },
             {
-                name: '9-12个月',
+                name: '6-12个月',
                 type: 'bar',
                 stack: '总量',
                 itemStyle:{

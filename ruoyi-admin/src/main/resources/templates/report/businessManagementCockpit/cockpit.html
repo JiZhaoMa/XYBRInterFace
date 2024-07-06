@@ -9,6 +9,29 @@
         <div class="title">
             <span>星源经营管理驾驶舱</span>
         </div>
+        <div style="position: fixed; left: 84%; top: 3%">
+            <select name="selectYear" id="selectYear" style="background-color: rgb(21,51,114); color: #FFFFFF; border: 0.2px solid #FFF; border-radius: 3px 3px 3px 3px;">
+                <option value="2022">2022</option>
+                <option value="2023">2023</option>
+                <option value="2024" selected="selected">2024</option>
+                <option value="2025">2025</option>
+                <option value="2026">2026</option>
+            </select>
+            <select name="selectMonth" id="selectMonth" style="background-color: rgb(21,51,114); color: #FFFFFF; border: 0.2px solid #FFF; border-radius: 3px 3px 3px 3px;">
+                <option value="01">一月</option>
+                <option value="02">二月</option>
+                <option value="03">三月</option>
+                <option value="04">四月</option>
+                <option value="05" selected="selected">五月</option>
+                <option value="06">六月</option>
+                <option value="07">七月</option>
+                <option value="08">八月</option>
+                <option value="09">九月</option>
+                <option value="10">十月</option>
+                <option value="11">十一月</option>
+                <option value="12">十二月</option>
+            </select>
+        </div>
     </div>
     <div class="swiper-wrapper">
         <div class="swiper-slide contentMain" id="001">
@@ -89,7 +112,7 @@
                     <div style="color: #FFFFFF;width: 25%;height: 12%;position: absolute;top: -5%;background-color: rgb(21, 51, 114);text-align: center;left: 3%;">
                         <span>库存</span>
                     </div>
-                    <div style="height: 40%;width: 40%;text-align: center; color: #FFFFFF; background-image: url('http://localhost:80/img/stockBack.png'); background-size: cover;top: 30%;position: relative;">
+                    <div style="height: 40%;width: 40%;text-align: center; color: #FFFFFF; background-image: url('/img/stockBack.png'); background-size: cover;top: 30%;position: relative;">
                         <div style="color: #FFFFFF;font-weight: 800;top: 20%; position: relative; ">
                             <span>库存金额（万）</span>
                         </div>
@@ -265,9 +288,9 @@
                     <div style="color: #FFFFFF;width: 25%;height: 3%;position: absolute;top: -1%;background-color: rgb(21, 51, 114);text-align: center;left: 3%;align-items: center;justify-content:center ;display: flex">
                         <span>项目管理</span>
                     </div>
-                    <div style="width: 100%; height: 25%;position: absolute;">
+                    <div style="width: 100%; height: 20%;position: absolute;">
                         <div style="width: 100%;height: 50%; display: flex">
-                            <div style="width: 50%;height: 100%; background-image: url('http://localhost:80/img/zanTing.png'); background-size: 100% 100%;display: flex;justify-content: center; align-items: center; ">
+                            <div style="width: 50%;height: 100%; background-image: url('/img/zanTing.png'); background-size: 100% 100%;display: flex;justify-content: center; align-items: center; ">
                                 <div style="color: #1A2C78; width: 70%; height: 50%;display: flex;justify-content: center; align-items: center;top: 10%;position: relative;">
                                     <div style="font-size: x-large; font-weight: 600; margin: 5%">
                                         <span>在研</span>
@@ -278,7 +301,7 @@
 
                                 </div>
                             </div>
-                            <div style="width: 50%;height: 100%; background-image: url('http://localhost:80/img/zanTing.png'); background-size: 100% 100%;display: flex;justify-content: center; align-items: center;">
+                            <div style="width: 50%;height: 100%; background-image: url('/img/zanTing.png'); background-size: 100% 100%;display: flex;justify-content: center; align-items: center;">
                                 <div style="color: #33FFCC; width: 70%; height: 50%;display: flex;justify-content: center; align-items: center;top: 10%;position: relative;">
                                     <div style="font-size: x-large; font-weight: 600; margin: 5%">
                                         <span>转产</span>
@@ -291,7 +314,7 @@
                             </div>
                         </div>
                         <div style="width: 100%;height: 50%; display: flex">
-                            <div style="width: 50%;height: 100%; background-image: url('http://localhost:80/img/zanTing.png'); background-size: 100% 100%;display: flex;justify-content: center; align-items: center;">
+                            <div style="width: 50%;height: 100%; background-image: url('/img/zanTing.png'); background-size: 100% 100%;display: flex;justify-content: center; align-items: center;">
                                 <div style="color: #FFEB3B; width: 70%; height: 50%;display: flex;justify-content: center; align-items: center;top: 10%;position: relative;">
                                     <div style="font-size: x-large; font-weight: 600; margin: 5%">
                                         <span>暂停</span>
@@ -302,7 +325,7 @@
 
                                 </div>
                             </div>
-                            <div style="width: 50%;height: 100%; background-image: url('http://localhost:80/img/zanTing.png'); background-size: 100% 100%;display: flex;justify-content: center; align-items: center;">
+                            <div style="width: 50%;height: 100%; background-image: url('/img/zanTing.png'); background-size: 100% 100%;display: flex;justify-content: center; align-items: center;">
                                 <div style="color: #eb3600; width: 70%; height: 50%;display: flex;justify-content: center; align-items: center;top: 10%;position: relative;">
                                     <div style="font-size: x-large; font-weight: 600; margin: 5%">
                                         <span>终止</span>
@@ -315,7 +338,7 @@
                             </div>
                         </div>
                     </div>
-                    <div style="top: 2%;left: 33%;width: 34%;height: 25%;justify-content: center;align-items: center;display: flex;position: absolute;">
+                    <div style="top: 2%;left: 33%;width: 34%;height: 20%;justify-content: center;align-items: center;display: flex;position: absolute;">
                         <div style="color: #8a1f11;font-size: x-large; font-weight: 600; margin: 5%">
                             <span>总数量</span>
                         </div>
@@ -323,26 +346,20 @@
                             <span id="cockpit023"></span>
                         </div>
                     </div>
-                    <div style="width: 100%;height: 30%;top:25%;position:absolute;">
+                    <div style="width: 100%;height: 40%;top:20%;position:absolute;">
                         <table class="table">
                             <thead>
                             <tr>
-                                <th style="font-size: 12px; width: 12%;font-weight: 400;text-align: center">研发部</th>
-                                <th style="font-size: 12px; width: 30%;font-weight: 400;text-align: center">项目名称</th>
-                                <th style="font-size: 12px; width: 12%;font-weight: 400;text-align: center">项目经理</th>
-                                <th style="font-size: 12px; width: 18%;font-weight: 400;text-align: center">基线</th>
-                                <th style="font-size: 12px; width: 18%;font-weight: 400;text-align: center">滚动</th>
-                                <th style="font-size: 12px; width: 10%;font-weight: 400;text-align: center">转量产</th>
-                            </tr>
-                            <!--<tr>
-                                <th rowspan="2" style="color: #00a65a;">排名</th>
-                                <th rowspan="2">部门</th>
-                                <th colspan="2">测试</th>
+                                <th rowspan="2" style="font-size: 12px; width: 12%;font-weight: 400;text-align: center">研发部</th>
+                                <th rowspan="2"  style="font-size: 12px; width: 30%;font-weight: 400;text-align: center">项目名称</th>
+                                <th rowspan="2"  style="font-size: 12px; width: 12%;font-weight: 400;text-align: center">项目经理</th>
+                                <th colspan="2"  style="font-size: 12px; width: 34%;font-weight: 400;text-align: center">转中试</th>
+                                <th rowspan="2"  style="font-size: 12px; width: 14%;font-weight: 400;text-align: center">转量产</th>
                             </tr>
                             <tr>
-                                <th>基线</th>
-                                <th>滚动</th>
-                            </tr>-->
+                                <th style="font-size: 12px; width: 16%;font-weight: 400;text-align: center">基线</th>
+                                <th style="font-size: 12px; width: 16%;font-weight: 400;text-align: center">滚动</th>
+                            </tr>
                             </thead>
                         </table>
 
@@ -357,11 +374,50 @@
                     <div style="color: #FFFFFF;width: 15%;height: 10%;position: absolute;top: -5%;background-color: rgb(21, 51, 114);text-align: center;left: 3%;align-items: center;justify-content:center ;display: flex">
                         <span>专利</span>
                     </div>
-                    <div style="width: 20%; height: 100%">
-                        <div style="position: relative;left: 30%; top: 20%">
-                            <div style="color: #FFFFFF;font-weight: 400; font-size: xx-large">
+                    <div style="height: 20%; width: 100%; position: absolute; left: 10%">
+                        <div style="height: 50%;width: 100%;position:relative;float: left;display: inline-flex;">
+                            <div style="left: 8%;width:12%;position: relative;color: #FFFFFF;font-weight: 400;/* font-size: x-large; */">
                                 <span>累计</span>
                             </div>
+                            <div style="color: #FFFFFF;left: 12%;width: 20%;position: relative;">
+                                <span>总专利数</span>
+                                <span id="cockpit051" style="font-size: medium;left: 5%;font-weight: 800;position: relative;background: linear-gradient(to right, #ff0000, #ffff00);-webkit-background-clip: text;-webkit-text-fill-color: transparent;font-family: fantasy;"></span>
+                            </div>
+                            <div style="color: #FFFFFF;left: 12%;width: 15%;position: relative;/* font-weight: 800; */top: 10%">
+                                <span>发明</span>
+                                <span id="cockpit052"  style="font-size: medium;left: 5%;font-weight: 800;position: relative;background: linear-gradient(to right, #ff0000, #ffff00);-webkit-background-clip: text;-webkit-text-fill-color: transparent;font-family: fantasy;"></span>
+                            </div>
+                            <div style="left: 12%;width: 20%;position: relative;color: #FFFFFF;/* font-weight: 800; */">
+                                <span>实用新型</span>
+                                <span id="cockpit053"  style="font-size: medium;left: 5%;font-weight: 800;position: relative;background: linear-gradient(to right, #ff0000, #ffff00);-webkit-background-clip: text;-webkit-text-fill-color: transparent;font-family: fantasy;"></span>
+                            </div>
+                            <div style="left: 12%;width: 15%;position: relative;color: #FFFFFF;/* font-weight: 800; */">
+                                <span>外观</span>
+                                <span id="cockpit054"  style="font-size: medium;left: 5%;font-weight: 800;position: relative;background: linear-gradient(to right, #ff0000, #ffff00);-webkit-background-clip: text;-webkit-text-fill-color: transparent;font-family: fantasy;"></span>
+                            </div>
+                        </div>
+                        <div style="height: 50%;width: 100%;position:relative;display: inline-flex;float: left;">
+                            <div style="left: 8%;width:12%;position: relative;color: #FFFFFF;font-weight: 400;/* font-size: x-large; */">
+                                <span>年度新增</span>
+                            </div>
+                            <div style="color: #FFFFFF;/* font-weight: 800; */left: 12%;width: 20%;position: relative;">
+                                <span style="width: 70%;">申请</span>
+                                <span id="cockpit055"  style="width: 30%;font-size: medium;left: 5%;font-weight: 800;position: relative;background: linear-gradient(to right, #ff0000, #ffff00);-webkit-background-clip: text;-webkit-text-fill-color: transparent;font-family: fantasy;"></span>
+                            </div>
+                            <div style="left: 12%;width: 15%;position: relative;color: #FFFFFF;/* font-weight: 800; */">
+                                <span style="width: 70%;">发明</span>
+                                <span id="cockpit056"  style="width: 30%;font-size: medium;left: 5%;font-weight: 800;position: relative;background: linear-gradient(to right, #ff0000, #ffff00);-webkit-background-clip: text;-webkit-text-fill-color: transparent;font-family: fantasy;"></span>
+                            </div>
+                            <div style="left: 12%;width: 20%;position: relative;color: #FFFFFF;/* font-weight: 800; */">
+                                <span style="width: 70%;">实用新型</span>
+                                <span id="cockpit057"  style="width: 30%;font-size: medium;left: 5%;font-weight: 800;position: relative;background: linear-gradient(to right, #ff0000, #ffff00);-webkit-background-clip: text;-webkit-text-fill-color: transparent;font-family: fantasy;"></span>
+                            </div>
+                            <div style="left: 12%;width: 15%;position: relative;color: #FFFFFF;/* font-weight: 800; */">
+                                <span style="width: 70%;">外观</span>
+                                <span id="cockpit058"  style="width: 30%;font-size: medium;left: 5%;font-weight: 800;position: relative;background: linear-gradient(to right, #ff0000, #ffff00);-webkit-background-clip: text;-webkit-text-fill-color: transparent;font-family: fantasy;"></span>
+                            </div>
+                        </div>
+                        <!--<div style="height: 50%; width: 100%; position:relative;float: left">
                             <div style="color: #FFFFFF;font-weight: 800">
                                 <span>总专利数</span>
                                 <span style="font-size: x-large;left: 5% ; font-weight: 800;position: relative; background: linear-gradient(to right, #ff0000, #ffff00); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-family: fantasy;">20</span>
@@ -379,29 +435,8 @@
                                 <span style="font-size: x-large;left: 5% ; font-weight: 800;position: relative; background: linear-gradient(to right, #ff0000, #ffff00); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-family: fantasy;">20</span>
                             </div>
                         </div>
-                    </div>
-                    <div class="xuanZhuanMuMa swiper">
-                        <div class="swiper-wrapper xuanZhuanMuMaWrapper">
-                            <div class="swiper-slide imgSlide">
-                                <img src="http://123.249.26.42/obpm/uploads/lib/icon/upload/%E4%B8%8A%E7%BA%BF%E5%AE%A3%E5%AF%BC.png"/>
-                            </div>
-                            <div class="swiper-slide imgSlide">
-                                <img src="http://123.249.26.42/obpm/uploads/lib/icon/upload/%E4%B8%8A%E7%BA%BF%E5%AE%A3%E5%AF%BC.png"/>
-                            </div>
-                            <div class="swiper-slide imgSlide">
-                                <img src="http://123.249.26.42/obpm/uploads/lib/icon/upload/%E4%B8%8A%E7%BA%BF%E5%AE%A3%E5%AF%BC.png"/>
-                            </div>
-                            <div class="swiper-slide imgSlide">
-                                <img src="http://123.249.26.42/obpm/uploads/lib/icon/upload/%E4%B8%8A%E7%BA%BF%E5%AE%A3%E5%AF%BC.png"/>
-                            </div>
-                            <div class="swiper-slide imgSlide">
-                                <img src="http://123.249.26.42/obpm/uploads/lib/icon/upload/%E4%B8%8A%E7%BA%BF%E5%AE%A3%E5%AF%BC.png"/>
-                            </div>
-                        </div>
-                    </div>
-                    <div style="width: 20%; height: 100%">
-                        <div style="position: relative;right: 30%;top: 20%;">
-                            <div style="color: #FFFFFF;font-weight: 400; font-size: xx-large">
+                        <div style="height: 50%; width: 100%; position:relative;display: inline">
+                            <div style="color: #FFFFFF;font-weight: 400; font-size: x-large">
                                 <span>年度新增</span>
                             </div>
                             <div style="color: #FFFFFF;font-weight: 800">
@@ -420,6 +455,16 @@
                                 <span style="width: 70%;">外观</span>
                                 <span style="width: 30%;font-size: x-large;left: 5% ; font-weight: 800;position: relative; background: linear-gradient(to right, #ff0000, #ffff00); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-family: fantasy;">20</span>
                             </div>
+                        </div>-->
+                    </div>
+                    <div class="stage">
+                        <div class="container">
+                            <!--<img class="img" src="/img/zhuanli01.png"/>
+                            <img class="img" src="/img/zhuanli01.png"/>
+                            <img class="img" src="/img/zhuanli01.png"/>
+                            <img class="img" src="/img/zhuanli01.png"/>
+                            <img class="img" src="/img/zhuanli01.png"/>
+                            <img class="img" src="/img/zhuanli01.png"/>-->
                         </div>
                     </div>
                 </div>
@@ -451,7 +496,7 @@
                         <span>人力资源管理</span>
                     </div>
                     <div style="width: 100%;height: 25%; display: flex;top: 10%; position: relative;align-items: center;">
-                        <div style="width: 45%;height: 100%; background-image: url('http://localhost:80/img/displayData04.png'); background-size: 100% 100%;left: 4%; position: relative;display: flex;">
+                        <div style="width: 45%;height: 100%; background-image: url('/img/displayData04.png'); background-size: 100% 100%;left: 4%; position: relative;display: flex;">
                             <div style="width: 60%; height: 35%; color: #FFF; font-size: large; left: 3%; position: relative; top: 7%;background-color: rgba(0,202,149,1);text-align: center;">
                                 <span>薪酬总额</span>
                             </div>
@@ -464,7 +509,7 @@
                                 <span style="left: 5%; position:relative;" id="cockpit034"></span>
                             </div>
                         </div>
-                        <div style="width: 45%;height: 100%; background-image: url('http://localhost:80/img/displayData04.png'); background-size: 100% 100%;left: 7%; position: relative;display: flex;">
+                        <div style="width: 45%;height: 100%; background-image: url('/img/displayData04.png'); background-size: 100% 100%;left: 7%; position: relative;display: flex;">
                             <div style="width: 60%; height: 35%; color: #FFF; font-size: large; left: 3%; position: relative; top: 7%;background-color: rgba(0,202,149,1);text-align: center;">
                                 <span>员工总数</span>
                             </div>
@@ -478,7 +523,7 @@
                         </div>
                     </div>
                     <div style="width: 100%;height: 25%; display: flex;top: 15%; position: relative;align-items: center;">
-                        <div style="width: 45%;height: 100%; background-image: url('http://localhost:80/img/displayData04.png'); background-size: 100% 100%;left: 4%; position: relative;display: flex;">
+                        <div style="width: 45%;height: 100%; background-image: url('/img/displayData04.png'); background-size: 100% 100%;left: 4%; position: relative;display: flex;">
                             <div style="width: 60%; height: 35%; color: #FFF; font-size: large; left: 3%; position: relative; top: 7%;background-color: rgba(0,202,149,1);text-align: center;">
                                 <span>招聘完成率</span>
                             </div>
@@ -490,7 +535,7 @@
                                 <span style="left: 5%; position:relative;" id="cockpit036"></span>
                             </div>
                         </div>
-                        <div style="width: 45%;height: 100%; background-image: url('http://localhost:80/img/displayData04.png'); background-size: 100% 100%;left: 7%; position: relative;display: flex;">
+                        <div style="width: 45%;height: 100%; background-image: url('/img/displayData04.png'); background-size: 100% 100%;left: 7%; position: relative;display: flex;">
                             <div style="width: 60%; height: 35%; color: #FFF; font-size: large; left: 3%; position: relative; top: 7%;background-color: rgba(0,202,149,1);text-align: center;">
                                 <span>人员流失率</span>
                             </div>
@@ -504,7 +549,7 @@
                         </div>
                     </div>
                     <div style="width: 100%;height: 25%; display: flex;top: 20%; position: relative;align-items: center;">
-                        <div style="width: 45%;height: 100%; background-image: url('http://localhost:80/img/displayData04.png'); background-size: 100% 100%;left: 4%; position: relative;display: flex;">
+                        <div style="width: 45%;height: 100%; background-image: url('/img/displayData04.png'); background-size: 100% 100%;left: 4%; position: relative;display: flex;">
                             <div style="width: 60%; height: 35%; color: #FFF; font-size: large; left: 3%; position: relative; top: 7%;background-color: rgba(0,202,149,1);text-align: center;">
                                 <span>研发占比</span>
                             </div>
@@ -516,7 +561,7 @@
                                 <span style="left: 5%; position:relative;" id="cockpit038"></span>
                             </div>
                         </div>
-                        <div style="width: 45%;height: 100%; background-image: url('http://localhost:80/img/displayData04.png'); background-size: 100% 100%;left: 7%; position: relative;display: flex;">
+                        <div style="width: 45%;height: 100%; background-image: url('/img/displayData04.png'); background-size: 100% 100%;left: 7%; position: relative;display: flex;">
                             <div style="width: 60%; height: 35%; color: #FFF; font-size: large; left: 3%; position: relative; top: 7%;background-color: rgba(0,202,149,1);text-align: center;">
                                 <span>培训完成率</span>
                             </div>
@@ -534,7 +579,10 @@
                     <div style="color: #FFFFFF;width: 40%;height: 20%;position: absolute;top: -8%;background-color: rgb(21, 51, 114);text-align: center;left: 3%;align-items: center;justify-content:center ;display: flex">
                         <span>已规划产品启动率</span>
                     </div>
-                    <div style="width: 100%; height: 90%; position:relative; top: 10%" id="guiHuaChanPinQidongRate">
+                    <div style="font-size: x-large;font-weight: 800; width: 25%; height: 25%; position:absolute; top: 5%; left: 55%; background: linear-gradient(to right, #ff0000, #ffff00); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-family: fantasy;">
+                        <span id="cockpit050"></span>
+                    </div>
+                    <div style="width: 100%; height: 85%; position:relative; top: 15%" id="guiHuaChanPinQidongRate">
 
                     </div>
                 </div>
@@ -552,6 +600,69 @@
     <!--<div class="swiper-scrollbar" style="background-color: #FFFFFF"></div>-->
 </div>
 <style>
+    @keyframes rotating {
+        0%{
+            transform: translate(-50%, -50%) rotateY(0deg);
+        }
+        100%{
+            transform: translate(-50%, -50%) rotateY(360deg);
+        }
+    }
+    .stage{
+        perspective: 1200px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 100%;
+        height: 100%;
+    }
+    .container {
+        position: absolute;
+        top: 60%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 50%;
+        height: 60%;
+        transform-style: preserve-3d;
+        animation-name: rotating;
+        animation-duration: 30s;
+        animation-timing-function: linear;
+        animation-iteration-count: infinite;
+        animation-play-state: running;
+    }
+    .container img{
+        width: 80%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        transition: all 0.3s;
+
+    }
+    .container img:hover{
+        box-shadow: 0 0 8px 1px #24b4f3;
+    }
+    .container img:nth-of-type(1){
+        transform: rotateY(60deg) translateX(300px) rotateY(90deg);
+    }
+    .container img:nth-of-type(2){
+        transform: rotateY(120deg) translateX(300px) rotateY(90deg);
+    }
+    .container img:nth-of-type(3){
+        transform: rotateY(180deg) translateX(300px) rotateY(90deg);
+    }
+    .container img:nth-of-type(4){
+        transform: rotateY(2400deg) translateX(300px) rotateY(90deg);
+    }
+    .container img:nth-of-type(5){
+        transform: rotateY(300deg) translateX(300px) rotateY(90deg);
+    }
+    .container img:nth-of-type(6){
+        transform: rotateY(360deg) translateX(300px) rotateY(90deg);
+    }
+</style>
+<style>
     .body {
         height: 700px;
         top: 0%;
@@ -559,18 +670,13 @@
     .content {
         height: 100%;
         width: 100%;
-        background-image: url("http://localhost:80/img/backImage.jpg");
+        background-image: url("/img/backImage.jpg");
         background-size: cover;
         overflow: hidden;
     }
     .swiper-wrapper {
         height: 100%;
         width: 100%;
-    }
-    .img {
-        top: 30%;
-        height: 70% !important;
-        width: 90% !important;
     }
     .title {
         height: 8%;
@@ -724,32 +830,6 @@
         top: 10%;
         border: 0.2px solid rgba(50, 255, 238, .7);
     }
-    /*  table {
-          width: 100%; !* 设置table宽度 *!
-          border-collapse: collapse; !* 边框合并 *!
-          overflow: auto;
-      }
-      th{
-          border: 0px; !* 设置单元格边框 *!
-          padding: 8px; !* 设置单元格内边距 *!
-          text-align: center; !* 单元格内文本对齐方式 *!
-          position: sticky;
-          top: 0;
-      }
-      td {
-          border: 0px; !* 设置单元格边框 *!
-          padding: 8px; !* 设置单元格内边距 *!
-          text-align: center; !* 单元格内文本对齐方式 *!
-          text-align: left;
-      }
-      ::-webkit-scrollbar{
-          width: 12px;
-          height: 24px;
-      }
-      th {
-          text-align: left;
-          !*background-color: rgb(21,51,114);*!
-      }*/
     .left02 {
         width: 25%;
         height: 95%;
@@ -868,7 +948,7 @@
         top: 5%;
     }
     .scroll-box-03 {
-        height: 80%;
+        height: 60%;
         width: 100%;
         overflow-y: auto;
         position: relative;
@@ -882,21 +962,6 @@
         top: 6%;
         position: relative;
     }
-    /*table-01 {
-        width: 100%; !* 设置table宽度 *!
-        border-collapse: collapse; !* 边框合并 *!
-        overflow: auto;
-        top: 6%;
-        position: relative;
-    }
-    table-02 {
-        width: 100%; !* 设置table宽度 *!
-        border-collapse: collapse; !* 边框合并 *!
-        overflow: auto;
-        top: 6%;
-        position: relative;
-        height: 10%;
-    }*/
     th{
         border: 0px; /* 设置单元格边框 */
         padding: 8px; /* 设置单元格内边距 */
@@ -919,7 +984,6 @@
         text-align: center;
         color: #FFFFFF;
         width: 28%;
-        /*background-color: rgb(21,51,114);*/
     }
 </style>
 
@@ -947,8 +1011,10 @@
 
 <script type="text/javascript">
     var urls = "http://localhost/";
-    var monthStr = "202405";
+    //var urls = "http://192.168.31.52:8084/xybrInterFace/";
+    var monthStr = document.getElementById("selectYear").value + document.getElementById("selectMonth").value;;
     var jsonObject = '';
+    var zhuanLiUrl = '';
     /*let projectInfoStr = '';
     var scrollContent= document.getElementsByClassName('scroll-box').item(0);*/
     var table = document.getElementsByClassName('scroll-tab-01').item(0);
@@ -968,15 +1034,19 @@
         url: urls + "/system/cockpit/getViewData",
         contentType: "application/json;charset=utf-8",
         data: {
-            "monthStr": "202406"
+            "monthStr": document.getElementById("selectYear").value + "-" + document.getElementById("selectMonth").value + "-01"
         },
         dateType: "json",
         success: function (data) {
-            jsonObject = data;
-            fillData();
-            fillDataTable();
-            tenClientPie();
-            chinaMap();
+            if(data.code === 500){
+                alert("该月份没有录入可用数据！");
+            }else{
+                jsonObject = data;
+                fillData();
+                fillDataTable();
+                tenClientPie();
+                chinaMap();
+            }
         },
         error: function (data) {
             alert("失败");
@@ -1016,6 +1086,15 @@
         document.getElementById('cockpit040').innerText = jsonObject.cockpitData.cockpit040;
         document.getElementById('cockpit041').innerText = jsonObject.cockpitData.cockpit041;
         document.getElementById('cockpit049').innerText = jsonObject.cockpitData.cockpit049;
+        document.getElementById('cockpit050').innerText = jsonObject.cockpitData.cockpit050;
+        document.getElementById('cockpit051').innerText = jsonObject.cockpitData.cockpit051;
+        document.getElementById('cockpit052').innerText = jsonObject.cockpitData.cockpit052;
+        document.getElementById('cockpit053').innerText = jsonObject.cockpitData.cockpit053;
+        document.getElementById('cockpit054').innerText = jsonObject.cockpitData.cockpit054;
+        document.getElementById('cockpit055').innerText = jsonObject.cockpitData.cockpit055;
+        document.getElementById('cockpit056').innerText = jsonObject.cockpitData.cockpit056;
+        document.getElementById('cockpit057').innerText = jsonObject.cockpitData.cockpit057;
+        document.getElementById('cockpit058').innerText = jsonObject.cockpitData.cockpit058;
         /*第一个界面的内容*/
         let yuQiClient = echarts.init(document.getElementById("yuQiClient"));//逾期客户
         createyuQiClient(yuQiClient, monthStr);
@@ -1028,7 +1107,7 @@
         let maoLiRate = echarts.init(document.getElementById("maoLiRate"));//毛利率
         createMaoLiRate(maoLiRate, jsonObject.monthList);
         let qiJianFeiYongRate = echarts.init(document.getElementById("qiJianFeiYongRate"));//期间费用率
-        createQiJianFeiYongRate(qiJianFeiYongRate, jsonObject.monthList);
+        createQiJianFeiYongRate(qiJianFeiYongRate, jsonObject.cockpitData.currentMonth, jsonObject.cockpitData.yearsAgoMonth, jsonObject.cockpitData.agoMonth);
         /*第一个界面的内容*/
         let chanPinZhiTongRate = echarts.init(document.getElementById("chanPinZhiTongRate"));//产品直通率
         createChanPinZhiTongRate(chanPinZhiTongRate, jsonObject.monthList);
@@ -1053,6 +1132,7 @@
         let zuZhiJiXiaoData = jsonObject.performaneList;
         let projectInfoList = jsonObject.projectInfoList;
         let tenClientData = jsonObject.tenClientList;
+        let zhuanLiData = jsonObject.zhuanLiList;
         for (let n = 0; n < projectInfoList.length; n++) {
             projectManageStr +=
                 '<tr style="height: 48px;"><td style="font-size: 12px; width: 12%;font-weight: 400;text-align: center">' +
@@ -1061,11 +1141,11 @@
                 projectInfoList[n].projectName +
                 '</td><td style="font-size: 12px; width: 12%;font-weight: 400;text-align: center">' +
                 projectInfoList[n].projectAdmin +
-                '</td><td style="font-size: 12px; width: 18%;font-weight: 400;text-align: center">' +
+                '</td><td style="font-size: 12px; width: 16%;font-weight: 400;text-align: center">' +
                 projectInfoList[n].jiXian +
-                '</td><td style="font-size: 12px; width: 18%;font-weight: 400;text-align: center">' +
+                '</td><td style="font-size: 12px; width: 16%;font-weight: 400;text-align: center">' +
                 projectInfoList[n].gunDong +
-                '</td><td style="font-size: 12px; width: 10%;font-weight: 400;text-align: center">' +
+                '</td><td style="font-size: 12px; width: 14%;font-weight: 400;text-align: center">' +
                 projectInfoList[n].zhuanLiangChan +
                 '</td></tr>';
         }
@@ -1089,6 +1169,12 @@
                 tenClientData[n].sale +
                 '</td></tr>';
         }
+        for (let n = 0; n < zhuanLiData.length; n++) {
+            zhuanLiUrl +=
+                '<img class="img" src="http://192.168.31.52:8089/' +
+                JSON.parse(zhuanLiData[n].url)[0].url +
+                '"/>';
+        }
 
         /*$('.scrollContent').append(zhuanLiStr);
         $('.scrollContent').append(zhuanLiStr);//不能使用innerHtml  插入两次 目的是复制一份数据 使滚动区域高度大于容器高度 实现滚动效果*/
@@ -1098,6 +1184,8 @@
         $('.scrollContent-02').append(tenClientDataStr);//不能使用innerHtml  插入两次 目的是复制一份数据 使滚动区域高度大于容器高度 实现滚动效果
         $('.scrollContent-03').append(projectManageStr);
         $('.scrollContent-03').append(projectManageStr);//不能使用innerHtml  插入两次 目的是复制一份数据 使滚动区域高度大于容器高度 实现滚动效果
+        $('.container').append(zhuanLiUrl);
+        /*mySwiper02.update();*/
     }
     //全屏功能
     document.getElementById("fullScreenBg").ondblclick = function() {
@@ -1107,7 +1195,7 @@
         elem.style.overflowY = "scroll";
         elem.style.overflow = "hidden";
         elem.style.backgroundSize = "cover";
-        elem.style.backgroundImage = "url('http://localhost:80/img/backImage.jpg')";
+        elem.style.backgroundImage = "url('/img/backImage.jpg')";
         requestFullScreen(elem); // 某个页面元素
     };
     //全屏方法
@@ -1201,7 +1289,7 @@
 
         speed: 2000,
     })
-    var mySwiper02 = new Swiper ('.xuanZhuanMuMa', {
+    /*var mySwiper02 = new Swiper ('.xuanZhuanMuMa', {
         autoplay: {
             deplay: 1000,
             disableOnInteraction: true
@@ -1213,13 +1301,67 @@
         centeredSlides: true,
         centeredSlidesBounds: true,
         effect: "cube", //"fade"（淡入）、"cube"（方块）、"coverflow"（3d流）、"flip"（3d翻转）、"cards"(卡片式)、"creative"（创意性）
-    })
-    var imageContainers = document.querySelectorAll('.imgSlide');
+    })*/
+    var imageContainers = document.querySelectorAll('.container');
     imageContainers.forEach(function(container) {
         container.addEventListener('dblclick', function() {
-            requestFullScreen(this.querySelector('img'));
+            requestFullScreen(this.querySelector('.img'));
         });
     });
+    $(document).ready(function (){
+        $("#selectMonth").change(function (){
+            monthStr = document.getElementById("selectYear").value + document.getElementById("selectMonth").value;
+            $.ajax({
+                type: "GET",
+                url: urls + "/system/cockpit/getViewData",
+                contentType: "application/json;charset=utf-8",
+                data: {
+                    "monthStr": document.getElementById("selectYear").value + "-" + document.getElementById("selectMonth").value + "-01"
+                },
+                dateType: "json",
+                success: function (data) {
+                    if(data.code === 500){
+                        alert("该月份没有录入可用数据！");
+                    }else{
+                        jsonObject = data;
+                        fillData();
+                        fillDataTable();
+                        tenClientPie();
+                        chinaMap();
+                    }
+                },
+                error: function (data) {
+                    alert("失败");
+                }
+            });
+        });
+        $("#selectYear").change(function (){
+            monthStr = document.getElementById("selectYear").value + document.getElementById("selectMonth").value;
+            $.ajax({
+                type: "GET",
+                url: urls + "/system/cockpit/getViewData",
+                contentType: "application/json;charset=utf-8",
+                data: {
+                    "monthStr": document.getElementById("selectYear").value + "-" + document.getElementById("selectMonth").value + "-01"
+                },
+                dateType: "json",
+                success: function (data) {
+                    if(data.code === 500){
+                        alert("该月份没有录入可用数据！");
+                    }else{
+                        jsonObject = data;
+                        fillData();
+                        fillDataTable();
+                        tenClientPie();
+                        chinaMap();
+                    }
+                },
+                error: function (data) {
+                    alert("失败");
+                }
+            });
+        });
+    })
 </script>
 </body>
 </html>

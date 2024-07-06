@@ -9,7 +9,7 @@ function createShiChangGuZhangRate(line, monthList) {
         },
         legend: {
             data: ['量产一年内', '量产一年外'],
-            top: '5%',
+            //top: '5%',
             align: 'right',
             right: 10,
             textStyle: {
@@ -23,7 +23,8 @@ function createShiChangGuZhangRate(line, monthList) {
             top: '20%',
             left: '5%',
             right: '5%',
-            bottom: '15%',
+            bottom: '4%',
+            containLabel: true
         },
         xAxis: [{
             type: 'category',

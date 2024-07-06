@@ -14,7 +14,7 @@ function createMuBiaoDaChengRate(line, monthList) {
         },
         legend: {
             data: legendData,
-            top: '5%',
+            //top: '1%',
             align: 'right',
             right: 10,
             textStyle: {
@@ -28,7 +28,8 @@ function createMuBiaoDaChengRate(line, monthList) {
             top: '20%',
             left: '5%',
             right: '5%',
-            bottom: '15%',
+            bottom: '4%',
+            containLabel: true
         },
         xAxis: [{
             type: 'category',

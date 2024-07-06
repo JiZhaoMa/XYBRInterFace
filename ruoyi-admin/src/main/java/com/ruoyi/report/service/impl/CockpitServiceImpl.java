@@ -25,10 +25,6 @@ public class CockpitServiceImpl implements CockpitService {
         return cockpitMapper.getTenClient(month);
     }
 
-    @Override
-    public List<Patent> getPatent(String month) {
-        return cockpitMapper.getPatent(month);
-    }
 
     @Override
     public List<Performance> getPerformance(String month) {
@@ -61,8 +57,8 @@ public class CockpitServiceImpl implements CockpitService {
     }
 
     @Override
-    public List<QIJianFeiYongRate> getQIJianFeiYongRate(List<String> monthList) {
-        return cockpitMapper.getQIJianFeiYongRate(monthList);
+    public List<QIJianFeiYongRate> getQIJianFeiYongRate(CockpitData cockpitData) {
+        return cockpitMapper.getQIJianFeiYongRate(cockpitData);
     }
 
     @Override
@@ -88,5 +84,10 @@ public class CockpitServiceImpl implements CockpitService {
     @Override
     public List<ProjectInfo> getProjectInfo(String monthStr) {
         return cockpitMapper.getProjectInfo(monthStr);
+    }
+
+    @Override
+    public List<ZhuanLi> getZhuanLiList(String monthStr) {
+        return cockpitMapper.getZhuanLiList(monthStr);
     }
 }
