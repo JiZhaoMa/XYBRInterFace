@@ -34,7 +34,6 @@
                 <option value="老化">老化</option>
                 <option value="老化后">老化后</option>
                 <option value="耐压">耐压</option>
-                <option value="综合">综合</option>
             </select>
         </div>
     </div>
@@ -54,7 +53,7 @@
             </div>
         </div>
         <div id="firstZhiTongRate">
-            <span>一次直通率占比</span>
+            <span>一次直通率</span>
             <div style="position: relative;left: 28%;top: -24px;">
                 <div style="width: 20%; display: inline-block;">
                     <span id="seriesOfFirst">90%</span>
@@ -461,7 +460,7 @@
                 var laoHuaZhiTongRate = laoHuaTestNum == 0 ? 0 : laoHuaZhiTongNum/laoHuaTestNum;
                 var laoHuaHouZhiTongRate = laoHuaHouTestNum == 0 ? 0 : laoHuaHouZhiTongNum/laoHuaHouTestNum;
                 var naiYaZhiTongRate = naiYaTestNum == 0 ? 0 : naiYaZhiTongNum/naiYaTestNum;
-                document.getElementById('zhiTongRateCurrMonth').innerText = (laoHuaQianZhiTongRate * laoHuaZhiTongRate * laoHuaHouZhiTongRate * naiYaZhiTongRate * 100).toFixed(2) + "%";
+                document.getElementById('zhiTongRateCurrMonth').innerText = ((Number(laoHuaQianZhiTongNum) + Number(laoHuaZhiTongNum) + Number(laoHuaHouZhiTongNum) + Number(naiYaZhiTongNum))* 100/(Number(laoHuaQianTestNum) + Number(laoHuaTestNum) + Number(laoHuaHouTestNum) + Number(naiYaTestNum))).toFixed(2) + "%";
 
                 var stage = document.getElementById("selectStage").value;
                 if(stage == "老化前"){
@@ -483,11 +482,6 @@
                     document.getElementById('seriesTestNum').innerText = Number(naiYaTestNum);
                     document.getElementById('seriesZhiTongNum').innerText = Number(naiYaZhiTongNum);
                     document.getElementById('seriesZhiTongRate').innerText = (naiYaZhiTongRate * 100).toFixed(2) + "%";
-                }
-                if(stage == "综合"){
-                    document.getElementById('seriesTestNum').innerText = Number(laoHuaQianTestNum) + Number(laoHuaTestNum) + Number(laoHuaHouTestNum) + Number(naiYaTestNum);
-                    document.getElementById('seriesZhiTongNum').innerText = Number(laoHuaQianZhiTongNum) + Number(laoHuaZhiTongNum) + Number(laoHuaHouZhiTongNum) + Number(naiYaZhiTongNum);
-                    document.getElementById('seriesZhiTongRate').innerText = (Number(laoHuaQianTestNum )+ Number(laoHuaTestNum) + Number(laoHuaHouTestNum) + Number(naiYaTestNum)) == 0 ? 0 : ((Number(laoHuaQianZhiTongNum) + Number(laoHuaZhiTongNum) + Number(laoHuaHouZhiTongNum) + Number(naiYaZhiTongNum)) * 100 / (Number(laoHuaQianTestNum )+ Number(laoHuaTestNum) + Number(laoHuaHouTestNum) + Number(naiYaTestNum))).toFixed(2) + "%";
                 }
             },
             error: function (data) {

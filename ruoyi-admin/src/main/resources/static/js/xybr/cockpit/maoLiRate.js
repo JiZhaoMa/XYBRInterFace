@@ -9,8 +9,8 @@ function createMaoLiRate(chart, monthList) {
         },
         legend: {
             data: ['20kW', '30kW', '40kW'],
+            top: '6%',
             align: 'right',
-            right: 10,
             textStyle: {
                 color: "#00c7ff"
             },

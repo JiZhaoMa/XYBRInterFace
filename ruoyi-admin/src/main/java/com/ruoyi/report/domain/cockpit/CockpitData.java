@@ -60,10 +60,46 @@ public class CockpitData {
     private String cockpit056;
     private String cockpit057;
     private String cockpit058;
+    private String cockpit059;
+    private String cockpit060;
+    private String cockpit061;
+    private String cockpit062;
     private String monthList;
     private String currentMonth;
     private String yearsAgoMonth;
     private String agoMonth;
+
+    public String getCockpit059() {
+        return cockpit059;
+    }
+
+    public void setCockpit059(String cockpit059) {
+        this.cockpit059 = cockpit059;
+    }
+
+    public String getCockpit060() {
+        return cockpit060;
+    }
+
+    public void setCockpit060(String cockpit060) {
+        this.cockpit060 = cockpit060;
+    }
+
+    public String getCockpit061() {
+        return cockpit061;
+    }
+
+    public void setCockpit061(String cockpit061) {
+        this.cockpit061 = cockpit061;
+    }
+
+    public String getCockpit062() {
+        return cockpit062;
+    }
+
+    public void setCockpit062(String cockpit062) {
+        this.cockpit062 = cockpit062;
+    }
 
     public String getCockpit051() {
         return cockpit051;

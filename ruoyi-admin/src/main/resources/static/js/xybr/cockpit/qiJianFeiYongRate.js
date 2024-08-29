@@ -37,12 +37,11 @@ function createQiJianFeiYongRate(qiJianFeiYongRate, currentMonth,yearsAgoMonth,a
                 itemWidth: 25,
                 itemHeight: 15,
                 itemGap: 15,
-                //top: '3%',
+                top: '6%',
                 align: 'right',
-                right: 10,
                 selectedMode: false
             }
-            const grid = {top: '20%',left: '10%', right: '10%', bottom: '4%',
+            const grid = {top: '25%',left: '10%', right: '10%', bottom: '4%',
                 containLabel: true}
 // xAxis
             const xAxis = {
@@ -60,7 +59,6 @@ function createQiJianFeiYongRate(qiJianFeiYongRate, currentMonth,yearsAgoMonth,a
                 axisLabel: { textStyle: { color: "#00c7ff", } }
             },{
                 show: true,
-                max: 100,
                 splitLine: { show:false },
                 axisLine: { show: false },
                 axisTick: { show: false },
@@ -170,7 +168,7 @@ function createQiJianFeiYongRate(qiJianFeiYongRate, currentMonth,yearsAgoMonth,a
             }, {
                 z: 9,
                 yAxisIndex: 1,
-                name: '费用占比', type: 'line',
+                name: '营收占比', type: 'line',
                 //symbol: `path://M9.312,4.594 C12.074,4.594 14.313,6.832 14.313,9.594 C14.313,12.355 12.074,14.594 9.312,14.594 C6.551,14.594 4.312,12.355 4.312,9.594 C4.312,6.832 6.551,4.594 9.312,4.594 Z`,
                 //symbolSize: [10, 10],
                 color: {

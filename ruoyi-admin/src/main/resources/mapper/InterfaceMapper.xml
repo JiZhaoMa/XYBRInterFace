@@ -29,14 +29,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<insert id="insertOrderList" parameterType="java.util.List">
 		insert into 星源工单表(产品编码, 星源生产PO, 下单数量, 整机组装, 老化前, 老化, 老化后, 入库, 工厂名称) values
 		<foreach item="item" index="index" collection="list" separator=",">
-			(#{item.星源产品编码},#{item.星源生产PO},#{item.下单数量},#{item.整机组装},#{item.老化前},#{item.老化},#{item.老化后},#{item.入库},'天宝')
+			(#{item.星源产品编码},#{item.星源生产PO},#{item.下单数量},#{item.整机组装},#{item.老化前},#{item.老化},#{item.老化后},#{item.入库},#{item.工厂})
 		</foreach>
 	</insert>
 
 	<insert id="insertAgentOrderList" parameterType="java.util.List">
 		insert into 代工厂工单表(星源生产PO, 工厂生产PO, 工单数量, SMT订单上线时间, SMT数量, 插件数量, 单板终验数量, 单板组装数量, 工厂名称) values
 		<foreach item="item" index="index" collection="list" separator=",">
-			(#{item.星源生产PO},#{item.工厂生产PO},#{item.工单数量},#{item.SMT订单上线时间},#{item.SMT},#{item.插件},#{item.单板终验},#{item.单板组装},'天宝')
+			(#{item.星源生产PO},#{item.工厂生产PO},#{item.工单数量},#{item.SMT订单上线时间},#{item.SMT},#{item.插件},#{item.单板终验},#{item.单板组装},#{item.工厂})
 		</foreach>
 	</insert>
 
@@ -45,28 +45,28 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		                 老化后直通数量, 耐压测试数量, 耐压直通数量, 创建时间, 工厂名称) values
 		<foreach item="item" index="index" collection="list" separator=",">
 			(#{item.产品编码},#{item.老化前测试数量},#{item.老化前测试一次直通数量},#{item.老化前直通数量},#{item.老化测试数量},#{item.老化直通数量},#{item.老化后测试数量},#{item.老化后测试一次直通数量},
-			 #{item.老化后直通数量},#{item.耐压测试数量},#{item.耐压直通数量},#{item.日期},'天宝')
+			 #{item.老化后直通数量},#{item.耐压测试数量},#{item.耐压直通数量},#{item.日期},#{item.工厂})
 		</foreach>
 	</insert>
 
 	<insert id="insertInstoreDataList">
 		insert into 入库表(产品编码, 入库数量, 入库时间, 工厂名称) values
 		<foreach item="item" index="index" collection="list" separator=",">
-			(#{item.产品编码},#{item.入库数},#{item.入库时间},'天宝')
+			(#{item.产品编码},#{item.入库数},#{item.入库时间},#{item.工厂})
 		</foreach>
 	</insert>
 
 	<insert id="insertShippingDataList">
 		insert into 发货表(产品编码, 发货时间, 发货数量, 工厂名称) values
 		<foreach item="item" index="index" collection="list" separator=",">
-			(#{item.产品编码},#{item.发货时间},#{item.发货数量},'天宝')
+			(#{item.产品编码},#{item.发货时间},#{item.发货数量},#{item.工厂})
 		</foreach>
 	</insert>
 
 	<insert id="insertStockDataList">
 		insert into 库存表(产品编号, 产品硬件版本, 产品软件版本, 库存, 库存时间, 工厂名称) values
 		<foreach item="item" index="index" collection="list" separator=",">
-			(#{item.产品编号},#{item.产品硬件版本},#{item.产品软件版本},#{item.库存},#{item.库存时间},'天宝')
+			(#{item.产品编号},#{item.产品硬件版本},#{item.产品软件版本},#{item.库存},#{item.库存时间},#{item.工厂})
 		</foreach>
 	</insert>
 	<insert id="deleteStockData">
@@ -75,7 +75,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<insert id="insertHistoryStockDataList">
 		insert into 库存历史表(产品编号, 产品硬件版本, 产品软件版本, 库存, 库存时间, 工厂名称) values
 		<foreach item="item" index="index" collection="list" separator=",">
-			(#{item.产品编号},#{item.产品硬件版本},#{item.产品软件版本},#{item.库存},#{item.库存时间},'天宝')
+			(#{item.产品编号},#{item.产品硬件版本},#{item.产品软件版本},#{item.库存},#{item.库存时间},#{item.工厂})
 		</foreach>
 	</insert>
 

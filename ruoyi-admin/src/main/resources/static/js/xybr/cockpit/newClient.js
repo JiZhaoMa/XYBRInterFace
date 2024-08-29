@@ -6,12 +6,12 @@ function createNewClient(newClientPie, cockpitData) {
         },
         //grid: { top: '18%', left: '10%', right: '6%', bottom: '25%'},
         legend: {
-            top: '5%',
+            top: '2%',
             left: '0%',
-            width: '10%',
+            width: '1%',
             textStyle:{
                 color:'#FFFFFF',
-                fontSize: 12,
+                fontSize: '1vw',
             }
         },
         series: [

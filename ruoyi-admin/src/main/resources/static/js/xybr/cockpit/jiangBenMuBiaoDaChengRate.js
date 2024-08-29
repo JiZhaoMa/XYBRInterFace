@@ -14,11 +14,11 @@ function createMuBiaoDaChengRate(line, monthList) {
         },
         legend: {
             data: legendData,
-            //top: '1%',
-            align: 'right',
-            right: 10,
+            top: '6%',
+            align: 'left',
             textStyle: {
-                color: "#00c7ff"
+                color: "#00c7ff",
+                fontSize: '1vw'
             },
             itemWidth: 10,
             itemHeight: 10,
@@ -92,7 +92,7 @@ function createMuBiaoDaChengRate(line, monthList) {
             },
             label: {
                 show: true,
-                position: 'top',
+                position: 'bottom',
                 textStyle: {
                     color: '#6c50f3',
                 }
@@ -142,7 +142,7 @@ function createMuBiaoDaChengRate(line, monthList) {
                 },
                 label: {
                     show: true,
-                    position: 'top',
+                    position: 'bottom',
                     textStyle: {
                         color: '#00ca95',
                     }
@@ -193,7 +193,7 @@ function createMuBiaoDaChengRate(line, monthList) {
                 },
                 label: {
                     show: true,
-                    position: 'top',
+                    position: 'bottom',
                     textStyle: {
                         color: 'rgba(255, 209, 26, .7)',
                     }

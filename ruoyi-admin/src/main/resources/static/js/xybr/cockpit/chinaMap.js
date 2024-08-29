@@ -11,23 +11,23 @@ function createChinaMap(myChart, cockpitData) {
         global: false }
     var points = [
         // 点坐标
-        { value: [86.25167 , 45.44452 ], itemStyle: { color: effectScatterItemStyle}, name: '西北'},
-        { value: [113.56913 , 42.85388], itemStyle: { color: effectScatterItemStyle }, name: '华北'},
+        { value: [98.25167 , 37.44452 ], itemStyle: { color: effectScatterItemStyle}, name: '西北'},
+        { value: [120.56913 , 42.85388], itemStyle: { color: effectScatterItemStyle }, name: '华北'},
         { value: [113.32099 , 32.44534 ], itemStyle: { color: effectScatterItemStyle }, name: '华中'},
-        { value: [118.08968 , 34.74876 ], itemStyle: { color: effectScatterItemStyle }, name: '华东'},
-        { value: [109.53131 , 23.18507], itemStyle: { color: effectScatterItemStyle }, name: '华南'},
+        { value: [119.08968 , 31.74876 ], itemStyle: { color: effectScatterItemStyle }, name: '华东'},
+        { value: [109.53131 , 22.18507], itemStyle: { color: effectScatterItemStyle }, name: '华南'},
         { value: [90.53131 , 30.18507], itemStyle: { color: effectScatterItemStyle }, name: '西南'},
-        { value: [125.83103 , 46.89552], itemStyle: { color: effectScatterItemStyle }, name: '东北'}
+        /*{ value: [125.83103 , 46.89552], itemStyle: { color: effectScatterItemStyle }, name: '东北'}*/
     ]
     var points1 = [
         // 提示坐标
-        { value: [87 , 45 ], itemStyle: { color: effectScatterItemStyle}, name: '西北'},
-        { value: [113 , 42], itemStyle: { color: effectScatterItemStyle }, name: '华北'},
+        { value: [100 , 36 ], itemStyle: { color: effectScatterItemStyle}, name: '西北'},
+        { value: [118 , 42], itemStyle: { color: effectScatterItemStyle }, name: '华北'},
         { value: [110 , 32 ], itemStyle: { color: effectScatterItemStyle }, name: '华中'},
-        { value: [121 , 34.5 ], itemStyle: { color: effectScatterItemStyle }, name: '华东'},
-        { value: [106 , 23], itemStyle: { color: effectScatterItemStyle }, name: '华南'},
+        { value: [119 , 30.5 ], itemStyle: { color: effectScatterItemStyle }, name: '华东'},
+        { value: [108 , 21.5], itemStyle: { color: effectScatterItemStyle }, name: '华南'},
         { value: [89 , 29], itemStyle: { color: effectScatterItemStyle }, name: '西南'},
-        { value: [127 , 46], itemStyle: { color: effectScatterItemStyle }, name: '东北'}
+        /*{ value: [127 , 46], itemStyle: { color: effectScatterItemStyle }, name: '东北'}*/
     ]
     var showVlas={
         西北 : [cockpitData.cockpit010,cockpitData.cockpit042] ,
@@ -58,7 +58,7 @@ function createChinaMap(myChart, cockpitData) {
             calculable: true,
             show:false,
             inRange: {
-                color: ['#FFF', '#210A57', '#210A57', '#330440', '#264240', '#213E66', '#213E66', '#264240'],
+                color: ['#FFF', '#210A57', '#210A57', '#330440', '#210A57', '#213E66', '#213E66', '#264240'],
             }
             //华北      西南    华中     东北     华东    西北     华南
         },
@@ -262,13 +262,13 @@ function createChinaMap(myChart, cockpitData) {
                     show: true,
                     position: 'bottom',
                     formatter:function(param){
-                        var val = param.name + `\n` + "目标";
-                        val += showVlas[param.name][1]+'\n' + "销售额";
+                        var val = param.name + `\n` + "T: ";
+                        val += showVlas[param.name][1]+'\n' + "S: ";
                         val += showVlas[param.name][0];
                         return val
                     },
                     color: '#FFF',
-                    fontSize: 14
+                    fontSize: '1vw'
                 },
                 symbol: 'circle',
                 symbolSize: 1,

@@ -14,20 +14,19 @@ function createyuQiClient(yuQiClientBar, monthStr) {
         },
         legend: {
             data: ['1-6个月', '6-12个月','12个月以上'],
-            top: '-3%',
-            align: 'right',
-            right: 10,
+            align: 'left',
             textStyle: {
-                color: "#00c7ff"
+                color: "#00c7ff",
+                fontSize: '1vw'
             },
             itemWidth: 10,
             itemHeight: 10,
-            itemGap: 35
+            itemGap: 10
         },
         grid: {
             left: '3%',
             right: '4%',
-            bottom: '5%',
+            top: '12%',
             height: '80%',
             containLabel: true
         },
@@ -37,6 +36,7 @@ function createyuQiClient(yuQiClientBar, monthStr) {
                 show: true,
                 textStyle: {
                     color: "#00c7ff",
+                    fontSize: '1vw'
                 }
             },
         },
@@ -46,12 +46,14 @@ function createyuQiClient(yuQiClientBar, monthStr) {
             axisLabel: {
                 textStyle: {
                     color: '#FFF',
+                    fontSize: '1vw'
                 },
                 //align: 'justify',
             },
             nameTextStyle: {
                 color: '#FFF',
                 textAlign: 'justify',
+                fontSize: '1vw'
             },
         },
         series: [
@@ -59,7 +61,7 @@ function createyuQiClient(yuQiClientBar, monthStr) {
                 name: '1-6个月',
                 type: 'bar',
                 stack: '总量',
-                barWidth: 15,
+                barWidth: 10,
                 itemStyle:{
                     normal: {
                         color: '#32ffee',
@@ -69,9 +71,15 @@ function createyuQiClient(yuQiClientBar, monthStr) {
                 label: {
                     normal: {
                         show: true,
-                        position: 'insideRight',
+                        position: 'right',
+                        formatter: function(params) {
+                            if (params.value == 0) {
+                                return '';
+                            }
+                            return Math.floor(params.value);
+                        },
                         textStyle: {
-                            color: "#000",
+                            color: "#FFF",
                         }
                     }
                 },
@@ -100,9 +108,15 @@ function createyuQiClient(yuQiClientBar, monthStr) {
                 label: {
                     normal: {
                         show: true,
-                        position: 'insideRight',
+                        position: 'right',
+                        formatter: function(params) {
+                            if (params.value == 0) {
+                                return '';
+                            }
+                            return Math.floor(params.value);
+                        },
                         textStyle: {
-                            color: "#000",
+                            color: '#FFF',
                         }
                     }
                 },
@@ -122,9 +136,15 @@ function createyuQiClient(yuQiClientBar, monthStr) {
                 label: {
                     normal: {
                         show: true,
-                        position: 'insideRight',
+                        position: 'right',
+                        formatter: function(params) {
+                            if (params.value == 0) {
+                                return '';
+                            }
+                            return Math.floor(params.value);
+                        },
                         textStyle: {
-                            color: "#000",
+                            color: '#FFF',
                         }
                     }
                 },

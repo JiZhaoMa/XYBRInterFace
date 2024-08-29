@@ -52,16 +52,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <select id="getCurMonZhiTongRate" parameterType="CurrentZhiTongRate" resultMap="currentZhiTongRateResult">
         SELECT
         a.`系列名称` AS seriesName,
-        ((
-        SUM( c.`老化前测试一次直通数量` ) + SUM( c.`老化后测试一次直通数量` ) + SUM( c.`老化直通数量` ) + SUM( c.`耐压直通数量` )
-        )/(SELECT
-        ( SUM( `老化前测试一次直通数量` ) + SUM( `老化后测试一次直通数量` ) + SUM( `老化直通数量` ) + SUM( `耐压直通数量` ) )
-        FROM
-        `直通率表`
-        WHERE
-        1 = 1
-        <if test="month != null and month !=''"> AND DATE_FORMAT( `创建时间`, '%Y%m' ) = #{month}</if>
-        <if test="agent != null and agent !=''"> AND `工厂名称` = #{agent}</if>)) AS seriesNum
+        ((SUM( c.`老化前测试一次直通数量` )/SUM( c.`老化前测试数量` )) * (SUM( c.`老化后测试一次直通数量` )/SUM( c.`老化后测试数量` )) * (SUM( c.`老化直通数量` )/SUM( c.`老化测试数量` )) * (SUM( c.`耐压直通数量` )/SUM( c.`耐压测试数量` ))) AS seriesNum
         FROM `tlk_产品系列表` a
         LEFT JOIN `tlk_产品表` b ON a.`系列ID` = b.`产品系列ID`
         LEFT JOIN `直通率表` c ON c.`产品编码` = b.`产品编码`

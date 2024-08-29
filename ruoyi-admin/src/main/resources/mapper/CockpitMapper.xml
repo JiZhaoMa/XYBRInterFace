@@ -62,6 +62,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="cockpit056"    column="cockpit056"/>
         <result property="cockpit057"    column="cockpit057"/>
         <result property="cockpit058"    column="cockpit058"/>
+        <result property="cockpit059"    column="cockpit059"/>
+        <result property="cockpit060"    column="cockpit060"/>
+        <result property="cockpit061"    column="cockpit061"/>
+        <result property="cockpit062"    column="cockpit062"/>
         <result property="monthList"     column="monthList"/>
         <result property="currentMonth"  column="currentMonth"/>
         <result property="yearsAgoMonth" column="yearsAgoMonth"/>
@@ -198,13 +202,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
                ITEM_销售额,
                ITEM_月份
         FROM tlk_十大客户 WHERE DATE_FORMAT(ITEM_月份,'%Y%m') = DATE_FORMAT(STR_TO_DATE(#{monthStr},'%Y-%m-%d'),'%Y%m')
-        order by ITEM_销售额 desc
+        order by CAST(ITEM_销售额 AS UNSIGNED) desc
     </select>
     <select id="getProjectInfo" parameterType="String" resultMap="ProjectInfoResult">
-        SELECT ITEM_研发部,ITEM_项目名称,ITEM_项目经理,DATE_FORMAT(ITEM_基线,'%Y-%m-%d') AS  ITEM_基线,DATE_FORMAT(ITEM_滚动,'%Y-%m-%d') AS  ITEM_滚动,
-               DATE_FORMAT(ITEM_转量产,'%Y-%m-%d') AS ITEM_转量产
+        SELECT ITEM_研发部,ITEM_项目名称,ITEM_项目经理,IFNULL(DATE_FORMAT(ITEM_基线,'%Y-%m-%d'),'') AS  ITEM_基线,IFNULL(DATE_FORMAT(ITEM_滚动,'%Y-%m-%d'),'') AS  ITEM_滚动,
+               IFNULL(DATE_FORMAT(ITEM_转量产,'%Y-%m-%d'),'') AS ITEM_转量产
         FROM tlk_经营管理项目看板
-        WHERE DATE_FORMAT(ITEM_月份,'%Y%m') = DATE_FORMAT(STR_TO_DATE(#{monthStr},'%Y-%m-%d'),'%Y%m')
+        WHERE DATE_FORMAT(ITEM_月份,'%Y%m') = (SELECT DATE_FORMAT(ITEM_月份,'%Y%m') FROM	tlk_经营管理项目看板 ORDER BY ITEM_月份 DESC LIMIT 1)
     </select>
     <select id="getPerformance" parameterType="String" resultMap="PerformanceResult">
         SELECT ITEM_排名,
@@ -219,61 +223,68 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             ROUND(ITEM_新客户数量,0) AS cockpit001,
             ROUND(ITEM_老客户数量,0) AS cockpit002,
             ITEM_营销费用率 AS cockpit003,
-            ROUND(ITEM_人均销售额,2) AS cockpit004,
+            --  ROUND(ITEM_人均销售额,0) AS cockpit004,
+            ROUND((ITEM_西北销售额+ITEM_华北销售额+ITEM_华东销售额+ITEM_华南销售额+ITEM_西南销售额+ITEM_华中销售额)/ITEM_员工总数,0) AS cockpit004,
             ITEM_及时回款率 AS cockpit005,
-            ROUND(ITEM_销售目标,2) AS cockpit006,
-            ROUND(ITEM_已完成销售额,2) AS cockpit007,
+            -- ROUND(ITEM_销售目标,0) AS cockpit006,
+            ROUND(ITEM_西北销售目标+ITEM_华北销售目标+ITEM_华东销售目标+ITEM_华南销售目标+ITEM_西南销售目标+ITEM_华中销售目标,0) AS cockpit006,
+            -- ROUND(ITEM_已完成销售额,0) AS cockpit007,
+            ROUND(ITEM_西北销售额+ITEM_华北销售额+ITEM_华东销售额+ITEM_华南销售额+ITEM_西南销售额+ITEM_华中销售额,0) AS cockpit007,
             ITEM_同比 AS cockpit008,
-            ITEM_环比 AS cockpit009,
-            ROUND(ITEM_西北销售额,2) AS cockpit010,
-            ROUND(ITEM_华北销售额,2) AS cockpit011,
-            ROUND(ITEM_东北销售额,2) AS cockpit012,
-            ROUND(ITEM_华东销售额,2) AS cockpit013,
-            ROUND(ITEM_华南销售额,2) AS cockpit014,
-                ROUND(ITEM_西南销售额,2) AS cockpit015,
-            ROUND(ITEM_华中销售额,2) AS cockpit016,
-            ROUND(ITEM_西北销售目标,2) AS cockpit042,
-            ROUND(ITEM_华北销售目标,2) AS cockpit043,
-            ROUND(ITEM_东北销售目标,2) AS cockpit044,
-            ROUND(ITEM_华东销售目标,2) AS cockpit045,
-            ROUND(ITEM_华南销售目标,2) AS cockpit046,
-            ROUND(ITEM_西南销售目标,2) AS cockpit047,
-            ROUND(ITEM_华中销售目标,2) AS cockpit048,
+            IFNULL(((ITEM_西北销售额+ITEM_华北销售额+ITEM_华东销售额+ITEM_华南销售额+ITEM_西南销售额+ITEM_华中销售额) - (SELECT (ITEM_西北销售额+ITEM_华北销售额+ITEM_华东销售额+ITEM_华南销售额+ITEM_西南销售额+ITEM_华中销售额) FROM `tlk_报表数据统计` WHERE DATE_FORMAT(ITEM_月份,'%Y%m') = DATE_FORMAT(DATE_SUB(STR_TO_DATE(#{monthStr},'%Y-%m-%d'), INTERVAL 1 MONTH),'%Y%m'))) / (SELECT (ITEM_西北销售额+ITEM_华北销售额+ITEM_华东销售额+ITEM_华南销售额+ITEM_西南销售额+ITEM_华中销售额) FROM `tlk_报表数据统计` WHERE DATE_FORMAT(ITEM_月份,'%Y%m') = DATE_FORMAT(DATE_SUB(STR_TO_DATE(#{monthStr},'%Y-%m-%d'), INTERVAL 1 MONTH),'%Y%m')),0)*100 AS cockpit009,
+            ROUND(ITEM_西北销售额,0) AS cockpit010,
+            ROUND(ITEM_华北销售额,0) AS cockpit011,
+            ROUND(ITEM_东北销售额,0) AS cockpit012,
+            ROUND(ITEM_华东销售额,0) AS cockpit013,
+            ROUND(ITEM_华南销售额,0) AS cockpit014,
+            ROUND(ITEM_西南销售额,0) AS cockpit015,
+            ROUND(ITEM_华中销售额,0) AS cockpit016,
+            ROUND(ITEM_西北销售目标,0) AS cockpit042,
+            ROUND(ITEM_华北销售目标,0) AS cockpit043,
+            ROUND(ITEM_东北销售目标,0) AS cockpit044,
+            ROUND(ITEM_华东销售目标,0) AS cockpit045,
+            ROUND(ITEM_华南销售目标,0) AS cockpit046,
+            ROUND(ITEM_西南销售目标,0) AS cockpit047,
+            ROUND(ITEM_华中销售目标,0) AS cockpit048,
             ITEM_毛利率20kW AS cockpit017,
             ITEM_毛利率30kW AS cockpit018,
             ITEM_毛利率40kW AS cockpit019,
-            ROUND(ITEM_超出预算,2) AS cockpit020,
-            ROUND(ITEM_费用金额,2) AS cockpit021,
+            ROUND(ITEM_超出预算,0) AS cockpit020,
+            ROUND(ITEM_费用金额,0) AS cockpit021,
             ROUND(ITEM_当月费用支出,2) AS cockpit022,
             ROUND(ITEM_项目总数量,0) AS cockpit023,
             ROUND(ITEM_在研项目,0) AS cockpit024,
             ROUND(ITEM_已结项项目,0) AS cockpit025,
             ROUND(ITEM_暂停项目,0) AS cockpit026,
             ROUND(ITEM_终止项目,0) AS cockpit049,
-            ROUND(ITEM_薪酬总额,2) AS cockpit027,
+            ROUND(ITEM_薪酬总额,0) AS cockpit027,
             ROUND(ITEM_员工总数,0) AS cockpit028,
             ITEM_招聘完成率 AS cockpit029,
             ITEM_人员流失率 AS cockpit030,
             ITEM_预算执行率 AS cockpit031,
             ITEM_研发占比 AS cockpit032,
             ITEM_培训完成率 AS cockpit033,
-            ITEM_薪酬总额环比 AS cockpit034,
-            ITEM_员工总数环比 AS cockpit035,
-            ITEM_招聘完成率环比 AS cockpit036,
-            ITEM_人员流失率环比 AS cockpit037,
-            ITEM_研发占比环比 AS cockpit038,
-            ITEM_培训完成率环比 AS cockpit039,
-            ROUND(ITEM_逾期总金额,2) AS cockpit040,
-            ROUND(ITEM_库存金额,2) AS cockpit041,
+            IFNULL((ITEM_薪酬总额 - (SELECT ITEM_薪酬总额 FROM `tlk_报表数据统计` WHERE DATE_FORMAT(ITEM_月份,'%Y%m') = DATE_FORMAT(DATE_SUB(STR_TO_DATE(#{monthStr},'%Y-%m-%d'), INTERVAL 1 MONTH),'%Y%m'))) / (SELECT ITEM_薪酬总额 FROM `tlk_报表数据统计` WHERE DATE_FORMAT(ITEM_月份,'%Y%m') = DATE_FORMAT(DATE_SUB(STR_TO_DATE(#{monthStr},'%Y-%m-%d'), INTERVAL 1 MONTH),'%Y%m')),0)*100 AS cockpit034,
+            IFNULL((ITEM_员工总数 - (SELECT `ITEM_员工总数` FROM `tlk_报表数据统计` WHERE DATE_FORMAT(ITEM_月份,'%Y%m') = DATE_FORMAT(DATE_SUB(STR_TO_DATE(#{monthStr},'%Y-%m-%d'), INTERVAL 1 MONTH),'%Y%m'))) / (SELECT ITEM_员工总数 FROM `tlk_报表数据统计` WHERE DATE_FORMAT(ITEM_月份,'%Y%m') = DATE_FORMAT(DATE_SUB(STR_TO_DATE(#{monthStr},'%Y-%m-%d'), INTERVAL 1 MONTH),'%Y%m')),0)*100 AS cockpit035,
+            IFNULL((ITEM_招聘完成率 - (SELECT `ITEM_招聘完成率` FROM `tlk_报表数据统计` WHERE DATE_FORMAT(ITEM_月份,'%Y%m') = DATE_FORMAT(DATE_SUB(STR_TO_DATE(#{monthStr},'%Y-%m-%d'), INTERVAL 1 MONTH),'%Y%m'))) / (SELECT ITEM_招聘完成率 FROM `tlk_报表数据统计` WHERE DATE_FORMAT(ITEM_月份,'%Y%m') = DATE_FORMAT(DATE_SUB(STR_TO_DATE(#{monthStr},'%Y-%m-%d'), INTERVAL 1 MONTH),'%Y%m')),0)*100 AS cockpit036,
+            IFNULL((ITEM_人员流失率 - (SELECT ITEM_人员流失率 FROM `tlk_报表数据统计` WHERE DATE_FORMAT(ITEM_月份,'%Y%m') = DATE_FORMAT(DATE_SUB(STR_TO_DATE(#{monthStr},'%Y-%m-%d'), INTERVAL 1 MONTH),'%Y%m'))) / (SELECT ITEM_人员流失率 FROM `tlk_报表数据统计` WHERE DATE_FORMAT(ITEM_月份,'%Y%m') = DATE_FORMAT(DATE_SUB(STR_TO_DATE(#{monthStr},'%Y-%m-%d'), INTERVAL 1 MONTH),'%Y%m')),0)*100 AS cockpit037,
+            IFNULL((ITEM_研发占比 - (SELECT `ITEM_研发占比` FROM `tlk_报表数据统计` WHERE DATE_FORMAT(ITEM_月份,'%Y%m') = DATE_FORMAT(DATE_SUB(STR_TO_DATE(#{monthStr},'%Y-%m-%d'), INTERVAL 1 MONTH),'%Y%m'))) / (SELECT ITEM_研发占比 FROM `tlk_报表数据统计` WHERE DATE_FORMAT(ITEM_月份,'%Y%m') = DATE_FORMAT(DATE_SUB(STR_TO_DATE(#{monthStr},'%Y-%m-%d'), INTERVAL 1 MONTH),'%Y%m')),0)*100 AS cockpit038,
+            IFNULL((((ITEM_西北销售额+ITEM_华北销售额+ITEM_华东销售额+ITEM_华南销售额+ITEM_西南销售额+ITEM_华中销售额)/ITEM_员工总数) - (SELECT ((ITEM_西北销售额+ITEM_华北销售额+ITEM_华东销售额+ITEM_华南销售额+ITEM_西南销售额+ITEM_华中销售额)/ITEM_员工总数) FROM `tlk_报表数据统计` WHERE DATE_FORMAT(ITEM_月份,'%Y%m') = DATE_FORMAT(DATE_SUB(STR_TO_DATE(#{monthStr},'%Y-%m-%d'), INTERVAL 1 MONTH),'%Y%m'))) / (SELECT ((ITEM_西北销售额+ITEM_华北销售额+ITEM_华东销售额+ITEM_华南销售额+ITEM_西南销售额+ITEM_华中销售额)/ITEM_员工总数) FROM `tlk_报表数据统计` WHERE DATE_FORMAT(ITEM_月份,'%Y%m') = DATE_FORMAT(DATE_SUB(STR_TO_DATE(#{monthStr},'%Y-%m-%d'), INTERVAL 1 MONTH),'%Y%m')),0)*100 AS cockpit039,
+            ROUND(ITEM_逾期总金额,0) AS cockpit040,
+            ROUND(ITEM_库存金额,0) AS cockpit041,
             ITEM_规划产品启动率 AS cockpit050,
             ROUND(ITEM_总专利数,0) AS cockpit051,
-                  ROUND(ITEM_总发明数,0) AS cockpit052,
-                        ROUND(ITEM_总实用新型数,0) AS cockpit053,
-                              ROUND(ITEM_总外观数,0) AS cockpit054,
-                                    ROUND(ITEM_年度申请数,0) AS cockpit055,
-                                          ROUND(ITEM_年度发明数,0) AS cockpit056,
-                                                ROUND(ITEM_年度实用新型数,0) AS cockpit057,
-                                                      ROUND(ITEM_年度外观数,0) AS cockpit058,
+            ROUND(ITEM_总发明数,0) AS cockpit052,
+            ROUND(ITEM_总实用新型数,0) AS cockpit053,
+            ROUND(ITEM_总外观数,0) AS cockpit054,
+            ROUND(ITEM_年度申请数,0) AS cockpit055,
+            ROUND(ITEM_年度发明数,0) AS cockpit056,
+            ROUND(ITEM_年度实用新型数,0) AS cockpit057,
+            ROUND(ITEM_年度外观数,0) AS cockpit058,
+            ROUND(ITEM_申请中总数,0) AS cockpit059,
+            ROUND(ITEM_申请中发明数,0) AS cockpit060,
+            ROUND(ITEM_申请中实用新型数,0) AS cockpit061,
+            ROUND(ITEM_申请中外观数,0) AS cockpit062,
             concat(ITEM_first,',',ITEM_second,',',ITEM_third,',',ITEM_fourth,',',ITEM_fifth,',',ITEM_sixth) AS monthList,
             DATE_FORMAT(STR_TO_DATE(#{monthStr},'%Y-%m-%d'),'%Y%m') AS currentMonth,
             DATE_FORMAT(DATE_SUB(STR_TO_DATE(#{monthStr},'%Y-%m-%d'), INTERVAL 1 YEAR),'%Y%m') AS yearsAgoMonth,

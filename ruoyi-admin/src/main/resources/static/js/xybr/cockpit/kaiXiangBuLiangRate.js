@@ -9,9 +9,8 @@ function createKaiXiangBuLiangRate(line, monthList) {
         },
         legend: {
             data: ['量产一年内', '量产一年外'],
-            //top: '5%',
-            align: 'right',
-            right: 10,
+            top: '6%',
+            align: 'left',
             textStyle: {
                 color: "#00c7ff"
             },
@@ -87,7 +86,7 @@ function createKaiXiangBuLiangRate(line, monthList) {
             },
             label: {
                 show: true,
-                position: 'top',
+                position: 'bottom',
                 textStyle: {
                     color: '#6c50f3',
                 }
@@ -137,7 +136,7 @@ function createKaiXiangBuLiangRate(line, monthList) {
                 },
                 label: {
                     show: true,
-                    position: 'top',
+                    position: 'bottom',
                     textStyle: {
                         color: '#00ca95',
                     }

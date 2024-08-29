@@ -9,11 +9,11 @@ function createChanPinZhiTongRate(line, monthList) {
         },
         legend: {
             data: ['20kW', '30kW', '40kW'],
-            //top: '5%',
-            align: 'right',
-            right: 10,
+            top: '6%',
+            align: 'left',
             textStyle: {
-                color: "#00c7ff"
+                color: "#00c7ff",
+                fontSize: '1vw'
             },
             itemWidth: 10,
             itemHeight: 10,
@@ -87,7 +87,7 @@ function createChanPinZhiTongRate(line, monthList) {
             },
             label: {
                 show: true,
-                position: 'top',
+                position: 'bottom',
                 textStyle: {
                     color: '#6c50f3',
                 }
@@ -137,7 +137,7 @@ function createChanPinZhiTongRate(line, monthList) {
                 },
                 label: {
                     show: true,
-                    position: 'top',
+                    position: 'bottom',
                     textStyle: {
                         color: '#00ca95',
                     }
@@ -188,7 +188,7 @@ function createChanPinZhiTongRate(line, monthList) {
                 },
                 label: {
                     show: true,
-                    position: 'top',
+                    position: 'bottom',
                     textStyle: {
                         color: '#eb3600',
                     }
