@@ -66,7 +66,8 @@ function createStockPie(newClientPie, monthStr) {
                     show: true,
                     normal: {
                         color: '#FFF',
-                        position: 'inner'
+                        position: 'inner',
+                        fontSize: nowSize(),
                     }
                 },
                 data:[
@@ -112,4 +113,11 @@ function createStockPie(newClientPie, monthStr) {
         }
 
     });
+    window.addEventListener('resize', function() {
+        newClientPie.setOption(option, true);
+    });
+    function nowSize(){
+        let nowClientWidth = 12*(document.documentElement.clientWidth/1698);
+        return nowClientWidth;
+    }
 }

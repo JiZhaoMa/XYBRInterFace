@@ -15,5 +15,7 @@ public enum DataSourceType
     /**
      * 从库
      */
-    SLAVE
+    SLAVE,
+
+    U9C
 }

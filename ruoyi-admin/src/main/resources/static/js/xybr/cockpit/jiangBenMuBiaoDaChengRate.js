@@ -18,7 +18,7 @@ function createMuBiaoDaChengRate(line, monthList) {
             align: 'left',
             textStyle: {
                 color: "#00c7ff",
-                fontSize: '1vw'
+                fontSize: nowSize(),
             },
             itemWidth: 10,
             itemHeight: 10,
@@ -37,7 +37,8 @@ function createMuBiaoDaChengRate(line, monthList) {
                 show: true
             },
             axisLabel: {
-                color: '#00c7ff'
+                color: '#00c7ff',
+                fontSize: nowSize(),
             },
             splitLine: {
                 show: false
@@ -95,6 +96,7 @@ function createMuBiaoDaChengRate(line, monthList) {
                 position: 'bottom',
                 textStyle: {
                     color: '#6c50f3',
+                    fontSize: nowSize(),
                 }
             },
             itemStyle: {
@@ -142,9 +144,10 @@ function createMuBiaoDaChengRate(line, monthList) {
                 },
                 label: {
                     show: true,
-                    position: 'bottom',
+                    position: 'top',
                     textStyle: {
                         color: '#00ca95',
+                        fontSize: nowSize(),
                     }
                 },
 
@@ -193,9 +196,10 @@ function createMuBiaoDaChengRate(line, monthList) {
                 },
                 label: {
                     show: true,
-                    position: 'bottom',
+                    position: 'insideBottomLeft',
                     textStyle: {
                         color: 'rgba(255, 209, 26, .7)',
+                        fontSize: nowSize(),
                     }
                 },
 
@@ -264,4 +268,11 @@ function createMuBiaoDaChengRate(line, monthList) {
         }
 
     });
+    window.addEventListener('resize', function() {
+        line.setOption(option, true);
+    });
+    function nowSize(){
+        let nowClientWidth = 12*(document.documentElement.clientWidth/1698);
+        return nowClientWidth;
+    }
 }

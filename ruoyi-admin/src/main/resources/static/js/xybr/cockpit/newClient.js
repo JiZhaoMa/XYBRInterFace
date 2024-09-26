@@ -11,7 +11,7 @@ function createNewClient(newClientPie, cockpitData) {
             width: '1%',
             textStyle:{
                 color:'#FFFFFF',
-                fontSize: '1vw',
+                fontSize: nowSize(),
             }
         },
         series: [
@@ -26,6 +26,7 @@ function createNewClient(newClientPie, cockpitData) {
                         color: '#FFF',
                         position: 'inner',
                         formatter: '{c} ({d}%)',
+                        fontSize: nowSize(),
                     }
                 },
                 emphasis: {
@@ -49,4 +50,11 @@ function createNewClient(newClientPie, cockpitData) {
     option.series[0].data[0].value = cockpitData.cockpit001;
     option.series[0].data[1].value = cockpitData.cockpit002;
     newClientPie.setOption(option, true);
+    window.addEventListener('resize', function() {
+        newClientPie.setOption(option, true);
+    });
+    function nowSize(){
+        let nowClientWidth = 12*(document.documentElement.clientWidth/1698);
+        return nowClientWidth;
+    }
 }

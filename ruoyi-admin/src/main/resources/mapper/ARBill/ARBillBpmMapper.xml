@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.u9c.mapper.ARBillBpmMapper">
+    <insert id="insertARBill" parameterType="java.util.List">
+        insert into report_客户销售额(月份, 销售额, 客户编码, 客户简称, 地区, 统计销售额) values
+        <foreach item="item" index="index" collection="list" separator=",">
+            (#{item.month},#{item.totalMoney},#{item.accrueCustCode},#{item.shortName},#{item.territory},ROUND(#{item.totalMoney}/10000))
+        </foreach>
+    </insert>
+    <insert id="deleteARBill">
+        delete from report_客户销售额 WHERE 月份 = #{month}
+    </insert>
+    <update id="updateARBill">
+        call UPDATESALES(#{month})
+    </update>
+</mapper>

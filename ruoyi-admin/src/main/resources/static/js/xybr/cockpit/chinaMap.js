@@ -268,7 +268,7 @@ function createChinaMap(myChart, cockpitData) {
                         return val
                     },
                     color: '#FFF',
-                    fontSize: '1vw'
+                    fontSize: nowSize(),
                 },
                 symbol: 'circle',
                 symbolSize: 1,
@@ -278,4 +278,11 @@ function createChinaMap(myChart, cockpitData) {
         ]
     };
     myChart.setOption(option,true);
+    window.addEventListener('resize', function() {
+        myChart.setOption(option, true);
+    });
+    function nowSize(){
+        let nowClientWidth = 12*(document.documentElement.clientWidth/1698);
+        return nowClientWidth;
+    }
 }

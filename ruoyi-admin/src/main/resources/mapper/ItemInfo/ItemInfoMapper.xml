@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.u9c.mapper.ItemInfoMapper">
+    <resultMap type="ItemInfo" id="ItemInfoResult">
+        <result property="code"    column="code"/>
+        <result property="name"    column="name"/>
+        <result property="specs"    column="specs"/>
+        <result property="unitName"    column="unitName"/>
+        <result property="unitCode"    column="unitCode"/>
+        <result property="categoryCode"    column="categoryCode"/>
+    </resultMap>
+    <select id="getItemInfoList" resultMap="ItemInfoResult">
+        SELECT
+            a.Code,
+            a.Name,
+            a.SPECS,
+            b.Name AS UnitName,
+            b1.Code AS UnitCode,
+            e.Code AS CategoryCode
+        FROM
+            dbo.CBO_ItemMaster a
+                INNER JOIN dbo.Base_UOM_Trl b ON a.InventorySecondUOM= b.ID
+                INNER JOIN dbo.Base_UOM b1 ON a.InventorySecondUOM= b1.ID
+                INNER JOIN dbo.CBO_ItemMaster_Trl c ON a.ID= c.ID
+                INNER JOIN dbo.Base_Organization d ON d.ID= a.Org
+                INNER JOIN dbo.CBO_Category e ON a.MainItemCategory= e.ID
+        WHERE
+            a.Effective_IsEffective = 1
+          AND d.Code= '001'
+    </select>
+</mapper>

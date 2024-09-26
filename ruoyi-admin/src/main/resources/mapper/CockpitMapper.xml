@@ -72,9 +72,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="agoMonth"      column="agoMonth"/>
     </resultMap>
     <resultMap type="TenClient" id="TenClientResult">
-        <result property="name"    column="ITEM_客户名称"/>
-        <result property="sale"    column="ITEM_销售额"/>
-        <result property="month"    column="ITEM_月份"/>
+        <result property="name"    column="客户简称"/>
+        <result property="sale"    column="统计销售额"/>
+        <result property="month"    column="月份"/>
     </resultMap>
     <resultMap type="Patent" id="PatentResult">
         <result property="patentName"    column="ITEM_专利名称"/>
@@ -111,9 +111,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="month"    column="month"/>
     </resultMap>
     <resultMap type="QIJianFeiYongRate" id="QIJianFeiYongRateResult">
-        <result property="type"    column="ITEM_费用类别"/>
-        <result property="value"    column="ITEM_费用"/>
-        <result property="rate"    column="ITEM_占比"/>
+        <result property="type"    column="费用类别"/>
+        <result property="value"    column="费用"/>
+        <result property="rate"    column="应收占比"/>
         <result property="month"    column="month"/>
     </resultMap>
     <resultMap type="ChanPinZhiTongRate" id="ChanPinZhiTongRateResult">
@@ -198,17 +198,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 
     <select id="getTenClient" parameterType="String" resultMap="TenClientResult">
-        SELECT ITEM_客户名称,
-               ITEM_销售额,
-               ITEM_月份
-        FROM tlk_十大客户 WHERE DATE_FORMAT(ITEM_月份,'%Y%m') = DATE_FORMAT(STR_TO_DATE(#{monthStr},'%Y-%m-%d'),'%Y%m')
-        order by CAST(ITEM_销售额 AS UNSIGNED) desc
+        SELECT 客户简称,
+               统计销售额,
+               月份
+        FROM activity.report_客户销售额 WHERE 月份 = DATE_FORMAT(STR_TO_DATE(#{monthStr},'%Y-%m-%d'),'%Y-%m')
+        order by 统计销售额 desc LIMIT 10
     </select>
     <select id="getProjectInfo" parameterType="String" resultMap="ProjectInfoResult">
         SELECT ITEM_研发部,ITEM_项目名称,ITEM_项目经理,IFNULL(DATE_FORMAT(ITEM_基线,'%Y-%m-%d'),'') AS  ITEM_基线,IFNULL(DATE_FORMAT(ITEM_滚动,'%Y-%m-%d'),'') AS  ITEM_滚动,
                IFNULL(DATE_FORMAT(ITEM_转量产,'%Y-%m-%d'),'') AS ITEM_转量产
         FROM tlk_经营管理项目看板
-        WHERE DATE_FORMAT(ITEM_月份,'%Y%m') = (SELECT DATE_FORMAT(ITEM_月份,'%Y%m') FROM	tlk_经营管理项目看板 ORDER BY ITEM_月份 DESC LIMIT 1)
+        -- WHERE DATE_FORMAT(ITEM_月份,'%Y%m') = (SELECT DATE_FORMAT(ITEM_月份,'%Y%m') FROM	tlk_经营管理项目看板 ORDER BY ITEM_月份 DESC LIMIT 1)
     </select>
     <select id="getPerformance" parameterType="String" resultMap="PerformanceResult">
         SELECT ITEM_排名,
@@ -366,9 +366,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         order by ITEM_月份
     </select>
     <select id="getQIJianFeiYongRate" parameterType="CockpitData" resultMap="QIJianFeiYongRateResult">
-        SELECT DATE_FORMAT(`ITEM_月份`,'%Y%m') AS month, `ITEM_费用`, `ITEM_费用类别`, `ITEM_占比` FROM `tlk_期间费用率` WHERE
-        DATE_FORMAT(`ITEM_月份`,'%Y%m')  IN (#{currentMonth},#{yearsAgoMonth},#{agoMonth})
-        ORDER BY ITEM_费用类别
+        SELECT REPLACE(月份, '-', '') AS month, 费用, 费用类别, 应收占比 FROM activity.report_期间费用率 WHERE
+        REPLACE(月份, '-', '')  IN (#{currentMonth},#{yearsAgoMonth},#{agoMonth})
+        ORDER BY 费用类别
     </select>
     <select id="getChanPinZhiTongRate" parameterType="java.util.List" resultMap="ChanPinZhiTongRateResult">
         SELECT RIGHT(DATE_FORMAT(`ITEM_月份`,'%Y%m'),2) AS month, `ITEM_直通率`, `ITEM_产品名称` FROM `tlk_产品直通率` WHERE

@@ -17,7 +17,7 @@ function createyuQiClient(yuQiClientBar, monthStr) {
             align: 'left',
             textStyle: {
                 color: "#00c7ff",
-                fontSize: '1vw'
+                fontSize: nowSize()
             },
             itemWidth: 10,
             itemHeight: 10,
@@ -36,7 +36,7 @@ function createyuQiClient(yuQiClientBar, monthStr) {
                 show: true,
                 textStyle: {
                     color: "#00c7ff",
-                    fontSize: '1vw'
+                    fontSize: nowSize()
                 }
             },
         },
@@ -46,14 +46,14 @@ function createyuQiClient(yuQiClientBar, monthStr) {
             axisLabel: {
                 textStyle: {
                     color: '#FFF',
-                    fontSize: '1vw'
+                    fontSize: nowSize()
                 },
                 //align: 'justify',
             },
             nameTextStyle: {
                 color: '#FFF',
                 textAlign: 'justify',
-                fontSize: '1vw'
+                fontSize: nowSize()
             },
         },
         series: [
@@ -80,6 +80,7 @@ function createyuQiClient(yuQiClientBar, monthStr) {
                         },
                         textStyle: {
                             color: "#FFF",
+                            fontSize: nowSize(),
                         }
                     }
                 },
@@ -117,6 +118,7 @@ function createyuQiClient(yuQiClientBar, monthStr) {
                         },
                         textStyle: {
                             color: '#FFF',
+                            fontSize: nowSize(),
                         }
                     }
                 },
@@ -145,6 +147,7 @@ function createyuQiClient(yuQiClientBar, monthStr) {
                         },
                         textStyle: {
                             color: '#FFF',
+                            fontSize: nowSize(),
                         }
                     }
                 },
@@ -204,6 +207,12 @@ function createyuQiClient(yuQiClientBar, monthStr) {
         } else {
             dataIndex++;
         }
-    }, 3000);
-
+    }, 10000);
+    window.addEventListener('resize', function() {
+        yuQiClientBar.setOption(option, true);
+    });
+    function nowSize(){
+        let nowClientWidth = 12*(document.documentElement.clientWidth/1698);
+        return nowClientWidth;
+    }
 }

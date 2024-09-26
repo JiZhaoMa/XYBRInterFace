@@ -13,7 +13,7 @@ function createChanPinZhiTongRate(line, monthList) {
             align: 'left',
             textStyle: {
                 color: "#00c7ff",
-                fontSize: '1vw'
+                fontSize: nowSize(),
             },
             itemWidth: 10,
             itemHeight: 10,
@@ -32,7 +32,8 @@ function createChanPinZhiTongRate(line, monthList) {
                 show: true
             },
             axisLabel: {
-                color: '#00c7ff'
+                color: '#00c7ff',
+                fontSize: nowSize(),
             },
             splitLine: {
                 show: false
@@ -50,7 +51,8 @@ function createChanPinZhiTongRate(line, monthList) {
             splitLine: {
                 show: true,
                 lineStyle: {
-                    color: 'rgba(255,255,255,0.1)'
+                    color: 'rgba(255,255,255,0.1)',
+                    fontSize: nowSize(),
                 }
             },
             axisLine: {
@@ -61,6 +63,7 @@ function createChanPinZhiTongRate(line, monthList) {
                 margin: 20,
                 textStyle: {
                     color: '#d1e6eb',
+                    fontSize: nowSize(),
 
                 },
             },
@@ -90,6 +93,7 @@ function createChanPinZhiTongRate(line, monthList) {
                 position: 'bottom',
                 textStyle: {
                     color: '#6c50f3',
+                    fontSize: nowSize(),
                 }
             },
             itemStyle: {
@@ -137,9 +141,10 @@ function createChanPinZhiTongRate(line, monthList) {
                 },
                 label: {
                     show: true,
-                    position: 'bottom',
+                    position: 'top',
                     textStyle: {
                         color: '#00ca95',
+                        fontSize: nowSize(),
                     }
                 },
 
@@ -179,7 +184,7 @@ function createChanPinZhiTongRate(line, monthList) {
                 symbolSize: 5,
                 lineStyle: {
                     normal: {
-                        color: "#eb3600",
+                        color: 'rgba(255, 209, 26, .7)',
                         shadowColor: 'rgba(0, 0, 0, .3)',
                         shadowBlur: 0,
                         shadowOffsetY: 5,
@@ -188,14 +193,15 @@ function createChanPinZhiTongRate(line, monthList) {
                 },
                 label: {
                     show: true,
-                    position: 'bottom',
+                    position: 'insideBottomLeft',
                     textStyle: {
-                        color: '#eb3600',
+                        color: 'rgba(255, 209, 26, .7)',
+                        fontSize: nowSize(),
                     }
                 },
 
                 itemStyle: {
-                    color: "#eb3600",
+                    color: 'rgba(255, 209, 26, .7)',
                     borderColor: "#fff",
                     borderWidth: 3,
                     shadowColor: 'rgba(0, 0, 0, .3)',
@@ -207,14 +213,14 @@ function createChanPinZhiTongRate(line, monthList) {
                     normal: {
                         color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
                             offset: 0,
-                            color: 'rgba(0,202,149,0.3)'
+                            color: 'rgba(255, 209, 26, .7)'
                         },
                             {
                                 offset: 1,
                                 color: 'rgba(0,202,149,0)'
                             }
                         ], false),
-                        shadowColor: '#eb3600',
+                        shadowColor: 'rgba(255, 209, 26, .7)',
                         shadowBlur: 5
                     }
                 },
@@ -259,4 +265,11 @@ function createChanPinZhiTongRate(line, monthList) {
         }
 
     });
+    window.addEventListener('resize', function() {
+        line.setOption(option, true);
+    });
+    function nowSize(){
+        let nowClientWidth = 12*(document.documentElement.clientWidth/1698);
+        return nowClientWidth;
+    }
 }

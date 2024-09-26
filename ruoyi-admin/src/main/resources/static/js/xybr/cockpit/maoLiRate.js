@@ -12,7 +12,8 @@ function createMaoLiRate(chart, monthList) {
             top: '6%',
             align: 'right',
             textStyle: {
-                color: "#00c7ff"
+                color: "#00c7ff",
+                fontSize: nowSize(),
             },
             itemWidth: 10,
             itemHeight: 10,
@@ -38,7 +39,7 @@ function createMaoLiRate(chart, monthList) {
                 lineStyle: {
                     color: "#063374",
                     width: 1,
-                    type: "solid"
+                    type: "solid",
                 }
             },
             axisTick: {
@@ -48,13 +49,15 @@ function createMaoLiRate(chart, monthList) {
                 show: true,
                 textStyle: {
                     color: "#00c7ff",
+                    fontSize: nowSize(),
                 }
             },
         }],
         yAxis: [{
             type: 'value',
             axisLabel: {
-                formatter: '{value}'
+                formatter: '{value}',
+                fontSize: nowSize(),
             },
             axisTick: {
                 show: false,
@@ -64,12 +67,14 @@ function createMaoLiRate(chart, monthList) {
                 lineStyle: {
                     color: "#00c7ff",
                     width: 1,
-                    type: "solid"
+                    type: "solid",
+                    fontSize: nowSize(),
                 },
             },
             splitLine: {
                 lineStyle: {
                     color: "#063374",
+                    fontSize: nowSize(),
                 }
             }
         }],
@@ -166,4 +171,11 @@ function createMaoLiRate(chart, monthList) {
         }
 
     });
+    window.addEventListener('resize', function() {
+        chart.setOption(option, true);
+    });
+    function nowSize(){
+        let nowClientWidth = 12*(document.documentElement.clientWidth/1698);
+        return nowClientWidth;
+    }
 }

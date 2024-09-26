@@ -12,7 +12,8 @@ function createKaiXiangBuLiangRate(line, monthList) {
             top: '6%',
             align: 'left',
             textStyle: {
-                color: "#00c7ff"
+                color: "#00c7ff",
+                fontSize: nowSize(),
             },
             itemWidth: 10,
             itemHeight: 10,
@@ -31,7 +32,8 @@ function createKaiXiangBuLiangRate(line, monthList) {
                 show: true
             },
             axisLabel: {
-                color: '#00c7ff'
+                color: '#00c7ff',
+                fontSize: nowSize(),
             },
             splitLine: {
                 show: false
@@ -49,7 +51,8 @@ function createKaiXiangBuLiangRate(line, monthList) {
             splitLine: {
                 show: true,
                 lineStyle: {
-                    color: 'rgba(255,255,255,0.1)'
+                    color: 'rgba(255,255,255,0.1)',
+                    fontSize: nowSize(),
                 }
             },
             axisLine: {
@@ -60,65 +63,16 @@ function createKaiXiangBuLiangRate(line, monthList) {
                 margin: 20,
                 textStyle: {
                     color: '#d1e6eb',
-
+                    fontSize: nowSize(),
                 },
             },
             axisTick: {
                 show: false,
             },
         }],
-        series: [{
-            name: '量产一年内',
-            type: 'line',
-            // smooth: true, //是否平滑
-            showAllSymbol: true,
-            // symbol: 'image://./static/images/guang-circle.png',
-            symbol: 'circle',
-            symbolSize: 5,
-            lineStyle: {
-                normal: {
-                    color: "#6c50f3",
-                    shadowColor: 'rgba(0, 0, 0, .3)',
-                    shadowBlur: 0,
-                    shadowOffsetY: 5,
-                    shadowOffsetX: 5,
-                },
-            },
-            label: {
-                show: true,
-                position: 'bottom',
-                textStyle: {
-                    color: '#6c50f3',
-                }
-            },
-            itemStyle: {
-                color: "#6c50f3",
-                borderColor: "#fff",
-                borderWidth: 3,
-                shadowColor: 'rgba(0, 0, 0, .3)',
-                shadowBlur: 0,
-                shadowOffsetY: 2,
-                shadowOffsetX: 2,
-            },
-            areaStyle: {
-                normal: {
-                    color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
-                        offset: 0,
-                        color: 'rgba(108,80,243,0.3)'
-                    },
-                        {
-                            offset: 1,
-                            color: 'rgba(108,80,243,0)'
-                        }
-                    ], false),
-                    shadowColor: 'rgba(108,80,243, 0.9)',
-                    shadowBlur: 5
-                }
-            },
-            data: [88, 89, 79, 80, 58, 99 ]
-        },
+        series: [
             {
-                name: '量产一年外',
+                name: '量产一年内',
                 type: 'line',
                 // smooth: true, //是否平滑
                 showAllSymbol: true,
@@ -139,6 +93,7 @@ function createKaiXiangBuLiangRate(line, monthList) {
                     position: 'bottom',
                     textStyle: {
                         color: '#00ca95',
+                        fontSize: nowSize(),
                     }
                 },
 
@@ -167,7 +122,59 @@ function createKaiXiangBuLiangRate(line, monthList) {
                     }
                 },
                 data: [90, 58, 48, 90, 78, 80 ],
-            }
+            },
+            {
+                name: '量产一年外',
+                type: 'line',
+                // smooth: true, //是否平滑
+                showAllSymbol: true,
+                // symbol: 'image://./static/images/guang-circle.png',
+                symbol: 'circle',
+                symbolSize: 5,
+                lineStyle: {
+                    normal: {
+                        color: "#d0a00e",
+                        shadowColor: 'rgba(0, 0, 0, .3)',
+                        shadowBlur: 0,
+                        shadowOffsetY: 5,
+                        shadowOffsetX: 5,
+                    },
+                },
+                label: {
+                    show: true,
+                    position: 'top',
+                    textStyle: {
+                        color: '#d0a00e',
+                        fontSize: nowSize(),
+                    }
+                },
+
+                itemStyle: {
+                    color: "#d0a00e",
+                    borderColor: "#fff",
+                    borderWidth: 3,
+                    shadowColor: 'rgba(0, 0, 0, .3)',
+                    shadowBlur: 0,
+                    shadowOffsetY: 2,
+                    shadowOffsetX: 2,
+                },
+                areaStyle: {
+                    normal: {
+                        color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                            offset: 0,
+                            color: 'rgba(0,202,149,0.3)'
+                        },
+                            {
+                                offset: 1,
+                                color: 'rgba(0,202,149,0)'
+                            }
+                        ], false),
+                        shadowColor: '#d0a00e',
+                        shadowBlur: 5
+                    }
+                },
+                data: [48, 24, 22, 84, 90, 30 ],
+            },
         ],
         dataZoom : [
             {
@@ -206,4 +213,11 @@ function createKaiXiangBuLiangRate(line, monthList) {
         }
 
     });
+    window.addEventListener('resize', function() {
+        line.setOption(option, true);
+    });
+    function nowSize(){
+        let nowClientWidth = 12*(document.documentElement.clientWidth/1698);
+        return nowClientWidth;
+    }
 }

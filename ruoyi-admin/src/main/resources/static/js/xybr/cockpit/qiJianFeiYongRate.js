@@ -33,7 +33,7 @@ function createQiJianFeiYongRate(qiJianFeiYongRate, currentMonth,yearsAgoMonth,a
             }
             const legend = {
                 data: [yearsAgoMonth, agoMonth, currentMonth],
-                textStyle: { color: "#00c7ff"},
+                textStyle: { color: "#00c7ff",fontSize: nowSize(),},
                 itemWidth: 25,
                 itemHeight: 15,
                 itemGap: 15,
@@ -47,7 +47,7 @@ function createQiJianFeiYongRate(qiJianFeiYongRate, currentMonth,yearsAgoMonth,a
             const xAxis = {
                 axisTick: { show: true },
                 axisLine: { lineStyle: { color: 'rgba(255,255,255, .2)' } },
-                axisLabel: { textStyle: { color: "#00c7ff",  }, },
+                axisLabel: { textStyle: { color: "#00c7ff",fontSize: nowSize(),  }, },
                 data: dataArr.xdata
             }
 
@@ -56,14 +56,14 @@ function createQiJianFeiYongRate(qiJianFeiYongRate, currentMonth,yearsAgoMonth,a
                 axisTick: { show: false },
                 axisLine: { show: false, },
                 splitLine: { lineStyle: { color: 'rgba(255,255,255, .05)' } },
-                axisLabel: { textStyle: { color: "#00c7ff", } }
+                axisLabel: { textStyle: { color: "#00c7ff",fontSize: nowSize(), } }
             },{
                 show: true,
                 splitLine: { show:false },
                 axisLine: { show: false },
                 axisTick: { show: false },
                 axisLabel: {
-                    textStyle: { color: "#00c7ff", },
+                    textStyle: { color: "#00c7ff",fontSize: nowSize(), },
                     formatter: params => {
                         return `${params}%`
                     }
@@ -82,7 +82,8 @@ function createQiJianFeiYongRate(qiJianFeiYongRate, currentMonth,yearsAgoMonth,a
                 symbolSize: [29, 19],
                 itemStyle: {
                     borderColor: '#2fffa4',
-                    color: '#2fffa4'
+                    color: '#2fffa4',
+                    fontSize: nowSize(),
                 },
             },{
                 z: 1,
@@ -114,7 +115,8 @@ function createQiJianFeiYongRate(qiJianFeiYongRate, currentMonth,yearsAgoMonth,a
                 symbolSize: [29, 19],
                 itemStyle: {
                     borderColor: '#32ffee',
-                    color: '#32ffee'
+                    color: '#32ffee',
+                    fontSize: nowSize(),
                 },
             },{
                 z: 2,
@@ -145,7 +147,8 @@ function createQiJianFeiYongRate(qiJianFeiYongRate, currentMonth,yearsAgoMonth,a
                 symbolSize: [29, 19],
                 itemStyle: {
                     borderColor: '#ffd11a',
-                    color: '#ffd11a'
+                    color: '#ffd11a',
+                    fontSize: nowSize(),
                 },
             },{
                 z: 3,
@@ -194,11 +197,11 @@ function createQiJianFeiYongRate(qiJianFeiYongRate, currentMonth,yearsAgoMonth,a
                 },
                 label: {
                     show: true,
-                    position: 'insideBottomLeft',
+                    position: 'top',
                     formatter: params => {
                         return `${params.value}%`
                     },
-                    textStyle: { fontSize: 12, color: '#FFFFFF' }
+                    textStyle: { fontSize: 12, color: '#FFFFFF',fontSize: nowSize(), }
                 },
                 data: dataArr.rateDataOne
             }]
@@ -210,4 +213,11 @@ function createQiJianFeiYongRate(qiJianFeiYongRate, currentMonth,yearsAgoMonth,a
         }
 
     });
+    window.addEventListener('resize', function() {
+        qiJianFeiYongRate.setOption(option, true);
+    });
+    function nowSize(){
+        let nowClientWidth = 12*(document.documentElement.clientWidth/1698);
+        return nowClientWidth;
+    }
 }

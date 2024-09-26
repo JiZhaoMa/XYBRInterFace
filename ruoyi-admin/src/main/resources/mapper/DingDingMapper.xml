@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.mapper.DingDingMapper">
+    <resultMap type="DingDingUser" id="DingDingUserResult">
+        <result property="ddUserId"        column="ddUserId"/>
+        <result property="JobNumber"       column="JobNumber"/>
+        <result property="departmentId"    column="departmentId"/>
+        <result property="managerUserId"    column="managerUserId"/>
+    </resultMap>
+    <select id="getUserList" resultMap="DingDingUserResult">
+        SELECT DDUSERID AS ddUserId FROM obpm5.t_user WHERE `STATUS` = '1' AND DDUSERID is NOT NULL
+    </select>
+    <select id="getUserId" resultMap="DingDingUserResult">
+        SELECT ID AS managerUserId FROM obpm5.t_user WHERE DDUSERID = #{managerUserId} LIMIT 1
+    </select>
+    <update id="updateJobNumber">
+        <foreach item="item" index="index" collection="list" separator=";">
+            UPDATE obpm5.t_user
+            SET
+                FIELD1 = #{item.JobNumber}
+                <if test="item.managerUserId != null and item.managerUserId != ''">
+                    ,SUPERIOR = #{item.managerUserId}
+                </if>
+                <if test="item.departmentId != null and item.departmentId != ''">
+                    ,DEFAULTDEPARTMENT = (SELECT ID FROM obpm5.t_department WHERE DINGDING_DEPT_ID = #{item.departmentId} LIMIT 1)
+                </if>
+            WHERE DDUSERID = #{item.ddUserId}
+        </foreach>
+    </update>
+    <update id="updateDeptNumber">
+        <foreach item="item" index="index" collection="list" separator=";">
+            <if test="item.departmentId != null and item.departmentId != ''">
+                UPDATE obpm5.t_user_department_role_set
+                SET
+                DEPARTMENTID = (SELECT ID FROM obpm5.t_department WHERE DINGDING_DEPT_ID = #{item.departmentId} LIMIT 1)
+                WHERE USERID = (SELECT ID FROM obpm5.t_user WHERE DDUSERID = #{item.ddUserId} LIMIT 1)
+            </if>
+        </foreach>
+    </update>
+</mapper>

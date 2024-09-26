@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.u9c.mapper.VoucherBpmMapper">
+    <insert id="insertVoucher" parameterType="java.util.List">
+        insert into report_期间费用率(月份, 费用类别, 费用, 应收占比) values
+        <foreach item="item" index="index" collection="list" separator=",">
+            (#{item.month},#{item.type},ROUND(#{item.money}/10000),#{item.percent})
+        </foreach>
+    </insert>
+    <insert id="deleteVoucher">
+        delete from report_期间费用率 WHERE 月份 = #{month}
+    </insert>
+    <update id="updateVoucher">
+        update oa.tlk_报表数据统计 set ITEM_费用金额 = ROUND(#{sumMoney}/10000) WHERE DATE_FORMAT(ITEM_月份,'%Y-%m') = #{month}
+    </update>
+</mapper>

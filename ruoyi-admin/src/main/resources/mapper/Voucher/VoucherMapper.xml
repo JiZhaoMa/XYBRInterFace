@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.u9c.mapper.VoucherMapper">
+    <resultMap type="Voucher" id="VoucherResult">
+        <result property="month"             column="month"/>
+        <result property="type"              column="type"/>
+        <result property="money"             column="money"/>
+        <result property="sumMoney"             column="sumMoney"/>
+        <result property="percent"           column="占比"/>
+    </resultMap>
+    <select id="getVoucher" parameterType="java.util.Map" resultMap="VoucherResult">
+        SELECT
+            会计期间 AS month,
+            项目 AS type,
+            本期发生 AS money,
+            ROUND(本年累计,0) AS sumMoney,
+			ROUND(本期发生*100/(SELECT 本期发生 FROM vw_GL_ProfitabilityAnalysis WHERE 会计期间 = #{month} AND 行次 = 1),2) AS 占比
+        FROM vw_GL_ProfitabilityAnalysis
+        WHERE 会计期间 = #{month} AND 行次 IN(4,5,6) ORDER BY 行次;
+    </select>
+</mapper>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.u9c.mapper.ARBillMapper">
+    <resultMap type="ARBill" id="ARBillResult">
+        <result property="month"             column="month"/>
+        <result property="totalMoney"        column="totalMoney"/>
+        <result property="shortName"         column="shortName"/>
+        <result property="accrueCustCode"    column="accrueCustCode"/>
+        <result property="territory"    column="territory"/>
+    </resultMap>
+    <select id="getARBill" parameterType="java.util.Map" resultMap="ARBillResult">
+        SELECT SUM(a.AROCMoney_TotalMoney) AS totalMoney,
+               a.AccrueCust_ShortName AS shortName,
+               a.AccrueCust_code AS accrueCustCode,
+               c.territory AS territory,
+               CONCAT(#{year}, '-' ,#{month}) AS month
+        FROM AR_ARBillHead a
+        LEFT JOIN AR_ARPeriodClose b ON a.PostPeriod = b.AccountPeriod
+        LEFT JOIN CBO_Customer c ON a.AccrueCust_code = c.Code
+        WHERE b.Year = #{year}
+          AND b.PeriodCode = #{month}
+          AND a.SrcBusinessType = 449
+        GROUP BY a.AccrueCust_code, a.AccrueCust_ShortName, c.territory
+        ORDER by totalMoney DESC
+    </select>
+</mapper>

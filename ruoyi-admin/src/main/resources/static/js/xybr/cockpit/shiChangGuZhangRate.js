@@ -12,7 +12,8 @@ function createShiChangGuZhangRate(line, monthList) {
             top: '6%',
             align: 'left',
             textStyle: {
-                color: "#00c7ff"
+                color: "#00c7ff",
+                fontSize: nowSize(),
             },
             itemWidth: 10,
             itemHeight: 10,
@@ -31,7 +32,8 @@ function createShiChangGuZhangRate(line, monthList) {
                 show: true
             },
             axisLabel: {
-                color: '#00c7ff'
+                color: '#00c7ff',
+                fontSize: nowSize(),
             },
             splitLine: {
                 show: false
@@ -49,7 +51,8 @@ function createShiChangGuZhangRate(line, monthList) {
             splitLine: {
                 show: true,
                 lineStyle: {
-                    color: 'rgba(255,255,255,0.1)'
+                    color: 'rgba(255,255,255,0.1)',
+                    fontSize: nowSize(),
                 }
             },
             axisLine: {
@@ -60,7 +63,7 @@ function createShiChangGuZhangRate(line, monthList) {
                 margin: 20,
                 textStyle: {
                     color: '#d1e6eb',
-
+                    fontSize: nowSize(),
                 },
             },
             axisTick: {
@@ -90,6 +93,7 @@ function createShiChangGuZhangRate(line, monthList) {
                     position: 'bottom',
                     textStyle: {
                         color: '#00ca95',
+                        fontSize: nowSize(),
                     }
                 },
 
@@ -138,9 +142,10 @@ function createShiChangGuZhangRate(line, monthList) {
                 },
                 label: {
                     show: true,
-                    position: 'bottom',
+                    position: 'top',
                     textStyle: {
                         color: '#d0a00e',
+                        fontSize: nowSize(),
                     }
                 },
 
@@ -208,4 +213,11 @@ function createShiChangGuZhangRate(line, monthList) {
         }
 
     });
+    window.addEventListener('resize', function() {
+        line.setOption(option, true);
+    });
+    function nowSize(){
+        let nowClientWidth = 12*(document.documentElement.clientWidth/1698);
+        return nowClientWidth;
+    }
 }

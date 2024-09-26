@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.u9c.mapper.InvTransMapper">
+    <resultMap type="InvTrans" id="InvTransResult">
+        <result property="itemCode"         column="itemCode"/>
+        <result property="itemName"         column="itemName"/>
+        <result property="lotCode"          column="lotCode"/>
+        <result property="itemDesc"         column="itemDesc"/>
+        <result property="wareHouseCode"    column="wareHouseCode"/>
+        <result property="wareHouseName"    column="wareHouseName"/>
+        <result property="store"            column="store"/>
+    </resultMap>
+    <select id="getInvTransList" resultMap="InvTransResult">
+        select
+            t4.code             as itemCode,
+            t4.Name             As itemName,
+            t1.lotInfo_LotCode  As lotCode,
+            t5.Description      AS itemDesc,
+            t2.code             As wareHouseCode,
+            t6.Name             AS wareHouseName,
+            ISNULL(t1.StoreQty, 0) AS store
+        from InvTrans_WhQoh t1
+        left join CBO_ItemMaster t4 on t4.id = t1.ItemInfo_ItemID
+        left join CBO_ItemMaster_Trl t5 on t4.id = t5.id
+        left join CBO_Wh t2 on t2.ID = t1.Wh
+        left join CBO_Wh_Trl t6 on t6.ID = t2.ID
+        left join Base_Organization org on t1.ItemOwnOrg = org.ID
+        where org.Code = '001'
+    </select>
+</mapper>
