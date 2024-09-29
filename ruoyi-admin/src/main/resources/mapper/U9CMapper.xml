@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.mapper.U9CMapper">
+    <resultMap type="Department" id="Department01Result">
+        <result property="dingDingCode"        column="dingDingCode"/>
+        <result property="u9cCode"             column="u9cCode"/>
+        <result property="deptId"              column="deptId"/>
+        <result property="deptName"            column="deptName"/>
+        <result property="parentdept"          column="parentdept"/>
+        <result property="parentU9cCode"       column="parentU9cCode"/>
+    </resultMap>
+    <resultMap type="User" id="UserResult">
+        <result property="u9cCode"        column="u9cCode"/>
+        <result property="name"             column="name"/>
+        <result property="deptId"              column="deptId"/>
+    </resultMap>
+    <select id="getU9CDeptByName" resultMap="Department01Result">
+        SELECT
+            a.Code AS u9cCode,
+            b.Name AS deptName
+        FROM CBO_Department a, CBO_Department_Trl b
+        WHERE a.ID = b.ID AND b.Name = #{name}
+    </select>
+    <select id="getDepartCode" resultMap="Department01Result">
+        SELECT CONCAT('0',(MAX(CODE) + 1)) AS u9cCode
+        FROM CBO_Department
+        WHERE CODE like #{parentU9cCode} +'%' AND LEN(CODE) = (#{level}+1)*2;
+    </select>
+    <select id="getU9CUserInfo" resultMap="UserResult">
+        SELECT
+            a.Code AS u9cCode,
+            (SELECT b.Code FROM CBO_Department b WHERE b.ID = a.Dept) AS deptId
+        FROM CBO_Operators a WHERE a.Code = #{u9cCode}
+    </select>
+    <update id="updateU9CUserInfo">
+        UPDATE CBO_Operators a
+            SET a.Dept = (SELECT b.ID FROM CBO_Department b WHERE b.Code = #{deptId} limit 1)
+         WHERE a.Code = #{u9cCode}
+    </update>
+</mapper>

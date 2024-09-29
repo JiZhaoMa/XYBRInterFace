@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.mapper.BPMMapper">
+    <resultMap type="Department" id="DepartmentResult">
+        <result property="dingDingCode"        column="dingDingCode"/>
+        <result property="u9cCode"             column="u9cCode"/>
+        <result property="deptId"              column="deptId"/>
+        <result property="deptName"            column="deptName"/>
+        <result property="parentdept"          column="parentdept"/>
+        <result property="parentU9cCode"       column="parentU9cCode"/>
+    </resultMap>
+    <resultMap type="User" id="UserResult">
+        <result property="u9cCode"        column="u9cCode"/>
+        <result property="name"             column="name"/>
+        <result property="deptId"              column="deptId"/>
+    </resultMap>
+    <select id="getDepartList" resultMap="DepartmentResult">
+        SELECT
+            a.NAME AS deptName,
+            (SELECT IF(b.FIELD1='','01',b.FIELD1) FROM obpm5.t_department b WHERE a.SUPERIOR = b.ID) AS parentU9cCode
+        FROM obpm5.t_department a WHERE a.VALID = 1 AND a.LEVELS = 1 AND a.NAME != '外协厂家'
+    </select>
+    <update id="updateDeptU9CCode">
+        update obpm5.t_department set FIELD1 = #{u9cCode} WHERE NAME = #{deptName}
+    </update>
+    <select id="getUserList" resultMap="UserResult">
+        SELECT
+            a.NAME AS name,
+            a.FIELD1 AS u9cCode,
+            (SELECT b.FIELD1 FROM obpm5.t_department b WHERE a.DEFAULTDEPARTMENT = b.ID LIMIT 1) AS deptId
+        FROM obpm5.t_user a WHERE a.`STATUS` = '1' AND a.DDUSERID is NOT NULL
+    </select>
+</mapper>

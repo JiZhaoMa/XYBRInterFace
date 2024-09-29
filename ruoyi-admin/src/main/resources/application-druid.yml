@@ -2,7 +2,7 @@
 spring:
     datasource:
         type: com.alibaba.druid.pool.DruidDataSource
-        driverClassName: com.mysql.cj.jdbc.Driver
+        # driverClassName: com.mysql.cj.jdbc.Driver
         druid:
             # 主库数据源
             master:
@@ -19,13 +19,22 @@ spring:
                 url: jdbc:mysql://localhost:3306/activity?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8&nullCatalogMeansCurrent=true
                 username: root
                 password: chirspaul@3
+                driver-class-name: com.mysql.cj.jdbc.Driver
             # 从库数据源
             slave:
                 # 从数据源开关/默认关闭
                 enabled: true
-                url: jdbc:mysql://192.168.31.52:3306/oa?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8&nullCatalogMeansCurrent=true
-                username: xybr
-                password: xybr@2024
+                url: jdbc:mysql://192.168.31.52:3307/oa?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8&nullCatalogMeansCurrent=true&allowMultiQueries=true
+                username: root
+                password: Teemlink2010
+                driver-class-name: com.mysql.cj.jdbc.Driver
+            u9c:
+                # 从数据源开关/默认关闭
+                enabled: true
+                url: jdbc:sqlserver://120.46.188.100:1433;DatabaseName=U9CEDB;useUnicode=true;characterEncoding=utf8
+                username: sa
+                password: XYBR@1234
+                driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
             # 初始连接数
             initialSize: 5
             # 最小连接池数量
@@ -41,7 +50,7 @@ spring:
             # 配置一个连接在池中最大生存的时间，单位是毫秒
             maxEvictableIdleTimeMillis: 900000
             # 配置检测连接是否有效
-            validationQuery: SELECT 1 FROM DUAL
+            validationQuery: SELECT 1
             testWhileIdle: true
             testOnBorrow: false
             testOnReturn: false
