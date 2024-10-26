@@ -16,6 +16,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="name"             column="name"/>
         <result property="deptId"              column="deptId"/>
     </resultMap>
+    <resultMap type="Supplier" id="SupplierResult">
+        <result property="id"        column="id"/>
+        <result property="name"             column="name"/>
+        <result property="code"              column="code"/>
+    </resultMap>
+    <resultMap type="FixedFiled" id="FixedFiledResult">
+        <result property="id"        column="id"/>
+        <result property="name"             column="name"/>
+        <result property="code"              column="code"/>
+    </resultMap>
     <select id="getU9CDeptByName" resultMap="Department01Result">
         SELECT
             a.Code AS u9cCode,
@@ -32,11 +42,21 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         SELECT
             a.Code AS u9cCode,
             (SELECT b.Code FROM CBO_Department b WHERE b.ID = a.Dept) AS deptId
-        FROM CBO_Operators a WHERE a.Code = #{u9cCode}
+        FROM CBO_Operators a WHERE 1 = 1
+        <if test=" u9cCode != null and u9cCode != ''"> a.Code = #{u9cCode} </if>
     </select>
     <update id="updateU9CUserInfo">
         UPDATE CBO_Operators a
             SET a.Dept = (SELECT b.ID FROM CBO_Department b WHERE b.Code = #{deptId} limit 1)
          WHERE a.Code = #{u9cCode}
     </update>
+    <select id="getU9CFixedFiled" resultMap="FixedFiledResult">
+        select  A.ID AS id, A.Code AS code, A1.Name AS name from  Base_DefineValue as A  left join Base_DefineValue_Trl as A1 on (A1.SysMlFlag = 'zh-CN') and (A.ID = A1.ID) where  (A.ValueSetDef = 1002302160000089)
+    </select>
+    <select id="getU9CSupplier" resultMap="SupplierResult">
+        select  A.ID as id, A1.Name as name, A.Code as code from  CBO_Supplier as A  left join CBO_Supplier_Trl as A1 on (A1.SysMlFlag = 'zh-CN') and (A.ID = A1.ID)  left join Base_Organization as A2 on (A.Org = A2.ID) where  (A2.Code = '001')
+    </select>
+    <select id="getAssetCode" resultType="String">
+        SELECT Code FROM dbo.FA_AssetTag WHERE AssetCard = #{assetCard}
+    </select>
 </mapper>

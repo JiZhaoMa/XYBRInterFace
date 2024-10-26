@@ -3,6 +3,8 @@ package com.ruoyi.service.impl;
 import com.ruoyi.common.annotation.DataSource;
 import com.ruoyi.common.enums.DataSourceType;
 import com.ruoyi.domain.Department;
+import com.ruoyi.domain.FixedFiled;
+import com.ruoyi.domain.Supplier;
 import com.ruoyi.domain.User;
 import com.ruoyi.mapper.U9CMapper;
 import com.ruoyi.service.U9CService;
@@ -27,12 +29,27 @@ public class U9CServiceImpl implements U9CService {
     }
 
     @Override
-    public User getU9CUserInfo(User user) {
+    public List<User> getU9CUserInfo(User user) {
         return u9CMapper.getU9CUserInfo(user);
     }
 
     @Override
     public int updateU9CUserInfo(User user) {
         return u9CMapper.updateU9CUserInfo(user);
+    }
+
+    @Override
+    public List<FixedFiled> getU9CFixedFiled() {
+        return u9CMapper.getU9CFixedFiled();
+    }
+
+    @Override
+    public List<Supplier> getU9CSupplier() {
+        return u9CMapper.getU9CSupplier();
+    }
+
+    @Override
+    public String getAssetCode(String assetCard) {
+        return u9CMapper.getAssetCode(assetCard);
     }
 }

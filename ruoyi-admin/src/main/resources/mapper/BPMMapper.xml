@@ -22,6 +22,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             (SELECT IF(b.FIELD1='','01',b.FIELD1) FROM obpm5.t_department b WHERE a.SUPERIOR = b.ID) AS parentU9cCode
         FROM obpm5.t_department a WHERE a.VALID = 1 AND a.LEVELS = 1 AND a.NAME != '外协厂家'
     </select>
+    <update id="updateUserInfoDeptU9CCode">
+        <foreach item="item" index="index" collection="list" separator=";">
+            update obpm5.t_user set FIELD3 = #{item.deptId} WHERE FIELD2 = #{item.u9cCode} OR FIELD1 = #{item.u9cCode}
+        </foreach>
+    </update>
     <update id="updateDeptU9CCode">
         update obpm5.t_department set FIELD1 = #{u9cCode} WHERE NAME = #{deptName}
     </update>
@@ -32,4 +37,22 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             (SELECT b.FIELD1 FROM obpm5.t_department b WHERE a.DEFAULTDEPARTMENT = b.ID LIMIT 1) AS deptId
         FROM obpm5.t_user a WHERE a.`STATUS` = '1' AND a.DDUSERID is NOT NULL
     </select>
+    <insert id="insertFixedFiled" parameterType="java.util.List">
+        insert into activity.tem_fixedfiled(ID, CODE, NAME) values
+        <foreach item="item" index="index" collection="list" separator=",">
+            (#{item.id},#{item.code},#{item.name})
+        </foreach>
+    </insert>
+    <insert id="insertSupplier" parameterType="java.util.List">
+        insert into activity.tem_supplier(ID, CODE, NAME) values
+        <foreach item="item" index="index" collection="list" separator=",">
+            (#{item.id},#{item.code},#{item.name})
+        </foreach>
+    </insert>
+    <delete id="deleteFixedFiled">
+        DELETE FROM activity.tem_fixedfiled
+    </delete>
+    <delete id="deleteSupplier">
+        DELETE FROM activity.tem_supplier
+    </delete>
 </mapper>

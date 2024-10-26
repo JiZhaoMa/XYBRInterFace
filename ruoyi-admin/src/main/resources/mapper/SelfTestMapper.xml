@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.report.mapper.SelfTestMapper">
+    <resultMap type="PriorityQuestion" id="PriorityQuestionResult">
+        <result property="questionType"        column="questionType"/>
+        <result property="questionState"       column="questionState"/>
+        <result property="number"              column="number"/>
+    </resultMap>
+
+    <select id="getPriorityQues" resultMap="PriorityQuestionResult">
+        SELECT
+            a.NAME AS deptName,
+            (SELECT IF(b.FIELD1='','01',b.FIELD1) FROM obpm5.t_department b WHERE a.SUPERIOR = b.ID) AS parentU9cCode
+        FROM obpm5.t_department a WHERE a.VALID = 1 AND a.LEVELS = 1 AND a.NAME != '外协厂家'
+    </select>
+</mapper>

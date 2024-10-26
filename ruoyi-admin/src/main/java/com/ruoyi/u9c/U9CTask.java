@@ -1,6 +1,11 @@
 package com.ruoyi.u9c;
 
 import com.ruoyi.common.utils.StringUtils;
+import com.ruoyi.domain.FixedFiled;
+import com.ruoyi.domain.Supplier;
+import com.ruoyi.mapper.U9CMapper;
+import com.ruoyi.service.BPMService;
+import com.ruoyi.service.U9CService;
 import com.ruoyi.u9c.domain.ARBill;
 import com.ruoyi.u9c.domain.InvTrans;
 import com.ruoyi.u9c.domain.Voucher;
@@ -26,6 +31,10 @@ public class U9CTask {
     VoucherService voucherService;
     @Autowired
     VoucherBpmService voucherBpmService;
+    @Autowired
+    U9CService u9CService;
+    @Autowired
+    BPMService bpmService;
     public void getItemInfoList() {
         List<InvTrans> list = invTransService.getInvTransList();
         if(list.size() > 0){
@@ -95,5 +104,13 @@ public class U9CTask {
             voucherBpmService.updateVoucher(year +'-'+ month, sumMoney);
         }
         System.out.println(list);
+    }
+    public void synSuplier() throws Exception {
+        List<Supplier> list = u9CService.getU9CSupplier();
+        bpmService.insertSupplier(list);
+    }
+    public void synFixedField() throws Exception {
+        List<FixedFiled> list = u9CService.getU9CFixedFiled();
+        bpmService.insertFixedFiled(list);
     }
 }

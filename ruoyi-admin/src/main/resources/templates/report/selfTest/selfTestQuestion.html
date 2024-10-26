@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" >
+<head>
+
+</head>
+<body id="body" class="body">
+    <div class="top">
+        <div class="title">
+            <p class="text71">自测问题统计看板</p>
+        </div>
+    </div>
+    <div class="bottom">
+        <div class="left">
+            <div class="selfQuestionOfProjectPie" id="selfQuestionOfProjectPie"></div>
+        </div>
+        <div class="right">
+            <div class="selfQuestionOfPriorityBar" id="selfQuestionOfPriorityBar"></div>
+            <div class="tabDiv">
+                <ul class="nav-box">
+                    <li class="nav-item active">问题优先级</li>
+                    <li class="nav-item">问题状态</li>
+                    <li class="nav-item">问题类型</li>
+                    <li class="nav-item">处理时间</li>
+                    <li class="nav-item">问题等级</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+<style>
+    .body {
+
+    }
+    .nav-box {
+        width: 100%;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        /*border-bottom: 2px solid rgba(229, 229, 229);*/
+        font-size: 18px;
+        font-weight: 600;
+        position: relative;
+    }
+    .nav-box .nav-item {
+        font-size: 1.2vw;
+        font-weight: 600;
+        list-style: none;
+        padding: 18px;
+        cursor: pointer;
+    }
+    .nav-box .nav-item.active {
+        color: #64CCC5;
+    }
+    .title{
+        width: 100%;
+        height: 90%;
+        justify-content: center;
+        align-items: center;
+        display: flex;
+    }
+    .text71{
+        font-weight: 600;
+        font-size: 2.5vw;
+        color: transparent;
+        letter-spacing: 4px;
+        margin: 0;
+        padding: 0 16px;
+        background: linear-gradient(to right, #000 0, #ffff00 20%, #000 40%);
+        background-position: -32px 0;
+        -webkit-background-clip: text;
+        animation: eff71 3s linear infinite;
+    }
+    @keyframes eff71{
+        to{
+            background-position: 130px 0;
+        }
+    }
+    .top{
+        width: 100%;
+        height: 20%;
+    }
+    .bottom{
+        width: 100%;
+        height: 70%;
+        display: flex;
+    }
+    .left {
+        left: 5%;
+        width: 45%;
+        height: 100%;
+        position: relative;
+    }
+    .selfQuestionOfProjectPie{
+        width: 100%;
+        height: 100%;
+    }
+    .tabDiv{
+        width: 100%;
+        height: 20%;
+        justify-content: center;
+        display: flex;
+        top: 5%;
+        position: relative;
+    }
+    .selfQuestionOfPriorityBar{
+        width: 100%;
+        height: 80%;
+    }
+    .right {
+        left: 5%;
+        width: 45%;
+        height: 100%;
+        position: relative;
+    }
+</style>
+
+<script type="text/javascript" th:src="@{/js/plugins/echarts.min.js}"></script>
+<script type="text/javascript" th:src="@{/js/xybr/selfTest/priorityQuestion.js}"></script>
+    <script type="text/javascript" th:src="@{/js/xybr/selfTest/stateQuestion.js}"></script>
+    <script type="text/javascript" th:src="@{/js/xybr/selfTest/selfQuestionOfProject.js}"></script>
+    <script type="text/javascript" th:src="@{/js/xybr/selfTest/typeQuestion.js}"></script>
+    <script type="text/javascript" th:src="@{/js/xybr/selfTest/priorityTimeQuestion.js}"></script>
+    <script type="text/javascript" th:src="@{/js/xybr/selfTest/gradeQuestion.js}"></script>
+<script type="text/javascript" th:src="@{/js/jquery.min.js}"></script>
+<script type="text/javascript">
+    //var urls = "http://123.249.26.42:8084/xybrInterFace/";
+    var urls = "http://localhost/";
+    window.onload = function (){
+        var height = window.innerHeight;
+        var width = window.innerWidth;
+        var element = document.getElementById("body");
+        element.style.height = height - 20 + 'px'; //根据窗口的大小设置body的高
+        element.style.width = width - 20 + 'px'; //根据窗口的大小设置body的高
+        let selfQuestionOfProjectPie = echarts.init(document.getElementById("selfQuestionOfProjectPie"));
+        createSelfQuestionOfProject(selfQuestionOfProjectPie,'');
+        loadEchartsTab(0);
+    }
+    window.addEventListener('resize', function() {
+        location.reload()
+    });
+    const tabs = document.querySelectorAll('.nav-item')
+    tabs.forEach((tab, index) => {
+        tab.addEventListener('click', e => {
+            tabs.forEach(tab => tab.classList.remove('active'));
+            tab.classList.add('active');
+            loadEchartsTab(index);
+        })
+    })
+    function loadEchartsTab(index,project) {
+        if(index === 0){
+            let selfQuestionOfPriorityBar = echarts.init(document.getElementById("selfQuestionOfPriorityBar"));
+            createPriorityBar(selfQuestionOfPriorityBar,project);
+        }
+        if(index === 1){
+            let selfQuestionOfPriorityBar = echarts.init(document.getElementById("selfQuestionOfPriorityBar"));
+            createStateFunnel(selfQuestionOfPriorityBar,project);
+        }
+        if(index === 2){
+            let selfQuestionOfPriorityBar = echarts.init(document.getElementById("selfQuestionOfPriorityBar"));
+            createTypeBar(selfQuestionOfPriorityBar,project);
+        }
+        if(index === 3){
+            let selfQuestionOfPriorityBar = echarts.init(document.getElementById("selfQuestionOfPriorityBar"));
+            createPriorityTimeBar(selfQuestionOfPriorityBar,project);
+        }
+        if(index === 4){
+            let selfQuestionOfPriorityBar = echarts.init(document.getElementById("selfQuestionOfPriorityBar"));
+            createGradeBar(selfQuestionOfPriorityBar,project);
+        }
+    }
+</script>
+</body>
+</html>

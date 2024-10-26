@@ -8,6 +8,8 @@ import com.alibaba.fastjson.JSONObject;
 import com.ruoyi.common.utils.StringUtils;
 import com.ruoyi.common.utils.http.HttpUtils;
 import com.ruoyi.domain.Department;
+import com.ruoyi.domain.FixedFiled;
+import com.ruoyi.domain.Supplier;
 import com.ruoyi.domain.User;
 import com.ruoyi.service.BPMService;
 import com.ruoyi.service.U9CService;
@@ -26,6 +28,13 @@ public class U9COrgTask {
     U9CService u9CService;
     @Autowired
     BPMService bpmService;
+    public void updateBpmDept() throws Exception {
+        User user = new User();
+        List<User> list = u9CService.getU9CUserInfo(user);
+        if(list.size() > 0){
+            bpmService.updateUserInfoDeptU9CCode(list);
+        }
+    }
     public void updateDept() throws Exception {
         int level = 1;
         List<Department> list = bpmService.getDepartList(level);
@@ -51,19 +60,19 @@ public class U9COrgTask {
             list = bpmService.getDepartList(level);
         }
     }
-    public void updateU9CUserInfo() throws Exception {
-        List<User> list = bpmService.getUserList();
-        for(User user:list){
-            User u9c = u9CService.getU9CUserInfo(user);
-            if(u9c == null){
-                addUserU9C(getToken(),user);
-            }else{
-                if(!user.getDeptId().equals(u9c.getDeptId())){
-                    u9CService.updateU9CUserInfo(user);
-                }
-            }
-        }
-    }
+//    public void updateU9CUserInfo() throws Exception {
+//        List<User> list = bpmService.getUserList();
+//        for(User user:list){
+//            List<User> userlist = u9CService.getU9CUserInfo(user);
+//            if(userlist.size() == 0){
+//                addUserU9C(getToken(),user);
+//            }else{
+//                if(!user.getDeptId().equals(u9c.getDeptId())){
+//                    u9CService.updateU9CUserInfo(user);
+//                }
+//            }
+//        }
+//    }
     public String getToken() throws Exception {
         String param = "clientid=XYBRAPI&clientsecret=30d0c9b957ec44fdaba6367a74748295";
         log.info("【调用U9C接口获取授权码信息】,请求参数：{}",param);
