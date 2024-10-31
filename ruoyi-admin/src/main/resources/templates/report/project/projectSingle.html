@@ -1,0 +1,533 @@
+<!DOCTYPE html>  
+<html lang="zh-CN">  
+<head>  
+    <meta charset="UTF-8">  
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+    <title>项目看板</title>
+    <style>  
+        body {  
+            font-family: Arial, sans-serif;  
+            height: 100vh;  
+            margin: 0;  
+        }
+        .flowchart-container {  
+            display: flex;    
+            justify-content: space-around;  
+            width: 80%;  
+			align-items: center;
+            /*max-width: 1600px;  
+            overflow-x: auto;  */
+        }  
+        .stage {  
+            width: 60px;  
+            height: 60px;  
+            border-radius: 5px;  
+            display: flex;  
+            justify-content: center;  
+            align-items: center;  
+            font-size: 16px;
+            margin: 0.5px;
+            padding: 10px;  
+            box-sizing: border-box;  
+            text-align: center;  
+            position: relative;  
+            color: #fff;  
+        }  
+        .connector {  
+            width: 40px;  
+            height: 40px;  
+            display: flex;  
+            justify-content: center;  
+            align-items: center;  
+        }  
+        .connector svg {  
+            height: 100%;  
+            width: auto;  
+        }  
+        .connector line {  
+            stroke: #333;  
+            stroke-width: 2;  
+            stroke-linecap: round;  
+            marker-end: url(#arrowhead);  
+        }  
+		.progress {
+			position: absolute;
+			bottom: 0;
+			left: 0;
+			width: 100%;
+			height: 20px;
+			border-radius: 10px;
+			overflow: hidden;
+			color:#2196F3;
+			top: 110%;
+		}
+		.project-title{
+			height: 5%;
+			width: 100%;
+			color: brown;
+			font-size: large;
+			font-weight: bold;
+			justify-content: center;
+			align-items: center;
+			display: flex;  
+		}
+		.project-process{
+			height: 3%;
+			width: 100%;
+			color: brown;
+			font-size: small;
+			font-weight: bold;
+			justify-content: center;
+			align-items: center;
+			display: flex;
+		}
+		.project-plan-title{
+			width: 5%;
+			color: darkblue;
+			font-size: 18px;
+			font-weight: bold;
+		}
+		.project-plan{
+			height: 10%;
+			width: 100%;
+			position: absolute;
+			display: flex;
+			top: 8%;
+			justify-content: center;
+			align-items: center;
+		}
+		.project-row-first{
+			width: 90%;
+			height: 20%;
+			/*background-color: #00F7DE;*/
+			position: relative;
+			top: 15%;
+			left: 5%;
+			display: flex;
+		}
+		.project-row-second{
+			width: 90%;
+			height: 25%;
+			/*background-color: #e4b9b9;*/
+			position: relative;
+			top: 17%;
+			left: 5%;
+			display: flex;
+		}
+		.project-row-third{
+			width: 92%;
+			height: 25%;
+			/*background-color: #00BCD4;*/
+			position: relative;
+			top: 19%;
+			left: 5%;
+			border: 0.2px solid #0663A2;
+		}
+		.left{
+			width: 25%;
+			height: 100%;
+			border: 0.2px solid #0663A2;
+		}
+		.title{
+			width: 30%;
+			height: 10%;
+			background-color: #FFFFFF;
+			color: #0663A2;
+			top: -6%;
+			position: relative;
+			text-align: center;
+			left: 5%;
+		}
+		.tabel-title{
+			width: 15%;
+			height: 10%;
+			background-color: #FFFFFF;
+			color: #0663A2;
+			top: -6%;
+			position: relative;
+			text-align: center;
+			left: 5%;
+		}
+		.center{
+			width: 23%;
+			height: 100%;
+			left: 2%;
+			position: relative;
+			border: 0.2px solid #0663A2;
+		}
+		.right{
+			width: 23%;
+			height: 100%;
+			left: 4%;
+			position: relative;
+			border: 0.2px solid #0663A2;
+		}
+		.right01{
+			width: 25%;
+			height: 100%;
+			left: 6%;
+			position: relative;
+			border: 0.2px solid #0663A2;
+		}
+		.echarts-bar{
+			width: 100%;
+			height: 100%;
+			top: -5%;
+		}
+		.progress-color-01 { color: #4CAF50; } /* 市场洞察 */  
+        .progress-color-02 { color: #2196F3; } /* 机会分析 */  
+        .progress-color-03 { color: #FFC107; } /* 业务计划 */  
+        .progress-color-04 { color: #F44336; } /* 产品立项 */  
+        .progress-color-05 { color: #9C27B0; } /* 概念 */  
+        .progress-color-06 { color: #E91E63; } /* 计划 */  
+        .progress-color-07 { color: #673AB7; } /* 开发 */  
+        .progress-color-08 { color: #3F51B5; } /* 验证 */  
+        .progress-color-09 { color: #03A9F4; } /* 发布 */  
+        .progress-color-10 { color: #00BCD4; } /* 生命周期 */
+		
+        .market-insights { background-color: #4CAF50; } /* 市场洞察 */  
+        .opportunity-analysis { background-color: #2196F3; } /* 机会分析 */  
+        .business-plan { background-color: #FFC107; } /* 业务计划 */  
+        .product-initiation { background-color: #F44336; } /* 产品立项 */  
+        .concept { background-color: #9C27B0; } /* 概念 */  
+        .planning { background-color: #E91E63; } /* 计划 */  
+        .development { background-color: #673AB7; } /* 开发 */  
+        .validation { background-color: #3F51B5; } /* 验证 */  
+        .launch { background-color: #03A9F4; } /* 发布 */  
+        .lifecycle { background-color: #00BCD4; } /* 生命周期 */
+		table {
+			width: 100%; /* 设置table宽度 */
+			border-collapse: collapse; /* 边框合并 */
+			overflow: auto;
+			position: relative;
+			font-size: 0.9vw;
+			table-layout: fixed;
+		}
+		th{
+			border: 0px; /* 设置单元格边框 */
+			padding: 8px; /* 设置单元格内边距 */
+			text-align: center; /* 单元格内文本对齐方式 */
+			position: sticky;
+			background-color: #03A9F4;
+		}
+		td {
+			border: 0px; /* 设置单元格边框 */
+			padding: 8px; /* 设置单元格内边距 */
+			text-align: center; /* 单元格内文本对齐方式 */
+			color: #000;
+			width: 28%;
+			word-break: keep-all; /* 不换行 */
+			white-space: nowrap; /* 不换行 */
+			overflow: hidden; /* 内容超出宽度时隐藏超出部分的内容 */
+			text-overflow: ellipsis; /* 当对象内文本溢出时显示省略标记(...) ；需与overflow:hidden;一起使用。*/
+		}
+		table td:hover {
+			overflow: visible;/* 显示 */
+			white-space: normal;/* 允许文字自动换行 */
+			word-wrap: break-word;/* 文字自动换行 */
+		}
+		::-webkit-scrollbar{
+			width: 1px;
+			height: 24px;
+		}
+		th {
+			text-align: center;
+			color: #000;
+			width: 28%;
+			font-weight: bold;
+		}
+
+		.scroll-box-01 {
+			height: 65%;
+			width: 100%;
+			overflow-y: auto;
+			position: relative;
+		}
+    </style>  
+</head>  
+<body>
+	<div class="project-title">
+		<span>42kw小功率群充项目</span>
+		<div style="position: fixed; left: 84%; top: 3%">
+			<select name="selectYear" id="selectYear" style="background-color: #03A9F4; color: #000; border: 0.2px solid #03A9F4;">
+				<option value="2022">42kw小功率群充项目</option>
+				<option value="2023">42kw小功率群充项目</option>
+				<option value="2024" selected="selected">42kw小功率群充项目</option>
+				<option value="2025">42kw小功率群充项目</option>
+				<option value="2026">42kw小功率群充项目</option>
+				<option value="2027">42kw小功率群充项目</option>
+				<option value="2028">42kw小功率群充项目</option>
+				<option value="2028">42kw小功率群充项目</option>
+				<option value="2029">42kw小功率群充项目</option>
+				<option value="2030">42kw小功率群充项目</option>
+				<option value="2031">42kw小功率群充项目</option>
+				<option value="2032">42kw小功率群充项目</option>
+				<option value="2033">42kw小功率群充项目</option>
+			</select>
+		</div>
+	</div>
+	<div class="project-process">
+		<span>进度: 截至目前，项目主要处于XXXX阶段，延期10天，赶工计划是XX。</span>
+	</div>
+	<div class="project-plan">
+		<div class="project-plan-title"><span>项目计划</span></div> 
+		<div class="flowchart-container">  
+			<div class="stage market-insights">
+				<div>市场洞察</div>
+				<div class="progress progress-color-01">100%</div>
+			</div>  
+			<div class="connector">  
+				<svg>  
+					<defs>  
+						<marker id="arrowhead" markerWidth="10" markerHeight="7" refX="0" refY="3.5" orient="auto">  
+							<polygon points="0 0, 10 3.5, 0 7" fill="#333" />  
+						</marker>  
+					</defs>
+					<line x1="0" y1="12" x2="24" y2="12" />  
+				</svg>  
+			</div>
+			
+			<div class="stage opportunity-analysis">
+			
+				<div>机会分析</div>
+				<div class="progress progress-color-02">100%</div>
+			</div>	
+			<div class="connector"><svg><line x1="0" y1="12" x2="24" y2="12" /></svg></div>  
+			
+			<div class="stage business-plan">
+				<div>业务计划</div>
+				<div class="progress progress-color-03">100%</div>
+			</div>  
+			<div class="connector"><svg><line x1="0" y1="12" x2="24" y2="12" /></svg></div>
+			
+			<div class="stage product-initiation">
+				<div>产品立项</div>
+				<div class="progress progress-color-04">100%</div>
+			</div>  
+			<div class="connector"><svg><line x1="0" y1="12" x2="24" y2="12" /></svg></div>
+			
+			<div class="stage concept">
+				<div>概念</div>
+				<div class="progress progress-color-05">80%</div>
+			</div>  
+			<div class="connector"><svg><line x1="0" y1="12" x2="24" y2="12" /></svg></div> 
+			
+			<div class="stage planning">
+				<div>计划</div>
+				<div class="progress progress-color-06">10%</div>
+			</div>  
+			<div class="connector"><svg><line x1="0" y1="12" x2="24" y2="12" /></svg></div> 
+			
+			<div class="stage development">
+				<div>开发</div>
+				<div class="progress progress-color-07">100%</div>
+			</div>  
+			<div class="connector"><svg><line x1="0" y1="12" x2="24" y2="12" /></svg></div>  
+			
+			<div class="stage validation">
+				<div>验证</div>
+				<div class="progress progress-color-08">90%</div>
+			</div>  
+			<div class="connector"><svg><line x1="0" y1="12" x2="24" y2="12" /></svg></div> 
+			
+			<div class="stage launch">
+				<div>发布</div>
+				<div class="progress progress-color-09"></div>
+			</div>  
+			<div class="connector"><svg><line x1="0" y1="12" x2="24" y2="12" /></svg></div> 
+			
+			<div class="stage lifecycle">
+				<div>生命周期</div>
+				<div class="progress progress-color-10"></div>
+			</div> 
+		</div>
+    </div>
+	<div class="project-row-first">
+		<div class="left">
+			<div class="title">
+				<span>项目缺陷</span>
+			</div>
+			<div class="echarts-bar" id="projectDefect"></div>
+		</div>
+		<div class="center">
+			<div class="title">
+				<span>问题闭环</span>
+			</div>
+			<div class="echarts-bar" id="questionCloseLoop"></div>
+		</div>
+		<div class="right">
+			<div class="title">
+				<span>风险问题</span>
+			</div>
+			<div class="echarts-bar" id="risk"></div>
+		</div>
+		<div class="right01">
+			<div class="title">
+				<span>资源投入</span>
+			</div>
+			<div class="echarts-bar" id="source"></div>
+		</div>
+	</div>
+	<div class="project-row-second">
+		<div class="left">
+			<div class="title">
+				<span>成本信息</span>
+			</div>
+			<div class="echarts-bar" id="cost"></div>
+		</div>
+		<div class="center">
+			<div class="title">
+				<span>成本构成</span>
+			</div>
+			<div class="echarts-bar" id="costComp"></div>
+		</div>
+		<div class="right">
+			<div class="title">
+				<span>预算支出</span>
+			</div>
+			<div class="echarts-bar" id="budget"></div>
+		</div>
+		<div class="right01">
+			<div class="title">
+				<span>项目预算</span>
+			</div>
+			<div class="echarts-bar" id="projectBudget"></div>
+		</div>
+	</div>
+	<div class="project-row-third">
+		<div class="tabel-title">
+			<span>EC变更台账</span>
+		</div>
+		<table class="table">
+			<thead>
+			<tr>
+				<th style="font-size: 0.8vw; width: 5%;text-align: center">序号</th>
+				<th style="font-size: 0.8vw; width: 7%;text-align: center">EC单号</th>
+				<th style="font-size: 0.8vw; width: 7%;text-align: center">申请时间</th>
+				<th style="font-size: 0.8vw; width: 7%;text-align: center">申请人</th>
+				<th style="font-size: 0.8vw; width: 7%;text-align: center">设计内容</th>
+				<th style="font-size: 0.8vw; width: 7%;text-align: center">涉及新物料</th>
+				<th style="font-size: 0.8vw; width: 7%;text-align: center">受影响产品</th>
+				<th style="font-size: 0.8vw; width: 7%;text-align: center">关键器件变更</th>
+				<th style="font-size: 0.8vw; width: 7%;text-align: center">涉及PCN</th>
+				<th style="font-size: 0.8vw; width: 7%;text-align: center">排产订单号</th>
+				<th style="font-size: 0.8vw; width: 7%;text-align: center">执行效果</th>
+				<th style="font-size: 0.8vw; width: 7%;text-align: center">切入日期</th>
+				<th style="font-size: 0.8vw; width: 7%;text-align: center">首台条码</th>
+				<th style="font-size: 0.8vw; width: 7%;text-align: center">备注</th>
+			</tr>
+			</thead>
+		</table>
+
+		<div class="scroll-box-01">
+			<table class="scroll-tab-01" id="content01">
+				<tbody class="scrollContent-01" id="scrollContent01"></tbody>
+			</table>
+		</div>
+	</div>
+	</div>
+	<script type="text/javascript" th:src="@{/js/plugins/echarts.min.js}"></script>
+	<script type="text/javascript" th:src="@{/js/xybr/project/budgetExpen.js}"></script>
+	<script type="text/javascript" th:src="@{/js/xybr/project/cost.js}"></script>
+	<script type="text/javascript" th:src="@{/js/xybr/project/risk.js}"></script>
+	<script type="text/javascript" th:src="@{/js/xybr/project/projectDefect.js}"></script>
+	<script type="text/javascript" th:src="@{/js/xybr/project/costComp.js}"></script>
+	<script type="text/javascript" th:src="@{/js/xybr/project/questionCloseLoop.js}"></script>
+	<script type="text/javascript" th:src="@{/js/xybr/project/source.js}"></script>
+	<script type="text/javascript" th:src="@{/js/xybr/project/projectBudget.js}"></script>
+	<script type="text/javascript" th:src="@{/js/jquery.min.js}"></script>
+	<script type="text/javascript">
+		//var urls = "http://123.249.26.42:8084/xybrInterFace/";
+		var urls = "http://localhost/";
+		window.onload = function (){
+			document.querySelectorAll('.stage').forEach(function(element) {
+				element.style.width = nowSize(60) + 'px';
+				element.style.height = nowSize(60) + 'px';
+				element.style.borderRadius = nowSize(5) + 'px';
+				element.style.fontSize = nowSize(16) + 'px';
+				element.style.margin = nowSize(0.5) + 'px';
+				element.style.padding = nowSize(10) + 'px';
+			});
+			document.querySelectorAll('.connector').forEach(function(element) {
+				element.style.width = nowSize(60) + 'px';
+				element.style.height = nowSize(40) + 'px';
+			});
+			document.querySelectorAll('.progress').forEach(function(element) {
+				element.style.borderRadius = nowSize(10) + 'px';
+				element.style.height = nowSize(20) + 'px';
+			});
+			document.querySelectorAll('.project-plan-title').forEach(function(element) {
+				element.style.fontSize = nowSize(18) + 'px';
+			});
+			document.querySelectorAll('.title').forEach(function(element) {
+				element.style.fontSize = nowSize(16) + 'px';
+			});
+			document.querySelectorAll('.tabel-title').forEach(function(element) {
+				element.style.fontSize = nowSize(16) + 'px';
+			});
+			let budget = echarts.init(document.getElementById("budget"));
+			createBudgeExp(budget,'');
+			let cost = echarts.init(document.getElementById("cost"));
+			createCost(cost,'');
+			let projectDefect = echarts.init(document.getElementById("projectDefect"));
+			createProjectDefect(projectDefect,'');
+			let risk = echarts.init(document.getElementById("risk"));
+			createRisk(risk,'');
+			let costComp = echarts.init(document.getElementById("costComp"));
+			createCostComp(costComp,'');
+			let questionCloseLoop = echarts.init(document.getElementById("questionCloseLoop"));
+			createQuestionCloseLoop(questionCloseLoop,'');
+			let source = echarts.init(document.getElementById("source"));
+			createSource(source,'');
+			let projectBudget = echarts.init(document.getElementById("projectBudget"));
+			createProjectBudget(projectBudget,'');
+			fillDataTable();
+		}
+		window.addEventListener('resize', function() {
+			location.reload()
+		});
+		function fillDataTable() {
+			var table03 = document.getElementsByClassName('scroll-tab-01').item(0);
+			let ECChangeStr = '';
+			var scrollContent01= document.getElementsByClassName('scroll-box-01').item(0);
+			for (let n = 0; n < 20; n++) {
+				ECChangeStr +=
+						'<tr style="height: 24px;"><td style="font-size: 0.8vw; width: 5%;font-weight: 400;text-align: center">' +
+						n +
+						'</td><td style="font-size: 0.8vw; width: 7%;font-weight: 400;text-align: center">' +
+						'20241009001' +
+						'</td><td style="font-size: 0.8vw; width: 7%;font-weight: 400;text-align: center">' +
+						'2024-10-09' +
+						'</td><td style="font-size: 0.8vw; width: 7%;font-weight: 400;text-align: center">' +
+						'马继召' +
+						'</td><td style="font-size: 0.8vw; width: 7%;font-weight: 400;text-align: center">' +
+						'设计内容设计内容' +
+						'</td><td style="font-size: 0.8vw; width: 7%;font-weight: 400;text-align: center">' +
+						'是' +
+						'</td><td style="font-size: 0.8vw; width: 7%;font-weight: 400;text-align: center">' +
+						'受影响产品产品产品' +
+						'</td><td style="font-size: 0.8vw; width: 7%;font-weight: 400;text-align: center">' +
+						'是' +
+						'</td><td style="font-size: 0.8vw; width: 7%;font-weight: 400;text-align: center">' +
+						'是' +
+						'</td><td style="font-size: 0.8vw; width: 7%;font-weight: 400;text-align: center">' +
+						'00154850002' +
+						'</td><td style="font-size: 0.8vw; width: 7%;font-weight: 400;text-align: center">' +
+						'执执行效果执行效果执行效果执行效果执行效果执行效果执行效果执行效果执行效果行效果执行效果执行效果' +
+						'</td><td style="font-size: 0.8vw; width: 7%;font-weight: 400;text-align: center">' +
+						'2024-10-09' +
+						'</td><td style="font-size: 0.8vw; width: 7%;font-weight: 400;text-align: center">' +
+						'1000235989259885926' +
+						'</td><td style="font-size: 0.8vw; width: 7%;font-weight: 400;text-align: center">' +
+						'备注备注备注' +
+						'</td></tr>';
+			}
+			$('.scrollContent-01').append(ECChangeStr);
+		}
+		function nowSize(size){
+			let nowClientWidth = size*(document.documentElement.clientWidth/1698);
+			return nowClientWidth;
+		}
+	</script>
+</body>  
+</html>
