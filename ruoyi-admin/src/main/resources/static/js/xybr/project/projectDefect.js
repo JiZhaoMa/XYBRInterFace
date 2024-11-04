@@ -25,7 +25,7 @@ function createProjectDefect(bar,project) {
             itemGap: nowSize(6),
             textStyle: {
                 fontSize: nowSize(10),
-                color: "#5D6C8E",
+                color: "#000",
                 fontFamily: "SourceHanSansCN-Regular"
             }
         },
@@ -90,7 +90,7 @@ function createProjectDefect(bar,project) {
                     normal: {
                         show: true,
                         textStyle: {
-                            fontSize: nowSize(10)
+                            fontSize: nowSize(12)
                         },
                         color: new echarts.graphic.LinearGradient(
                             0,
@@ -104,7 +104,7 @@ function createProjectDefect(bar,project) {
                                 },
                                 {
                                     offset: 1,
-                                    color: "#FFD355"
+                                    color: "#ffdb5c"
                                 }
                             ],
                             false
@@ -131,7 +131,7 @@ function createProjectDefect(bar,project) {
                     normal: {
                         show: true,
                         textStyle: {
-                            fontSize: nowSize(10)
+                            fontSize: nowSize(12)
                         },
                         color: new echarts.graphic.LinearGradient(
                             0,
@@ -145,7 +145,7 @@ function createProjectDefect(bar,project) {
                                 },
                                 {
                                     offset: 1,
-                                    color: "#FF6772"
+                                    color: "#ff9f7f"
                                 }
                             ],
                             false
@@ -157,7 +157,7 @@ function createProjectDefect(bar,project) {
                 name: "自测问题",
                 type: "bar",
                 // 宽度
-                barWidth: nowSize(10),
+                barWidth: nowSize(12),
                 barGap: '80%',
                 barCategoryGap: '80%',
                 // 堆叠
@@ -172,7 +172,7 @@ function createProjectDefect(bar,project) {
                     normal: {
                         show: true,
                         textStyle: {
-                            fontSize: nowSize(10)
+                            fontSize: nowSize(12)
                         },
                         color: new echarts.graphic.LinearGradient(
                             0,
@@ -186,7 +186,7 @@ function createProjectDefect(bar,project) {
                                 },
                                 {
                                     offset: 1,
-                                    color: "#5EA1FF"
+                                    color: "#37a2da"
                                 }
                             ],
                             false

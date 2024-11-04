@@ -28,9 +28,9 @@ function createBudgeExp(bar,project) {
             }
         };
         for (var i = 0; i < mainData.length; i++) {
-            var paramColor = "brown";
+            var paramColor = "#ff9f7f";
             if(i===1){
-                paramColor = "#4CAF50";
+                paramColor = "#9fe6b8";
             }
             result.push({
                 type: 'pie',

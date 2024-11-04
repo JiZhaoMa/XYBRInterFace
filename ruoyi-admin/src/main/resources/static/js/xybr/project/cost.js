@@ -34,7 +34,7 @@ function createCost(bar,project) {
         for (var i = 0; i < mainData.length; i++) {
             var paramColor = "brown";
             if(i===0){
-                paramColor = "brown";
+                paramColor = "#ff9f7f";
                 result.push({
                     type: 'pie',
                     center: ['20%', '28%'], // 20%  50%  80%
@@ -52,7 +52,7 @@ function createCost(bar,project) {
                 });
             }
             if(i===1){
-                paramColor = "#4CAF50";
+                paramColor = "#9fe6b8";
                 result.push({
                     type: 'pie',
                     center: ['80%', '28%'], // 20%  50%  80%
@@ -70,7 +70,7 @@ function createCost(bar,project) {
                 });
             }
             if(i===2){
-                paramColor = "#03A9F4";
+                paramColor = "#32c5e9";
                 result.push({
                     type: 'pie',
                     center: ['50%', '62%'], // 20%  50%  80%

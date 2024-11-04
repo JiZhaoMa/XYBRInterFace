@@ -35,9 +35,8 @@ function createProjectBudget(bar,project) {
             {
                 name: '预算',
                 type: 'bar',
-                barWidth: nowSize(30),
-                stack: '数量',
-                data: [11,20,30,26,53,24,19],
+                barWidth: nowSize(25),
+                data: [11,70,30,26,53,24,19],
                 itemStyle: {
                     normal: {
                         //颜色渐变
@@ -54,9 +53,8 @@ function createProjectBudget(bar,project) {
             {
                 name: '核算',
                 type: 'bar',
-                barWidth:nowSize(30),
-                stack: '数量',
-                data:  [11,20,30,26,53,24,19],
+                barWidth:nowSize(25),
+                data:  [11,20,80,26,53,24,119],
                 itemStyle: {
                     normal: {
                         //颜色渐变

@@ -6,12 +6,19 @@ function createRisk(bar,project) {
             radius: nowSize(60),
             // shape: 'circle',
             indicator: [
-                { name: '需求', max: 6500},
-                { name: '技术', max: 16000},
-                { name: '成本', max: 30000},
-                { name: '质量', max: 38000},
-                { name: '计划', max: 52000}
-            ]
+                { name: '需求', max: 10000},
+                { name: '技术', max: 10000},
+                { name: '成本', max: 10000},
+                { name: '质量', max: 10000},
+                { name: '计划', max: 10000}
+            ],
+            name: {
+                formatter: '{value}',
+                textStyle: {
+                    fontSize: nowSize(12),
+                    color: '#000' //外圈标签字体颜色
+                }
+            },
         },
         series: [{
             name: '风险问题',
@@ -19,8 +26,11 @@ function createRisk(bar,project) {
             // areaStyle: {normal: {}},
             data : [
                 {
-                    value : [4300, 10000, 28000, 35000, 50000],
-                    name : '风险问题'
+                    value : [4300, 10000, 2000, 3000, 5000],
+                    name : '风险问题',
+                    textStyle: {
+                        color: 'red' // 设置文字颜色为红色
+                    }
                 }
             ]
         }]

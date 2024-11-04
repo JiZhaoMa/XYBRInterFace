@@ -50,7 +50,7 @@
             stroke-linecap: round;  
             marker-end: url(#arrowhead);  
         }  
-		.progress {
+		.process {
 			position: absolute;
 			bottom: 0;
 			left: 0;
@@ -64,8 +64,9 @@
 		.project-title{
 			height: 5%;
 			width: 100%;
-			color: brown;
-			font-size: large;
+			background-color: #37a2da;
+			color: #FFF;
+			font-size: x-large;
 			font-weight: bold;
 			justify-content: center;
 			align-items: center;
@@ -74,7 +75,7 @@
 		.project-process{
 			height: 3%;
 			width: 100%;
-			color: brown;
+			color: #37a2da;
 			font-size: small;
 			font-weight: bold;
 			justify-content: center;
@@ -122,11 +123,13 @@
 			top: 19%;
 			left: 5%;
 			border: 0.2px solid #0663A2;
+			border-radius: 10px 10px 10px 10px;
 		}
 		.left{
 			width: 25%;
 			height: 100%;
 			border: 0.2px solid #0663A2;
+			border-radius: 10px 10px 10px 10px;
 		}
 		.title{
 			width: 30%;
@@ -154,6 +157,7 @@
 			left: 2%;
 			position: relative;
 			border: 0.2px solid #0663A2;
+			border-radius: 10px 10px 10px 10px;
 		}
 		.right{
 			width: 23%;
@@ -161,6 +165,7 @@
 			left: 4%;
 			position: relative;
 			border: 0.2px solid #0663A2;
+			border-radius: 10px 10px 10px 10px;
 		}
 		.right01{
 			width: 25%;
@@ -168,33 +173,34 @@
 			left: 6%;
 			position: relative;
 			border: 0.2px solid #0663A2;
+			border-radius: 10px 10px 10px 10px;
 		}
 		.echarts-bar{
 			width: 100%;
 			height: 100%;
 			top: -5%;
 		}
-		.progress-color-01 { color: #4CAF50; } /* 市场洞察 */  
-        .progress-color-02 { color: #2196F3; } /* 机会分析 */  
-        .progress-color-03 { color: #FFC107; } /* 业务计划 */  
-        .progress-color-04 { color: #F44336; } /* 产品立项 */  
-        .progress-color-05 { color: #9C27B0; } /* 概念 */  
-        .progress-color-06 { color: #E91E63; } /* 计划 */  
-        .progress-color-07 { color: #673AB7; } /* 开发 */  
-        .progress-color-08 { color: #3F51B5; } /* 验证 */  
-        .progress-color-09 { color: #03A9F4; } /* 发布 */  
-        .progress-color-10 { color: #00BCD4; } /* 生命周期 */
+		.process-color-01 { color: #37a2da; } /* 市场洞察 */
+        .process-color-02 { color: #37a2da; } /* 机会分析 */
+        .process-color-03 { color: #37a2da; } /* 业务计划 */
+        .process-color-04 { color: #37a2da; } /* 产品立项 */
+        .process-color-05 { color: #37a2da; } /* 概念 */
+        .process-color-06 { color: #37a2da; } /* 计划 */
+        .process-color-07 { color: #ff9f7f; } /* 开发 */
+        .process-color-08 { color: #ff9f7f; } /* 验证 */
+        .process-color-09 { color: #9ea6b9; } /* 发布 */
+        .process-color-10 { color: #9ea6b9; } /* 生命周期 */
 		
-        .market-insights { background-color: #4CAF50; } /* 市场洞察 */  
-        .opportunity-analysis { background-color: #2196F3; } /* 机会分析 */  
-        .business-plan { background-color: #FFC107; } /* 业务计划 */  
-        .product-initiation { background-color: #F44336; } /* 产品立项 */  
-        .concept { background-color: #9C27B0; } /* 概念 */  
-        .planning { background-color: #E91E63; } /* 计划 */  
-        .development { background-color: #673AB7; } /* 开发 */  
-        .validation { background-color: #3F51B5; } /* 验证 */  
-        .launch { background-color: #03A9F4; } /* 发布 */  
-        .lifecycle { background-color: #00BCD4; } /* 生命周期 */
+        .market-insights { background-color: #37a2da; } /* 市场洞察 */
+        .opportunity-analysis { background-color: #37a2da; } /* 机会分析 */
+        .business-plan { background-color: #37a2da; } /* 业务计划 */
+        .product-initiation { background-color: #37a2da; } /* 产品立项 */
+        .concept { background-color: #37a2da; } /* 概念 */
+        .planning { background-color: #37a2da; } /* 计划 */
+        .development { background-color: #ff9f7f; } /* 开发 */
+        .validation { background-color: #ff9f7f; } /* 验证 */
+        .launch { background-color: #9ea6b9; } /* 发布 */
+        .lifecycle { background-color: #9ea6b9; } /* 生命周期 */
 		table {
 			width: 100%; /* 设置table宽度 */
 			border-collapse: collapse; /* 边框合并 */
@@ -208,7 +214,7 @@
 			padding: 8px; /* 设置单元格内边距 */
 			text-align: center; /* 单元格内文本对齐方式 */
 			position: sticky;
-			background-color: #03A9F4;
+			background-color: #37a2da;
 		}
 		td {
 			border: 0px; /* 设置单元格边框 */
@@ -232,7 +238,7 @@
 		}
 		th {
 			text-align: center;
-			color: #000;
+			color: #fff;
 			width: 28%;
 			font-weight: bold;
 		}
@@ -248,8 +254,8 @@
 <body>
 	<div class="project-title">
 		<span>42kw小功率群充项目</span>
-		<div style="position: fixed; left: 84%; top: 3%">
-			<select name="selectYear" id="selectYear" style="background-color: #03A9F4; color: #000; border: 0.2px solid #03A9F4;">
+		<div style="position: fixed; left: 84%;">
+			<select name="selectProject" id="selectProject" style="background-color: #37a2da; color: #fff; border: 0.2px solid #37a2da;">
 				<option value="2022">42kw小功率群充项目</option>
 				<option value="2023">42kw小功率群充项目</option>
 				<option value="2024" selected="selected">42kw小功率群充项目</option>
@@ -274,7 +280,9 @@
 		<div class="flowchart-container">  
 			<div class="stage market-insights">
 				<div>市场洞察</div>
-				<div class="progress progress-color-01">100%</div>
+				<div class="process process-color-01" id="process">
+					<span id="process01"></span>
+				</div>
 			</div>  
 			<div class="connector">  
 				<svg>  
@@ -290,55 +298,73 @@
 			<div class="stage opportunity-analysis">
 			
 				<div>机会分析</div>
-				<div class="progress progress-color-02">100%</div>
+				<div class="process process-color-02">
+					<span id="process02"></span>
+				</div>
 			</div>	
 			<div class="connector"><svg><line x1="0" y1="12" x2="24" y2="12" /></svg></div>  
 			
 			<div class="stage business-plan">
 				<div>业务计划</div>
-				<div class="progress progress-color-03">100%</div>
+				<div class="process process-color-03">
+					<span id="process03"></span>
+				</div>
 			</div>  
 			<div class="connector"><svg><line x1="0" y1="12" x2="24" y2="12" /></svg></div>
 			
 			<div class="stage product-initiation">
 				<div>产品立项</div>
-				<div class="progress progress-color-04">100%</div>
+				<div class="process process-color-04">
+					<span id="process04"></span>
+				</div>
 			</div>  
 			<div class="connector"><svg><line x1="0" y1="12" x2="24" y2="12" /></svg></div>
 			
 			<div class="stage concept">
 				<div>概念</div>
-				<div class="progress progress-color-05">80%</div>
+				<div class="process process-color-05">
+					<span id="process05"></span>
+				</div>
 			</div>  
 			<div class="connector"><svg><line x1="0" y1="12" x2="24" y2="12" /></svg></div> 
 			
 			<div class="stage planning">
 				<div>计划</div>
-				<div class="progress progress-color-06">10%</div>
+				<div class="process process-color-06">
+					<span id="process06"></span>
+				</div>
 			</div>  
 			<div class="connector"><svg><line x1="0" y1="12" x2="24" y2="12" /></svg></div> 
 			
 			<div class="stage development">
 				<div>开发</div>
-				<div class="progress progress-color-07">100%</div>
+				<div class="process process-color-07">
+					<span id="process07"></span>
+				</div>
 			</div>  
 			<div class="connector"><svg><line x1="0" y1="12" x2="24" y2="12" /></svg></div>  
 			
 			<div class="stage validation">
 				<div>验证</div>
-				<div class="progress progress-color-08">90%</div>
+				<div class="process process-color-08">
+					<span id="process08"></span>
+				</div>
 			</div>  
 			<div class="connector"><svg><line x1="0" y1="12" x2="24" y2="12" /></svg></div> 
 			
 			<div class="stage launch">
 				<div>发布</div>
-				<div class="progress progress-color-09"></div>
+				<div class="process process-color-09">
+					<span id="process09"></span>
+				</div>
 			</div>  
 			<div class="connector"><svg><line x1="0" y1="12" x2="24" y2="12" /></svg></div> 
 			
 			<div class="stage lifecycle">
 				<div>生命周期</div>
-				<div class="progress progress-color-10"></div>
+				<div class="process process-color-10">
+					<span id="process10"></span>
+				</div>
 			</div> 
 		</div>
     </div>
@@ -362,6 +388,18 @@
 			<div class="echarts-bar" id="risk"></div>
 		</div>
 		<div class="right01">
+			<div style="position: fixed; right: 4%;">
+				<select name="selectYear" id="selectYear" style="background-color: #37a2da; color: #fff; border: 0.2px solid #37a2da;">
+					<option value="2022">2022</option>
+					<option value="2023">2023</option>
+					<option value="2024" selected="selected">2024</option>
+					<option value="2025">2025</option>
+					<option value="2026">2026</option>
+					<option value="2027">2027</option>
+					<option value="2028">2028</option>
+					<option value="2029">2029</option>
+				</select>
+			</div>
 			<div class="title">
 				<span>资源投入</span>
 			</div>
@@ -425,7 +463,6 @@
 			</table>
 		</div>
 	</div>
-	</div>
 	<script type="text/javascript" th:src="@{/js/plugins/echarts.min.js}"></script>
 	<script type="text/javascript" th:src="@{/js/xybr/project/budgetExpen.js}"></script>
 	<script type="text/javascript" th:src="@{/js/xybr/project/cost.js}"></script>
@@ -452,7 +489,7 @@
 				element.style.width = nowSize(60) + 'px';
 				element.style.height = nowSize(40) + 'px';
 			});
-			document.querySelectorAll('.progress').forEach(function(element) {
+			document.querySelectorAll('.process').forEach(function(element) {
 				element.style.borderRadius = nowSize(10) + 'px';
 				element.style.height = nowSize(20) + 'px';
 			});
@@ -482,14 +519,25 @@
 			let projectBudget = echarts.init(document.getElementById("projectBudget"));
 			createProjectBudget(projectBudget,'');
 			fillDataTable();
+			fillProjectPlanData();
 		}
 		window.addEventListener('resize', function() {
 			location.reload()
 		});
+		function fillProjectPlanData(){
+			document.getElementById('process01').innerText = "100%";
+			document.getElementById('process02').innerText = "100%";
+			document.getElementById('process03').innerText = "100%";
+			document.getElementById('process04').innerText = "100%";
+			document.getElementById('process05').innerText = "100%";
+			document.getElementById('process06').innerText = "100%";
+			document.getElementById('process07').innerText = "80%";
+			document.getElementById('process08').innerText = "90%";
+			document.getElementById('process09').innerText = "";
+			document.getElementById('process10').innerText = "";
+		}
 		function fillDataTable() {
-			var table03 = document.getElementsByClassName('scroll-tab-01').item(0);
 			let ECChangeStr = '';
-			var scrollContent01= document.getElementsByClassName('scroll-box-01').item(0);
 			for (let n = 0; n < 20; n++) {
 				ECChangeStr +=
 						'<tr style="height: 24px;"><td style="font-size: 0.8vw; width: 5%;font-weight: 400;text-align: center">' +
@@ -523,10 +571,35 @@
 						'</td></tr>';
 			}
 			$('.scrollContent-01').append(ECChangeStr);
+			$('.scrollContent-01').append(ECChangeStr);
 		}
 		function nowSize(size){
 			let nowClientWidth = size*(document.documentElement.clientWidth/1698);
 			return nowClientWidth;
+		}
+		var table01 = document.getElementsByClassName('scroll-tab-01').item(0);
+		var scrollContent01= document.getElementsByClassName('scroll-box-01').item(0);
+		roll(50);
+		//滚动函数
+		function roll(t) {
+			var timer = setInterval(rollStart, t); // 间隔时间t
+			// 鼠标移入table时暂停滚动
+			table01.onmouseover = function () {
+				clearInterval(timer);
+			};
+			// 鼠标移出table后继续滚动
+			table01.onmouseout = function () {
+				timer = setInterval(rollStart, t);
+			};
+		}
+		// 开始滚动函数
+		function rollStart() {
+			if (scrollContent01.scrollTop >= scrollContent01.scrollHeight / 2) {
+				//注此处高度相当于为俩个tbody高度 需除2
+				scrollContent01.scrollTop = 0;
+			} else {
+				scrollContent01.scrollTop++;
+			}
 		}
 	</script>
 </body>  

@@ -25,7 +25,7 @@ function createQuestionCloseLoop(bar,project) {
             itemGap: nowSize(6),
             textStyle: {
                 fontSize: nowSize(10),
-                color: "#5D6C8E",
+                color: "#000",
                 fontFamily: "SourceHanSansCN-Regular"
             }
         },
@@ -84,12 +84,12 @@ function createQuestionCloseLoop(bar,project) {
                 backgroundStyle: {
                     color: "#EEF2F9"
                 },
-                data: [10, 11, 6],
+                data: [10, 1111, 6],
                 itemStyle: {
                     normal: {
                         show: true,
                         textStyle: {
-                            fontSize: nowSize(10)
+                            fontSize: nowSize(12)
                         },
                         color: new echarts.graphic.LinearGradient(
                             0,
@@ -103,7 +103,7 @@ function createQuestionCloseLoop(bar,project) {
                                 },
                                 {
                                     offset: 1,
-                                    color: "#FFD355"
+                                    color: "#ffdb5c"
                                 }
                             ],
                             false
@@ -130,7 +130,7 @@ function createQuestionCloseLoop(bar,project) {
                     normal: {
                         show: true,
                         textStyle: {
-                            fontSize: nowSize(10),
+                            fontSize: nowSize(12),
                         },
                         color: new echarts.graphic.LinearGradient(
                             0,
@@ -144,7 +144,7 @@ function createQuestionCloseLoop(bar,project) {
                                 },
                                 {
                                     offset: 1,
-                                    color: "#FF6772"
+                                    color: "#ff9f7f"
                                 }
                             ],
                             false
@@ -171,7 +171,7 @@ function createQuestionCloseLoop(bar,project) {
                     normal: {
                         show: true,
                         textStyle: {
-                            fontSize: nowSize(10)
+                            fontSize: nowSize(12)
                         },
                         color: new echarts.graphic.LinearGradient(
                             0,
@@ -185,7 +185,7 @@ function createQuestionCloseLoop(bar,project) {
                                 },
                                 {
                                     offset: 1,
-                                    color: "#5EA1FF"
+                                    color: "#37a2da"
                                 }
                             ],
                             false

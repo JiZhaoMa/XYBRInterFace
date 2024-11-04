@@ -182,7 +182,7 @@ function createShiChangGuZhangRate(line, monthList) {
                 show: true,//控制滚动条显示隐藏
                 realtime: true, //拖动滚动条时是否动态的更新图表数据
                 height: 0, //滚动条高度
-                start: 0, //滚动条开始位置（共6等份）
+                start: this.startValue, //滚动条开始位置（共6等份）
                 end: this.endValue,//滚动条结束位置
                 top: '95%',
                 bottom: '4%',
@@ -206,6 +206,10 @@ function createShiChangGuZhangRate(line, monthList) {
             option.xAxis[0].data = data.monthLists;
             option.series[0].data = data.listIn;
             option.series[1].data = data.listOut;
+            var end = option.xAxis[0].data.length - 1;
+            var start = option.xAxis[0].data.length - 5;
+            option.dataZoom[0].startValue = start;
+            option.dataZoom[0].endValue = end;
             line.setOption(option,true);
         },
         error: function (data) {
