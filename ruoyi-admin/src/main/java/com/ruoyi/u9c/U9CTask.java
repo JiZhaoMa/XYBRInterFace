@@ -8,6 +8,7 @@ import com.ruoyi.service.BPMService;
 import com.ruoyi.service.U9CService;
 import com.ruoyi.u9c.domain.ARBill;
 import com.ruoyi.u9c.domain.InvTrans;
+import com.ruoyi.u9c.domain.SaleContract;
 import com.ruoyi.u9c.domain.Voucher;
 import com.ruoyi.u9c.service.*;
 import com.ruoyi.u9c.service.impl.ARBillServiceImpl;
@@ -35,6 +36,10 @@ public class U9CTask {
     U9CService u9CService;
     @Autowired
     BPMService bpmService;
+    @Autowired
+    SaleContractBPMService saleContractBPMService;
+    @Autowired
+    SaleContractService saleContractService;
     public void getItemInfoList() {
         List<InvTrans> list = invTransService.getInvTransList();
         if(list.size() > 0){
@@ -112,5 +117,9 @@ public class U9CTask {
     public void synFixedField() throws Exception {
         List<FixedFiled> list = u9CService.getU9CFixedFiled();
         bpmService.insertFixedFiled(list);
+    }
+    public void getSaleContractList() {
+       List<SaleContract> list = saleContractService.getSaleContractList();
+       saleContractBPMService.insertSaleContrace(list);
     }
 }

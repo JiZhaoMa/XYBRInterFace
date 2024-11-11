@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.u9c.mapper.SaleContractMapper">
+    <resultMap type="SaleContract" id="SaleContractResult">
+        <result property="businessDate"             column="businessDate"/>
+        <result property="docNo"                    column="docNo"/>
+        <result property="itemName"                 column="itemName"/>
+        <result property="orderPrice"               column="orderPrice"/>
+        <result property="contactQtyPU"             column="contactQtyPU"/>
+        <result property="totalMnyTC"               column="totalMnyTC"/>
+        <result property="customerName"             column="customerName"/>
+        <result property="deliverQty"               column="deliverQty"/>
+    </resultMap>
+    <select id="getSaleContractList" parameterType="java.util.Map" resultMap="SaleContractResult">
+        SELECT h.*, d.deliverQty FROM
+            (SELECT
+                 b.ID AS ID,
+                 FORMAT(a.BusinessDate, 'yyyy-MM-dd') AS businessDate,
+                 a.DocNo AS docNo,
+                 b.ItemInfo_ItemName AS itemName,
+                 b.OrderPrice AS orderPrice,
+                 b.ContactQtyPU AS contactQtyPU,
+                 b.TotalMnyTC AS totalMnyTC,
+                 c.Name AS customerName
+             FROM
+                 [dbo].[SM_SaleContract] a,
+                 [dbo].[SM_SCLine] b,
+                 [dbo].[CBO_Customer_Trl] c
+             WHERE a.ID = b.SaleContract
+               AND a.Orderby = c.ID
+               AND (b.ItemInfo_ItemCode like '93101%' OR b.ItemInfo_ItemCode like '93102%')
+               -- AND a.BusinessDate > DATEADD(MONTH,-6,GETDATE())
+               AND a.Cancel_Canceled != 1) h
+                LEFT JOIN (SELECT SUM(OrderByQtyPU) as deliverQty,SaleContractLine  FROM [dbo].[SM_SOLine] GROUP BY SaleContractLine) d ON h.ID = d.SaleContractLine
+        ORDER BY h.businessDate DESC
+    </select>
+</mapper>

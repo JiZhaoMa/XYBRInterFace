@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.u9c.mapper.SaleContractBPMMapper">
+    <insert id="insertSaleContrace" parameterType="java.util.List">
+        insert into report_salecontract(docNo, businessDate, itemName, orderPrice, contactQtyPU, totalMnyTC, customerName,deliverQty ) values
+        <foreach item="item" index="index" collection="list" separator=",">
+            (#{item.docNo},#{item.businessDate},#{item.itemName},#{item.orderPrice},#{item.contactQtyPU},#{item.totalMnyTC},#{item.customerName},#{item.deliverQty})
+        </foreach>
+    </insert>
+    <delete id="deletSaleContrace">
+        delete from report_salecontract
+    </delete>
+</mapper>
