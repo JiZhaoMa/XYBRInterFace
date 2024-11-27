@@ -19,7 +19,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
                  b.ID AS ID,
                  FORMAT(a.BusinessDate, 'yyyy-MM-dd') AS businessDate,
                  a.DocNo AS docNo,
-                 b.ItemInfo_ItemName AS itemName,
+                 f.Description AS itemName,
                  b.OrderPrice AS orderPrice,
                  b.ContactQtyPU AS contactQtyPU,
                  b.TotalMnyTC AS totalMnyTC,
@@ -27,10 +27,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
              FROM
                  [dbo].[SM_SaleContract] a,
                  [dbo].[SM_SCLine] b,
-                 [dbo].[CBO_Customer_Trl] c
+                 [dbo].[CBO_Customer_Trl] c,
+                 [dbo].[CBO_ItemMaster] e,
+                 [dbo].[CBO_ItemMaster_Trl] f
              WHERE a.ID = b.SaleContract
                AND a.Orderby = c.ID
-               AND (b.ItemInfo_ItemCode like '93101%' OR b.ItemInfo_ItemCode like '93102%')
+               AND b.ItemInfo_ItemCode = e.Code
+               AND e.ID = f.ID
+               -- AND (b.ItemInfo_ItemCode like '93101%' OR b.ItemInfo_ItemCode like '93102%')
                -- AND a.BusinessDate > DATEADD(MONTH,-6,GETDATE())
                AND a.Cancel_Canceled != 1) h
                 LEFT JOIN (SELECT SUM(OrderByQtyPU) as deliverQty,SaleContractLine  FROM [dbo].[SM_SOLine] GROUP BY SaleContractLine) d ON h.ID = d.SaleContractLine

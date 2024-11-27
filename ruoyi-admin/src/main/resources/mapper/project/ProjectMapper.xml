@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.report.mapper.ProjectMapper">
+    <resultMap type="EcLedger" id="EcLedgerResult">
+        <result property="ecNo"             column="ecNo"/>
+        <result property="appDate"          column="appDate"/>
+        <result property="approver"         column="approver"/>
+        <result property="content"          column="content"/>
+        <result property="inVolveNewItem"   column="inVolveNewItem"/>
+        <result property="affectedProduct"  column="affectedProduct"/>
+        <result property="keyDevices"       column="keyDevices"/>
+        <result property="affectedPcn"      column="affectedPcn"/>
+        <result property="orderNo"          column="orderNo"/>
+        <result property="effectiveness"    column="effectiveness"/>
+        <result property="cutInDate"        column="cutInDate"/>
+        <result property="firstBarCode"     column="firstBarCode"/>
+        <result property="notes"            column="notes"/>
+    </resultMap>
+    <resultMap type="Project" id="ProjectResult">
+        <result property="projectName"             column="projectName"/>
+        <result property="projectCode"             column="projectCode"/>
+    </resultMap>
+    <select id="getEcLedger" resultMap="EcLedgerResult">
+        SELECT
+            a.`ITEM_EC单号` AS ecNo,
+            DATE_FORMAT(a.`ITEM_申请日期`,'%Y-%m-%d') AS appDate,
+            a.`ITEM_姓名` AS approver,
+            a.`ITEM_EC涉及内容` AS content,
+            a.`ITEM_是否涉及新增物料` AS inVolveNewItem,
+            IF(a.`ITEM_是否有其他受影响产品`='是', (SELECT GROUP_CONCAT(b.`ITEM_受影响产品名称` SEPARATOR ', ') FROM rdm.`tlk_受影响产品信息` b WHERE b.PARENT = a.ID), '') AS affectedProduct,
+            IF(a.`ITEM_是否涉及关键器件变更`is null,'',a.`ITEM_是否涉及关键器件变更`) AS keyDevices,
+            a.`ITEM_是否涉及PCN` AS affectedPcn,
+            a.`ITEM_实际EC切入排产订单号` AS orderNo,
+            IF(a.`ITEM_质量执行效果` is null,'',a.`ITEM_质量执行效果`) AS effectiveness,
+            IF(a.`ITEM_质量执行切入日期` is null,'',DATE_FORMAT(a.`ITEM_质量执行切入日期`,'%Y-%m-%d')) AS cutInDate,
+            IF(a.`ITEM_质量执行首台条码` is null,'',a.`ITEM_质量执行首台条码`) AS firstBarCode,
+            a.`ITEM_备注` AS notes
+        FROM rdm.`tlk_正式ec` a
+        UNION
+        SELECT
+            a.`ITEM_EC单号` AS ecNo,
+            DATE_FORMAT(a.`ITEM_申请日期`,'%Y-%m-%d') AS appDate,
+            a.`ITEM_姓名` AS approver,
+            a.`ITEM_EC涉及内容` AS content,
+            a.`ITEM_是否涉及新增物料` AS inVolveNewItem,
+            '' AS affectedProduct,
+            '' AS keyDevices,
+            '' AS affectedPcn,
+            a.`ITEM_实际EC切入排产订单号` AS orderNo,
+            '' AS effectiveness,
+            '' AS cutInDate,
+            '' AS firstBarCode,
+            a.`ITEM_备注` AS notes
+        FROM rdm.`tlk_临时ec` a
+    </select>
+    <select id="getProject" resultMap="ProjectResult">
+        SELECT
+            ITEM_项目编码 AS projectCode,
+            ITEM_项目名称 AS projectName
+        FROM rdm.tlk_项目信息查询
+    </select>
+</mapper>

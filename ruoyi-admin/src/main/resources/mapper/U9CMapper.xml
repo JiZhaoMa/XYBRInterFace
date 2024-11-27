@@ -26,6 +26,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="name"             column="name"/>
         <result property="code"              column="code"/>
     </resultMap>
+    <resultMap type="ArriveQty" id="ArriveQtyResult">
+        <result property="docNo"        column="docNo"/>
+        <result property="itemCode"     column="itemCode"/>
+        <result property="lotCode"      column="lotCode"/>
+        <result property="activityQty"  column="activityQty"/>
+    </resultMap>
     <select id="getU9CDeptByName" resultMap="Department01Result">
         SELECT
             a.Code AS u9cCode,
@@ -58,5 +64,35 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </select>
     <select id="getAssetCode" resultType="String">
         SELECT Code FROM dbo.FA_AssetTag WHERE AssetCard = #{assetCard}
+    </select>
+    <update id="updateOrderCode">
+        UPDATE PM_PurchaseOrder
+        SET DocNo = #{newOrderCode}
+        WHERE DocNo = #{orderCode}
+    </update>
+    <update id="updateLotCode">
+        UPDATE PM_POShipLine
+        SET ItemLot_LotCode = #{lotCode},
+            ItemLotCode = #{lotCode},
+            PlanArriveDate = #{deliveryDate},
+            ItemLot_LotMaster = (SELECT TOP 1 ID FROM Lot_LotMaster WHERE ItemCode = #{itemCode} AND LotCode = #{lotCode})
+        WHERE POLine IN
+              (SELECT b.ID FROM PM_PurchaseOrder a, PM_POLine b
+        WHERE a.ID = b.PurchaseOrder
+          AND b.ItemInfo_ItemCode = #{itemCode}
+          AND a.DocNo = #{orderCode}
+          AND b.DocLineNo = #{docLineNo})
+    </update>
+    <select id="selectArriveQty" resultMap="ArriveQtyResult">
+        SELECT
+            SrcDoc_SrcDocNo AS docNo,
+            ItemInfo_ItemCode AS itemCode,
+            POLotCode AS lotCode,
+            SUM(ArriveQtySU) AS activityQty
+        FROM [dbo].[PM_RcvLine]
+        WHERE SrcDoc_SrcDocNo = #{docNo}
+          AND ItemInfo_ItemCode = #{itemCode}
+          AND POLotCode = #{lotCode}
+        GROUP BY SrcDoc_SrcDocNo,ItemInfo_ItemCode,POLotCode
     </select>
 </mapper>

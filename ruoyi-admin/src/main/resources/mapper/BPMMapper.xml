@@ -16,6 +16,34 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="name"             column="name"/>
         <result property="deptId"              column="deptId"/>
     </resultMap>
+    <resultMap type="POLine" id="POLineResult">
+        <result property="DocumentType"            column="DocumentType"/>
+        <result property="BizType"                 column="BizType"/>
+        <result property="BusinessDate"            column="BusinessDate"/>
+        <result property="PurOperCode"             column="PurOperCode"/>
+        <result property="PurDeptCode"             column="PurDeptCode"/>
+        <result property="SupplierCode"            column="SupplierCode"/>
+        <result property="TC"        		       column="TC"/>
+        <result property="AC"                      column="AC"/>
+        <result property="ItemInfoCode"            column="ItemInfoCode"/>
+        <result property="ReqQtyTU"                column="ReqQtyTU"/>
+        <result property="SupplierConfirmQtyTU"    column="SupplierConfirmQtyTU"/>
+        <result property="FinallyPriceTC"          column="FinallyPriceTC"/>
+        <result property="TaxScheduleCode"         column="TaxScheduleCode"/>
+        <result property="projectCode"             column="projectCode"/>
+        <result property="orderCode"               column="orderCode"/>
+        <result property="caiGouType"              column="caiGouType"/>
+        <result property="lotCode"                 column="lotCode"/>
+        <result property="DeliveryDate"            column="DeliveryDate"/>
+        <result property="shipAdress"              column="shipAdress"/>
+        <result property="serializeNo"            column="serializeNo"/>
+    </resultMap>
+    <resultMap type="ArriveQty" id="ArriveQtyResult">
+        <result property="docNo"        column="docNo"/>
+        <result property="itemCode"     column="itemCode"/>
+        <result property="lotCode"      column="lotCode"/>
+        <result property="activityQty"  column="activityQty"/>
+    </resultMap>
     <select id="getDepartList" resultMap="DepartmentResult">
         SELECT
             a.NAME AS deptName,
@@ -55,4 +83,71 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <delete id="deleteSupplier">
         DELETE FROM activity.tem_supplier
     </delete>
+    <select id="getPOLine" parameterType="java.util.List" resultMap="POLineResult">
+        SELECT
+            b.`ITEM_供应商编码` AS SupplierCode,
+            b.`ITEM_单价` AS FinallyPriceTC,
+            b.`ITEM_物料编码` AS ItemInfoCode,
+            b.`ITEM_厂家规格型号` AS lotCode,
+            a.`ITEM_项目编码` AS projectCode,
+            DATE_FORMAT(b.`ITEM_预计回货的日期`,'%Y-%m-%d') AS DeliveryDate,
+            a.`ITEM_采购用途类别` AS caiGouType,
+            a.`ITEM_收货人` AS shipAdress,
+            a.`ITEM_研发采购流水号` AS serializeNo,
+            SUM(b.`ITEM_数量`) AS ReqQtyTU
+        FROM rdm.`tlk_研发采购申请表` a,  rdm.`tlk_采购明细` b WHERE a.ID = b.PARENT
+        AND b.`ITEM_供应商编码` IS not Null
+        AND a.ITEM_研发采购流水号 IN
+        <foreach collection="list" index="index" item="item" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+        GROUP BY b.`ITEM_供应商编码`, b.`ITEM_物料编码`,a.`ITEM_采购用途类别`, b.`ITEM_单价`, b.`ITEM_厂家规格型号`,a.`ITEM_项目编码`,DATE_FORMAT(b.`ITEM_预计回货的日期`,'%Y-%m-%d'),a.`ITEM_收货人`,a.`ITEM_研发采购流水号`
+    </select>
+    <select id="getProject" parameterType="java.util.List" resultType="String">
+        SELECT DISTINCT a.ITEM_项目编码 FROM rdm.`tlk_研发采购申请表` a WHERE
+        a.ITEM_研发采购流水号 IN
+        <foreach collection="list" index="index" item="item" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </select>
+    <select id="getSupplier" parameterType="java.util.List" resultType="String">
+        SELECT DISTINCT b.`ITEM_供应商编码` FROM rdm.`tlk_研发采购申请表` a,  rdm.`tlk_采购明细` b WHERE a.ID = b.PARENT
+        AND b.`ITEM_供应商编码` IS not Null
+        AND a.ITEM_研发采购流水号 IN
+        <foreach collection="list" index="index" item="item" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </select>
+    <select id="getCaiGouType" parameterType="java.util.List" resultType="String">
+        SELECT DISTINCT a.ITEM_采购用途类别 FROM rdm.`tlk_研发采购申请表` a WHERE
+        a.ITEM_研发采购流水号 IN
+        <foreach collection="list" index="index" item="item" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </select>
+    <update id="updateCaiGouDetail">
+        UPDATE rdm.`tlk_采购明细` SET `ITEM_合同编码` = #{orderCode} WHERE  1 = 1
+        AND ITEM_供应商编码 = #{supplier}
+        AND `ITEM_物料编码` IN
+        <foreach collection="pOLineList" index="index" item="item" open="(" separator="," close=")">
+            #{item.ItemInfoCode}
+        </foreach>
+        AND PARENT IN (SELECT ID FROM rdm.`tlk_研发采购申请表` WHERE ITEM_研发采购流水号 IN
+        <foreach collection="codeList" index="index" item="item" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+        )
+    </update>
+    <select id="getCaiGouDetail" resultMap="ArriveQtyResult">
+        SELECT
+            `ITEM_合同编码` AS docNo,
+            `ITEM_物料编码` AS itemCode,
+            `ITEM_厂家规格型号` AS lotCode
+        FROM rdm.tlk_采购明细
+        WHERE `ITEM_合同编码` IS NOT NULL
+          AND `ITEM_数量` > `ITEM_到货数量`
+    </select>
+    <update id="updateArriveQty">
+        update rdm.tlk_采购明细 set ITEM_到货数量 = #{activityQty} WHERE `ITEM_合同编码` = #{docNo} AND `ITEM_物料编码` = #{itemCode} AND `ITEM_厂家规格型号` = #{lotCode}
+    </update>
 </mapper>

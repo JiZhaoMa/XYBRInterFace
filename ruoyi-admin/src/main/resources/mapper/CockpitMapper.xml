@@ -231,7 +231,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             -- ROUND(ITEM_已完成销售额,0) AS cockpit007,
             ROUND(ITEM_西北销售额+ITEM_华北销售额+ITEM_华东销售额+ITEM_华南销售额+ITEM_西南销售额+ITEM_华中销售额,0) AS cockpit007,
             ITEM_同比 AS cockpit008,
-            IFNULL(((ITEM_西北销售额+ITEM_华北销售额+ITEM_华东销售额+ITEM_华南销售额+ITEM_西南销售额+ITEM_华中销售额) - (SELECT (ITEM_西北销售额+ITEM_华北销售额+ITEM_华东销售额+ITEM_华南销售额+ITEM_西南销售额+ITEM_华中销售额) FROM `tlk_报表数据统计` WHERE DATE_FORMAT(ITEM_月份,'%Y%m') = DATE_FORMAT(DATE_SUB(STR_TO_DATE(#{monthStr},'%Y-%m-%d'), INTERVAL 1 MONTH),'%Y%m'))) / (SELECT (ITEM_西北销售额+ITEM_华北销售额+ITEM_华东销售额+ITEM_华南销售额+ITEM_西南销售额+ITEM_华中销售额) FROM `tlk_报表数据统计` WHERE DATE_FORMAT(ITEM_月份,'%Y%m') = DATE_FORMAT(DATE_SUB(STR_TO_DATE(#{monthStr},'%Y-%m-%d'), INTERVAL 1 MONTH),'%Y%m')),0)*100 AS cockpit009,
+            ((SELECT SUM(统计销售额) - (SELECT SUM(统计销售额) FROM activity.report_客户销售额 WHERE 月份 = DATE_FORMAT(DATE_SUB(STR_TO_DATE(#{monthStr},'%Y-%m-%d'), INTERVAL 1 MONTH),'%Y-%m')) FROM activity.report_客户销售额 WHERE 月份 = DATE_FORMAT(STR_TO_DATE(#{monthStr},'%Y-%m-%d'),'%Y-%m'))*100 /
+             (SELECT SUM(统计销售额) FROM activity.report_客户销售额 WHERE 月份 = DATE_FORMAT(STR_TO_DATE(#{monthStr},'%Y-%m-%d'),'%Y-%m'))) AS cockpit009,
             ROUND(ITEM_西北销售额,0) AS cockpit010,
             ROUND(ITEM_华北销售额,0) AS cockpit011,
             ROUND(ITEM_东北销售额,0) AS cockpit012,

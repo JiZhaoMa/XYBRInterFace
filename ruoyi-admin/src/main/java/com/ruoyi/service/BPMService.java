@@ -1,9 +1,8 @@
 package com.ruoyi.service;
 
-import com.ruoyi.domain.Department;
-import com.ruoyi.domain.FixedFiled;
-import com.ruoyi.domain.Supplier;
-import com.ruoyi.domain.User;
+import com.alibaba.fastjson.JSONObject;
+import com.ruoyi.domain.*;
+import com.ruoyi.u9c.domain.POLine;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -15,4 +14,7 @@ public interface BPMService {
     public List<User> getUserList();
     public int insertFixedFiled(List<FixedFiled> list);
     public int insertSupplier(List<Supplier> list);
+    public JSONObject getPOLine(List<String> list);
+    public List<ArriveQty> getCaiGouDetail();
+    public int updateArriveQty(ArriveQty arriveQty);
 }

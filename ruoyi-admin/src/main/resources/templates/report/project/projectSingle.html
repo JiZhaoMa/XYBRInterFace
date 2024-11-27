@@ -72,16 +72,6 @@
 			align-items: center;
 			display: flex;  
 		}
-		.project-process{
-			height: 3%;
-			width: 100%;
-			color: #37a2da;
-			font-size: small;
-			font-weight: bold;
-			justify-content: center;
-			align-items: center;
-			display: flex;
-		}
 		.project-plan-title{
 			width: 5%;
 			color: darkblue;
@@ -93,16 +83,15 @@
 			width: 100%;
 			position: absolute;
 			display: flex;
-			top: 8%;
 			justify-content: center;
 			align-items: center;
 		}
 		.project-row-first{
 			width: 90%;
-			height: 20%;
+			height: 25%;
 			/*background-color: #00F7DE;*/
 			position: relative;
-			top: 15%;
+			top: 13%;
 			left: 5%;
 			display: flex;
 		}
@@ -111,19 +100,18 @@
 			height: 25%;
 			/*background-color: #e4b9b9;*/
 			position: relative;
-			top: 17%;
+			top: 15%;
 			left: 5%;
 			display: flex;
 		}
 		.project-row-third{
 			width: 92%;
-			height: 25%;
+			height: 27%;
 			/*background-color: #00BCD4;*/
 			position: relative;
-			top: 19%;
+			top: 17%;
 			left: 5%;
-			border: 0.2px solid #0663A2;
-			border-radius: 10px 10px 10px 10px;
+			display: flex;
 		}
 		.left{
 			width: 25%;
@@ -175,6 +163,20 @@
 			border: 0.2px solid #0663A2;
 			border-radius: 10px 10px 10px 10px;
 		}
+		.third-left{
+			width: 49%;
+			height: 100%;
+			border: 0.2px solid #0663A2;
+			border-radius: 10px 10px 10px 10px;
+		}
+		.third-right{
+			left: 2%;
+			width: 49%;
+			height: 100%;
+			border: 0.2px solid #0663A2;
+			border-radius: 10px 10px 10px 10px;
+			position: relative;
+		}
 		.echarts-bar{
 			width: 100%;
 			height: 100%;
@@ -222,16 +224,16 @@
 			text-align: center; /* 单元格内文本对齐方式 */
 			color: #000;
 			width: 28%;
-			word-break: keep-all; /* 不换行 */
-			white-space: nowrap; /* 不换行 */
-			overflow: hidden; /* 内容超出宽度时隐藏超出部分的内容 */
-			text-overflow: ellipsis; /* 当对象内文本溢出时显示省略标记(...) ；需与overflow:hidden;一起使用。*/
+			/*word-break: keep-all; !* 不换行 *!*/
+			/*white-space: nowrap; !* 不换行 *!*/
+			/*overflow: hidden; !* 内容超出宽度时隐藏超出部分的内容 *!*/
+			/*text-overflow: ellipsis; !* 当对象内文本溢出时显示省略标记(...) ；需与overflow:hidden;一起使用。*!*/
 		}
-		table td:hover {
-			overflow: visible;/* 显示 */
-			white-space: normal;/* 允许文字自动换行 */
-			word-wrap: break-word;/* 文字自动换行 */
-		}
+		/*table td:hover {*/
+		/*	overflow: visible;!* 显示 *!*/
+		/*	white-space: normal;!* 允许文字自动换行 *!*/
+		/*	word-wrap: break-word;!* 文字自动换行 *!*/
+		/*}*/
 		::-webkit-scrollbar{
 			width: 1px;
 			height: 24px;
@@ -247,6 +249,25 @@
 			height: 65%;
 			width: 100%;
 			overflow-y: auto;
+			position: relative;
+		}
+		.scroll-box-02 {
+			height: 100%;
+			width: 100%;
+			overflow-y: auto;
+			position: relative;
+		}
+		.scroll-box-03 {
+			height: 100%;
+			width: 100%;
+			overflow-y: auto;
+			position: relative;
+		}
+		.content{
+			width: 90%;
+			height: 85%;
+			margin: auto;
+			top: -2%;
 			position: relative;
 		}
     </style>  
@@ -271,9 +292,6 @@
 				<option value="2033">42kw小功率群充项目</option>
 			</select>
 		</div>
-	</div>
-	<div class="project-process">
-		<span>进度: 截至目前，项目主要处于XXXX阶段，延期10天，赶工计划是XX。</span>
 	</div>
 	<div class="project-plan">
 		<div class="project-plan-title"><span>项目计划</span></div> 
@@ -371,21 +389,70 @@
 	<div class="project-row-first">
 		<div class="left">
 			<div class="title">
+				<span>项目进度</span>
+			</div>
+			<div class="content">
+				<div class="scroll-box-02">
+					<table class="scroll-tab-02" id="content02">
+						<tbody class="scrollContent-02" id="scrollContent02"></tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+		<div class="center">
+			<div class="title">
 				<span>项目缺陷</span>
 			</div>
 			<div class="echarts-bar" id="projectDefect"></div>
 		</div>
-		<div class="center">
+		<div class="right">
 			<div class="title">
 				<span>问题闭环</span>
 			</div>
 			<div class="echarts-bar" id="questionCloseLoop"></div>
 		</div>
-		<div class="right">
+		<div class="right01">
 			<div class="title">
 				<span>风险问题</span>
 			</div>
 			<div class="echarts-bar" id="risk"></div>
+		</div>
+	</div>
+	<div class="project-row-second">
+		<div class="left">
+			<div class="title">
+				<span>关键问题</span>
+			</div>
+			<div class="content">
+				<div class="scroll-box-03">
+					<table class="scroll-tab-03" id="content03">
+						<tbody class="scrollContent-03" id="scrollContent03"></tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+		<div class="center">
+			<div class="title">
+				<span>成本信息</span>
+			</div>
+			<div class="echarts-bar" id="cost"></div>
+			<div style="left: 55%;position: relative;height: 100%;width: 45%;top: -100%;">
+				<div style="width: 100%;height: 30%;font-size: large;font-weight: bold;color: #37a2da;">
+					<span>目标成本：100万</span>
+				</div>
+				<div style="width: 100%;height: 30%;font-size: large;font-weight: bold;color: #37a2da;">
+					<span>实际成本：110万</span>
+				</div>
+				<div style="width: 100%;height: 30%;font-size: large;font-weight: bold;color: #37a2da;">
+					<span>差额：10万</span>
+				</div>
+			</div>
+		</div>
+		<div class="right">
+			<div class="title">
+				<span>项目预算</span>
+			</div>
+			<div class="echarts-bar" id="projectBudget"></div>
 		</div>
 		<div class="right01">
 			<div style="position: fixed; right: 4%;">
@@ -406,61 +473,57 @@
 			<div class="echarts-bar" id="source"></div>
 		</div>
 	</div>
-	<div class="project-row-second">
-		<div class="left">
-			<div class="title">
-				<span>成本信息</span>
-			</div>
-			<div class="echarts-bar" id="cost"></div>
-		</div>
-		<div class="center">
-			<div class="title">
-				<span>成本构成</span>
-			</div>
-			<div class="echarts-bar" id="costComp"></div>
-		</div>
-		<div class="right">
-			<div class="title">
-				<span>预算支出</span>
-			</div>
-			<div class="echarts-bar" id="budget"></div>
-		</div>
-		<div class="right01">
-			<div class="title">
-				<span>项目预算</span>
-			</div>
-			<div class="echarts-bar" id="projectBudget"></div>
-		</div>
-	</div>
 	<div class="project-row-third">
-		<div class="tabel-title">
-			<span>EC变更台账</span>
-		</div>
-		<table class="table">
-			<thead>
-			<tr>
-				<th style="font-size: 0.8vw; width: 5%;text-align: center">序号</th>
-				<th style="font-size: 0.8vw; width: 7%;text-align: center">EC单号</th>
-				<th style="font-size: 0.8vw; width: 7%;text-align: center">申请时间</th>
-				<th style="font-size: 0.8vw; width: 7%;text-align: center">申请人</th>
-				<th style="font-size: 0.8vw; width: 7%;text-align: center">设计内容</th>
-				<th style="font-size: 0.8vw; width: 7%;text-align: center">涉及新物料</th>
-				<th style="font-size: 0.8vw; width: 7%;text-align: center">受影响产品</th>
-				<th style="font-size: 0.8vw; width: 7%;text-align: center">关键器件变更</th>
-				<th style="font-size: 0.8vw; width: 7%;text-align: center">涉及PCN</th>
-				<th style="font-size: 0.8vw; width: 7%;text-align: center">排产订单号</th>
-				<th style="font-size: 0.8vw; width: 7%;text-align: center">执行效果</th>
-				<th style="font-size: 0.8vw; width: 7%;text-align: center">切入日期</th>
-				<th style="font-size: 0.8vw; width: 7%;text-align: center">首台条码</th>
-				<th style="font-size: 0.8vw; width: 7%;text-align: center">备注</th>
-			</tr>
-			</thead>
-		</table>
-
-		<div class="scroll-box-01">
-			<table class="scroll-tab-01" id="content01">
-				<tbody class="scrollContent-01" id="scrollContent01"></tbody>
+		<div class="third-left">
+			<div class="tabel-title">
+				<span>EC变更台账</span>
+			</div>
+			<table class="table">
+				<thead>
+				<tr>
+					<th style="font-size: 0.8vw; width: 5%;text-align: center">序号</th>
+					<th style="font-size: 0.8vw; width: 14%;text-align: center">EC单号</th>
+<!--					<th style="font-size: 0.8vw; width: 7%;text-align: center">申请时间</th>-->
+					<th style="font-size: 0.8vw; width: 13%;text-align: center">申请人</th>
+					<th style="font-size: 0.8vw; width: 15%;text-align: center">涉及内容</th>
+					<th style="font-size: 0.8vw; width: 13%;text-align: center">当前处理人</th>
+					<th style="font-size: 0.8vw; width: 10%;text-align: center">状态</th>
+					<th style="font-size: 0.8vw; width: 15%;text-align: center">执行效果</th>
+					<th style="font-size: 0.8vw; width: 15%;text-align: center">切入日期</th>
+				</tr>
+				</thead>
 			</table>
+
+			<div class="scroll-box-01">
+				<table class="scroll-tab-01" id="content01">
+					<tbody class="scrollContent-01" id="scrollContent01"></tbody>
+				</table>
+			</div>
+		</div>
+		<div class="third-right">
+			<div class="tabel-title">
+				<span>项目变更台账</span>
+			</div>
+			<table class="table">
+				<thead>
+				<tr>
+					<th style="font-size: 0.8vw; width: 5%;text-align: center">序号</th>
+					<th style="font-size: 0.8vw; width: 7%;text-align: center">申请人</th>
+					<th style="font-size: 0.8vw; width: 7%;text-align: center">状态</th>
+					<th style="font-size: 0.8vw; width: 7%;text-align: center">变更类型</th>
+					<th style="font-size: 0.8vw; width: 7%;text-align: center">变更原因</th>
+					<th style="font-size: 0.8vw; width: 7%;text-align: center">评审类型</th>
+					<th style="font-size: 0.8vw; width: 7%;text-align: center">当前处理人</th>
+					<th style="font-size: 0.8vw; width: 7%;text-align: center">变更批准</th>
+				</tr>
+				</thead>
+			</table>
+
+			<div class="scroll-box-04">
+				<table class="scroll-tab-04" id="content04">
+					<tbody class="scrollContent-04" id="scrollContent04"></tbody>
+				</table>
+			</div>
 		</div>
 	</div>
 	<script type="text/javascript" th:src="@{/js/plugins/echarts.min.js}"></script>
@@ -476,6 +539,8 @@
 	<script type="text/javascript">
 		//var urls = "http://123.249.26.42:8084/xybrInterFace/";
 		var urls = "http://localhost/";
+		var jsonEcList = '';
+		var jsonProcessList = '';
 		window.onload = function (){
 			document.querySelectorAll('.stage').forEach(function(element) {
 				element.style.width = nowSize(60) + 'px';
@@ -502,23 +567,23 @@
 			document.querySelectorAll('.tabel-title').forEach(function(element) {
 				element.style.fontSize = nowSize(16) + 'px';
 			});
-			let budget = echarts.init(document.getElementById("budget"));
-			createBudgeExp(budget,'');
+			// let budget = echarts.init(document.getElementById("budget"));
+			// createBudgeExp(budget,'');
 			let cost = echarts.init(document.getElementById("cost"));
 			createCost(cost,'');
 			let projectDefect = echarts.init(document.getElementById("projectDefect"));
 			createProjectDefect(projectDefect,'');
 			let risk = echarts.init(document.getElementById("risk"));
 			createRisk(risk,'');
-			let costComp = echarts.init(document.getElementById("costComp"));
-			createCostComp(costComp,'');
+			// let costComp = echarts.init(document.getElementById("costComp"));
+			// createCostComp(costComp,'');
 			let questionCloseLoop = echarts.init(document.getElementById("questionCloseLoop"));
 			createQuestionCloseLoop(questionCloseLoop,'');
 			let source = echarts.init(document.getElementById("source"));
 			createSource(source,'');
 			let projectBudget = echarts.init(document.getElementById("projectBudget"));
 			createProjectBudget(projectBudget,'');
-			fillDataTable();
+			queryData();
 			fillProjectPlanData();
 		}
 		window.addEventListener('resize', function() {
@@ -536,40 +601,62 @@
 			document.getElementById('process09').innerText = "";
 			document.getElementById('process10').innerText = "";
 		}
+		function queryData(){
+			$.ajax({
+				type: "GET",
+				url: urls + "/report/project/getEcLedger",
+				contentType: "application/json;charset=utf-8",
+				data: {
+					"projectCode": ""
+				},
+				dateType: "json",
+				success: function (data) {
+					jsonEcList = data.ecList;
+					fillDataTable();
+				},
+				error: function (data) {
+					alert("失败");
+				}
+			});
+		}
 		function fillDataTable() {
 			let ECChangeStr = '';
-			for (let n = 0; n < 20; n++) {
+			let processStr = '';
+			let keyQuestion = '';
+			for (let n = 0; n < jsonEcList.length; n++) {
+				processStr +=
+						'<tr style="height: 24px;"><td style="font-size: 1vw; font-family: cursive;width: 100%;font-weight: 400;text-align: left">' +
+						'1、项目编码项目编码项目编码项目编码项目编码项目编码项目编码项目编码项目编码项目编码项目编码项目编码项目编码项目编码项目编码项目编码项目编码项目' +
+						'</td></tr>';
+				keyQuestion +=
+						'<tr style="height: 24px;"><td style="font-size: 1vw; font-family: cursive;width: 100%;font-weight: 400;text-align: left">' +
+						'1、项目编码项目编码项目编码项目编码项目编码项目编码项目编码项目编码项目编码项目编码项目编码项目编码项目编码项目编码项目编码项目编码项目编码项目' +
+						'</td></tr>';
 				ECChangeStr +=
 						'<tr style="height: 24px;"><td style="font-size: 0.8vw; width: 5%;font-weight: 400;text-align: center">' +
 						n +
-						'</td><td style="font-size: 0.8vw; width: 7%;font-weight: 400;text-align: center">' +
-						'20241009001' +
-						'</td><td style="font-size: 0.8vw; width: 7%;font-weight: 400;text-align: center">' +
-						'2024-10-09' +
-						'</td><td style="font-size: 0.8vw; width: 7%;font-weight: 400;text-align: center">' +
+						'</td><td style="font-size: 0.8vw; width: 14%;font-weight: 400;text-align: center">' +
+						jsonEcList[n].ecNo +
+						// '</td><td style="font-size: 0.8vw; width: 7%;font-weight: 400;text-align: center">' +
+						// jsonEcList[n].appDate +
+						'</td><td style="font-size: 0.8vw; width: 13%;font-weight: 400;text-align: center">' +
+						jsonEcList[n].approver +
+						'</td><td style="font-size: 0.8vw; width: 15%;font-weight: 400;text-align: center">' +
+						jsonEcList[n].content +
+						'</td><td style="font-size: 0.8vw; width: 13%;font-weight: 400;text-align: center">' +
 						'马继召' +
-						'</td><td style="font-size: 0.8vw; width: 7%;font-weight: 400;text-align: center">' +
-						'设计内容设计内容' +
-						'</td><td style="font-size: 0.8vw; width: 7%;font-weight: 400;text-align: center">' +
-						'是' +
-						'</td><td style="font-size: 0.8vw; width: 7%;font-weight: 400;text-align: center">' +
-						'受影响产品产品产品' +
-						'</td><td style="font-size: 0.8vw; width: 7%;font-weight: 400;text-align: center">' +
-						'是' +
-						'</td><td style="font-size: 0.8vw; width: 7%;font-weight: 400;text-align: center">' +
-						'是' +
-						'</td><td style="font-size: 0.8vw; width: 7%;font-weight: 400;text-align: center">' +
-						'00154850002' +
-						'</td><td style="font-size: 0.8vw; width: 7%;font-weight: 400;text-align: center">' +
-						'执执行效果执行效果执行效果执行效果执行效果执行效果执行效果执行效果执行效果行效果执行效果执行效果' +
-						'</td><td style="font-size: 0.8vw; width: 7%;font-weight: 400;text-align: center">' +
-						'2024-10-09' +
-						'</td><td style="font-size: 0.8vw; width: 7%;font-weight: 400;text-align: center">' +
-						'1000235989259885926' +
-						'</td><td style="font-size: 0.8vw; width: 7%;font-weight: 400;text-align: center">' +
-						'备注备注备注' +
+						'</td><td style="font-size: 0.8vw; width: 10%;font-weight: 400;text-align: center">' +
+						'结束' +
+						'</td><td style="font-size: 0.8vw; width: 15%;font-weight: 400;text-align: center">' +
+						jsonEcList[n].effectiveness +
+						'</td><td style="font-size: 0.8vw; width: 15%;font-weight: 400;text-align: center">' +
+						jsonEcList[n].cutInDate +
 						'</td></tr>';
 			}
+			$('.scrollContent-03').append(keyQuestion);
+			$('.scrollContent-03').append(keyQuestion);
+			$('.scrollContent-02').append(processStr);
+			$('.scrollContent-02').append(processStr);
 			$('.scrollContent-01').append(ECChangeStr);
 			$('.scrollContent-01').append(ECChangeStr);
 		}

@@ -2,12 +2,10 @@ package com.ruoyi.service.impl;
 
 import com.ruoyi.common.annotation.DataSource;
 import com.ruoyi.common.enums.DataSourceType;
-import com.ruoyi.domain.Department;
-import com.ruoyi.domain.FixedFiled;
-import com.ruoyi.domain.Supplier;
-import com.ruoyi.domain.User;
+import com.ruoyi.domain.*;
 import com.ruoyi.mapper.U9CMapper;
 import com.ruoyi.service.U9CService;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -51,5 +49,20 @@ public class U9CServiceImpl implements U9CService {
     @Override
     public String getAssetCode(String assetCard) {
         return u9CMapper.getAssetCode(assetCard);
+    }
+
+    @Override
+    public int updateOrderCode(String newOrderCode, String orderCode) {
+        return u9CMapper.updateOrderCode(newOrderCode,orderCode);
+    }
+
+    @Override
+    public int updateLotCode(String lotCode, String orderCode, String itemCode,int docLineNo,String deliveryDate) {
+        return u9CMapper.updateLotCode(lotCode,orderCode,itemCode,docLineNo,deliveryDate);
+    }
+
+    @Override
+    public ArriveQty selectArriveQty(ArriveQty arriveQty) {
+        return u9CMapper.selectArriveQty(arriveQty);
     }
 }

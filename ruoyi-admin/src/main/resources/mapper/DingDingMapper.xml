@@ -39,4 +39,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             </if>
         </foreach>
     </update>
+    <insert id="insertLeaveRecords" parameterType="java.util.List">
+        insert into activity.t_钉钉考勤记录(leaveRecordType, leaveViewUnit, leaveCode, startTime, endTime, usrerId, calType, recordNumPerHour, leaveStatus,createTime) values
+        <foreach item="item" index="index" collection="list" separator=",">
+            (#{item.leaveRecordType},#{item.leaveViewUnit},#{item.leaveCode},#{item.startTime},#{item.endTime},#{item.userId},#{item.calType},#{item.recordNumPerHour},#{item.leaveStatus}, NOW())
+        </foreach>
+    </insert>
 </mapper>

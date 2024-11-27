@@ -2,7 +2,10 @@ package com.ruoyi.report.web;
 
 import com.ruoyi.common.core.controller.BaseController;
 import com.ruoyi.common.json.JSONObject;
+import com.ruoyi.report.domain.project.EcLedger;
+import com.ruoyi.report.domain.project.Project;
 import com.ruoyi.report.domain.selfTest.PriorityQuestion;
+import com.ruoyi.report.service.ProjectService;
 import com.ruoyi.report.service.SelfTestService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,18 +21,29 @@ public class ProjectController extends BaseController {
     private String prefix = "report/project";
 
     @Autowired
-    private SelfTestService selfTestService;
+    private ProjectService projectService;
     @GetMapping("/getProjectSingle")
     public String getProjectSingle()
     {
         return prefix + "/projectSingle";
     }
-    @GetMapping("/getPriorityQues")
+    @GetMapping("/getEcLedger")
     @ResponseBody
-    public JSONObject getPriorityQues(String project)
+    public JSONObject getEcLedger(String projectCode)
     {
         JSONObject jsonObject = new JSONObject();
-        List<PriorityQuestion> list = selfTestService.getPriorityQues(project);
+        EcLedger ecLedger = new EcLedger();
+        List<EcLedger> list = projectService.getEcLedger(ecLedger);
+        jsonObject.put("ecList",list);
+        return jsonObject;
+    }
+    @GetMapping("/getProjectList")
+    @ResponseBody
+    public JSONObject getProjectList()
+    {
+        JSONObject jsonObject = new JSONObject();
+        List<Project> projectList = projectService.getProject();
+        jsonObject.put("projectList",projectList);
         return jsonObject;
     }
 }

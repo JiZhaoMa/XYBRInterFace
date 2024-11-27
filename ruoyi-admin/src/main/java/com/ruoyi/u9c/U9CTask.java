@@ -1,6 +1,7 @@
 package com.ruoyi.u9c;
 
 import com.ruoyi.common.utils.StringUtils;
+import com.ruoyi.domain.ArriveQty;
 import com.ruoyi.domain.FixedFiled;
 import com.ruoyi.domain.Supplier;
 import com.ruoyi.mapper.U9CMapper;
@@ -121,5 +122,16 @@ public class U9CTask {
     public void getSaleContractList() {
        List<SaleContract> list = saleContractService.getSaleContractList();
        saleContractBPMService.insertSaleContrace(list);
+    }
+
+    /*
+    采购申请同步到货数量
+     */
+    public void synArriveQty(){
+        List<ArriveQty> list = bpmService.getCaiGouDetail();
+        for(ArriveQty qty : list){
+            ArriveQty arriveQty = u9CService.selectArriveQty(qty);
+            bpmService.updateArriveQty(arriveQty);
+        }
     }
 }

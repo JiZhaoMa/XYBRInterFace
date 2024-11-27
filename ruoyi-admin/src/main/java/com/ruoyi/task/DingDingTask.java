@@ -1,24 +1,21 @@
 package com.ruoyi.task;
 
-import cn.hutool.http.HttpRequest;
-import cn.hutool.http.HttpResponse;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import com.ruoyi.common.constant.Constants;
+import com.aliyun.dingtalkattendance_1_0.models.GetLeaveRecordsResponse;
+import com.aliyun.dingtalkattendance_1_0.models.GetLeaveRecordsResponseBody;
+import com.aliyun.tea.TeaException;
 import com.ruoyi.common.utils.StringUtils;
 import com.ruoyi.common.utils.http.HttpUtils;
 import com.ruoyi.domain.DingDingUser;
 import com.ruoyi.service.DingDingService;
-import com.ruoyi.u9c.domain.ItemInfo;
-import com.ruoyi.u9c.service.ItemInfoService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
-import org.springframework.util.ObjectUtils;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -28,6 +25,7 @@ public class DingDingTask {
     private static final Logger log = LoggerFactory.getLogger(Tianbao.class);
     private static final String url = "https://oapi.dingtalk.com/gettoken";
     private static final String getUserUrl = "https://oapi.dingtalk.com/topapi/v2/user/get";
+    private static final String getKaoQinUrl = "https://api.dingtalk.com/v1.0/attendance/vacations/records/query";
     @Autowired
     DingDingService dingDingService;
     public void updateJobNumber() throws Exception {
@@ -55,6 +53,13 @@ public class DingDingTask {
         String token = jsonObject.get("access_token").toString();
         return token;
     }
+    public void getRecords() throws Exception {
+        List<DingDingUser> list = dingDingService.getUserList();
+        String token = getToken();
+        for (DingDingUser dingDingUser : list){
+            getKaoQin(token,dingDingUser.getDdUserId());
+        }
+    }
     public Map<String,String> getJobNumber(String token,String userid) throws Exception {
         String param = "access_token="+token+"&userid="+userid;
         log.info("【调用钉钉接口获取用户信息】,请求参数：{}",param);
@@ -76,5 +81,49 @@ public class DingDingTask {
         resultMap.put("managerUserId",managerUserId);
         resultMap.put("depId",depId);
         return resultMap;
+    }
+    public void getKaoQin(String token,String userid) throws Exception {
+        com.aliyun.dingtalkattendance_1_0.Client client = createClient();
+        com.aliyun.dingtalkattendance_1_0.models.GetLeaveRecordsHeaders getLeaveRecordsHeaders = new com.aliyun.dingtalkattendance_1_0.models.GetLeaveRecordsHeaders();
+        getLeaveRecordsHeaders.xAcsDingtalkAccessToken = token;
+        com.aliyun.dingtalkattendance_1_0.models.GetLeaveRecordsRequest getLeaveRecordsRequest = new com.aliyun.dingtalkattendance_1_0.models.GetLeaveRecordsRequest();
+        try {
+            getLeaveRecordsRequest.setLeaveCode("de94c795-beb0-48c8-88c2-35e6fe9ecb7d");
+            getLeaveRecordsRequest.setOpUserId("130964441539018833");
+            getLeaveRecordsRequest.setPageNumber(0L);
+            getLeaveRecordsRequest.setPageSize(200);
+            List<String> userList = new ArrayList<>();
+            userList.add(userid);
+            getLeaveRecordsRequest.setUserIds(userList);
+            int num = 0;
+            boolean flag = true;
+            while(flag){
+                getLeaveRecordsRequest.setPageNumber(0L + num * 200);
+                GetLeaveRecordsResponse recordsResponse = client.getLeaveRecordsWithOptions(getLeaveRecordsRequest, getLeaveRecordsHeaders, new com.aliyun.teautil.models.RuntimeOptions());
+                if(200 == recordsResponse.getStatusCode()){
+                    List<GetLeaveRecordsResponseBody.GetLeaveRecordsResponseBodyResultLeaveRecords> listRecords = recordsResponse.getBody().getResult().getLeaveRecords();
+                    dingDingService.insertLeaveRecords(listRecords);
+                    flag = recordsResponse.getBody().getResult().getHasMore();
+                    num++;
+                }
+            }
+        } catch (TeaException err) {
+            if (!com.aliyun.teautil.Common.empty(err.code) && !com.aliyun.teautil.Common.empty(err.message)) {
+                // err 中含有 code 和 message 属性，可帮助开发定位问题
+            }
+
+        } catch (Exception _err) {
+            TeaException err = new TeaException(_err.getMessage(), _err);
+            if (!com.aliyun.teautil.Common.empty(err.code) && !com.aliyun.teautil.Common.empty(err.message)) {
+                // err 中含有 code 和 message 属性，可帮助开发定位问题
+            }
+
+        }
+    }
+    public static com.aliyun.dingtalkattendance_1_0.Client createClient() throws Exception {
+        com.aliyun.teaopenapi.models.Config config = new com.aliyun.teaopenapi.models.Config();
+        config.protocol = "https";
+        config.regionId = "central";
+        return new com.aliyun.dingtalkattendance_1_0.Client(config);
     }
 }
