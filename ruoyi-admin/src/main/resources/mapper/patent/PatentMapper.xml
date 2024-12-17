@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.report.mapper.PatentMapper">
+    <resultMap type="Patents" id="PatentResult">
+        <result property="appType"             column="appType"/>
+        <result property="process"             column="process"/>
+        <result property="appNumber"           column="appNumber"/>
+        <result property="dept"                column="dept"/>
+        <result property="person"              column="person"/>
+        <result property="proxy"               column="proxy"/>
+        <result property="year"                column="year"/>
+    </resultMap>
+    <select id="getPatentAppType" resultMap="PatentResult">
+        SELECT
+            `ITEM_专利类型` AS appType,
+            COUNT(1) AS appNumber
+        FROM `tlk_知识产权`
+        WHERE 1 = 1
+        <if test="dept != null and dept != ''">
+            AND ITEM_部门 = #{dept}
+        </if>
+        <if test="person != null and person != ''">
+            AND ITEM_第一发明人 = #{person}
+        </if>
+        <if test="ptype != null and ptype != ''">
+            AND ITEM_专利类型 = #{ptype}
+        </if>
+        <if test="process != null and process != ''">
+            AND ITEM_专利进度 = #{process}
+        </if>
+        <if test="jiaoDiShuMonth != null and jiaoDiShuMonth != ''">
+            AND DATE_FORMAT(`ITEM_交底书提交日期`,'%Y%m') like concat('%',#{jiaoDiShuMonth},'%')
+        </if>
+        <if test="shouQuanMonth != null and shouQuanMonth != ''">
+            AND DATE_FORMAT(`ITEM_授权公告日`,'%Y%m') like concat('%',#{shouQuanMonth},'%')
+        </if>
+        GROUP BY `ITEM_专利类型`
+    </select>
+    <select id="getPatentByType" resultMap="PatentResult">
+        SELECT
+            `ITEM_专利类型` AS appType,
+            `ITEM_专利进度` AS process,
+            COUNT(1)  AS appNumber FROM `tlk_知识产权`
+        WHERE 1 = 1
+        <if test="dept != null and dept != ''">
+            AND ITEM_部门 = #{dept}
+        </if>
+        <if test="person != null and person != ''">
+            AND ITEM_第一发明人 = #{person}
+        </if>
+        <if test="ptype != null and ptype != ''">
+            AND ITEM_专利类型 = #{ptype}
+        </if>
+        <if test="process != null and process != ''">
+            AND ITEM_专利进度 = #{process}
+        </if>
+        <if test="jiaoDiShuMonth != null and jiaoDiShuMonth != ''">
+            AND DATE_FORMAT(`ITEM_交底书提交日期`,'%Y%m') like concat('%',#{jiaoDiShuMonth},'%')
+        </if>
+        <if test="shouQuanMonth != null and shouQuanMonth != ''">
+            AND DATE_FORMAT(`ITEM_授权公告日`,'%Y%m') like concat('%',#{shouQuanMonth},'%')
+        </if>
+        GROUP BY `ITEM_专利类型`,`ITEM_专利进度`
+    </select>
+    <select id="getPatentByDept" resultMap="PatentResult">
+        SELECT
+            `ITEM_专利类型` AS appType,
+            `ITEM_部门` AS dept,
+            COUNT(1)  AS appNumber FROM `tlk_知识产权`
+        WHERE 1 = 1
+        <if test="dept != null and dept != ''">
+            AND ITEM_部门 = #{dept}
+        </if>
+        <if test="person != null and person != ''">
+            AND ITEM_第一发明人 = #{person}
+        </if>
+        <if test="ptype != null and ptype != ''">
+            AND ITEM_专利类型 = #{ptype}
+        </if>
+        <if test="process != null and process != ''">
+            AND ITEM_专利进度 = #{process}
+        </if>
+        <if test="jiaoDiShuMonth != null and jiaoDiShuMonth != ''">
+            AND DATE_FORMAT(`ITEM_交底书提交日期`,'%Y%m') like concat('%',#{jiaoDiShuMonth},'%')
+        </if>
+        <if test="shouQuanMonth != null and shouQuanMonth != ''">
+            AND DATE_FORMAT(`ITEM_授权公告日`,'%Y%m') like concat('%',#{shouQuanMonth},'%')
+        </if>
+        GROUP BY `ITEM_专利类型`,`ITEM_部门`
+    </select>
+    <select id="getPatentByPerson" resultMap="PatentResult">
+        SELECT
+            `ITEM_专利类型` AS appType,
+            `ITEM_第一发明人` AS person,
+            COUNT(1)  AS appNumber FROM `tlk_知识产权`
+        WHERE 1 = 1
+        <if test="dept != null and dept != ''">
+            AND ITEM_部门 = #{dept}
+        </if>
+        <if test="person != null and person != ''">
+            AND ITEM_第一发明人 = #{person}
+        </if>
+        <if test="ptype != null and ptype != ''">
+            AND ITEM_专利类型 = #{ptype}
+        </if>
+        <if test="process != null and process != ''">
+            AND ITEM_专利进度 = #{process}
+        </if>
+        <if test="jiaoDiShuMonth != null and jiaoDiShuMonth != ''">
+            AND DATE_FORMAT(`ITEM_交底书提交日期`,'%Y%m') like concat('%',#{jiaoDiShuMonth},'%')
+        </if>
+        <if test="shouQuanMonth != null and shouQuanMonth != ''">
+            AND DATE_FORMAT(`ITEM_授权公告日`,'%Y%m') like concat('%',#{shouQuanMonth},'%')
+        </if>
+        GROUP BY `ITEM_专利类型`,`ITEM_第一发明人`
+    </select>
+    <select id="getPatentByProxy" resultMap="PatentResult">
+        SELECT
+            `ITEM_专利类型` AS appType,
+            `ITEM_代理机构` AS proxy,
+            COUNT(1)  AS appNumber FROM `tlk_知识产权`
+        WHERE 1 = 1
+        <if test="dept != null and dept != ''">
+            AND ITEM_部门 = #{dept}
+        </if>
+        <if test="person != null and person != ''">
+            AND ITEM_第一发明人 = #{person}
+        </if>
+        <if test="ptype != null and ptype != ''">
+            AND ITEM_专利类型 = #{ptype}
+        </if>
+        <if test="process != null and process != ''">
+            AND ITEM_专利进度 = #{process}
+        </if>
+        <if test="jiaoDiShuMonth != null and jiaoDiShuMonth != ''">
+            AND DATE_FORMAT(`ITEM_交底书提交日期`,'%Y%m') like concat('%',#{jiaoDiShuMonth},'%')
+        </if>
+        <if test="shouQuanMonth != null and shouQuanMonth != ''">
+            AND DATE_FORMAT(`ITEM_授权公告日`,'%Y%m') like concat('%',#{shouQuanMonth},'%')
+        </if>
+        GROUP BY `ITEM_专利类型`,`ITEM_代理机构`
+    </select>
+    <select id="getPatentByYear" resultMap="PatentResult">
+        SELECT
+            `ITEM_专利类型` AS appType,
+            DATE_FORMAT(`ITEM_授权公告日`,'%Y') AS year,
+            COUNT(1)  AS appNumber FROM `tlk_知识产权`
+        WHERE `ITEM_授权公告日` is not null
+        <if test="dept != null and dept != ''">
+            AND ITEM_部门 = #{dept}
+        </if>
+        <if test="person != null and person != ''">
+            AND ITEM_第一发明人 = #{person}
+        </if>
+        GROUP BY `ITEM_专利类型`,DATE_FORMAT(`ITEM_授权公告日`,'%Y')
+        ORDER BY DATE_FORMAT(`ITEM_授权公告日`,'%Y')
+    </select>
+    <select id="getPatentDetail" resultMap="PatentResult">
+        SELECT
+            COUNT(1)  AS appNumber ,
+            `ITEM_专利进度` AS process
+        FROM `tlk_知识产权`
+        WHERE 1 = 1
+        <if test="dept != null and dept != ''">
+            AND ITEM_部门 = #{dept}
+        </if>
+        <if test="person != null and person != ''">
+            AND ITEM_第一发明人 = #{person}
+        </if>
+        <if test="ptype != null and ptype != ''">
+            AND ITEM_专利类型 = #{ptype}
+        </if>
+        <if test="process != null and process != ''">
+            AND ITEM_专利进度 = #{process}
+        </if>
+        <if test="jiaoDiShuMonth != null and jiaoDiShuMonth != ''">
+            AND DATE_FORMAT(`ITEM_交底书提交日期`,'%Y%m') like concat('%',#{jiaoDiShuMonth},'%')
+        </if>
+        <if test="shouQuanMonth != null and shouQuanMonth != ''">
+            AND DATE_FORMAT(`ITEM_授权公告日`,'%Y%m') like concat('%',#{shouQuanMonth},'%')
+        </if>
+        GROUP BY `ITEM_专利进度`
+    </select>
+</mapper>

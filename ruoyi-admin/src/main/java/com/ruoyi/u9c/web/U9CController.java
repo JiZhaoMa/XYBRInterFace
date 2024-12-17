@@ -3,6 +3,8 @@ package com.ruoyi.u9c.web;
 import com.ruoyi.common.core.controller.BaseController;
 import com.ruoyi.common.json.JSONObject;
 import com.ruoyi.domain.ArriveQty;
+import com.ruoyi.domain.FixedFiled;
+import com.ruoyi.domain.Supplier;
 import com.ruoyi.report.domain.selfTest.PriorityQuestion;
 import com.ruoyi.report.service.SelfTestService;
 import com.ruoyi.service.BPMService;
@@ -18,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -61,12 +64,23 @@ public class U9CController extends BaseController {
         jsonObject.put("message","调用接口成功！");
         return jsonObject;
     }
-    @GetMapping("/createPurchaseOrder/{docNo}")
+    @GetMapping("/createPurchaseOrder/{docNo}/{ids}/{PurDeptCode}/{PurOperCode}")
     @ResponseBody
-    public JSONObject createPurchaseOrder(@PathVariable("docNo")String docNo)
+    public JSONObject createPurchaseOrder(@PathVariable("docNo")String docNo,@PathVariable("ids")String ids,@PathVariable("PurDeptCode")String PurDeptCode,@PathVariable("PurOperCode")String PurOperCode)
     {
         List<String> list = Arrays.asList(docNo.split("-"));
-        bpmService.getPOLine(list);
+        List<String> idList = Arrays.asList(ids.split("~"));
+        bpmService.getPOLine(list,idList,PurDeptCode,PurOperCode);
+        JSONObject jsonObject = new JSONObject();
+        return jsonObject;
+    }
+    @GetMapping("/createPurchaseOrder/{docNo}/{PurDeptCode}/{PurOperCode}")
+    @ResponseBody
+    public JSONObject createPurchaseOrder(@PathVariable("docNo")String docNo,@PathVariable("PurDeptCode")String PurDeptCode,@PathVariable("PurOperCode")String PurOperCode)
+    {
+        List<String> list = Arrays.asList(docNo.split("-"));
+        List<String> idList = new ArrayList<>();
+        bpmService.getPOLine(list,idList,PurDeptCode,PurOperCode);
         JSONObject jsonObject = new JSONObject();
         return jsonObject;
     }
@@ -92,5 +106,23 @@ public class U9CController extends BaseController {
             result.put("MSG",e.toString());
         }
         return result;
+    }
+    /*
+    U9C供应商信息同步到BPM
+     */
+    @GetMapping("/synSuplier")
+    @ResponseBody
+    public void synSuplier() throws Exception {
+        List<Supplier> list = u9CService.getU9CSupplier();
+        bpmService.insertSupplier(list);
+    }
+    /*
+    U9C的资产存放位置信息同步到BPM
+     */
+    @GetMapping("/synFixedField")
+    @ResponseBody
+    public void synFixedField() throws Exception {
+        List<FixedFiled> list = u9CService.getU9CFixedFiled();
+        bpmService.insertFixedFiled(list);
     }
 }

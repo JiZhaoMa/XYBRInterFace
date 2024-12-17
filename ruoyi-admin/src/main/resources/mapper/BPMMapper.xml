@@ -101,6 +101,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <foreach collection="list" index="index" item="item" open="(" separator="," close=")">
             #{item}
         </foreach>
+        <if test="idsList !=null and idsList.size > 0">
+            AND b.ID IN
+            <foreach collection="idsList" index="index" item="item" open="(" separator="," close=")">
+                #{item}
+            </foreach>
+        </if>
         GROUP BY b.`ITEM_供应商编码`, b.`ITEM_物料编码`,a.`ITEM_采购用途类别`, b.`ITEM_单价`, b.`ITEM_厂家规格型号`,a.`ITEM_项目编码`,DATE_FORMAT(b.`ITEM_预计回货的日期`,'%Y-%m-%d'),a.`ITEM_收货人`,a.`ITEM_研发采购流水号`
     </select>
     <select id="getProject" parameterType="java.util.List" resultType="String">
@@ -117,6 +123,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <foreach collection="list" index="index" item="item" open="(" separator="," close=")">
             #{item}
         </foreach>
+        <if test="idsList !=null and idsList.size > 0">
+            AND b.ID IN
+            <foreach collection="idsList" index="index" item="item" open="(" separator="," close=")">
+                #{item}
+            </foreach>
+        </if>
     </select>
     <select id="getCaiGouType" parameterType="java.util.List" resultType="String">
         SELECT DISTINCT a.ITEM_采购用途类别 FROM rdm.`tlk_研发采购申请表` a WHERE

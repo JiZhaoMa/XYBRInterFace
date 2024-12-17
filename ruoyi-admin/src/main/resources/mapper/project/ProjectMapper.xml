@@ -5,60 +5,307 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="com.ruoyi.report.mapper.ProjectMapper">
     <resultMap type="EcLedger" id="EcLedgerResult">
         <result property="ecNo"             column="ecNo"/>
-        <result property="appDate"          column="appDate"/>
         <result property="approver"         column="approver"/>
         <result property="content"          column="content"/>
-        <result property="inVolveNewItem"   column="inVolveNewItem"/>
-        <result property="affectedProduct"  column="affectedProduct"/>
-        <result property="keyDevices"       column="keyDevices"/>
-        <result property="affectedPcn"      column="affectedPcn"/>
-        <result property="orderNo"          column="orderNo"/>
         <result property="effectiveness"    column="effectiveness"/>
         <result property="cutInDate"        column="cutInDate"/>
-        <result property="firstBarCode"     column="firstBarCode"/>
-        <result property="notes"            column="notes"/>
+        <result property="auditorNames"        column="auditorNames"/>
+        <result property="stateLabel"        column="stateLabel"/>
+        <result property="projectCode"        column="projectCode"/>
+    </resultMap>
+    <resultMap type="ProjectChange" id="ProjectChangeResult">
+        <result property="approver"         column="approver"/>
+        <result property="stateLabel"          column="stateLabel"/>
+        <result property="changeType"    column="changeType"/>
+        <result property="changeReason"        column="changeReason"/>
+        <result property="approveType"        column="approveType"/>
+        <result property="auditorNames"        column="auditorNames"/>
+        <result property="changeApprove"        column="changeApprove"/>
+        <result property="projectCode"        column="projectCode"/>
+    </resultMap>
+    <resultMap type="QuestionCloseLoop" id="QuestionCloseLoopResult">
+        <result property="projectType"             column="projectType"/>
+        <result property="projectStage"             column="projectStage"/>
+        <result property="questionNum"             column="questionNum"/>
+        <result property="projectCode"             column="projectCode"/>
     </resultMap>
     <resultMap type="Project" id="ProjectResult">
         <result property="projectName"             column="projectName"/>
         <result property="projectCode"             column="projectCode"/>
     </resultMap>
+    <resultMap type="Risk" id="RiskResult">
+        <result property="riskType"               column="riskType"/>
+        <result property="riskNum"                column="riskNum"/>
+        <result property="riskMaxNum"             column="riskMaxNum"/>
+        <result property="projectCode"            column="projectCode"/>
+    </resultMap>
+    <resultMap type="ProjectPlan" id="ProjectPlanResult">
+        <result property="projectName"             column="projectName"/>
+        <result property="projectCode"             column="projectCode"/>
+        <result property="processName"             column="processName"/>
+        <result property="processValue"             column="processValue"/>
+    </resultMap>
+    <resultMap type="ProjectProcess" id="ProjectProcessResult">
+        <result property="projectName"             column="projectName"/>
+        <result property="projectCode"             column="projectCode"/>
+        <result property="projectProcess"          column="projectProcess"/>
+    </resultMap>
+    <resultMap type="ProjectDefect" id="ProjectDefectResult">
+        <result property="projectType"             column="projectType"/>
+        <result property="projectStage"            column="projectStage"/>
+        <result property="questionNum"       column="questionNum"/>
+        <result property="projectCode"      column="projectCode"/>
+    </resultMap>
+    <resultMap type="SourceInve" id="SourceInveResult">
+        <result property="year"             column="year"/>
+        <result property="month"            column="month"/>
+        <result property="sourceType"       column="sourceType"/>
+        <result property="inveNum"          column="inveNum"/>
+        <result property="projectCode"      column="projectCode"/>
+    </resultMap>
+    <resultMap type="ProjectKeyQuestion" id="ProjectKeyQuestionResult">
+        <result property="projectName"             column="projectName"/>
+        <result property="projectCode"             column="projectCode"/>
+        <result property="keyQustion"             column="keyQustion"/>
+        <result property="isComSource"             column="isComSource"/>
+    </resultMap>
+    <resultMap type="ProjectBudget" id="ProjectBudgetResult">
+        <result property="value01"             column="value01"/>
+        <result property="value02"             column="value02"/>
+        <result property="value03"             column="value03"/>
+        <result property="value04"             column="value04"/>
+        <result property="value05"             column="value05"/>
+        <result property="value06"             column="value06"/>
+        <result property="value07"             column="value07"/>
+        <result property="value08"             column="value08"/>
+        <result property="value09"             column="value09"/>
+        <result property="value10"             column="value10"/>
+        <result property="value11"             column="value11"/>
+        <result property="value12"             column="value12"/>
+    </resultMap>
+    <resultMap type="Cost" id="CostResult">
+        <result property="value01"             column="value01"/>
+        <result property="value02"             column="value02"/>
+        <result property="value03"             column="value03"/>
+        <result property="value04"             column="value04"/>
+        <result property="value05"             column="value05"/>
+        <result property="value06"             column="value06"/>
+        <result property="value07"             column="value07"/>
+        <result property="value08"             column="value08"/>
+        <result property="chaECost"            column="chaECost"/>
+        <result property="costRate"            column="costRate"/>
+        <result property="projectCode"         column="projectCode"/>
+    </resultMap>
     <select id="getEcLedger" resultMap="EcLedgerResult">
         SELECT
             a.`ITEM_EC单号` AS ecNo,
-            DATE_FORMAT(a.`ITEM_申请日期`,'%Y-%m-%d') AS appDate,
             a.`ITEM_姓名` AS approver,
             a.`ITEM_EC涉及内容` AS content,
-            a.`ITEM_是否涉及新增物料` AS inVolveNewItem,
-            IF(a.`ITEM_是否有其他受影响产品`='是', (SELECT GROUP_CONCAT(b.`ITEM_受影响产品名称` SEPARATOR ', ') FROM rdm.`tlk_受影响产品信息` b WHERE b.PARENT = a.ID), '') AS affectedProduct,
-            IF(a.`ITEM_是否涉及关键器件变更`is null,'',a.`ITEM_是否涉及关键器件变更`) AS keyDevices,
-            a.`ITEM_是否涉及PCN` AS affectedPcn,
-            a.`ITEM_实际EC切入排产订单号` AS orderNo,
+            IFNULL((SELECT AUDITORNAMES FROM rdm.`t_flowstatert` b WHERE a.ID = b.DOCID LIMIT 1),'') AS auditorNames,
+            a.STATELABEL,
             IF(a.`ITEM_质量执行效果` is null,'',a.`ITEM_质量执行效果`) AS effectiveness,
-            IF(a.`ITEM_质量执行切入日期` is null,'',DATE_FORMAT(a.`ITEM_质量执行切入日期`,'%Y-%m-%d')) AS cutInDate,
-            IF(a.`ITEM_质量执行首台条码` is null,'',a.`ITEM_质量执行首台条码`) AS firstBarCode,
-            a.`ITEM_备注` AS notes
-        FROM rdm.`tlk_正式ec` a
+            IF(a.`ITEM_质量执行切入日期` is null,'',DATE_FORMAT(a.`ITEM_质量执行切入日期`,'%Y-%m-%d')) AS cutInDate
+        FROM rdm.`tlk_正式ec` a  WHERE a.`ITEM_项目编码` = #{projectCode}
         UNION
         SELECT
             a.`ITEM_EC单号` AS ecNo,
-            DATE_FORMAT(a.`ITEM_申请日期`,'%Y-%m-%d') AS appDate,
             a.`ITEM_姓名` AS approver,
             a.`ITEM_EC涉及内容` AS content,
-            a.`ITEM_是否涉及新增物料` AS inVolveNewItem,
-            '' AS affectedProduct,
-            '' AS keyDevices,
-            '' AS affectedPcn,
-            a.`ITEM_实际EC切入排产订单号` AS orderNo,
+            IFNULL((SELECT AUDITORNAMES FROM rdm.`t_flowstatert` b WHERE a.ID = b.DOCID LIMIT 1),'') AS auditorNames,
+            a.STATELABEL,
             '' AS effectiveness,
-            '' AS cutInDate,
-            '' AS firstBarCode,
-            a.`ITEM_备注` AS notes
-        FROM rdm.`tlk_临时ec` a
+            '' AS cutInDate
+        FROM rdm.`tlk_临时ec` a WHERE a.`ITEM_项目编码` = #{projectCode}
+    </select>
+    <select id="getProjectChange" resultMap="ProjectChangeResult">
+        SELECT
+            t.NAME AS approver,
+            a.STATELABEL AS stateLabel,
+            `ITEM_变更类型` AS changeType,
+            `ITEM_变更原因` AS changeReason,
+            `ITEM_评审类型` AS approveType,
+            `ITEM_变更批准` AS changeApprove,
+            IFNULL((SELECT AUDITORNAMES FROM rdm.`t_flowstatert` b WHERE a.ID = b.DOCID LIMIT 1),'') AS auditorNames
+        FROM rdm.`tlk_项目变更流程` a, obpm5.t_user t WHERE a.`ITEM_申请人` = t.ID AND a.`ITEM_项目编码` = #{projectCode}
     </select>
     <select id="getProject" resultMap="ProjectResult">
         SELECT
             ITEM_项目编码 AS projectCode,
             ITEM_项目名称 AS projectName
         FROM rdm.tlk_项目信息查询
+    </select>
+    <select id="getRisk" resultMap="RiskResult">
+        SELECT
+            `ITEM_风险类型` AS riskType,
+            count(1) AS riskNum,
+            10 AS riskMaxNum
+        FROM rdm.tlk_项目风险管理主表
+        WHERE `ITEM_项目编码` = #{projectCode}
+        GROUP BY `ITEM_风险类型`
+    </select>
+    <select id="getSourceInve" resultMap="SourceInveResult">
+        SELECT
+            CONCAT(right(h.value01,2),'月') AS month,
+            h.value02 AS sourceType,
+            ROUND(h.value04/h.value03,1) AS inveNum
+        FROM
+            (SELECT
+                 a.`ITEM_月份` AS value01,
+                 c.`ITEM_项目角色` AS value02,
+                 b.`ITEM_工时` AS value03,
+                 SUM(a.`ITEM_工作时长`) AS value04
+             FROM rdm.`tlk_工时填写` a, rdm.`tlk_工时管理` b,rdm.`tlk_研发人员管理` c
+             where a.PARENT = b.ID
+               AND a.`ITEM_申请人` = c.`ITEM_研发人员`
+               AND a.item_项目编码 = #{projectCode}
+               AND a.`ITEM_月份` like concat('%',#{year},'%')
+        GROUP BY b.`ITEM_工时`,a.`ITEM_月份`,c.`ITEM_项目角色`) h WHERE h.value02 != ''
+        ORDER BY h.value01
+    </select>
+    <select id="getProjectPlan" resultMap="ProjectPlanResult">
+        SELECT
+            a.`ITEM_关键节点` AS processName,
+            a.`ITEM_任务完成度` AS processValue
+        FROM rdm.`tlk_关键节点` a, rdm.`tlk_项目成本目标及预算` b
+        WHERE a.PARENT = b.ID
+          AND b.`ITEM_项目编码` = #{projectCode}
+        ORDER BY a.CREATED
+    </select>
+    <select id="getProjectKeyQuestion" resultMap="ProjectKeyQuestionResult">
+        SELECT
+            REPLACE(a.`ITEM_关键技术问题攻克`, '\n', CONCAT('&lt;','br/','&gt;')) AS keyQustion,
+            a.`ITEM_是否需要公司资源投入` AS isComSource
+        FROM rdm.`tlk_关键技术问题攻克` a, rdm.`tlk_项目成本目标及预算` b
+        WHERE a.PARENT = b.ID
+          AND b.`ITEM_项目编码` = #{projectCode}
+          AND a.`ITEM_已解决` != '是'
+        ORDER BY a.CREATED DESC
+    </select>
+    <select id="getProjectProcess" resultMap="ProjectProcessResult">
+        SELECT
+            CONCAT('项目处于：',a.`ITEM_当前关键节点`,'阶段',IF(a.`ITEM_延期情况` = '是', CONCAT(', 延期',ROUND(a.`ITEM_延期天数`,0),'天'), ''),CONCAT('&lt;','br/','&gt;'),REPLACE(a.`ITEM_项目进展`, '\n', CONCAT('&lt;','br/','&gt;'))) AS projectProcess
+        FROM rdm.`tlk_项目详细进展` a, rdm.`tlk_项目成本目标及预算` b
+        WHERE a.PARENT = b.ID
+          AND b.`ITEM_项目编码` = #{projectCode}
+        ORDER BY a.CREATED DESC
+            LIMIT 1
+    </select>
+    <select id="getProjectBudget" resultMap="ProjectBudgetResult">
+        SELECT
+            SUM(a.ITEM_人力费用) AS value01,
+            SUM(a.ITEM_外购样机费用) AS value02,
+            SUM(a.ITEM_研发样机费) AS value03,
+            SUM(a.ITEM_设备购置费) AS value04,
+            SUM(a.ITEM_工装费) AS value05,
+            SUM(a.ITEM_模具费) AS value06,
+            SUM(a.ITEM_外出试验费) AS value07,
+            SUM(a.ITEM_认证服务费) AS value08,
+            SUM(a.ITEM_委外设计费) AS value09,
+            SUM(a.ITEM_差旅费) AS value10,
+            SUM(a.ITEM_其他) AS value11,
+            SUM(a.ITEM_合计) AS value12
+        FROM rdm.`tlk_项目预算` a, rdm.`tlk_项目成本目标及预算` b
+        WHERE a.PARENT = b.ID
+        AND a.`ITEM_费用类型` = #{type}
+        AND b.`ITEM_项目编码` = #{projectCode}
+    </select>
+    <select id="getCost" resultMap="CostResult">
+        SELECT
+            SUM(a.ITEM_结构件成本) AS costValue01,
+            SUM(a.ITEM_包材成本) AS costValue02,
+            SUM(a.ITEM_定制件成本) AS costValue03,
+            SUM(a.ITEM_标准电子件成本) AS costValue04,
+            SUM(a.ITEM_PCB成本) AS costValue05,
+            SUM(a.ITEM_工艺辅料成本) AS costValue06,
+            SUM(a.ITEM_加工成本) AS costValue07,
+            SUM(a.ITEM_其他成本) AS costValue08
+        FROM rdm.`tlk_产品成本` a, rdm.`tlk_项目成本目标及预算` b
+        WHERE a.PARENT = b.ID
+          AND b.`ITEM_项目编码` = #{projectCode}
+    </select>
+    <select id="getCostRate" resultMap="CostResult">
+        SELECT
+            a.`ITEM_成本目标` - a.`ITEM_合计` AS chaECost,
+            ROUND((1-(a.`ITEM_合计` - a.`ITEM_成本目标`)/a.`ITEM_成本目标`)*100,2) AS costRate
+        FROM rdm.`tlk_产品成本` a, rdm.`tlk_项目成本目标及预算` b
+        WHERE a.PARENT = b.ID
+          AND b.`ITEM_项目编码` = #{projectCode}
+        ORDER BY a.CREATED LIMIT 1
+    </select>
+    <select id="getProjectDefect" resultMap="ProjectDefectResult">
+        SELECT a.* FROM
+            (SELECT
+                 LEFT(c.`ITEM_测试阶段`,2) AS projectStage,
+                 count(1) AS questionNum,
+                 '测试问题' AS projectType
+             FROM rdm.`tlk_问题电子流` a,
+                 rdm.`tlk_测试任务子流程` b,
+                 rdm.`tlk_测试任务申请电子流` c
+             WHERE a.ITEM_问题父子关系 = b.ID
+               AND b.ITEM_父子关系 = c.ID
+               AND c.`ITEM_项目编码` = #{projectCode}
+             GROUP BY LEFT(c.`ITEM_测试阶段`,2)
+             UNION ALL
+
+             SELECT
+                 LEFT(`ITEM_产品阶段`,2) AS projectStage,
+                 count(1) AS questionNum,
+                 '试制问题' AS projectType
+             FROM rdm.`tlk_样机加工问题主表`
+             WHERE `ITEM_项目编码` = #{projectCode}
+             GROUP BY LEFT(`ITEM_产品阶段`,2)
+
+             UNION ALL
+
+             SELECT
+                 LEFT(`ITEM_产品阶段`,2) AS projectStage,
+                 count(1) AS questionNum,
+                 '自测问题' AS projectType
+             FROM rdm.`tlk_自测问题`
+             WHERE `ITEM_项目编码` = #{projectCode}
+             GROUP BY LEFT(`ITEM_产品阶段`,2)) a ORDER BY projectStage
+    </select>
+    <select id="getQuestionCloseLoop" resultMap="QuestionCloseLoopResult">
+        SELECT a.qurstionType AS projectState,count(1) AS questionNum, '测试问题' AS projectType FROM (SELECT
+            CASE a.`ITEM_测试问题验证结论`
+                WHEN '' THEN '未解决'
+                WHEN '问题已验证，未解决' THEN '未解决'
+                WHEN '不是问题，关闭' THEN '已解决'
+                WHEN '问题遗留，不需要跟踪' THEN '遗留不跟踪'
+                WHEN '问题已验证,关闭' THEN '已解决'
+                WHEN '问题已验证，遗留跟踪' THEN '遗留跟踪'
+                WHEN '会议评审，问题遗留' THEN '遗留跟踪'
+                else '未解决'
+                END AS qurstionType
+        FROM rdm.`tlk_问题电子流` a,
+             rdm.`tlk_测试任务子流程` b,
+             rdm.`tlk_测试任务申请电子流` c
+        WHERE a.ITEM_问题父子关系 = b.ID
+          AND b.ITEM_父子关系 = c.ID
+          AND c.`ITEM_项目编码` = #{projectCode}) a GROUP BY qurstionType
+        UNION ALL
+        SELECT
+            CASE `ITEM_问题状态`
+                WHEN '' THEN '未解决'
+                else `ITEM_问题状态`
+                END AS projectState,
+            count(1) AS questionNum,
+            '试制问题' AS projectType
+
+        FROM rdm.`tlk_样机加工问题主表`
+        WHERE `ITEM_项目编码` = #{projectCode}
+        GROUP BY `ITEM_问题状态`
+
+        UNION ALL
+        SELECT
+            CASE `ITEM_问题状态`
+                WHEN '' THEN '未解决'
+                else `ITEM_问题状态`
+                END AS projectState,
+            count(1) AS questionNum,
+            '测试问题' AS projectType
+        FROM rdm.`tlk_自测问题`
+        WHERE `ITEM_项目编码` = #{projectCode}
+        GROUP BY `ITEM_问题状态`
     </select>
 </mapper>

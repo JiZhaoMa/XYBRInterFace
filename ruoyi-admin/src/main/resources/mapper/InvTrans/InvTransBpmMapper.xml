@@ -10,9 +10,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         </foreach>
     </insert>
     <insert id="insertInvTrans" parameterType="java.util.List">
-        insert into 料品库存信息(itemCode, itemName, lotCode, itemDesc, wareHouseCode, wareHouseName, store) values
+        insert into 料品库存信息(itemCode, itemName, lotCode, itemDesc, wareHouseCode, wareHouseName, store, price, totalPrice) values
         <foreach item="item" index="index" collection="list" separator=",">
-            (#{item.itemCode},#{item.itemName},#{item.lotCode},#{item.itemDesc},#{item.wareHouseCode},#{item.wareHouseName},#{item.store})
+            (#{item.itemCode},#{item.itemName},#{item.lotCode},#{item.itemDesc},#{item.wareHouseCode},#{item.wareHouseName},#{item.store},#{item.price},(#{item.store}*#{item.price}))
         </foreach>
     </insert>
     <insert id="deleteInvTrans">

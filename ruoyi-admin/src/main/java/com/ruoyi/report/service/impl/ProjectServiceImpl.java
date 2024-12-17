@@ -41,6 +41,11 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
     @Override
+    public Cost getCostRate(Cost cost) {
+        return projectMapper.getCostRate(cost);
+    }
+
+    @Override
     public CostComp getCostComp(CostComp costComp) {
         return projectMapper.getCostComp(costComp);
     }
@@ -61,7 +66,27 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
     @Override
+    public List<ProjectChange> getProjectChange(ProjectChange projectChange) {
+        return projectMapper.getProjectChange(projectChange);
+    }
+
+    @Override
     public List<Project> getProject() {
         return projectMapper.getProject();
+    }
+
+    @Override
+    public List<ProjectPlan> getProjectPlan(ProjectPlan projectPlan) {
+        return projectMapper.getProjectPlan(projectPlan);
+    }
+
+    @Override
+    public List<ProjectKeyQuestion> getProjectKeyQuestion(ProjectKeyQuestion projectKeyQuestion) {
+        return projectMapper.getProjectKeyQuestion(projectKeyQuestion);
+    }
+
+    @Override
+    public List<ProjectProcess> getProjectProcess(ProjectProcess p) {
+        return projectMapper.getProjectProcess(p);
     }
 }

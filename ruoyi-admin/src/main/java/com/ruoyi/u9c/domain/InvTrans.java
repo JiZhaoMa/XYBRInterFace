@@ -11,6 +11,14 @@ public class InvTrans {
     private String wareHouseCode; //仓库编号
     private String wareHouseName; //仓库名称
     private int store; //库存
+    private float price;
+    public float getPrice() {
+        return price;
+    }
+
+    public void setPrice(float price) {
+        this.price = price;
+    }
 
     public String getItemCode() {
         return itemCode;

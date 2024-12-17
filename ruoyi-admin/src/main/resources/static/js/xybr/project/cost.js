@@ -1,6 +1,6 @@
 //饼图
-function createCost(bar,project) {
-    option = {
+function createCost(bar,projectCode) {
+    let option = {
         tooltip : {
             trigger: 'item',
             formatter: "{a} <br/>{b} : {c} ({d}%)"
@@ -32,16 +32,37 @@ function createCost(bar,project) {
                     }
                 },
                 data:[
-                    {value:1976, name:'结构件'},
-                    {value:1092, name:'工艺辅料'},
-                    {value:2141, name:'加工费'},
-                    {value:519, name:'电子料'},
-                    {value:1159, name:'PCB'},
-                    {value:2159, name:'其他'},
+                    {value:0, name:''}
                 ]
             }
         ]
     };
+    $.ajax({
+        type: "GET",
+        url: urls + "report/project/getCost",
+        contentType: "application/json;charset=utf-8",
+        data: {
+            "projectCode": projectCode
+        },
+        dateType: "json",
+        success: function (data) {
+            option.series[0].data.pop();
+            for(var i=0; i<data.costList.length; i++){
+                option.series[0].data.push({
+                    name: data.costTypeList[i],
+                    value: data.costList[i]
+                })
+            }
+            bar.setOption(option,true);
+        },
+        error: function (data) {
+            alert("失败");
+        }
+
+    });
+    window.addEventListener('resize', function() {
+        bar.setOption(option, true);
+    });
     bar.setOption(option,true);
     function nowSize(size){
         let nowClientWidth = size*(document.documentElement.clientWidth/1698);

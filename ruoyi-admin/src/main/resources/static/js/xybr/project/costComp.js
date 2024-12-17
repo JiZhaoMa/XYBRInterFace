@@ -1,6 +1,6 @@
 //饼图
 function createCostComp(bar,project) {
-    option = {
+    let option = {
         color: ['#37a2da','#32c5e9','#9fe6b8','#ffdb5c','#ff9f7f'],
         tooltip : {
             trigger: 'item',

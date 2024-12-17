@@ -2,35 +2,14 @@ package com.ruoyi.report.domain.project;
 
 public class EcLedger {
     private String ecNo;
-    private String appDate;
     private String approver;
     private String content;
-    private String inVolveNewItem;
-    private String affectedProduct;
-    private String keyDevices;
-    private String affectedPcn;
-    private String orderNo;
+    private String auditorNames;
+    private String stateLabel;
     private String effectiveness;
     private String cutInDate;
-    private String firstBarCode;
-    private String notes;
+
     private String projectCode;
-
-    public String getCutInDate() {
-        return cutInDate;
-    }
-
-    public void setCutInDate(String cutInDate) {
-        this.cutInDate = cutInDate;
-    }
-
-    public String getProjectCode() {
-        return projectCode;
-    }
-
-    public void setProjectCode(String projectCode) {
-        this.projectCode = projectCode;
-    }
 
     public String getEcNo() {
         return ecNo;
@@ -38,14 +17,6 @@ public class EcLedger {
 
     public void setEcNo(String ecNo) {
         this.ecNo = ecNo;
-    }
-
-    public String getAppDate() {
-        return appDate;
-    }
-
-    public void setAppDate(String appDate) {
-        this.appDate = appDate;
     }
 
     public String getApprover() {
@@ -64,44 +35,20 @@ public class EcLedger {
         this.content = content;
     }
 
-    public String getInVolveNewItem() {
-        return inVolveNewItem;
+    public String getAuditorNames() {
+        return auditorNames;
     }
 
-    public void setInVolveNewItem(String inVolveNewItem) {
-        this.inVolveNewItem = inVolveNewItem;
+    public void setAuditorNames(String auditorNames) {
+        this.auditorNames = auditorNames;
     }
 
-    public String getAffectedProduct() {
-        return affectedProduct;
+    public String getStateLabel() {
+        return stateLabel;
     }
 
-    public void setAffectedProduct(String affectedProduct) {
-        this.affectedProduct = affectedProduct;
-    }
-
-    public String getKeyDevices() {
-        return keyDevices;
-    }
-
-    public void setKeyDevices(String keyDevices) {
-        this.keyDevices = keyDevices;
-    }
-
-    public String getAffectedPcn() {
-        return affectedPcn;
-    }
-
-    public void setAffectedPcn(String affectedPcn) {
-        this.affectedPcn = affectedPcn;
-    }
-
-    public String getOrderNo() {
-        return orderNo;
-    }
-
-    public void setOrderNo(String orderNo) {
-        this.orderNo = orderNo;
+    public void setStateLabel(String stateLabel) {
+        this.stateLabel = stateLabel;
     }
 
     public String getEffectiveness() {
@@ -112,19 +59,19 @@ public class EcLedger {
         this.effectiveness = effectiveness;
     }
 
-    public String getFirstBarCode() {
-        return firstBarCode;
+    public String getCutInDate() {
+        return cutInDate;
     }
 
-    public void setFirstBarCode(String firstBarCode) {
-        this.firstBarCode = firstBarCode;
+    public void setCutInDate(String cutInDate) {
+        this.cutInDate = cutInDate;
     }
 
-    public String getNotes() {
-        return notes;
+    public String getProjectCode() {
+        return projectCode;
     }
 
-    public void setNotes(String notes) {
-        this.notes = notes;
+    public void setProjectCode(String projectCode) {
+        this.projectCode = projectCode;
     }
 }

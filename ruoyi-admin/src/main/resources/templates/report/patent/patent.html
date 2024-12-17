@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>专利看板</title>
+	<style>
+		body {
+			font-family: Arial, sans-serif;
+			height: 100vh;
+			margin: 0;
+		}
+		.patent-title{
+			height: 7%;
+			width: 100%;
+			background-color: #37a2da;
+			color: #FFF;
+			font-weight: bold;
+			justify-content: center;
+			align-items: center;
+			display: flex;
+		}
+		.patent-plan{
+			height: 10%;
+			width: 90%;
+			position: absolute;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			left: 5%;
+		}
+		.patent-first{
+			height: 100%;
+			width: 20%;
+			justify-content: center;
+			align-items: center;
+			display: flex;
+			color: #bb2649;
+			font-weight: bold;
+		}
+		.patent-row-first{
+			width: 90%;
+			height: 35%;
+			position: relative;
+			top: 12%;
+			left: 3%;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+		}
+		.patent-row-second{
+			width: 90%;
+			height: 35%;
+			position: relative;
+			top: 17%;
+			left: 3%;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+		}
+		.left{
+			width: 30%;
+			height: 100%;
+			border: 0.2px solid #0663A2;
+			border-radius: 10px 10px 10px 10px;
+		}
+		.title{
+			width: 30%;
+			height: 10%;
+			background-color: #FFFFFF;
+			color: #0663A2;
+			top: -6%;
+			position: relative;
+			text-align: center;
+			left: 5%;
+		}
+		.center{
+			width: 30%;
+			height: 100%;
+			left: 2%;
+			position: relative;
+			border: 0.2px solid #0663A2;
+			border-radius: 10px 10px 10px 10px;
+		}
+		.right{
+			width: 30%;
+			height: 100%;
+			left: 4%;
+			position: relative;
+			border: 0.2px solid #0663A2;
+			border-radius: 10px 10px 10px 10px;
+		}
+		.echarts-bar{
+			width: 95%;
+			height: 95%;
+			top: -5%;
+			left: 2%;
+		}
+		.select{
+			background-color: #37a2da;
+			color: #fff;
+			border: 0.2px solid #37a2da;
+			width: 35%;
+		}
+	</style>
+</head>
+<body id="body">
+<div class="patent-title">
+	<div style="position: fixed; left: 2%;">
+		<select name="selectDept" id="selectDept" class="select">
+			<option value="" selected="selected">部门</option>
+		</select>
+		<select name="selectPerson" id="selectPerson" class="select">
+			<option value="" selected="selected">第一发明人</option>
+		</select>
+		<select name="selectType" id="selectType" class="select">
+			<option value="" selected="selected">专利类型</option>
+			<option value="发明">发明</option>
+			<option value="实用新型">实用新型</option>
+			<option value="外观设计">外观设计</option>
+		</select>
+		<select name="selectProcess" id="selectProcess" class="select">
+			<option value="" selected="selected">专利进度</option>
+			<option value="初审合格">初审合格</option>
+			<option value="发证">发证</option>
+			<option value="受理">受理</option>
+			<option value="授权待发证">授权待发证</option>
+			<option value="撤案">撤案</option>
+			<option value="暂停处理">暂停处理</option>
+			<option value="第一次审查意见：不具备创造性">第一次审查意见：不具备创造性</option>
+			<option value="等待实审提案">等待实审提案</option>
+			<option value="进入实审">进入实审</option>
+			<option value="递交交底书">递交交底书</option>
+			<option value="驳回">驳回</option>
+			<option value="第二次审查意见：不具备创造性">第二次审查意见：不具备创造性</option>
+		</select>
+	</div>
+	<span>西安星源博锐新能源技术有限公司专利看板</span>
+	<div style="position: fixed; right: 2%;">
+		<select name="selectYear" id="selectJiaoDiShuYear" class="select">
+			<option value="" selected="selected">交底书委外年份</option>
+			<option value="2021">2021年</option>
+			<option value="2022">2022年</option>
+			<option value="2023">2023年</option>
+			<option value="2024">2024年</option>
+			<option value="2025">2025年</option>
+			<option value="2026">2026年</option>
+			<option value="2027">2027年</option>
+			<option value="2028">2028年</option>
+			<option value="2029">2029年</option>
+			<option value="2030">2030年</option>
+			<option value="2031">2031年</option>
+			<option value="2032">2032年</option>
+			<option value="2033">2033年</option>
+		</select>
+		<select name="selectMonth" id="selectJiaoDiShuMonth" class="select">
+			<option value="" selected="selected">交底书委外月份</option>
+			<option value="01">1月</option>
+			<option value="02">2月</option>
+			<option value="03">3月</option>
+			<option value="04">4月</option>
+			<option value="05">5月</option>
+			<option value="06">6月</option>
+			<option value="07">7月</option>
+			<option value="08">8月</option>
+			<option value="09">9月</option>
+			<option value="10">10月</option>
+			<option value="11">11月</option>
+			<option value="12">12月</option>
+		</select>
+		<select name="selectYear" id="selectShouQuanGongGaoYear" class="select">
+			<option value="" selected="selected">授权公告年份</option>
+			<option value="2021">2021年</option>
+			<option value="2022">2022年</option>
+			<option value="2023">2023年</option>
+			<option value="2024">2024年</option>
+			<option value="2025">2025年</option>
+			<option value="2026">2026年</option>
+			<option value="2027">2027年</option>
+			<option value="2028">2028年</option>
+			<option value="2029">2029年</option>
+			<option value="2030">2030年</option>
+			<option value="2031">2031年</option>
+			<option value="2032">2032年</option>
+			<option value="2033">2033年</option>
+		</select>
+		<select name="selectMonth" id="selectShouQuanGongGaoMonth" class="select">
+			<option value="" selected="selected">授权公告月份</option>
+			<option value="01">1月</option>
+			<option value="02">2月</option>
+			<option value="03">3月</option>
+			<option value="04">4月</option>
+			<option value="05">5月</option>
+			<option value="06">6月</option>
+			<option value="07">7月</option>
+			<option value="08">8月</option>
+			<option value="09">9月</option>
+			<option value="10">10月</option>
+			<option value="11">11月</option>
+			<option value="12">12月</option>
+		</select>
+	</div>
+</div>
+<div class="patent-plan">
+	<div class="patent-first">
+		<span>申请总数：</span>
+		<span id="countNum">0</span>
+	</div>
+	<div class="patent-first">
+		<span>撤案总数：</span>
+		<span id="cheAnNum">0</span>
+	</div>
+	<div class="patent-first">
+		<span>下证数量：</span>
+		<span id="xiaZhengNum">0</span>
+	</div>
+	<div class="patent-first">
+		<span>驳回数量：</span>
+		<span id="boHuiNum">0</span>
+	</div>
+	<div class="patent-first">
+		<span>授权待发：</span>
+		<span id="shouQuanDaiFa">0</span>
+	</div>
+</div>
+<div class="patent-row-first">
+	<div class="left">
+		<div class="title">
+			<span>申请类型</span>
+		</div>
+		<div class="echarts-bar" id="appType"></div>
+	</div>
+	<div class="center">
+		<div class="title">
+			<span>授权年份&数量</span>
+		</div>
+		<div class="echarts-bar" id="patentYearAndNumber"></div>
+	</div>
+	<div class="right">
+		<div class="title">
+			<span>授权类型&数量</span>
+		</div>
+		<div class="echarts-bar" id="patentGroupByType"></div>
+	</div>
+</div>
+<div class="patent-row-second">
+	<div class="left">
+		<div class="title">
+			<span>部门专利信息</span>
+		</div>
+		<div class="echarts-bar" id="patentGroupByDept"></div>
+	</div>
+	<div class="center">
+		<div class="title">
+			<span>第一发明人</span>
+		</div>
+		<div class="echarts-bar" id="patentGroupByPerson"></div>
+	</div>
+	<div class="right">
+		<div class="title">
+			<span>案件代理机构</span>
+		</div>
+		<div class="echarts-bar" id="patentGroupByProxy"></div>
+	</div>
+</div>
+<script type="text/javascript" th:src="@{/js/plugins/echarts.min.js}"></script>
+<script type="text/javascript" th:src="@{/js/xybr/patent/appType.js}"></script>
+<script type="text/javascript" th:src="@{/js/xybr/patent/patentYearAndNumber.js}"></script>
+<script type="text/javascript" th:src="@{/js/xybr/patent/patentGroupByDept.js}"></script>
+<script type="text/javascript" th:src="@{/js/xybr/patent/patentGroupByPerson.js}"></script>
+<script type="text/javascript" th:src="@{/js/xybr/patent/patentGroupByProxy.js}"></script>
+<script type="text/javascript" th:src="@{/js/xybr/patent/patentGroupByType.js}"></script>
+<script type="text/javascript" th:src="@{/js/jquery.min.js}"></script>
+<script type="text/javascript">
+	//var urls = "http://123.249.26.42:8084/xybrInterFace/";
+	var urls = "http://localhost/";
+	window.onload = function (){
+		document.querySelectorAll('.title').forEach(function(element) {
+			element.style.fontSize = nowSize(16) + 'px';
+		});
+		document.querySelectorAll('.patent-first').forEach(function(element) {
+			element.style.fontSize = nowSize(20) + 'px';
+		});
+		document.querySelectorAll('.patent-title').forEach(function(element) {
+			element.style.fontSize = nowSize(24) + 'px';
+		});
+		document.querySelectorAll('.select').forEach(function(element) {
+			element.style.fontSize = nowSize(14) + 'px';
+		});
+		var height = window.innerHeight;
+		var width = window.innerWidth;
+		var element = document.getElementById("body");
+		element.style.height = height - 20 + 'px'; //根据窗口的大小设置body的高
+		element.style.width = width + 'px'; //根据窗口的大小设置body的高
+		initHtml();
+	}
+	window.addEventListener('resize', function() {
+		location.reload()
+	});
+	function nowSize(size){
+		let nowClientWidth = size*(document.documentElement.clientWidth/1698);
+		return nowClientWidth;
+	}
+	$(document).ready(function (){
+		$("#selectDept").change(function (){
+			initHtml();
+		});
+		$("#selectPerson").change(function (){
+			initHtml();
+		});
+		$("#selectType").change(function (){
+			initHtml();
+		});
+		$("#selectProcess").change(function (){
+			initHtml();
+		});
+		$("#selectJiaoDiShuYear").change(function (){
+			initHtml();
+		});
+		$("#selectJiaoDiShuMonth").change(function (){
+			initHtml();
+		});
+		$("#selectShouQuanGongGaoYear").change(function (){
+			initHtml();
+		});
+		$("#selectShouQuanGongGaoMonth").change(function (){
+			initHtml();
+		});
+	})
+	function loadEcharts(person,dept,type,process,jiaoDiShuMonth,shouQuanMonth){
+		let appType = echarts.init(document.getElementById("appType"));
+		createAppType(appType,person,dept,type,process,jiaoDiShuMonth,shouQuanMonth);
+		let patentYearAndNumber = echarts.init(document.getElementById("patentYearAndNumber"));
+		createPatentYearNumber(patentYearAndNumber,person,dept);
+		let patentGroupByDept = echarts.init(document.getElementById("patentGroupByDept"));
+		createPatentGroupByDept(patentGroupByDept,person,dept,type,process,jiaoDiShuMonth,shouQuanMonth);
+		let patentGroupByPerson = echarts.init(document.getElementById("patentGroupByPerson"));
+		createPatentGroupByPerson(patentGroupByPerson,person,dept,type,process,jiaoDiShuMonth,shouQuanMonth);
+		let patentGroupByProxy = echarts.init(document.getElementById("patentGroupByProxy"));
+		createPatentGroupByProxy(patentGroupByProxy,person,dept,type,process,jiaoDiShuMonth,shouQuanMonth);
+		let patentGroupByType = echarts.init(document.getElementById("patentGroupByType"));
+		createPatentGroupByType(patentGroupByType,person,dept,type,process,jiaoDiShuMonth,shouQuanMonth);
+	}
+	function initHtml(){
+		var dept = document.getElementById("selectDept").value;
+		var person = document.getElementById("selectPerson").value;
+		var ptype = document.getElementById("selectType").value;
+		var process = document.getElementById("selectProcess").value;
+		var jiaoDishuYear = document.getElementById("selectJiaoDiShuYear").value;
+		var jiaoDishuMonth = document.getElementById("selectJiaoDiShuMonth").value;
+		var shouQuanYear = document.getElementById("selectShouQuanGongGaoYear").value;
+		var shouQuanmonth = document.getElementById("selectShouQuanGongGaoMonth").value;
+		$.ajax({
+			type: "GET",
+			url: urls + "report/patent/getPatentDetail",
+			contentType: "application/json;charset=utf-8",
+			data: {
+				"dept": dept,
+				"person": person,
+				"ptype": ptype,
+				"process": process,
+				"jiaoDiShuMonth": jiaoDishuYear + jiaoDishuMonth,
+				"shouQuanMonth": shouQuanYear + shouQuanmonth,
+			},
+			dataType: "json",
+			success: function (data) {
+				var dList = data.deptList;
+				var pList = data.personList;
+				var deptElement = document.getElementById("selectDept");
+				var personElement = document.getElementById("selectPerson");
+				for(var i=0; i<dList.length; i++){
+					var option = document.createElement("option");
+					option.text = dList[i];
+					option.value = dList[i];
+					deptElement.add(option);
+				}
+				for(var i=0; i<pList.length; i++){
+					var option = document.createElement("option");
+					option.text = pList[i];
+					option.value = pList[i];
+					personElement.add(option);
+				}
+				document.getElementById('countNum').innerText = data.countNum;
+				document.getElementById('cheAnNum').innerText = data.cheAnNum;
+				document.getElementById('xiaZhengNum').innerText = data.xiaZhengNum;
+				document.getElementById('boHuiNum').innerText = data.boHuiNum;
+				document.getElementById('shouQuanDaiFa').innerText = data.shouQuanDaiFa;
+				loadEcharts(person,dept,ptype,process,jiaoDishuYear + jiaoDishuMonth,shouQuanYear + shouQuanmonth);
+			},
+			error: function (data) {
+				alert("失败");
+			}
+		});
+	}
+</script>
+</body>
+</html>

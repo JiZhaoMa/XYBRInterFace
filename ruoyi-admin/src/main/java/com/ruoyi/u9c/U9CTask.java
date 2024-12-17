@@ -111,10 +111,16 @@ public class U9CTask {
         }
         System.out.println(list);
     }
+    /*
+    	U9C的供应商信息同步到BPM
+     */
     public void synSuplier() throws Exception {
         List<Supplier> list = u9CService.getU9CSupplier();
         bpmService.insertSupplier(list);
     }
+    /*
+    U9C的资产存放位置信息同步到BPM
+     */
     public void synFixedField() throws Exception {
         List<FixedFiled> list = u9CService.getU9CFixedFiled();
         bpmService.insertFixedFiled(list);

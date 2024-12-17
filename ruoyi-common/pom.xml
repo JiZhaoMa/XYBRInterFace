@@ -16,7 +16,6 @@
 	</description>
 
     <dependencies>
-		
 		<!-- Spring框架基本的核心工具 -->
 		<dependency>
 			<groupId>org.springframework</groupId>
@@ -94,7 +93,11 @@
 		    <groupId>javax.servlet</groupId>
 		    <artifactId>javax.servlet-api</artifactId>
 		</dependency>
-		
-    </dependencies>
+		<dependency>
+			<groupId>org.springframework.data</groupId>
+			<artifactId>spring-data-redis</artifactId>
+		</dependency>
+
+	</dependencies>
   
 </project>

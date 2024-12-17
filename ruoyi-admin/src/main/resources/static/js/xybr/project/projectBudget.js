@@ -1,6 +1,6 @@
 //饼图
-function createProjectBudget(bar,project) {
-    option = {
+function createProjectBudget(bar,projectCode) {
+    let option = {
         title: {
             text: '',
             subtext: ''
@@ -26,7 +26,7 @@ function createProjectBudget(bar,project) {
         },
         xAxis: {
             type: 'category',
-            data: ['累计','人力','物料','外测','认证','工装','模具','差旅'],
+            data: ['累计','人力','外购样机','研发样机','设备购置','工装','模具','外出试验','认证服务','委外设计','差旅','其他'],
         },
         yAxis: {
             type: 'value',
@@ -86,6 +86,27 @@ function createProjectBudget(bar,project) {
             }
         ]
     };
+    $.ajax({
+        type: "GET",
+        url: urls + "report/project/getProjectBudget",
+        contentType: "application/json;charset=utf-8",
+        data: {
+            "projectCode": projectCode
+        },
+        dateType: "json",
+        success: function (data) {
+            option.series[0].data = data.yusuanlist; //预算
+            option.series[1].data = data.hesuanlist; //核算
+            bar.setOption(option,true);
+        },
+        error: function (data) {
+            alert("失败");
+        }
+
+    });
+    window.addEventListener('resize', function() {
+        bar.setOption(option, true);
+    });
     bar.setOption(option,true);
     function nowSize(size){
         let nowClientWidth = size*(document.documentElement.clientWidth/1698);

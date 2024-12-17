@@ -1,6 +1,6 @@
 //饼图
-function createSource(bar,project) {
-    option = {
+function createSource(bar,project,year) {
+    let option = {
         title: {
             text: '',
             subtext: ''
@@ -88,6 +88,29 @@ function createSource(bar,project) {
             }
         ]
     };
+    $.ajax({
+        type: "GET",
+        url: urls + "report/project/getSourceInve",
+        contentType: "application/json;charset=utf-8",
+        data: {
+            "projectCode": projectCode,
+            "year": year
+        },
+        dateType: "json",
+        success: function (data) {
+            option.xAxis.data = data.monthlist;
+            option.series[0].data = data.yingJian;
+            option.series[1].data = data.ruanJian;
+            bar.setOption(option,true);
+        },
+        error: function (data) {
+            alert("失败");
+        }
+
+    });
+    window.addEventListener('resize', function() {
+        bar.setOption(option, true);
+    });
     bar.setOption(option,true);
     function nowSize(size){
         let nowClientWidth = size*(document.documentElement.clientWidth/1698);

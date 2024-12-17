@@ -77,12 +77,12 @@ public class BPMServiceImpl implements BPMService {
     }
 
     @Override
-    public JSONObject getPOLine(List<String> list) {
+    public JSONObject getPOLine(List<String> list,List<String> idsList,String PurDeptCode,String PurOperCode) {
         JSONObject result = new JSONObject();
-        List<POLine> poList = bpmMapper.getPOLine(list);
-        List<String> projectList = bpmMapper.getProject(list);
-        List<String> supplierList = bpmMapper.getSupplier(list);
-        List<String> caigouList = bpmMapper.getCaiGouType(list);
+        List<POLine> poList = bpmMapper.getPOLine(list,idsList);
+        List<String> projectList = bpmMapper.getProject(list,idsList);
+        List<String> supplierList = bpmMapper.getSupplier(list,idsList);
+        List<String> caigouList = bpmMapper.getCaiGouType(list,idsList);
         for(String projectCode : projectList) {
             List<POLine> proJectPOLineList = poList.stream().filter(item -> projectCode.equals(item.getProjectCode())).collect(Collectors.toList());
             for(String supplier : supplierList){
@@ -99,16 +99,19 @@ public class BPMServiceImpl implements BPMService {
                     JSONObject SupplierJson = new JSONObject();
                     SupplierJson.put("Code", supplier);
                     JSONObject PurOperJson = new JSONObject();
-                    PurOperJson.put("m_code", "001");
+                    PurOperJson.put("m_code", PurOperCode);
                     JSONObject PurDeptJson = new JSONObject();
-                    PurDeptJson.put("m_code", "010801");
+                    PurDeptJson.put("m_code", PurDeptCode);
                     POJson.put("Supplier",SupplierJson);
                     POJson.put("PurOper",PurOperJson);
                     POJson.put("PurDept",PurDeptJson);
+                    POJson.put("Memo","BPM");
                     JSONArray POLineDTOList = new JSONArray();
                     JSONObject DescFlexFieldJson = new JSONObject();
                     String serializeNo = "";
+                    List<String> serializeNoList = new ArrayList<>();
                     String shipAdress = "";
+                    List<String> shipAdressList = new ArrayList<>();
                     int i = 0;
                     for (POLine poLine : caiGouTypePOLineList) {
                         i++;
@@ -121,14 +124,18 @@ public class BPMServiceImpl implements BPMService {
                         POLineDTOJson.put("DocLineNo",poLine.getDocLineNo());
                         POLineDTOJson.put("ReqQtyTU",poLine.getReqQtyTU());
                         POLineDTOJson.put("SupplierConfirmQtyTU",poLine.getReqQtyTU());
-                        POLineDTOJson.put("FinallyPriceTC",poLine.getFinallyPriceTC());
+//                        POLineDTOJson.put("FinallyPriceTC",poLine.getFinallyPriceTC());
+                        POLineDTOJson.put("FinallyPriceTC",0.19);
                         POLineDTOJson.put("DeliveryDate",poLine.getDeliveryDate());
                         TaxScheduleJson.put("m_code","Y0Z2");
                         POLineDTOJson.put("TaxSchedule",TaxScheduleJson);
-                        if(!serializeNo.contentEquals(poLine.getSerializeNo())){
+
+                        if(!serializeNoList.contains(poLine.getSerializeNo())){
+                            serializeNoList.add(poLine.getSerializeNo());
                             serializeNo = serializeNo + poLine.getSerializeNo() + ";";
                         }
-                        if(!shipAdress.contentEquals(poLine.getShipAdress())){
+                        if(!shipAdressList.contains(poLine.getShipAdress())){
+                            shipAdressList.add(poLine.getShipAdress());
                             shipAdress = shipAdress + poLine.getShipAdress() + ";";
                         }
                         POLineDTOList.add(POLineDTOJson);
@@ -180,7 +187,7 @@ public class BPMServiceImpl implements BPMService {
                             JSONObject jsonObject = new JSONObject();
                             jsonObject.put("Code",newOrdeCode);
                             subJsonArr.add(jsonObject);
-                            submitU9CPOLine(subJsonArr);
+                            //submitU9CPOLine(subJsonArr);
                             result.put("code","200");
                             result.put("MSG","成功生成U9标准采购！");
                         } catch (Exception e) {

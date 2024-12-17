@@ -193,16 +193,16 @@
         .process-color-09 { color: #9ea6b9; } /* 发布 */
         .process-color-10 { color: #9ea6b9; } /* 生命周期 */
 		
-        .market-insights { background-color: #37a2da; } /* 市场洞察 */
-        .opportunity-analysis { background-color: #37a2da; } /* 机会分析 */
-        .business-plan { background-color: #37a2da; } /* 业务计划 */
-        .product-initiation { background-color: #37a2da; } /* 产品立项 */
-        .concept { background-color: #37a2da; } /* 概念 */
-        .planning { background-color: #37a2da; } /* 计划 */
-        .development { background-color: #ff9f7f; } /* 开发 */
-        .validation { background-color: #ff9f7f; } /* 验证 */
-        .launch { background-color: #9ea6b9; } /* 发布 */
-        .lifecycle { background-color: #9ea6b9; } /* 生命周期 */
+        .process-bg-01 { background-color: #37a2da; } /* 市场洞察 */
+		.process-bg-02 { background-color: #37a2da; } /* 机会分析 */
+		.process-bg-03 { background-color: #37a2da; } /* 业务计划 */
+		.process-bg-04 { background-color: #37a2da; } /* 产品立项 */
+		.process-bg-05 { background-color: #37a2da; } /* 概念 */
+		.process-bg-06 { background-color: #37a2da; } /* 计划 */
+		.process-bg-07 { background-color: #ff9f7f; } /* 开发 */
+		.process-bg-08 { background-color: #ff9f7f; } /* 验证 */
+		.process-bg-09 { background-color: #9ea6b9; } /* 发布 */
+		.process-bg-10 { background-color: #9ea6b9; } /* 生命周期 */
 		table {
 			width: 100%; /* 设置table宽度 */
 			border-collapse: collapse; /* 边框合并 */
@@ -263,6 +263,12 @@
 			overflow-y: auto;
 			position: relative;
 		}
+		.scroll-box-04 {
+			height: 65%;
+			width: 100%;
+			overflow-y: auto;
+			position: relative;
+		}
 		.content{
 			width: 90%;
 			height: 85%;
@@ -274,32 +280,21 @@
 </head>  
 <body>
 	<div class="project-title">
-		<span>42kw小功率群充项目</span>
+		<span id="projectNameTitle">42kw小功率群充项目</span>
 		<div style="position: fixed; left: 84%;">
 			<select name="selectProject" id="selectProject" style="background-color: #37a2da; color: #fff; border: 0.2px solid #37a2da;">
-				<option value="2022">42kw小功率群充项目</option>
-				<option value="2023">42kw小功率群充项目</option>
-				<option value="2024" selected="selected">42kw小功率群充项目</option>
-				<option value="2025">42kw小功率群充项目</option>
-				<option value="2026">42kw小功率群充项目</option>
-				<option value="2027">42kw小功率群充项目</option>
-				<option value="2028">42kw小功率群充项目</option>
-				<option value="2028">42kw小功率群充项目</option>
-				<option value="2029">42kw小功率群充项目</option>
-				<option value="2030">42kw小功率群充项目</option>
-				<option value="2031">42kw小功率群充项目</option>
-				<option value="2032">42kw小功率群充项目</option>
-				<option value="2033">42kw小功率群充项目</option>
 			</select>
 		</div>
 	</div>
 	<div class="project-plan">
 		<div class="project-plan-title"><span>项目计划</span></div> 
 		<div class="flowchart-container">  
-			<div class="stage market-insights">
-				<div>市场洞察</div>
+			<div class="stage process-bg-01">
+				<div>
+					<span id="process01Name"></span>
+				</div>
 				<div class="process process-color-01" id="process">
-					<span id="process01"></span>
+					<span id="process01Value"></span>
 				</div>
 			</div>  
 			<div class="connector">  
@@ -313,75 +308,93 @@
 				</svg>  
 			</div>
 			
-			<div class="stage opportunity-analysis">
-			
-				<div>机会分析</div>
+			<div class="stage process-bg-02">
+
+				<div>
+					<span id="process02Name"></span>
+				</div>
 				<div class="process process-color-02">
-					<span id="process02"></span>
+					<span id="process02Value"></span>
 				</div>
 			</div>	
 			<div class="connector"><svg><line x1="0" y1="12" x2="24" y2="12" /></svg></div>  
 			
-			<div class="stage business-plan">
-				<div>业务计划</div>
+			<div class="stage process-bg-03">
+				<div>
+					<span id="process03Name"></span>
+				</div>
 				<div class="process process-color-03">
-					<span id="process03"></span>
+					<span id="process03Value"></span>
 				</div>
 			</div>  
 			<div class="connector"><svg><line x1="0" y1="12" x2="24" y2="12" /></svg></div>
 			
-			<div class="stage product-initiation">
-				<div>产品立项</div>
+			<div class="stage process-bg-04">
+				<div>
+					<span id="process04Name"></span>
+				</div>
 				<div class="process process-color-04">
-					<span id="process04"></span>
+					<span id="process04Value"></span>
 				</div>
 			</div>  
 			<div class="connector"><svg><line x1="0" y1="12" x2="24" y2="12" /></svg></div>
 			
-			<div class="stage concept">
-				<div>概念</div>
+			<div class="stage process-bg-05">
+				<div>
+					<span id="process05Name"></span>
+				</div>
 				<div class="process process-color-05">
-					<span id="process05"></span>
+					<span id="process05Value"></span>
 				</div>
 			</div>  
 			<div class="connector"><svg><line x1="0" y1="12" x2="24" y2="12" /></svg></div> 
 			
-			<div class="stage planning">
-				<div>计划</div>
+			<div class="stage process-bg-06">
+				<div>
+					<span id="process06Name"></span>
+				</div>
 				<div class="process process-color-06">
-					<span id="process06"></span>
+					<span id="process06Value"></span>
 				</div>
 			</div>  
 			<div class="connector"><svg><line x1="0" y1="12" x2="24" y2="12" /></svg></div> 
 			
-			<div class="stage development">
-				<div>开发</div>
+			<div class="stage process-bg-07">
+				<div>
+					<span id="process07Name"></span>
+				</div>
 				<div class="process process-color-07">
-					<span id="process07"></span>
+					<span id="process07Value"></span>
 				</div>
 			</div>  
 			<div class="connector"><svg><line x1="0" y1="12" x2="24" y2="12" /></svg></div>  
 			
-			<div class="stage validation">
-				<div>验证</div>
+			<div class="stage process-bg-08">
+				<div>
+					<span id="process08Name"></span>
+				</div>
 				<div class="process process-color-08">
-					<span id="process08"></span>
+					<span id="process08Value"></span>
 				</div>
 			</div>  
 			<div class="connector"><svg><line x1="0" y1="12" x2="24" y2="12" /></svg></div> 
 			
-			<div class="stage launch">
-				<div>发布</div>
+			<div class="stage process-bg-09">
+				<div>
+					<span id="process09Name"></span>
+				</div>
 				<div class="process process-color-09">
-					<span id="process09"></span>
+					<span id="process09Value"></span>
 				</div>
 			</div>  
 			<div class="connector"><svg><line x1="0" y1="12" x2="24" y2="12" /></svg></div> 
 			
-			<div class="stage lifecycle">
-				<div>生命周期</div>
+			<div class="stage process-bg-10">
+				<div>
+					<span id="process10Name"></span>
+				</div>
 				<div class="process process-color-10">
-					<span id="process10"></span>
+					<span id="process10Value"></span>
 				</div>
 			</div> 
 		</div>
@@ -438,13 +451,12 @@
 			<div class="echarts-bar" id="cost"></div>
 			<div style="left: 55%;position: relative;height: 100%;width: 45%;top: -100%;">
 				<div style="width: 100%;height: 30%;font-size: large;font-weight: bold;color: #37a2da;">
-					<span>目标成本：100万</span>
+					<span>达成率：</span>
+					<span id="costRate"></span>
 				</div>
 				<div style="width: 100%;height: 30%;font-size: large;font-weight: bold;color: #37a2da;">
-					<span>实际成本：110万</span>
-				</div>
-				<div style="width: 100%;height: 30%;font-size: large;font-weight: bold;color: #37a2da;">
-					<span>差额：10万</span>
+					<span>差额：</span>
+					<span id="chaECost"></span>
 				</div>
 			</div>
 		</div>
@@ -511,7 +523,7 @@
 					<th style="font-size: 0.8vw; width: 7%;text-align: center">申请人</th>
 					<th style="font-size: 0.8vw; width: 7%;text-align: center">状态</th>
 					<th style="font-size: 0.8vw; width: 7%;text-align: center">变更类型</th>
-					<th style="font-size: 0.8vw; width: 7%;text-align: center">变更原因</th>
+					<th style="font-size: 0.8vw; width: 17%;text-align: center">变更原因</th>
 					<th style="font-size: 0.8vw; width: 7%;text-align: center">评审类型</th>
 					<th style="font-size: 0.8vw; width: 7%;text-align: center">当前处理人</th>
 					<th style="font-size: 0.8vw; width: 7%;text-align: center">变更批准</th>
@@ -539,9 +551,17 @@
 	<script type="text/javascript">
 		//var urls = "http://123.249.26.42:8084/xybrInterFace/";
 		var urls = "http://localhost/";
+		var jsonProjectList = '';
+		var jsonKeyQueList = '';
+		var jsonProjectProcessList = '';
 		var jsonEcList = '';
+		var jsonPcList = '';
 		var jsonProcessList = '';
-		window.onload = function (){
+		var projectCode = '';
+		var year = '';
+		queryProjectListAjax();
+		initHtml();
+		function initHtml (){
 			document.querySelectorAll('.stage').forEach(function(element) {
 				element.style.width = nowSize(60) + 'px';
 				element.style.height = nowSize(60) + 'px';
@@ -567,51 +587,56 @@
 			document.querySelectorAll('.tabel-title').forEach(function(element) {
 				element.style.fontSize = nowSize(16) + 'px';
 			});
-			// let budget = echarts.init(document.getElementById("budget"));
-			// createBudgeExp(budget,'');
-			let cost = echarts.init(document.getElementById("cost"));
-			createCost(cost,'');
-			let projectDefect = echarts.init(document.getElementById("projectDefect"));
-			createProjectDefect(projectDefect,'');
-			let risk = echarts.init(document.getElementById("risk"));
-			createRisk(risk,'');
-			// let costComp = echarts.init(document.getElementById("costComp"));
-			// createCostComp(costComp,'');
-			let questionCloseLoop = echarts.init(document.getElementById("questionCloseLoop"));
-			createQuestionCloseLoop(questionCloseLoop,'');
-			let source = echarts.init(document.getElementById("source"));
-			createSource(source,'');
-			let projectBudget = echarts.init(document.getElementById("projectBudget"));
-			createProjectBudget(projectBudget,'');
-			queryData();
-			fillProjectPlanData();
+			initEcharts();
+			queryDataAjax();
+			queryProjectProcessAjax();
+			queryKeyQuestiojnDataAjax();
 		}
 		window.addEventListener('resize', function() {
-			location.reload()
+			initHtml()
 		});
-		function fillProjectPlanData(){
-			document.getElementById('process01').innerText = "100%";
-			document.getElementById('process02').innerText = "100%";
-			document.getElementById('process03').innerText = "100%";
-			document.getElementById('process04').innerText = "100%";
-			document.getElementById('process05').innerText = "100%";
-			document.getElementById('process06').innerText = "100%";
-			document.getElementById('process07').innerText = "80%";
-			document.getElementById('process08').innerText = "90%";
-			document.getElementById('process09').innerText = "";
-			document.getElementById('process10').innerText = "";
+		function queryProjectListAjax(){
+			$.ajax({
+				type: "GET",
+				url: urls + "/report/project/getProjectList",
+				contentType: "application/json;charset=utf-8",
+				data: {
+
+				},
+				dateType: "json",
+				success: function (data) {
+					jsonProjectList = data.projectList;
+					var projectElement = document.getElementById("selectProject");
+					for(var i=0; i<jsonProjectList.length; i++){
+						var option = document.createElement("option");
+						option.text = jsonProjectList[i].projectName;
+						option.value = jsonProjectList[i].projectCode;
+						projectElement.add(option);
+					}
+					projectElement.selectedIndex = 0;
+					var selectOption = document.getElementById("selectProject");
+					var index = selectOption.selectedIndex;
+					projectName = selectOption.options[index].text;
+					projectCode = selectOption.options[index].value;
+					document.getElementById('projectNameTitle').innerText = projectName;
+				},
+				error: function (data) {
+					alert("失败");
+				}
+			});
 		}
-		function queryData(){
+		function queryDataAjax(){
 			$.ajax({
 				type: "GET",
 				url: urls + "/report/project/getEcLedger",
 				contentType: "application/json;charset=utf-8",
 				data: {
-					"projectCode": ""
+					"projectCode": projectCode
 				},
 				dateType: "json",
 				success: function (data) {
 					jsonEcList = data.ecList;
+					jsonPcList = data.pclist;
 					fillDataTable();
 				},
 				error: function (data) {
@@ -619,46 +644,262 @@
 				}
 			});
 		}
+		function queryProjectProcessAjax(){
+			$.ajax({
+				type: "GET",
+				url: urls + "/report/project/getProjectPlan",
+				contentType: "application/json;charset=utf-8",
+				data: {
+					"projectCode": projectCode
+				},
+				dateType: "json",
+				success: function (data) {
+					jsonProcessList = data.projectPlanList;
+					if(data.cost != null){
+						document.getElementById('chaECost').innerText = data.cost.chaECost;
+						document.getElementById('costRate').innerText = data.cost.costRate + '%';
+					}
+					fillProjectPlanData();
+				},
+				error: function (data) {
+					alert("失败");
+				}
+			});
+		}
+		function queryKeyQuestiojnDataAjax(){
+			$.ajax({
+				type: "GET",
+				url: urls + "/report/project/getProjectKeyQuestion",
+				contentType: "application/json;charset=utf-8",
+				data: {
+					"projectCode": projectCode
+				},
+				dateType: "json",
+				success: function (data) {
+					jsonKeyQueList = data.ProjectKeyQuestion;
+					jsonProjectProcessList = data.projectProcessList;
+					fillDataKeyQuestionData();
+				},
+				error: function (data) {
+					alert("失败");
+				}
+			});
+		}
+		function fillProjectPlanData(){
+			if(jsonProcessList.length > 0){
+				document.getElementById('process01Name').innerText = jsonProcessList[0].processName;
+				document.getElementById('process02Name').innerText = jsonProcessList[1].processName;
+				document.getElementById('process03Name').innerText = jsonProcessList[2].processName;
+				document.getElementById('process04Name').innerText = jsonProcessList[3].processName;
+				document.getElementById('process05Name').innerText = jsonProcessList[4].processName;
+				document.getElementById('process06Name').innerText = jsonProcessList[5].processName;
+				document.getElementById('process07Name').innerText = jsonProcessList[6].processName;
+				document.getElementById('process08Name').innerText = jsonProcessList[7].processName;+
+				document.getElementById('process09Name').innerText = jsonProcessList[8].processName;
+				document.getElementById('process10Name').innerText = jsonProcessList[9].processName;
+				document.getElementById('process01Value').innerText = jsonProcessList[0].processValue + '%';
+				document.getElementById('process02Value').innerText = jsonProcessList[1].processValue + '%';
+				document.getElementById('process03Value').innerText = jsonProcessList[2].processValue + '%';
+				document.getElementById('process04Value').innerText = jsonProcessList[3].processValue + '%';
+				document.getElementById('process05Value').innerText = jsonProcessList[4].processValue + '%';
+				document.getElementById('process06Value').innerText = jsonProcessList[5].processValue + '%';
+				document.getElementById('process07Value').innerText = jsonProcessList[6].processValue + '%';
+				document.getElementById('process08Value').innerText = jsonProcessList[7].processValue + '%';
+				document.getElementById('process09Value').innerText = jsonProcessList[8].processValue + '%';
+				document.getElementById('process10Value').innerText = jsonProcessList[9].processValue + '%';
+				if(jsonProcessList[0].processValue === 100){
+					document.querySelector('.process-color-01').style.color = '#37a2da';
+					document.querySelector('.process-bg-01').style.backgroundColor = '#37a2da';
+				}else if(jsonProcessList[0].processValue > 0){
+					document.querySelector('.process-color-01').style.color = '#ff9f7f';
+					document.querySelector('.process-bg-01').style.backgroundColor = '#ff9f7f';
+				}else{
+					document.querySelector('.process-color-01').style.color = '#9ea6b9';
+					document.querySelector('.process-bg-01').style.backgroundColor = '#9ea6b9';
+				}
+
+				if(jsonProcessList[1].processValue === 100){
+					document.querySelector('.process-color-02').style.color = '#37a2da';
+					document.querySelector('.process-bg-02').style.backgroundColor = '#37a2da';
+				}else if(jsonProcessList[1].processValue > 0){
+					document.querySelector('.process-color-02').style.color = '#ff9f7f';
+					document.querySelector('.process-bg-02').style.backgroundColor = '#ff9f7f';
+				}else{
+					document.querySelector('.process-color-02').style.color = '#9ea6b9';
+					document.querySelector('.process-bg-02').style.backgroundColor = '#9ea6b9';
+				}
+
+				if(jsonProcessList[2].processValue === 100){
+					document.querySelector('.process-color-03').style.color = '#37a2da';
+					document.querySelector('.process-bg-03').style.backgroundColor = '#37a2da';
+				}else if(jsonProcessList[2].processValue > 0){
+					document.querySelector('.process-color-03').style.color = '#ff9f7f';
+					document.querySelector('.process-bg-03').style.backgroundColor = '#ff9f7f';
+				}else{
+					document.querySelector('.process-color-03').style.color = '#9ea6b9';
+					document.querySelector('.process-bg-03').style.backgroundColor = '#9ea6b9';
+				}
+
+				if(jsonProcessList[3].processValue === 100){
+					document.querySelector('.process-color-04').style.color = '#37a2da';
+					document.querySelector('.process-bg-04').style.backgroundColor = '#37a2da';
+				}else if(jsonProcessList[3].processValue > 0){
+					document.querySelector('.process-color-04').style.color = '#ff9f7f';
+					document.querySelector('.process-bg-04').style.backgroundColor = '#ff9f7f';
+				}else{
+					document.querySelector('.process-color-04').style.color = '#9ea6b9';
+					document.querySelector('.process-bg-04').style.backgroundColor = '#9ea6b9';
+				}
+
+				if(jsonProcessList[4].processValue === 100){
+					document.querySelector('.process-color-05').style.color = '#37a2da';
+					document.querySelector('.process-bg-05').style.backgroundColor = '#37a2da';
+				}else if(jsonProcessList[4].processValue > 0){
+					document.querySelector('.process-color-05').style.color = '#ff9f7f';
+					document.querySelector('.process-bg-05').style.backgroundColor = '#ff9f7f';
+				}else{
+					document.querySelector('.process-color-05').style.color = '#9ea6b9';
+					document.querySelector('.process-bg-05').style.backgroundColor = '#9ea6b9';
+				}
+
+				if(jsonProcessList[5].processValue === 100){
+					document.querySelector('.process-color-06').style.color = '#37a2da';
+					document.querySelector('.process-bg-06').style.backgroundColor = '#37a2da';
+				}else if(jsonProcessList[5].processValue > 0){
+					document.querySelector('.process-color-06').style.color = '#ff9f7f';
+					document.querySelector('.process-bg-06').style.backgroundColor = '#ff9f7f';
+				}else{
+					document.querySelector('.process-color-06').style.color = '#9ea6b9';
+					document.querySelector('.process-bg-06').style.backgroundColor = '#9ea6b9';
+				}
+
+				if(jsonProcessList[6].processValue === 100){
+					document.querySelector('.process-color-01').style.color = '#37a2da';
+					document.querySelector('.process-bg-07').style.backgroundColor = '#37a2da';
+				}else if(jsonProcessList[6].processValue > 0){
+					document.querySelector('.process-color-07').style.color = '#ff9f7f';
+					document.querySelector('.process-bg-07').style.backgroundColor = '#ff9f7f';
+				}else{
+					document.querySelector('.process-color-07').style.color = '#9ea6b9';
+					document.querySelector('.process-bg-07').style.backgroundColor = '#9ea6b9';
+				}
+
+				if(jsonProcessList[7].processValue === 100){
+					document.querySelector('.process-color-08').style.color = '#37a2da';
+					document.querySelector('.process-bg-08').style.backgroundColor = '#37a2da';
+				}else if(jsonProcessList[7].processValue > 0){
+					document.querySelector('.process-color-08').style.color = '#ff9f7f';
+					document.querySelector('.process-bg-08').style.backgroundColor = '#ff9f7f';
+				}else{
+					document.querySelector('.process-color-08').style.color = '#9ea6b9';
+					document.querySelector('.process-bg-08').style.backgroundColor = '#9ea6b9';
+				}
+
+				if(jsonProcessList[8].processValue === 100){
+					document.querySelector('.process-color-09').style.color = '#37a2da';
+					document.querySelector('.process-bg-09').style.backgroundColor = '#37a2da';
+				}else if(jsonProcessList[8].processValue > 0){
+					document.querySelector('.process-color-09').style.color = '#ff9f7f';
+					document.querySelector('.process-bg-09').style.backgroundColor = '#ff9f7f';
+				}else{
+					document.querySelector('.process-color-09').style.color = '#9ea6b9';
+					document.querySelector('.process-bg-09').style.backgroundColor = '#9ea6b9';
+				}
+
+				if(jsonProcessList[9].processValue === 100){
+					document.querySelector('.process-color-10').style.color = '#37a2da';
+					document.querySelector('.process-bg-10').style.backgroundColor = '#37a2da';
+				}else if(jsonProcessList[9].processValue > 0){
+					document.querySelector('.process-color-10').style.color = '#ff9f7f';
+					document.querySelector('.process-bg-10').style.backgroundColor = '#ff9f7f';
+				}else{
+					document.querySelector('.process-color-10').style.color = '#9ea6b9';
+					document.querySelector('.process-bg-10').style.backgroundColor = '#9ea6b9';
+				}
+			}
+		}
 		function fillDataTable() {
-			let ECChangeStr = '';
-			let processStr = '';
-			let keyQuestion = '';
+			let ecChangeStr = '';
+			let pcStr = '';
 			for (let n = 0; n < jsonEcList.length; n++) {
-				processStr +=
-						'<tr style="height: 24px;"><td style="font-size: 1vw; font-family: cursive;width: 100%;font-weight: 400;text-align: left">' +
-						'1、项目编码项目编码项目编码项目编码项目编码项目编码项目编码项目编码项目编码项目编码项目编码项目编码项目编码项目编码项目编码项目编码项目编码项目' +
-						'</td></tr>';
-				keyQuestion +=
-						'<tr style="height: 24px;"><td style="font-size: 1vw; font-family: cursive;width: 100%;font-weight: 400;text-align: left">' +
-						'1、项目编码项目编码项目编码项目编码项目编码项目编码项目编码项目编码项目编码项目编码项目编码项目编码项目编码项目编码项目编码项目编码项目编码项目' +
-						'</td></tr>';
-				ECChangeStr +=
+				ecChangeStr +=
 						'<tr style="height: 24px;"><td style="font-size: 0.8vw; width: 5%;font-weight: 400;text-align: center">' +
-						n +
+						(n + 1) +
 						'</td><td style="font-size: 0.8vw; width: 14%;font-weight: 400;text-align: center">' +
 						jsonEcList[n].ecNo +
-						// '</td><td style="font-size: 0.8vw; width: 7%;font-weight: 400;text-align: center">' +
-						// jsonEcList[n].appDate +
 						'</td><td style="font-size: 0.8vw; width: 13%;font-weight: 400;text-align: center">' +
 						jsonEcList[n].approver +
 						'</td><td style="font-size: 0.8vw; width: 15%;font-weight: 400;text-align: center">' +
 						jsonEcList[n].content +
 						'</td><td style="font-size: 0.8vw; width: 13%;font-weight: 400;text-align: center">' +
-						'马继召' +
+						jsonEcList[n].auditorNames +
 						'</td><td style="font-size: 0.8vw; width: 10%;font-weight: 400;text-align: center">' +
-						'结束' +
+						jsonEcList[n].stateLabel +
 						'</td><td style="font-size: 0.8vw; width: 15%;font-weight: 400;text-align: center">' +
 						jsonEcList[n].effectiveness +
 						'</td><td style="font-size: 0.8vw; width: 15%;font-weight: 400;text-align: center">' +
 						jsonEcList[n].cutInDate +
 						'</td></tr>';
 			}
-			$('.scrollContent-03').append(keyQuestion);
-			$('.scrollContent-03').append(keyQuestion);
-			$('.scrollContent-02').append(processStr);
-			$('.scrollContent-02').append(processStr);
-			$('.scrollContent-01').append(ECChangeStr);
-			$('.scrollContent-01').append(ECChangeStr);
+			for (let n = 0; n < jsonPcList.length; n++) {
+				pcStr +=
+						'<tr style="height: 24px;"><td style="font-size: 0.8vw; width: 5%;font-weight: 400;text-align: center">' +
+						(n + 1) +
+						'</td><td style="font-size: 0.8vw; width: 7%;font-weight: 400;text-align: center">' +
+						jsonPcList[n].approver +
+						'</td><td style="font-size: 0.8vw; width: 7%;font-weight: 400;text-align: center">' +
+						jsonPcList[n].stateLabel +
+						'</td><td style="font-size: 0.8vw; width: 7%;font-weight: 400;text-align: center">' +
+						jsonPcList[n].changeType +
+						'</td><td style="font-size: 0.8vw; width: 17%;font-weight: 400;text-align: center">' +
+						jsonPcList[n].changeReason +
+						'</td><td style="font-size: 0.8vw; width: 7%;font-weight: 400;text-align: center">' +
+						jsonPcList[n].approveType +
+						'</td><td style="font-size: 0.8vw; width: 7%;font-weight: 400;text-align: center">' +
+						jsonPcList[n].auditorNames +
+						'</td><td style="font-size: 0.8vw; width: 7%;font-weight: 400;text-align: center">' +
+						jsonPcList[n].changeApprove +
+						'</td></tr>';
+			}
+			$('.scrollContent-01').append(ecChangeStr);
+			$('.scrollContent-01').append(ecChangeStr);
+			$('.scrollContent-04').append(pcStr);
+			$('.scrollContent-04').append(pcStr);
+		}
+		function fillDataKeyQuestionData() {
+			let keyQuestionStr = "";
+			let projectProcessStr = "";
+			for (let n = 0; n < jsonKeyQueList.length; n++) {
+				keyQuestionStr +=
+						'<tr style="height: 24px;"><td style="font-size: 1vw; width: 100%;font-weight: 400;text-align: left">' +
+						(n+1) + '、' + jsonKeyQueList[n].keyQustion + '<br/>'
+						'</td></tr>';
+			}
+			for (let n = 0; n < jsonProjectProcessList.length; n++) {
+				projectProcessStr +=
+						'<tr style="height: 24px;"><td style="font-size: 1vw; width: 100%;font-weight: 400;text-align: left">' +
+						jsonProjectProcessList[n].projectProcess + '<br/>'
+				'</td></tr>';
+			}
+			$('.scrollContent-02').append(projectProcessStr);
+			$('.scrollContent-03').append(keyQuestionStr);
+		}
+		function initEcharts(){
+			let cost = echarts.init(document.getElementById("cost"));
+			createCost(cost,projectCode);
+			let projectDefect = echarts.init(document.getElementById("projectDefect"));
+			createProjectDefect(projectDefect,projectCode);
+			let risk = echarts.init(document.getElementById("risk"));
+			createRisk(risk,projectCode);
+			// let costComp = echarts.init(document.getElementById("costComp"));
+			// createCostComp(costComp,'');
+			let questionCloseLoop = echarts.init(document.getElementById("questionCloseLoop"));
+			createQuestionCloseLoop(questionCloseLoop,projectCode);
+			let source = echarts.init(document.getElementById("source"));
+			year = document.getElementById("selectYear").value;
+			createSource(source,projectCode,year);
+			// let projectBudget = echarts.init(document.getElementById("projectBudget"));
+			// createProjectBudget(projectBudget,projectCode);
 		}
 		function nowSize(size){
 			let nowClientWidth = size*(document.documentElement.clientWidth/1698);
@@ -666,6 +907,8 @@
 		}
 		var table01 = document.getElementsByClassName('scroll-tab-01').item(0);
 		var scrollContent01= document.getElementsByClassName('scroll-box-01').item(0);
+		var table04 = document.getElementsByClassName('scroll-tab-04').item(0);
+		var scrollContent04= document.getElementsByClassName('scroll-box-04').item(0);
 		roll(50);
 		//滚动函数
 		function roll(t) {
@@ -678,6 +921,13 @@
 			table01.onmouseout = function () {
 				timer = setInterval(rollStart, t);
 			};
+			table04.onmouseover = function () {
+				clearInterval(timer);
+			};
+			// 鼠标移出table后继续滚动
+			table04.onmouseout = function () {
+				timer = setInterval(rollStart, t);
+			};
 		}
 		// 开始滚动函数
 		function rollStart() {
@@ -687,7 +937,28 @@
 			} else {
 				scrollContent01.scrollTop++;
 			}
+			if (scrollContent04.scrollTop >= scrollContent04.scrollHeight / 2) {
+				//注此处高度相当于为俩个tbody高度 需除2
+				scrollContent04.scrollTop = 0;
+			} else {
+				scrollContent04.scrollTop++;
+			}
 		}
+		$(document).ready(function (){
+			$("#selectProject").change(function (){
+				var selectOption = document.getElementById("selectProject");
+				var index = selectOption.selectedIndex;
+				projectName = selectOption.options[index].text;
+				projectCode = selectOption.options[index].value;
+				document.getElementById('projectNameTitle').innerText = projectName;
+				initHtml();
+			});
+			$("#selectYear").change(function (){
+				let source = echarts.init(document.getElementById("source"));
+				year = document.getElementById("selectYear").value;
+				createSource(source,projectCode,year);
+			});
+		})
 	</script>
 </body>  
 </html>

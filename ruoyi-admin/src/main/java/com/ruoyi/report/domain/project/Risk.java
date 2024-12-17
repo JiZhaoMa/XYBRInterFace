@@ -4,6 +4,15 @@ public class Risk {
     private String riskType;
     private int riskNum;
     private String projectCode;
+    private int riskMaxNum;
+
+    public int getRiskMaxNum() {
+        return riskMaxNum;
+    }
+
+    public void setRiskMaxNum(int riskMaxNum) {
+        this.riskMaxNum = riskMaxNum;
+    }
 
     public String getProjectCode() {
         return projectCode;

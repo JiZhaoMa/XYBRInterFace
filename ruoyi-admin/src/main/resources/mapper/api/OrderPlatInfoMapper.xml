@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+		PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.api.mapper.OrderPlatInfoMapper">
+
+	<resultMap type="com.ruoyi.api.domian.OrderPlatInfo" id="OrderPlatInfoResult">
+		<result property="platName" column="plat_name" />
+		<result property="appKey" column="app_key" />
+		<result property="appSecret" column="app_secret" />
+		<result property="tokenTime" column="token_time" />
+		<result property="status" column="status" />
+		<result property="createTime" column="create_time" />
+	</resultMap>
+
+	<sql id="selectOrderPlatInfoVo">
+		select plat_name, app_key, app_secret, token_time, status, create_time
+		from plat_info
+	</sql>
+
+	<select id="selectOrderPlatInfoList" parameterType="com.ruoyi.api.domian.OrderPlatInfo" resultMap="OrderPlatInfoResult">
+		<include refid="selectOrderPlatInfoVo"/>
+		<where>
+			<if test="platName != null and platName != ''"> and plat_name like concat('%', #{platName}, '%')</if>
+			<if test="tokenTime != null"> and token_time = #{tokenTime}</if>
+			<if test="status != null"> and status = #{status}</if>
+			<if test="createByName != null and createByName != ''"> and create_by_name like concat('%', #{createByName}, '%')</if>
+			<if test="updateByName != null and updateByName != ''"> and update_by_name like concat('%', #{updateByName}, '%')</if>
+		</where>
+	</select>
+
+	<select id="selectOrderPlatInfoById" parameterType="java.lang.Long" resultMap="OrderPlatInfoResult">
+		<include refid="selectOrderPlatInfoVo"/>
+		where id = #{id}
+	</select>
+	<select id="selectOrderPlatInfoByAppKey" resultType="String" resultMap="OrderPlatInfoResult">
+		<include refid="selectOrderPlatInfoVo"/>
+		where app_key = #{appKey}
+	</select>
+
+	<insert id="insertOrderPlatInfo" parameterType="com.ruoyi.api.domian.OrderPlatInfo" useGeneratedKeys="true" keyProperty="id">
+		insert into plat_info
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="platName != null">plat_name,</if>
+			<if test="appKey != null">app_key,</if>
+			<if test="appSecret != null">app_secret,</if>
+			<if test="tokenTime != null">token_time,</if>
+			<if test="status != null">status,</if>
+			<if test="createBy != null">create_by,</if>
+			<if test="createByName != null">create_by_name,</if>
+			create_time,
+			<if test="updateBy != null">update_by,</if>
+			<if test="updateByName != null">update_by_name,</if>
+			<if test="updateTime != null">update_time,</if>
+			<if test="remark != null">remark,</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="platName != null">#{platName},</if>
+			<if test="appKey != null">#{appKey},</if>
+			<if test="appSecret != null">#{appSecret},</if>
+			<if test="tokenTime != null">#{tokenTime},</if>
+			<if test="status != null">#{status},</if>
+			<if test="createBy != null">#{createBy},</if>
+			<if test="createByName != null">#{createByName},</if>
+			<if test="createTime != null">#{createTime},</if>
+			<if test="createTime == null">sysdate(),</if>
+			<if test="updateBy != null">#{updateBy},</if>
+			<if test="updateByName != null">#{updateByName},</if>
+			<if test="updateTime != null">#{updateTime},</if>
+			<if test="remark != null">#{remark},</if>
+		</trim>
+	</insert>
+
+	<update id="updateOrderPlatInfo" parameterType="com.ruoyi.api.domian.OrderPlatInfo">
+		update plat_info
+		<trim prefix="SET" suffixOverrides=",">
+			<if test="platName != null">plat_name = #{platName},</if>
+			<if test="appKey != null">app_key = #{appKey},</if>
+			<if test="appSecret != null">app_secret = #{appSecret},</if>
+			<if test="tokenTime != null">token_time = #{tokenTime},</if>
+			<if test="status != null">status = #{status},</if>
+			<if test="createBy != null">create_by = #{createBy},</if>
+			<if test="createByName != null">create_by_name = #{createByName},</if>
+			<if test="createTime != null">create_time = #{createTime},</if>
+			<if test="updateBy != null">update_by = #{updateBy},</if>
+			<if test="updateByName != null">update_by_name = #{updateByName},</if>
+			<if test="updateTime != null">update_time = #{updateTime},</if>
+			<if test="updateTime == null">update_time = sysdate(),</if>
+			<if test="remark != null">remark = #{remark},</if>
+		</trim>
+		where id = #{id}
+	</update>
+
+	<delete id="deleteOrderPlatInfoById" parameterType="java.lang.Long">
+		delete from plat_info where id = #{id} limit 1
+	</delete>
+
+	<delete id="deleteOrderPlatInfoByIds" parameterType="java.lang.String">
+		delete from plat_info where id in
+		<foreach item="id" collection="array" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</delete>
+</mapper>

@@ -14,7 +14,7 @@ public interface BPMService {
     public List<User> getUserList();
     public int insertFixedFiled(List<FixedFiled> list);
     public int insertSupplier(List<Supplier> list);
-    public JSONObject getPOLine(List<String> list);
+    public JSONObject getPOLine(List<String> list,List<String> idsList,String PurDeptCode,String PurOperCode);
     public List<ArriveQty> getCaiGouDetail();
     public int updateArriveQty(ArriveQty arriveQty);
 }

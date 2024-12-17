@@ -15,10 +15,10 @@ public interface BPMMapper {
     public int insertSupplier(List<Supplier> list);
     public int deleteFixedFiled();
     public int deleteSupplier();
-    public List<POLine> getPOLine(List<String> list);
-    public List<String> getProject(List<String> list);
-    public List<String> getSupplier(List<String> list);
-    public List<String> getCaiGouType(List<String> list);
+    public List<POLine> getPOLine(@Param("list") List<String> list,@Param("idsList") List<String> idsList);
+    public List<String> getProject(@Param("list") List<String> list,@Param("idsList") List<String> idsList);
+    public List<String> getSupplier(@Param("list") List<String> list,@Param("idsList") List<String> idsList);
+    public List<String> getCaiGouType(@Param("list") List<String> list,@Param("idsList") List<String> idsList);
     public int updateCaiGouDetail(@Param("pOLineList") List<POLine> pOLineList,@Param("codeList") List<String> codeList,@Param("orderCode") String orderCode,@Param("supplier") String supplier);
     public List<ArriveQty> getCaiGouDetail();
     public int updateArriveQty(ArriveQty arriveQty);

@@ -4,7 +4,7 @@ public class SourceInve {
     private String year;
     private String month;
     private String sourceType;
-    private String inveNum;
+    private float inveNum;
     private String projectCode;
 
     public String getProjectCode() {
@@ -39,11 +39,11 @@ public class SourceInve {
         this.sourceType = sourceType;
     }
 
-    public String getInveNum() {
+    public float getInveNum() {
         return inveNum;
     }
 
-    public void setInveNum(String inveNum) {
+    public void setInveNum(float inveNum) {
         this.inveNum = inveNum;
     }
 }

@@ -151,6 +151,10 @@ TianBao:
   password: 4b3db8dd1afde4b985b3830c18600bd4
 
 
+#雪花算法
+snowflake:
+  data-center-id: 1
+  worker-id: 1
 
 
 
