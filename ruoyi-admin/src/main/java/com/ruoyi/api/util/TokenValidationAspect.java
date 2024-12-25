@@ -5,7 +5,6 @@ import com.ruoyi.api.domian.*;
 import com.ruoyi.api.mapper.OrderPlatInfoMapper;
 import com.ruoyi.api.service.PlatCacheService;
 import com.ruoyi.common.core.domain.AjaxResult;
-import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.aspectj.lang.JoinPoint;
@@ -22,10 +21,7 @@ import org.springframework.util.ObjectUtils;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 import javax.servlet.http.HttpServletRequest;
-import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 
 
 /**
@@ -60,7 +56,11 @@ public class TokenValidationAspect {
         String requestMethod = request.getMethod();
         String requestPath = request.getRequestURI();
         // 调用 tokenValidator 进行校验
-        return validateToken(joinPoint,requestPath,requestMethod);
+        try{
+            return validateToken(joinPoint,requestPath,requestMethod);
+        }catch (Exception e){
+            return AjaxResult.error(e.toString(),null);
+        }
     }
 
     @AfterReturning(pointcut = "@annotation(com.ruoyi.api.util.TokenValidation)", returning = "result")
@@ -83,35 +83,24 @@ public class TokenValidationAspect {
         OrderPlatInfo platInfo = (OrderPlatInfo) map.get("platInfo");
         String appKey = platInfo.getAppKey();
         String appSecret = platInfo.getAppSecret();
+        TokenCacheVo cacheVo = new TokenCacheVo();
         long timestamp = (long) map.get("timestamp");
-//        OrderPlatInfo platInfo = platInfoMapper.selectOrderPlatInfoByAppKey(appKey);
         if (ObjectUtils.isEmpty(platInfo)){
             return AjaxResult.error("当前appKey对应的平台信息不存在");
         }
-        TokenCacheVo cacheVo = platCacheService.getPlatCacheFromRedisOrDb(CacheConstants.API_ACCSEE_KEY + appKey,platInfo);
+        try {
+            cacheVo = platCacheService.getPlatCacheFromRedisOrDb(CacheConstants.API_ACCSEE_KEY + appKey,platInfo);
+        }catch (Exception e){
+            return AjaxResult.error("token已过期，请重新获取token！");
+        }
         logger.info("【从缓存或数据库获取到的平台缓存信息为】：{}", JSON.toJSONString(cacheVo));
         //① 平台未接入  ②平台原来接入但现在已停用
         OrderPlatInfo contThirdPlat = cacheVo.getOrderPlatInfo();
         if(ObjectUtils.isEmpty(contThirdPlat) || STATUS != contThirdPlat.getStatus()){
             return AjaxResult.error("未接入【星源平台】或已停止授权");
         }
-        //③请求接口未授权或已停用
-        List<OrderInterInfo> list = cacheVo.getOrderInterInfos();
-        Optional<OrderInterInfo> result = list.stream()
-                .filter(obj->obj.getUrl().equals(requestPath))
-                .findFirst();
-        logger.info("【当前接口信息为】：{}",JSON.toJSONString(result));
-        if(result.isPresent()){
-            //④接口请求方式不运行
-            OrderInterInfo thisInterface = result.get();
-            if(!method.equals(thisInterface.getTypeName())){
-                return AjaxResult.error("请求方式错误");
-            }
-        }else {
-            return AjaxResult.error("接口未授权或已停用");
-        }
         //token已过期
-        long nowTimeStamp = System.currentTimeMillis();
+        long nowTimeStamp = System.currentTimeMillis()/1000;
         if(!platCacheService.checkToken(timestamp,nowTimeStamp,platInfo.getTokenTime())){
             return AjaxResult.error("TOKEN已过期");
         }
@@ -119,7 +108,7 @@ public class TokenValidationAspect {
         String newToken = Jwts.builder()
                 .setHeaderParam("type","JWT")
                 .setSubject("token")
-                .claim("appKey",appKey)
+                .claim("appKey",CacheConstants.API_ACCSEE_KEY + appKey)
                 .claim("appSecret",appSecret)
                 .claim("timestamp",timestamp)
                 .signWith(SignatureAlgorithm.HS512, WbdjConstants.SECRET_KEY).compact();

@@ -13,12 +13,13 @@ import java.util.List;
  */
 @Data
 public class TokenCacheVo {
-
     /** 平台信息 **/
     private OrderPlatInfo orderPlatInfo;
     /** 授权接口列表信息 **/
     private List<OrderInterInfo> orderInterInfos;
     /** 存入緩存時間 **/
     private Date createTime;
+    private String platName;
+    private int tokenTime;
 
 }

@@ -150,6 +150,10 @@ TianBao:
   username: xingyuan
   password: 4b3db8dd1afde4b985b3830c18600bd4
 
+#供应链数据管理员
+mail:
+  toUser: majizhao@xypower.com
+
 
 #雪花算法
 snowflake:

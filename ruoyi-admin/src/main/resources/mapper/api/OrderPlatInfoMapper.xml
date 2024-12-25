@@ -35,7 +35,7 @@
 	</select>
 	<select id="selectOrderPlatInfoByAppKey" resultType="String" resultMap="OrderPlatInfoResult">
 		<include refid="selectOrderPlatInfoVo"/>
-		where app_key = #{appKey}
+		where app_key = #{appKey} AND STATUS = 2
 	</select>
 
 	<insert id="insertOrderPlatInfo" parameterType="com.ruoyi.api.domian.OrderPlatInfo" useGeneratedKeys="true" keyProperty="id">

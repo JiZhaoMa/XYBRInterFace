@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+		PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.api.mapper.ApiU9CMapper">
+
+	<resultMap type="com.ruoyi.api.domian.Material" id="MaterialResult">
+		<result property="ReciveDate" column="ReciveDate" />
+		<result property="ItemCode" column="ItemCode" />
+		<result property="Suppier" column="Suppier" />
+		<result property="ReciveNum" column="ReciveNum" />
+		<result property="DocNo" column="DocNo" />
+		<result property="DocLineNo" column="DocLineNo" />
+		<result property="ReqQtyTU" column="ReqQtyTU" />
+		<result property="RcvQtyCU" column="RcvQtyCU" />
+		<result property="BusinessDate" column="BusinessDate" />
+		<result property="Fact" column="Fact" />
+	</resultMap>
+	<select id="getMaterial" resultMap="MaterialResult">
+		SELECT
+			b.DocNo,
+			c.ItemInfo_ItemCode AS ItemCode,
+			c.DocLineNo,
+			c.ReqQtyTU,
+			b.BusinessDate,
+			(SELECT ISNULL(SUM(t.RcvQtyCU),0)  FROM [dbo].[PM_RcvLine] t WHERE
+			c.ItemInfo_ItemCode = t.ItemInfo_ItemCode
+																		   AND c.DocLineNo = t.SrcDoc_SrcDocLineNo
+																		   AND B.DocNo = t.SrcDoc_SrcDocNo
+			) AS RcvQtyCU
+		FROM [dbo].[CBO_Supplier_Trl] a, [dbo].[PM_PurchaseOrder] b,[dbo].[PM_POLine] c
+		WHERE a.ID = b.Supplier_Supplier
+		  AND b.ID = c.PurchaseOrder
+		  AND c.Status = 2
+		<if test="Suppier != null and Suppier !=''"> AND a.NAME = #{Suppier} </if>
+		<if test="ItemCode != null and ItemCode !=''"> AND c.ItemInfo_ItemCode = #{ItemCode} </if>
+		<if test="ReciveNum != null and ReciveNum !='' and ReciveNum != 0"> AND c.ReqQtyTU = #{ReciveNum} </if>
+		ORDER BY b.BusinessDate ASC
+	</select>
+</mapper>

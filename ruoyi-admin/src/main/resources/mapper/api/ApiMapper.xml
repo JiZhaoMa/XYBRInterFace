@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+		PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.api.mapper.ApiMapper">
+
+	<resultMap type="com.ruoyi.api.domian.RecivmentLog" id="RecivmentLogResult">
+		<result property="ItemCode" column="ItemCode" />
+		<result property="Suppier" column="Suppier" />
+		<result property="ReciveDate" column="ReciveDate" />
+		<result property="ReciveNum" column="ReciveNum" />
+		<result property="ActRecivmentNum" column="ActRecivmentNum" />
+		<result property="PONo" column="PONo" />
+		<result property="POLineNo" column="POLineNo" />
+		<result property="Result" column="Result" />
+		<result property="Fact" column="Fact" />
+	</resultMap>
+	<insert id="insertRecivmentLog">
+		INSERT INTO t_recivmentlog(ItemCode,Suppier,ReciveDate,ReciveNum,ActRecivmentNum,PONo,POLineNo,Result,Fact)
+		VALUES (#{ItemCode},#{Suppier},#{ReciveDate},#{ReciveNum},#{ActRecivmentNum},#{PONo},#{POLineNo},#{Result},#{Fact})
+	</insert>
+</mapper>

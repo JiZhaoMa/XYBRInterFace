@@ -319,6 +319,66 @@ public class ProjectController extends BaseController {
         ProjectPlan pp = new ProjectPlan();
         pp.setProjectCode(projectCode);
         List<ProjectPlan> projectPlanList = projectService.getProjectPlan(pp);
+        if(projectPlanList.size() == 0){
+            for(int i=0; i<10; i++){
+                ProjectPlan p = new ProjectPlan();
+                projectPlanList.add(p);
+            }
+        }
+        if(projectPlanList.size() == 1){
+            for(int i=1; i<10; i++){
+                ProjectPlan p = new ProjectPlan();
+                projectPlanList.add(p);
+            }
+        }
+        if(projectPlanList.size() == 2){
+            for(int i=2; i<10; i++){
+                ProjectPlan p = new ProjectPlan();
+                projectPlanList.add(p);
+            }
+        }
+        if(projectPlanList.size() == 3){
+            for(int i=3; i<10; i++){
+                ProjectPlan p = new ProjectPlan();
+                projectPlanList.add(p);
+            }
+        }
+        if(projectPlanList.size() == 4){
+            for(int i=4; i<10; i++){
+                ProjectPlan p = new ProjectPlan();
+                projectPlanList.add(p);
+            }
+        }
+        if(projectPlanList.size() == 5){
+            for(int i=5; i<10; i++){
+                ProjectPlan p = new ProjectPlan();
+                projectPlanList.add(p);
+            }
+        }
+        if(projectPlanList.size() == 6){
+            for(int i=6; i<10; i++){
+                ProjectPlan p = new ProjectPlan();
+                projectPlanList.add(p);
+            }
+        }
+        if(projectPlanList.size() == 7){
+            for(int i=7; i<10; i++){
+                ProjectPlan p = new ProjectPlan();
+                projectPlanList.add(p);
+            }
+        }
+        if(projectPlanList.size() == 8){
+            for(int i=0; i<10; i++){
+                ProjectPlan p = new ProjectPlan();
+                projectPlanList.add(p);
+            }
+        }
+        if(projectPlanList.size() == 9){
+            for(int i=9; i<10; i++){
+                ProjectPlan p = new ProjectPlan();
+                projectPlanList.add(p);
+            }
+        }
         jsonObject.put("projectPlanList",projectPlanList);
         Cost cost = new Cost();
         cost.setProjectCode(projectCode);

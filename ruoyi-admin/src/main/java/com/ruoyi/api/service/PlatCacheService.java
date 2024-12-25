@@ -1,10 +1,9 @@
 package com.ruoyi.api.service;
 
 import cn.hutool.core.util.ObjectUtil;
-import com.ruoyi.api.domian.OrderInterInfo;
-import com.ruoyi.api.domian.OrderPlatInfo;
-import com.ruoyi.api.domian.TokenCacheVo;
-import com.ruoyi.api.domian.WbdjConstants;
+import com.alibaba.fastjson2.JSON;
+import com.alibaba.fastjson2.JSONObject;
+import com.ruoyi.api.domian.*;
 import com.ruoyi.api.util.RedisCache;
 import com.ruoyi.common.utils.DateUtils;
 import com.ruoyi.common.utils.StringUtils;
@@ -71,7 +70,9 @@ public class PlatCacheService {
      * @return
      */
     public TokenCacheVo getPlatCacheFromRedisOrDb(String appKey,OrderPlatInfo platInfo){
-        TokenCacheVo tokenCacheVoCache =  redisCache.getCacheObject(appKey);
+        TokenCacheVo tokenCacheVoCache = new TokenCacheVo();
+        JSONObject jsonObject =  redisCache.getCacheObject(appKey);
+        tokenCacheVoCache = JSON.parseObject(jsonObject.toJSONString(),TokenCacheVo.class);
         //当缓存中为空的时候，从数据查询组装相关信息放入缓存
         if(ObjectUtil.isEmpty(tokenCacheVoCache)){
             tokenCacheVoCache = firstCachePlatInfo(appKey,platInfo);
@@ -161,15 +162,12 @@ public class PlatCacheService {
                 .parseClaimsJws(token)
                 .getBody();
         String appKey = claims.get("appKey", String.class);
-        String apptimestampKey = claims.get("timestamp", String.class);
-        OrderPlatInfo orderPlatInfo = platInfoService.selectOrderPlatInfoByAppKey(appKey);
-        if(ObjectUtil.isEmpty(orderPlatInfo)){
-            throw new ServiceException("当前平台信息不存在");
-        }
+        long timestamp = claims.get("timestamp", Integer.class);
+        OrderPlatInfo orderPlatInfo = platInfoService.selectOrderPlatInfoByAppKey(appKey.replace(CacheConstants.API_ACCSEE_KEY, ""));
         Map<String,Object> hashMap = new HashMap<>();
         hashMap.put("token",token);
         hashMap.put("appKey",appKey);
-        hashMap.put("apptimestampKey",apptimestampKey);
+        hashMap.put("timestamp",timestamp);
         hashMap.put("platInfo",orderPlatInfo);
         return hashMap;
     }

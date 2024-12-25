@@ -120,7 +120,7 @@
 			border-radius: 10px 10px 10px 10px;
 		}
 		.title{
-			width: 30%;
+			width: 45%;
 			height: 10%;
 			background-color: #FFFFFF;
 			color: #0663A2;
@@ -434,7 +434,7 @@
 	<div class="project-row-second">
 		<div class="left">
 			<div class="title">
-				<span>关键问题</span>
+				<span>风险支持和关键问题</span>
 			</div>
 			<div class="content">
 				<div class="scroll-box-03">
@@ -446,15 +446,15 @@
 		</div>
 		<div class="center">
 			<div class="title">
-				<span>成本信息</span>
+				<span>成本信息(:/元)</span>
 			</div>
 			<div class="echarts-bar" id="cost"></div>
 			<div style="left: 55%;position: relative;height: 100%;width: 45%;top: -100%;">
-				<div style="width: 100%;height: 30%;font-size: large;font-weight: bold;color: #37a2da;">
+				<div style="width: 100%;height: 30%;font-weight: bold;color: #37a2da;">
 					<span>达成率：</span>
 					<span id="costRate"></span>
 				</div>
-				<div style="width: 100%;height: 30%;font-size: large;font-weight: bold;color: #37a2da;">
+				<div style="width: 100%;height: 30%;font-weight: bold;color: #37a2da;">
 					<span>差额：</span>
 					<span id="chaECost"></span>
 				</div>
@@ -694,7 +694,7 @@
 				document.getElementById('process05Name').innerText = jsonProcessList[4].processName;
 				document.getElementById('process06Name').innerText = jsonProcessList[5].processName;
 				document.getElementById('process07Name').innerText = jsonProcessList[6].processName;
-				document.getElementById('process08Name').innerText = jsonProcessList[7].processName;+
+				document.getElementById('process08Name').innerText = jsonProcessList[7].processName;
 				document.getElementById('process09Name').innerText = jsonProcessList[8].processName;
 				document.getElementById('process10Name').innerText = jsonProcessList[9].processName;
 				document.getElementById('process01Value').innerText = jsonProcessList[0].processValue + '%';
@@ -819,6 +819,16 @@
 			}
 		}
 		function fillDataTable() {
+			var table01 = document.getElementById('content01');
+			var table04 = document.getElementById('content04');
+			if(table01.getElementsByTagName('tbody').length > 0){
+				var tbody01 = table01.getElementsByTagName('tbody')[0];
+				tbody01.innerHTML = '';
+			}
+			if(table04.getElementsByTagName('tbody').length > 0){
+				var tbody04 = table04.getElementsByTagName('tbody')[0];
+				tbody04.innerHTML = '';
+			}
 			let ecChangeStr = '';
 			let pcStr = '';
 			for (let n = 0; n < jsonEcList.length; n++) {
@@ -867,12 +877,22 @@
 			$('.scrollContent-04').append(pcStr);
 		}
 		function fillDataKeyQuestionData() {
+			var table02 = document.getElementById('content02');
+			var table03 = document.getElementById('content03');
+			if(table02.getElementsByTagName('tbody').length > 0){
+				var tbody02 = table02.getElementsByTagName('tbody')[0];
+				tbody02.innerHTML = '';
+			}
+			if(table03.getElementsByTagName('tbody').length > 0){
+				var tbody03 = table03.getElementsByTagName('tbody')[0];
+				tbody03.innerHTML = '';
+			}
 			let keyQuestionStr = "";
 			let projectProcessStr = "";
 			for (let n = 0; n < jsonKeyQueList.length; n++) {
 				keyQuestionStr +=
 						'<tr style="height: 24px;"><td style="font-size: 1vw; width: 100%;font-weight: 400;text-align: left">' +
-						(n+1) + '、' + jsonKeyQueList[n].keyQustion + '<br/>'
+						jsonKeyQueList[n].keyQustion + '<br/>'
 						'</td></tr>';
 			}
 			for (let n = 0; n < jsonProjectProcessList.length; n++) {

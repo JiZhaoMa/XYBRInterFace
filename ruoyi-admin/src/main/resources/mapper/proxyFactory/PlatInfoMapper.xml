@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.proxyFactory.mapper.PlatInfoMapper">
+    
+    <resultMap type="PlatInfo" id="PlatInfoResult">
+        <result property="platName"    column="plat_name"    />
+        <result property="appKey"    column="app_key"    />
+        <result property="appSecret"    column="app_secret"    />
+        <result property="tokenTime"    column="token_time"    />
+        <result property="status"    column="status"    />
+        <result property="createTime"    column="create_time"    />
+    </resultMap>
+
+    <sql id="selectPlatInfoVo">
+        select plat_name, app_key, app_secret, token_time, status, create_time from plat_info
+    </sql>
+
+    <select id="selectPlatInfoList" parameterType="PlatInfo" resultMap="PlatInfoResult">
+        <include refid="selectPlatInfoVo"/>
+        <where>  
+            <if test="platName != null  and platName != ''"> and plat_name like concat('%', #{platName}, '%')</if>
+            <if test="appKey != null  and appKey != ''"> and app_key = #{appKey}</if>
+            <if test="appSecret != null  and appSecret != ''"> and app_secret = #{appSecret}</if>
+            <if test="tokenTime != null "> and token_time = #{tokenTime}</if>
+            <if test="status != null "> and status = #{status}</if>
+        </where>
+    </select>
+    
+    <select id="selectPlatInfoById" parameterType="String" resultMap="PlatInfoResult">
+        <include refid="selectPlatInfoVo"/>
+        where plat_name = #{platName}
+    </select>
+        
+    <insert id="insertPlatInfo" parameterType="PlatInfo">
+        insert into plat_info
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="platName != null  and platName != ''">plat_name,</if>
+            <if test="appKey != null  and appKey != ''">app_key,</if>
+            <if test="appSecret != null  and appSecret != ''">app_secret,</if>
+            <if test="tokenTime != null ">token_time,</if>
+            <if test="status != null ">status,</if>
+            <if test="createTime != null ">create_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="platName != null  and platName != ''">#{platName},</if>
+            <if test="appKey != null  and appKey != ''">#{appKey},</if>
+            <if test="appSecret != null  and appSecret != ''">#{appSecret},</if>
+            <if test="tokenTime != null ">#{tokenTime},</if>
+            <if test="status != null ">#{status},</if>
+            <if test="createTime != null ">#{createTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updatePlatInfo" parameterType="PlatInfo">
+        update plat_info
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="appKey != null  and appKey != ''">app_key = #{appKey},</if>
+            <if test="appSecret != null  and appSecret != ''">app_secret = #{appSecret},</if>
+            <if test="tokenTime != null ">token_time = #{tokenTime},</if>
+            <if test="status != null ">status = #{status},</if>
+            <if test="createTime != null ">create_time = #{createTime},</if>
+        </trim>
+        where plat_name = #{platName}
+    </update>
+
+    <delete id="deletePlatInfoById" parameterType="String">
+        delete from plat_info where plat_name = #{platName}
+    </delete>
+
+    <delete id="deletePlatInfoByIds" parameterType="String">
+        delete from plat_info where plat_name in 
+        <foreach item="platName" collection="array" open="(" separator="," close=")">
+            #{platName}
+        </foreach>
+    </delete>
+    
+</mapper>

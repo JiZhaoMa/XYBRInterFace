@@ -173,17 +173,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </select>
     <select id="getProjectKeyQuestion" resultMap="ProjectKeyQuestionResult">
         SELECT
-            REPLACE(a.`ITEM_关键技术问题攻克`, '\n', CONCAT('&lt;','br/','&gt;')) AS keyQustion,
-            a.`ITEM_是否需要公司资源投入` AS isComSource
-        FROM rdm.`tlk_关键技术问题攻克` a, rdm.`tlk_项目成本目标及预算` b
-        WHERE a.PARENT = b.ID
-          AND b.`ITEM_项目编码` = #{projectCode}
-          AND a.`ITEM_已解决` != '是'
-        ORDER BY a.CREATED DESC
+            CONCAT('需要的支持和风险事项：',
+                   (SELECT REPLACE(c.`ITEM_需要的支持事项和风险`, '\n', CONCAT('&lt;','br/','&gt;')) FROM rdm.`tlk_项目详细进展` c WHERE c.PARENT = a.ID ORDER BY c.CREATED DESC LIMIT 1),
+					CONCAT('&lt;','br/','&gt;'),
+					'关键技术问题是：',
+					(SELECT REPLACE(b.`ITEM_关键技术问题攻克`, '\n', CONCAT('&lt;','br/','&gt;')) FROM rdm.`tlk_关键技术问题攻克` b WHERE b.PARENT = a.ID AND b.`ITEM_已解决` != '是' ORDER BY b.CREATED DESC LIMIT 1)) AS keyQustion
+        FROM rdm.`tlk_项目成本目标及预算` a
+        WHERE a.`ITEM_项目编码` = #{projectCode}
     </select>
     <select id="getProjectProcess" resultMap="ProjectProcessResult">
         SELECT
-            CONCAT('项目处于：',a.`ITEM_当前关键节点`,'阶段',IF(a.`ITEM_延期情况` = '是', CONCAT(', 延期',ROUND(a.`ITEM_延期天数`,0),'天'), ''),CONCAT('&lt;','br/','&gt;'),REPLACE(a.`ITEM_项目进展`, '\n', CONCAT('&lt;','br/','&gt;'))) AS projectProcess
+            CONCAT('项目当前关键节点是：',a.`ITEM_当前关键节点`,' ',DATE_FORMAT(a.`ITEM_时间节点`,'%Y-%m-%d'),CONCAT('&lt;','br/','&gt;'),'计划完成率是：90%',IF(a.`ITEM_延期情况` = '是', CONCAT(CONCAT('&lt;','br/','&gt;'),'延期',ROUND(a.`ITEM_延期天数`,0),'天'), ''),IF(a.`ITEM_延期情况` = '是', CONCAT(CONCAT('&lt;','br/','&gt;'),'赶工措施：',a.`ITEM_赶工计划`), ''),CONCAT('&lt;','br/','&gt;'),'项目当前进展及关键任务是: ',REPLACE(a.`ITEM_项目进展`, '\n', CONCAT('&lt;','br/','&gt;'))) AS projectProcess
         FROM rdm.`tlk_项目详细进展` a, rdm.`tlk_项目成本目标及预算` b
         WHERE a.PARENT = b.ID
           AND b.`ITEM_项目编码` = #{projectCode}
@@ -243,7 +243,31 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
                  rdm.`tlk_测试任务申请电子流` c
              WHERE a.ITEM_问题父子关系 = b.ID
                AND b.ITEM_父子关系 = c.ID
-               AND c.`ITEM_项目编码` = #{projectCode}
+               AND c.`ITEM_项目编码` = #{projectCode} AND LEFT(c.`ITEM_测试阶段`,2) = '初样'
+             GROUP BY LEFT(c.`ITEM_测试阶段`,2)
+             UNION ALL
+             SELECT
+                 LEFT(c.`ITEM_测试阶段`,2) AS projectStage,
+                 count(1) AS questionNum,
+                 '测试问题' AS projectType
+             FROM rdm.`tlk_问题电子流` a,
+                 rdm.`tlk_测试任务子流程` b,
+                 rdm.`tlk_测试任务申请电子流` c
+             WHERE a.ITEM_问题父子关系 = b.ID
+               AND b.ITEM_父子关系 = c.ID
+               AND c.`ITEM_项目编码` = #{projectCode} AND LEFT(c.`ITEM_测试阶段`,2) = '正样'
+             GROUP BY LEFT(c.`ITEM_测试阶段`,2)
+             UNION ALL
+             SELECT
+                 LEFT(c.`ITEM_测试阶段`,2) AS projectStage,
+                 count(1) AS questionNum,
+                 '测试问题' AS projectType
+             FROM rdm.`tlk_问题电子流` a,
+                 rdm.`tlk_测试任务子流程` b,
+                 rdm.`tlk_测试任务申请电子流` c
+             WHERE a.ITEM_问题父子关系 = b.ID
+               AND b.ITEM_父子关系 = c.ID
+               AND c.`ITEM_项目编码` = #{projectCode}  AND LEFT(c.`ITEM_测试阶段`,2) = '中试'
              GROUP BY LEFT(c.`ITEM_测试阶段`,2)
              UNION ALL
 
@@ -252,9 +276,26 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
                  count(1) AS questionNum,
                  '试制问题' AS projectType
              FROM rdm.`tlk_样机加工问题主表`
-             WHERE `ITEM_项目编码` = #{projectCode}
+             WHERE `ITEM_项目编码` = #{projectCode}  AND LEFT(`ITEM_产品阶段`,2) = '初样'
              GROUP BY LEFT(`ITEM_产品阶段`,2)
+             UNION ALL
 
+             SELECT
+                 LEFT(`ITEM_产品阶段`,2) AS projectStage,
+                 count(1) AS questionNum,
+                 '试制问题' AS projectType
+             FROM rdm.`tlk_样机加工问题主表`
+             WHERE `ITEM_项目编码` = #{projectCode} AND LEFT(`ITEM_产品阶段`,2) = '正样'
+             GROUP BY LEFT(`ITEM_产品阶段`,2)
+             UNION ALL
+
+             SELECT
+                 LEFT(`ITEM_产品阶段`,2) AS projectStage,
+                 count(1) AS questionNum,
+                 '试制问题' AS projectType
+             FROM rdm.`tlk_样机加工问题主表`
+             WHERE `ITEM_项目编码` = #{projectCode} AND LEFT(`ITEM_产品阶段`,2) = '中试'
+             GROUP BY LEFT(`ITEM_产品阶段`,2)
              UNION ALL
 
              SELECT
@@ -262,8 +303,27 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
                  count(1) AS questionNum,
                  '自测问题' AS projectType
              FROM rdm.`tlk_自测问题`
-             WHERE `ITEM_项目编码` = #{projectCode}
-             GROUP BY LEFT(`ITEM_产品阶段`,2)) a ORDER BY projectStage
+             WHERE `ITEM_项目编码` = #{projectCode} AND LEFT(`ITEM_产品阶段`,2) = '初样'
+             GROUP BY LEFT(`ITEM_产品阶段`,2)
+             UNION ALL
+
+             SELECT
+                 LEFT(`ITEM_产品阶段`,2) AS projectStage,
+                 count(1) AS questionNum,
+                 '自测问题' AS projectType
+             FROM rdm.`tlk_自测问题`
+             WHERE `ITEM_项目编码` = #{projectCode} AND LEFT(`ITEM_产品阶段`,2) = '正样'
+             GROUP BY LEFT(`ITEM_产品阶段`,2)
+             UNION ALL
+
+             SELECT
+                 LEFT(`ITEM_产品阶段`,2) AS projectStage,
+                 count(1) AS questionNum,
+                 '自测问题' AS projectType
+             FROM rdm.`tlk_自测问题`
+             WHERE `ITEM_项目编码` = #{projectCode} AND LEFT(`ITEM_产品阶段`,2) = '中试'
+             GROUP BY LEFT(`ITEM_产品阶段`,2)
+            ) a
     </select>
     <select id="getQuestionCloseLoop" resultMap="QuestionCloseLoopResult">
         SELECT a.qurstionType AS projectState,count(1) AS questionNum, '测试问题' AS projectType FROM (SELECT
