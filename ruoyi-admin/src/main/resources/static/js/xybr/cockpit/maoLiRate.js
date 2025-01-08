@@ -1,4 +1,4 @@
-function createMaoLiRate(chart, monthList) {
+function createMaoLiRate(chart, monthStr) {
     let option = {
         backgroundColor: 'rgb(21,51,114, 0)',
         tooltip: {
@@ -139,7 +139,7 @@ function createMaoLiRate(chart, monthList) {
                 show: true,//控制滚动条显示隐藏
                 realtime: true, //拖动滚动条时是否动态的更新图表数据
                 height: 0, //滚动条高度
-                start: 0, //滚动条开始位置（共6等份）
+                start: this.startValue, //滚动条开始位置（共6等份）
                 end: this.endValue,//滚动条结束位置
                 top: '95%',
                 bottom: '4%',
@@ -156,7 +156,7 @@ function createMaoLiRate(chart, monthList) {
         url: urls + "/system/cockpit/getMaoLi",
         contentType: "application/json;charset=utf-8",
         data: {
-            "monthStr": monthList
+            "monthStr": monthStr
         },
         dateType: "json",
         success: function (data) {
@@ -164,6 +164,18 @@ function createMaoLiRate(chart, monthList) {
             option.series[0].data = data.list20kW;
             option.series[1].data = data.list30kW;
             option.series[2].data = data.list40kW;
+            var start = 0;
+            var end = 0;
+            if(option.xAxis[0].data.length > 4){
+                end = option.xAxis[0].data.length - 1;
+                start = option.xAxis[0].data.length - 4;
+                option.dataZoom[0].startValue = start;
+                option.dataZoom[0].endValue = end;
+            }else{
+                end = option.xAxis[0].data.length;
+            }
+            option.dataZoom[0].startValue = start;
+            option.dataZoom[0].endValue = end;
             chart.setOption(option,true);
         },
         error: function (data) {

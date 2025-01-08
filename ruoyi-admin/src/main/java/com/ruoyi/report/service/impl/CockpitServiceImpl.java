@@ -42,18 +42,18 @@ public class CockpitServiceImpl implements CockpitService {
     }
 
     @Override
-    public List<JiangBneMuBiao> getJiangBneMuBiao(List<String> monthList) {
-        return cockpitMapper.getJiangBneMuBiao(monthList);
+    public List<JiangBneMuBiao> getJiangBneMuBiao(String monthStr) {
+        return cockpitMapper.getJiangBneMuBiao(monthStr);
     }
 
     @Override
-    public List<AnShiJiaoFu> getAnShiJiaoFu(List<String> monthList) {
-        return cockpitMapper.getAnShiJiaoFu(monthList);
+    public List<AnShiJiaoFu> getAnShiJiaoFu(String monthStr) {
+        return cockpitMapper.getAnShiJiaoFu(monthStr);
     }
 
     @Override
-    public List<MaoLi> getMaoLi(List<String> monthList) {
-        return cockpitMapper.getMaoLi(monthList);
+    public List<MaoLi> getMaoLi(String monthStr) {
+        return cockpitMapper.getMaoLi(monthStr);
     }
 
     @Override
@@ -62,18 +62,18 @@ public class CockpitServiceImpl implements CockpitService {
     }
 
     @Override
-    public List<ChanPinZhiTongRate> getChanPinZhiTongRate(List<String> monthList) {
-        return cockpitMapper.getChanPinZhiTongRate(monthList);
+    public List<ChanPinZhiTongRate> getChanPinZhiTongRate(String monthStr) {
+        return cockpitMapper.getChanPinZhiTongRate(monthStr);
     }
 
     @Override
-    public List<ShiChangGuZhangRate> getShiChangGuZhangRate(List<String> monthList) {
-        return cockpitMapper.getShiChangGuZhangRate(monthList);
+    public List<ShiChangGuZhangRate> getShiChangGuZhangRate(String monthStr) {
+        return cockpitMapper.getShiChangGuZhangRate(monthStr);
     }
 
     @Override
-    public List<KaiXiangBuLiangRate> getKaiXiangBuLiangRate(List<String> monthList) {
-        return cockpitMapper.getKaiXiangBuLiangRate(monthList);
+    public List<KaiXiangBuLiangRate> getKaiXiangBuLiangRate(String monthStr) {
+        return cockpitMapper.getKaiXiangBuLiangRate(monthStr);
     }
 
     @Override

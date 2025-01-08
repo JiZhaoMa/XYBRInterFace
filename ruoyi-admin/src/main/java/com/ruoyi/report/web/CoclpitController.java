@@ -93,13 +93,8 @@ public class CoclpitController extends BaseController
     @ResponseBody
     public JSONObject getJiangBneMuBiao(String monthStr)
     {
-        List<String> monthList = new ArrayList<>();
-        String[] arrStr = monthStr.split(",");
-        for(String str : arrStr){
-            monthList.add(str);
-        }
         JSONObject jsonObject = new JSONObject();
-        List<JiangBneMuBiao> jiangBneMuBiaoData = cockpitService.getJiangBneMuBiao(monthList);
+        List<JiangBneMuBiao> jiangBneMuBiaoData = cockpitService.getJiangBneMuBiao(monthStr);
         List<String> monthLists = jiangBneMuBiaoData.stream().map(JiangBneMuBiao::getMonth).collect(Collectors.toList()).stream().distinct().collect(Collectors.toList());
         List<JiangBneMuBiao> valueList20kW = jiangBneMuBiaoData.stream().filter(item -> "20kW".equals(item.getProduct())).collect(Collectors.toList());
         List<String> list20kW = valueList20kW.stream().map(JiangBneMuBiao::getValue).collect(Collectors.toList());
@@ -117,13 +112,8 @@ public class CoclpitController extends BaseController
     @ResponseBody
     public JSONObject getAnShiJiaoFu(String monthStr)
     {
-        List<String> monthList = new ArrayList<>();
-        String[] arrStr = monthStr.split(",");
-        for(String str : arrStr){
-            monthList.add(str);
-        }
         JSONObject jsonObject = new JSONObject();
-        List<AnShiJiaoFu> anShiJiaoFuData = cockpitService.getAnShiJiaoFu(monthList);
+        List<AnShiJiaoFu> anShiJiaoFuData = cockpitService.getAnShiJiaoFu(monthStr);
         List<String> monthLists = anShiJiaoFuData.stream().map(AnShiJiaoFu::getMonth).collect(Collectors.toList()).stream().distinct().collect(Collectors.toList());
         List<AnShiJiaoFu> valueList20kW = anShiJiaoFuData.stream().filter(item -> "20kW".equals(item.getProduct())).collect(Collectors.toList());
         List<String> list20kW = valueList20kW.stream().map(AnShiJiaoFu::getValue).collect(Collectors.toList());
@@ -141,13 +131,8 @@ public class CoclpitController extends BaseController
     @ResponseBody
     public JSONObject getMaoLi(String monthStr)
     {
-        List<String> monthList = new ArrayList<>();
-        String[] arrStr = monthStr.split(",");
-        for(String str : arrStr){
-            monthList.add(str);
-        }
         JSONObject jsonObject = new JSONObject();
-        List<MaoLi> maoLiData = cockpitService.getMaoLi(monthList);
+        List<MaoLi> maoLiData = cockpitService.getMaoLi(monthStr);
         List<String> monthLists = maoLiData.stream().map(MaoLi::getMonth).collect(Collectors.toList()).stream().distinct().collect(Collectors.toList());
         List<MaoLi> valueList20kW = maoLiData.stream().filter(item -> "20kW".equals(item.getProduct())).collect(Collectors.toList());
         List<String> list20kW = valueList20kW.stream().map(MaoLi::getValue).collect(Collectors.toList());
@@ -187,13 +172,8 @@ public class CoclpitController extends BaseController
     @ResponseBody
     public JSONObject getChanPinZhiTongRate(String monthStr)
     {
-        List<String> monthList = new ArrayList<>();
-        String[] arrStr = monthStr.split(",");
-        for(String str : arrStr){
-            monthList.add(str);
-        }
         JSONObject jsonObject = new JSONObject();
-        List<ChanPinZhiTongRate> chanPinZhiTongRateData = cockpitService.getChanPinZhiTongRate(monthList);
+        List<ChanPinZhiTongRate> chanPinZhiTongRateData = cockpitService.getChanPinZhiTongRate(monthStr);
         List<String> monthLists = chanPinZhiTongRateData.stream().map(ChanPinZhiTongRate::getMonth).collect(Collectors.toList()).stream().distinct().collect(Collectors.toList());
         List<ChanPinZhiTongRate> valueList20kW = chanPinZhiTongRateData.stream().filter(item -> "20kW".equals(item.getProduct())).collect(Collectors.toList());
         List<String> list20kW = valueList20kW.stream().map(ChanPinZhiTongRate::getValue).collect(Collectors.toList());
@@ -211,13 +191,8 @@ public class CoclpitController extends BaseController
     @ResponseBody
     public JSONObject getShiChangGuZhangRate(String monthStr)
     {
-        List<String> monthList = new ArrayList<>();
-        String[] arrStr = monthStr.split(",");
-        for(String str : arrStr){
-            monthList.add(str);
-        }
         JSONObject jsonObject = new JSONObject();
-        List<ShiChangGuZhangRate> shiChangGuZhangRateData = cockpitService.getShiChangGuZhangRate(monthList);
+        List<ShiChangGuZhangRate> shiChangGuZhangRateData = cockpitService.getShiChangGuZhangRate(monthStr);
         List<String> monthLists = shiChangGuZhangRateData.stream().map(ShiChangGuZhangRate::getMonth).collect(Collectors.toList()).stream().distinct().collect(Collectors.toList());
         List<ShiChangGuZhangRate> valueListIn = shiChangGuZhangRateData.stream().filter(item -> "量产一年内".equals(item.getProduct())).collect(Collectors.toList());
         List<String> listIn = valueListIn.stream().map(ShiChangGuZhangRate::getValue).collect(Collectors.toList());
@@ -232,13 +207,8 @@ public class CoclpitController extends BaseController
     @ResponseBody
     public JSONObject getKaiXiangBuLiangRate(String monthStr)
     {
-        List<String> monthList = new ArrayList<>();
-        String[] arrStr = monthStr.split(",");
-        for(String str : arrStr){
-            monthList.add(str);
-        }
         JSONObject jsonObject = new JSONObject();
-        List<KaiXiangBuLiangRate> kaiXiangBuLiangRateData = cockpitService.getKaiXiangBuLiangRate(monthList);
+        List<KaiXiangBuLiangRate> kaiXiangBuLiangRateData = cockpitService.getKaiXiangBuLiangRate(monthStr);
         List<String> monthLists = kaiXiangBuLiangRateData.stream().map(KaiXiangBuLiangRate::getMonth).collect(Collectors.toList()).stream().distinct().collect(Collectors.toList());
         List<KaiXiangBuLiangRate> valueListIn = kaiXiangBuLiangRateData.stream().filter(item -> "量产一年内".equals(item.getProduct())).collect(Collectors.toList());
         List<String> listIn = valueListIn.stream().map(KaiXiangBuLiangRate::getValue).collect(Collectors.toList());

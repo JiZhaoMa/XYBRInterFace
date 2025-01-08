@@ -1,4 +1,4 @@
-function createShiChangGuZhangRate(line, monthList) {
+function createShiChangGuZhangRate(line, monthStr) {
     let option = {
         backgroundColor: 'rgb(21,51,114, 0)',
         tooltip: {
@@ -199,15 +199,23 @@ function createShiChangGuZhangRate(line, monthList) {
         url: urls + "/system/cockpit/getShiChangGuZhangRate",
         contentType: "application/json;charset=utf-8",
         data: {
-            "monthStr": monthList
+            "monthStr": monthStr
         },
         dateType: "json",
         success: function (data) {
             option.xAxis[0].data = data.monthLists;
             option.series[0].data = data.listIn;
             option.series[1].data = data.listOut;
-            var end = option.xAxis[0].data.length - 1;
-            var start = option.xAxis[0].data.length - 5;
+            var start = 0;
+            var end = 0;
+            if(option.xAxis[0].data.length > 5){
+                end = option.xAxis[0].data.length - 1;
+                start = option.xAxis[0].data.length - 5;
+                option.dataZoom[0].startValue = start;
+                option.dataZoom[0].endValue = end;
+            }else{
+                end = option.xAxis[0].data.length;
+            }
             option.dataZoom[0].startValue = start;
             option.dataZoom[0].endValue = end;
             line.setOption(option,true);

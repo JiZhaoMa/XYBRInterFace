@@ -14,19 +14,19 @@ public interface CockpitMapper {
 
     StockData getStockData(String monthStr);
 
-    List<JiangBneMuBiao> getJiangBneMuBiao(List<String> list);
+    List<JiangBneMuBiao> getJiangBneMuBiao(String monthStr);
 
-    List<AnShiJiaoFu> getAnShiJiaoFu(List<String> list);
+    List<AnShiJiaoFu> getAnShiJiaoFu(String monthStr);
 
-    List<MaoLi> getMaoLi(List<String> list);
+    List<MaoLi> getMaoLi(String monthStr);
 
     List<QIJianFeiYongRate> getQIJianFeiYongRate(CockpitData cockpitData);
 
-    List<ChanPinZhiTongRate> getChanPinZhiTongRate(List<String> list);
+    List<ChanPinZhiTongRate> getChanPinZhiTongRate(String monthStr);
 
-    List<ShiChangGuZhangRate> getShiChangGuZhangRate(List<String> list);
+    List<ShiChangGuZhangRate> getShiChangGuZhangRate(String monthStr);
 
-    List<KaiXiangBuLiangRate> getKaiXiangBuLiangRate(List<String> list);
+    List<KaiXiangBuLiangRate> getKaiXiangBuLiangRate(String monthStr);
 
     List<ChanPinQiDongRate> getChanPinQiDongRate(String monthStr);
     List<ZhuanLi> getZhuanLiList(String monthStr);

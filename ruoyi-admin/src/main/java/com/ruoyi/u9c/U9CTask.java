@@ -15,6 +15,7 @@ import com.ruoyi.u9c.service.*;
 import com.ruoyi.u9c.service.impl.ARBillServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.util.ObjectUtils;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -137,7 +138,9 @@ public class U9CTask {
         List<ArriveQty> list = bpmService.getCaiGouDetail();
         for(ArriveQty qty : list){
             ArriveQty arriveQty = u9CService.selectArriveQty(qty);
-            bpmService.updateArriveQty(arriveQty);
+            if(!ObjectUtils.isEmpty(arriveQty)){
+                bpmService.updateArriveQty(arriveQty);
+            }
         }
     }
 }

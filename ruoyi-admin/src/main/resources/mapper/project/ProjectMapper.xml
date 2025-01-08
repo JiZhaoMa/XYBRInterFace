@@ -332,7 +332,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
                 WHEN '问题已验证，未解决' THEN '未解决'
                 WHEN '不是问题，关闭' THEN '已解决'
                 WHEN '问题遗留，不需要跟踪' THEN '遗留不跟踪'
-                WHEN '问题已验证,关闭' THEN '已解决'
+                WHEN '问题已验证，关闭' THEN '已解决'
                 WHEN '问题已验证，遗留跟踪' THEN '遗留跟踪'
                 WHEN '会议评审，问题遗留' THEN '遗留跟踪'
                 else '未解决'

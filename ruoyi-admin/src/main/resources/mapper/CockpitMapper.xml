@@ -353,17 +353,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </select>
     <select id="getJiangBneMuBiao" parameterType="java.util.List" resultMap="JiangBneMuBiaoResult">
         SELECT RIGHT(DATE_FORMAT(`ITEM_月份`,'%Y%m'),2) AS month, `ITEM_达成率`, `ITEM_产品名称` FROM `tlk_降本目标达成率` WHERE
-        DATE_FORMAT(`ITEM_月份`,'%Y') = DATE_FORMAT(NOW(),'%Y')
+        DATE_FORMAT(`ITEM_月份`,'%Y') = LEFT(#{monthStr},4) AND DATE_FORMAT(`ITEM_月份`,'%Y%m') &lt;= #{monthStr}
         order by ITEM_月份
     </select>
     <select id="getAnShiJiaoFu" parameterType="java.util.List" resultMap="AnShiJiaoFuResult">
         SELECT RIGHT(DATE_FORMAT(`ITEM_月份`,'%Y%m'),2) AS month, `ITEM_交付率`, `ITEM_产品名称` FROM `tlk_按时交付率` WHERE
-        DATE_FORMAT(`ITEM_月份`,'%Y') = DATE_FORMAT(NOW(),'%Y')
+        DATE_FORMAT(`ITEM_月份`,'%Y') = LEFT(#{monthStr},4) AND DATE_FORMAT(`ITEM_月份`,'%Y%m') &lt;= #{monthStr}
         order by ITEM_月份
     </select>
     <select id="getMaoLi" parameterType="java.util.List" resultMap="MaoLiResult">
         SELECT RIGHT(DATE_FORMAT(`ITEM_月份`,'%Y%m'),2) AS month, `ITEM_毛利`, `ITEM_产品名称` FROM `tlk_毛利` WHERE
-        DATE_FORMAT(`ITEM_月份`,'%Y') = DATE_FORMAT(NOW(),'%Y')
+        DATE_FORMAT(`ITEM_月份`,'%Y') = LEFT(#{monthStr},4) AND DATE_FORMAT(`ITEM_月份`,'%Y%m') &lt;= #{monthStr}
         order by ITEM_月份
     </select>
     <select id="getQIJianFeiYongRate" parameterType="CockpitData" resultMap="QIJianFeiYongRateResult">
@@ -373,17 +373,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </select>
     <select id="getChanPinZhiTongRate" parameterType="java.util.List" resultMap="ChanPinZhiTongRateResult">
         SELECT RIGHT(DATE_FORMAT(`ITEM_月份`,'%Y%m'),2) AS month, `ITEM_直通率`, `ITEM_产品名称` FROM `tlk_产品直通率` WHERE
-        DATE_FORMAT(`ITEM_月份`,'%Y') =  DATE_FORMAT(NOW(),'%Y')
+        DATE_FORMAT(`ITEM_月份`,'%Y') = LEFT(#{monthStr},4) AND DATE_FORMAT(`ITEM_月份`,'%Y%m') &lt;= #{monthStr}
         order by ITEM_月份
     </select>
     <select id="getShiChangGuZhangRate" parameterType="java.util.List" resultMap="ShiChangGuZhangRateResult">
         SELECT RIGHT(DATE_FORMAT(`ITEM_月份`,'%Y%m'),2) AS month, `ITEM_故障率`, `ITEM_量产周期` FROM `tlk_市场故障率` WHERE
-        DATE_FORMAT(`ITEM_月份`,'%Y') = DATE_FORMAT(NOW(),'%Y')
+        DATE_FORMAT(`ITEM_月份`,'%Y') = LEFT(#{monthStr},4) AND DATE_FORMAT(`ITEM_月份`,'%Y%m') &lt;= #{monthStr}
         order by ITEM_月份
     </select>
     <select id="getKaiXiangBuLiangRate" parameterType="java.util.List" resultMap="KaiXiangBuLiangRateResult">
         SELECT RIGHT(DATE_FORMAT(`ITEM_月份`,'%Y%m'),2) AS month, `ITEM_开箱不良率`, `ITEM_量产周期` FROM `tlk_开箱不良率` WHERE
-        DATE_FORMAT(`ITEM_月份`,'%Y') = DATE_FORMAT(NOW(),'%Y')
+        DATE_FORMAT(`ITEM_月份`,'%Y') = LEFT(#{monthStr},4) AND DATE_FORMAT(`ITEM_月份`,'%Y%m') &lt;= #{monthStr}
         order by ITEM_月份
     </select>
     <select id="getChanPinQiDongRate" parameterType="String" resultMap="ChanPinQiDongRateResult">

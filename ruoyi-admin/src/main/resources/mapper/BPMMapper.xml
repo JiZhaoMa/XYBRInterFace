@@ -157,9 +157,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             `ITEM_厂家规格型号` AS lotCode
         FROM rdm.tlk_采购明细
         WHERE `ITEM_合同编码` IS NOT NULL
+          AND `ITEM_合同编码` != ''
           AND `ITEM_数量` > `ITEM_到货数量`
     </select>
     <update id="updateArriveQty">
-        update rdm.tlk_采购明细 set ITEM_到货数量 = #{activityQty} WHERE `ITEM_合同编码` = #{docNo} AND `ITEM_物料编码` = #{itemCode} AND `ITEM_厂家规格型号` = #{lotCode}
+        update rdm.tlk_采购明细 set ITEM_到货数量 = #{activityQty}, ITEM_到货时间 = NOW() WHERE `ITEM_合同编码` = #{docNo} AND `ITEM_物料编码` = #{itemCode} AND `ITEM_厂家规格型号` = #{lotCode}
     </update>
 </mapper>

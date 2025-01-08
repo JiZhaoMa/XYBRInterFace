@@ -107,7 +107,23 @@ function createQuestionCloseLoop(bar,projectCode) {
                     }])
                 }
             }
-        }]
+        }],
+        dataZoom : [
+            {
+                orient: 'horizontal',
+                show: true,//控制滚动条显示隐藏
+                realtime: true, //拖动滚动条时是否动态的更新图表数据
+                height: 0, //滚动条高度
+                start: this.startValue, //滚动条开始位置（共6等份）
+                end: this.endValue,//滚动条结束位置
+                bottom: '10%',
+                zoomLock: false, //指定是否锁定缩放比例。
+                startValue: 0, // 从头开始。
+                endValue: 2,// 一次性展示4个
+                showDetail: false, // 关闭滚动条提示
+                fillerColor: 'rgba(255, 255, 255,0.5)',
+            }
+        ]
     };
     $.ajax({
         type: "GET",

@@ -1,4 +1,4 @@
-function createJiaoFuRate(line, monthList) {
+function createJiaoFuRate(line, monthStr) {
     let xData = ['01', '02', '03', '04', '05', '06'];
     let legendData = ['20kW', '30kW', '40kW'];
     let Data20kW = [88, 89, 79, 80, 58, 99 ];
@@ -253,7 +253,7 @@ function createJiaoFuRate(line, monthList) {
         url: urls + "/system/cockpit/getAnShiJiaoFu",
         contentType: "application/json;charset=utf-8",
         data: {
-            "monthStr": monthList
+            "monthStr": monthStr
         },
         dateType: "json",
         success: function (data) {
@@ -261,8 +261,16 @@ function createJiaoFuRate(line, monthList) {
             option.series[0].data = data.list20kW;
             option.series[1].data = data.list30kW;
             option.series[2].data = data.list40kW;
-            var end = option.xAxis[0].data.length - 1;
-            var start = option.xAxis[0].data.length - 5;
+            var start = 0;
+            var end = 0;
+            if(option.xAxis[0].data.length > 5){
+                end = option.xAxis[0].data.length - 1;
+                start = option.xAxis[0].data.length - 5;
+                option.dataZoom[0].startValue = start;
+                option.dataZoom[0].endValue = end;
+            }else{
+                end = option.xAxis[0].data.length;
+            }
             option.dataZoom[0].startValue = start;
             option.dataZoom[0].endValue = end;
             line.setOption(option,true);
