@@ -36,7 +36,7 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
     @Override
-    public Cost getCost(Cost cost) {
+    public List<Cost> getCost(Cost cost) {
         return projectMapper.getCost(cost);
     }
 

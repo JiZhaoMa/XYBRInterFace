@@ -44,6 +44,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="projectCode"             column="projectCode"/>
         <result property="processName"             column="processName"/>
         <result property="processValue"             column="processValue"/>
+        <result property="planDateValue"             column="planDateValue"/>
     </resultMap>
     <resultMap type="ProjectProcess" id="ProjectProcessResult">
         <result property="projectName"             column="projectName"/>
@@ -82,16 +83,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="value10"             column="value10"/>
         <result property="value11"             column="value11"/>
         <result property="value12"             column="value12"/>
+        <result property="value13"             column="value13"/>
     </resultMap>
     <resultMap type="Cost" id="CostResult">
-        <result property="value01"             column="value01"/>
-        <result property="value02"             column="value02"/>
-        <result property="value03"             column="value03"/>
-        <result property="value04"             column="value04"/>
-        <result property="value05"             column="value05"/>
-        <result property="value06"             column="value06"/>
-        <result property="value07"             column="value07"/>
-        <result property="value08"             column="value08"/>
+        <result property="costText"            column="costText"/>
+        <result property="costValue"           column="costValue"/>
         <result property="chaECost"            column="chaECost"/>
         <result property="costRate"            column="costRate"/>
         <result property="projectCode"         column="projectCode"/>
@@ -132,7 +128,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         SELECT
             ITEM_项目编码 AS projectCode,
             ITEM_项目名称 AS projectName
-        FROM rdm.tlk_项目信息查询
+        FROM rdm.tlk_项目信息查询 WHERE ITEM_STATUS = 1
     </select>
     <select id="getRisk" resultMap="RiskResult">
         SELECT
@@ -165,11 +161,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <select id="getProjectPlan" resultMap="ProjectPlanResult">
         SELECT
             a.`ITEM_关键节点` AS processName,
-            a.`ITEM_任务完成度` AS processValue
+            a.`ITEM_任务完成度` AS processValue,
+            DATE_FORMAT(a.`ITEM_时间节点`,'%Y-%m-%d') AS planDateValue
         FROM rdm.`tlk_关键节点` a, rdm.`tlk_项目成本目标及预算` b
         WHERE a.PARENT = b.ID
           AND b.`ITEM_项目编码` = #{projectCode}
-        ORDER BY a.CREATED
+        ORDER BY a.`ITEM_时间节点`
     </select>
     <select id="getProjectKeyQuestion" resultMap="ProjectKeyQuestionResult">
         SELECT
@@ -192,18 +189,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </select>
     <select id="getProjectBudget" resultMap="ProjectBudgetResult">
         SELECT
-            SUM(a.ITEM_人力费用) AS value01,
-            SUM(a.ITEM_外购样机费用) AS value02,
-            SUM(a.ITEM_研发样机费) AS value03,
-            SUM(a.ITEM_设备购置费) AS value04,
-            SUM(a.ITEM_工装费) AS value05,
-            SUM(a.ITEM_模具费) AS value06,
-            SUM(a.ITEM_外出试验费) AS value07,
-            SUM(a.ITEM_认证服务费) AS value08,
-            SUM(a.ITEM_委外设计费) AS value09,
-            SUM(a.ITEM_差旅费) AS value10,
-            SUM(a.ITEM_其他) AS value11,
-            SUM(a.ITEM_合计) AS value12
+            SUM(a.ITEM_人力) AS value01,
+            SUM(a.ITEM_材料) AS value02,
+            SUM(a.ITEM_差旅) AS value03,
+            SUM(a.ITEM_外出实验) AS value04,
+            SUM(a.ITEM_模具) AS value05,
+            SUM(a.ITEM_认证) AS value06,
+            SUM(a.ITEM_工装治具) AS value07,
+            SUM(a.ITEM_委外设计) AS value08,
+            SUM(a.ITEM_快递运输) AS value09,
+            SUM(a.ITEM_低值易耗) AS value10,
+            SUM(a.ITEM_外协合作) AS value11,
+            SUM(a.ITEM_质量维护) AS value12,
+            SUM(a.ITEM_合计) AS value13
         FROM rdm.`tlk_项目预算` a, rdm.`tlk_项目成本目标及预算` b
         WHERE a.PARENT = b.ID
         AND a.`ITEM_费用类型` = #{type}
@@ -211,16 +209,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </select>
     <select id="getCost" resultMap="CostResult">
         SELECT
-            SUM(a.ITEM_结构件成本) AS costValue01,
-            SUM(a.ITEM_包材成本) AS costValue02,
-            SUM(a.ITEM_定制件成本) AS costValue03,
-            SUM(a.ITEM_标准电子件成本) AS costValue04,
-            SUM(a.ITEM_PCB成本) AS costValue05,
-            SUM(a.ITEM_工艺辅料成本) AS costValue06,
-            SUM(a.ITEM_加工成本) AS costValue07,
-            SUM(a.ITEM_其他成本) AS costValue08
-        FROM rdm.`tlk_产品成本` a, rdm.`tlk_项目成本目标及预算` b
+            c.ITEM_成本名称 AS costText,
+            c.ITEM_成本值 AS costValue
+        FROM rdm.`tlk_产品成本` a, rdm.`tlk_项目成本目标及预算` b,rdm.`tlk_成本详细信息` c
         WHERE a.PARENT = b.ID
+          AND a.ID = c.PARENT
           AND b.`ITEM_项目编码` = #{projectCode}
     </select>
     <select id="getCostRate" resultMap="CostResult">

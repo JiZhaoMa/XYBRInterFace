@@ -273,7 +273,8 @@
 <script type="text/javascript" th:src="@{/js/jquery.min.js}"></script>
 <script type="text/javascript">
 	//var urls = "http://123.249.26.42:8084/xybrInterFace/";
-	var urls = "http://localhost/";
+	var urls = "https://api.xybrpower.cn/xybrInterFace/";
+	//var urls = "http://localhost/";
 	window.onload = function (){
 		document.querySelectorAll('.title').forEach(function(element) {
 			element.style.fontSize = nowSize(16) + 'px';
@@ -368,18 +369,27 @@
 				var pList = data.personList;
 				var deptElement = document.getElementById("selectDept");
 				var personElement = document.getElementById("selectPerson");
+				while (deptElement.options.length > 1 && dept === ''){
+					deptElement.remove(1);
+				}
+				while (personElement.options.length > 1 && person === ''){
+					personElement.remove(1);
+				}
 				for(var i=0; i<dList.length; i++){
 					var option = document.createElement("option");
 					option.text = dList[i];
 					option.value = dList[i];
 					deptElement.add(option);
+					deptElement.se
 				}
+				deptElement.value = dept;
 				for(var i=0; i<pList.length; i++){
 					var option = document.createElement("option");
 					option.text = pList[i];
 					option.value = pList[i];
 					personElement.add(option);
 				}
+				personElement.value = person;
 				document.getElementById('countNum').innerText = data.countNum;
 				document.getElementById('cheAnNum').innerText = data.cheAnNum;
 				document.getElementById('xiaZhengNum').innerText = data.xiaZhengNum;

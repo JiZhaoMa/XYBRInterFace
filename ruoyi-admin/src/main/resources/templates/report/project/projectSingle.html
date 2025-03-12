@@ -19,13 +19,13 @@
             overflow-x: auto;  */
         }  
         .stage {  
-            width: 60px;  
-            height: 60px;  
+            width: 10%;
+            height: 100%;
             border-radius: 5px;  
             display: flex;  
             justify-content: center;  
             align-items: center;  
-            font-size: 16px;
+            font-size: 12px;
             margin: 0.5px;
             padding: 10px;  
             box-sizing: border-box;  
@@ -49,7 +49,18 @@
             stroke-width: 2;  
             stroke-linecap: round;  
             marker-end: url(#arrowhead);  
-        }  
+        }
+		.processDate {
+			position: absolute;
+			bottom: 0;
+			left: 0;
+			width: 100%;
+			height: 20px;
+			border-radius: 10px;
+			overflow: hidden;
+			color:#2196F3;
+			top: 5%;
+		}
 		.process {
 			position: absolute;
 			bottom: 0;
@@ -59,7 +70,7 @@
 			border-radius: 10px;
 			overflow: hidden;
 			color:#2196F3;
-			top: 110%;
+			top: 145%;
 		}
 		.project-title{
 			height: 5%;
@@ -79,7 +90,7 @@
 			font-weight: bold;
 		}
 		.project-plan{
-			height: 10%;
+			height: 8%;
 			width: 100%;
 			position: absolute;
 			display: flex;
@@ -91,7 +102,7 @@
 			height: 25%;
 			/*background-color: #00F7DE;*/
 			position: relative;
-			top: 13%;
+			top: 15%;
 			left: 5%;
 			display: flex;
 		}
@@ -100,16 +111,16 @@
 			height: 25%;
 			/*background-color: #e4b9b9;*/
 			position: relative;
-			top: 15%;
+			top: 17%;
 			left: 5%;
 			display: flex;
 		}
 		.project-row-third{
 			width: 92%;
-			height: 27%;
+			height: 25%;
 			/*background-color: #00BCD4;*/
 			position: relative;
-			top: 17%;
+			top: 19%;
 			left: 5%;
 			display: flex;
 		}
@@ -276,6 +287,56 @@
 			top: -2%;
 			position: relative;
 		}
+		.plan-date-01{
+			top: 110%;
+			position: absolute;
+			width: 140%
+		}
+		.plan-date-02{
+			top: 110%;
+			position: absolute;
+			width: 140%
+		}
+		.plan-date-03{
+			top: 110%;
+			position: absolute;
+			width: 140%
+		}
+		.plan-date-04{
+			top: 110%;
+			position: absolute;
+			width: 140%
+		}
+		.plan-date-05{
+			top: 110%;
+			position: absolute;
+			width: 140%
+		}
+		.plan-date-06{
+			top: 110%;
+			position: absolute;
+			width: 140%
+		}
+		.plan-date-07{
+			top: 110%;
+			position: absolute;
+			width: 140%
+		}
+		.plan-date-08{
+			top: 110%;
+			position: absolute;
+			width: 140%
+		}
+		.plan-date-09{
+			 top: 110%;
+			 position: absolute;
+			 width: 140%
+		 }
+		.plan-date-10{
+			top: 110%;
+			position: absolute;
+			width: 140%
+		}
     </style>  
 </head>  
 <body>
@@ -295,6 +356,9 @@
 				</div>
 				<div class="process process-color-01" id="process">
 					<span id="process01Value"></span>
+				</div>
+				<div class="plan-date-01">
+					<span id="planDate01Value"></span>
 				</div>
 			</div>  
 			<div class="connector">  
@@ -316,6 +380,9 @@
 				<div class="process process-color-02">
 					<span id="process02Value"></span>
 				</div>
+				<div class="plan-date-02">
+					<span id="planDate02Value"></span>
+				</div>
 			</div>	
 			<div class="connector"><svg><line x1="0" y1="12" x2="24" y2="12" /></svg></div>  
 			
@@ -325,6 +392,9 @@
 				</div>
 				<div class="process process-color-03">
 					<span id="process03Value"></span>
+				</div>
+				<div class="plan-date-03">
+					<span id="planDate03Value"></span>
 				</div>
 			</div>  
 			<div class="connector"><svg><line x1="0" y1="12" x2="24" y2="12" /></svg></div>
@@ -336,6 +406,9 @@
 				<div class="process process-color-04">
 					<span id="process04Value"></span>
 				</div>
+				<div class="plan-date-04">
+					<span id="planDate04Value"></span>
+				</div>
 			</div>  
 			<div class="connector"><svg><line x1="0" y1="12" x2="24" y2="12" /></svg></div>
 			
@@ -345,6 +418,9 @@
 				</div>
 				<div class="process process-color-05">
 					<span id="process05Value"></span>
+				</div>
+				<div class="plan-date-05">
+					<span id="planDate05Value"></span>
 				</div>
 			</div>  
 			<div class="connector"><svg><line x1="0" y1="12" x2="24" y2="12" /></svg></div> 
@@ -356,6 +432,9 @@
 				<div class="process process-color-06">
 					<span id="process06Value"></span>
 				</div>
+				<div class="plan-date-06">
+					<span id="planDate06Value"></span>
+				</div>
 			</div>  
 			<div class="connector"><svg><line x1="0" y1="12" x2="24" y2="12" /></svg></div> 
 			
@@ -365,6 +444,9 @@
 				</div>
 				<div class="process process-color-07">
 					<span id="process07Value"></span>
+				</div>
+				<div class="plan-date-07">
+					<span id="planDate07Value"></span>
 				</div>
 			</div>  
 			<div class="connector"><svg><line x1="0" y1="12" x2="24" y2="12" /></svg></div>  
@@ -376,6 +458,9 @@
 				<div class="process process-color-08">
 					<span id="process08Value"></span>
 				</div>
+				<div class="plan-date-08">
+					<span id="planDate08Value"></span>
+				</div>
 			</div>  
 			<div class="connector"><svg><line x1="0" y1="12" x2="24" y2="12" /></svg></div> 
 			
@@ -386,6 +471,9 @@
 				<div class="process process-color-09">
 					<span id="process09Value"></span>
 				</div>
+				<div class="plan-date-09">
+					<span id="planDate09Value"></span>
+				</div>
 			</div>  
 			<div class="connector"><svg><line x1="0" y1="12" x2="24" y2="12" /></svg></div> 
 			
@@ -395,6 +483,9 @@
 				</div>
 				<div class="process process-color-10">
 					<span id="process10Value"></span>
+				</div>
+				<div class="plan-date-10">
+					<span id="planDate10Value"></span>
 				</div>
 			</div> 
 		</div>
@@ -549,7 +640,7 @@
 	<script type="text/javascript" th:src="@{/js/xybr/project/projectBudget.js}"></script>
 	<script type="text/javascript" th:src="@{/js/jquery.min.js}"></script>
 	<script type="text/javascript">
-		//var urls = "http://123.249.26.42:8084/xybrInterFace/";
+		//var urls = "https://api.xybrpower.cn/xybrInterFace/";
 		var urls = "http://localhost/";
 		var jsonProjectList = '';
 		var jsonKeyQueList = '';
@@ -566,7 +657,7 @@
 				element.style.width = nowSize(60) + 'px';
 				element.style.height = nowSize(60) + 'px';
 				element.style.borderRadius = nowSize(5) + 'px';
-				element.style.fontSize = nowSize(16) + 'px';
+				element.style.fontSize = nowSize(12) + 'px';
 				element.style.margin = nowSize(0.5) + 'px';
 				element.style.padding = nowSize(10) + 'px';
 			});
@@ -707,113 +798,153 @@
 				document.getElementById('process08Value').innerText = jsonProcessList[7].processValue + '%';
 				document.getElementById('process09Value').innerText = jsonProcessList[8].processValue + '%';
 				document.getElementById('process10Value').innerText = jsonProcessList[9].processValue + '%';
+				document.getElementById('planDate01Value').innerText = jsonProcessList[0].planDateValue;
+				document.getElementById('planDate02Value').innerText = jsonProcessList[1].planDateValue;
+				document.getElementById('planDate03Value').innerText = jsonProcessList[2].planDateValue;
+				document.getElementById('planDate04Value').innerText = jsonProcessList[3].planDateValue;
+				document.getElementById('planDate05Value').innerText = jsonProcessList[4].planDateValue;
+				document.getElementById('planDate06Value').innerText = jsonProcessList[5].planDateValue;
+				document.getElementById('planDate07Value').innerText = jsonProcessList[6].planDateValue;
+				document.getElementById('planDate08Value').innerText = jsonProcessList[7].planDateValue;
+				document.getElementById('planDate09Value').innerText = jsonProcessList[8].planDateValue;
+				document.getElementById('planDate10Value').innerText = jsonProcessList[9].planDateValue;
 				if(jsonProcessList[0].processValue === 100){
 					document.querySelector('.process-color-01').style.color = '#37a2da';
+					document.querySelector('.plan-date-01').style.color = '#37a2da';
 					document.querySelector('.process-bg-01').style.backgroundColor = '#37a2da';
 				}else if(jsonProcessList[0].processValue > 0){
 					document.querySelector('.process-color-01').style.color = '#ff9f7f';
+					document.querySelector('.plan-date-01').style.color = '#ff9f7f';
 					document.querySelector('.process-bg-01').style.backgroundColor = '#ff9f7f';
 				}else{
 					document.querySelector('.process-color-01').style.color = '#9ea6b9';
+					document.querySelector('.plan-date-01').style.color = '#9ea6b9';
 					document.querySelector('.process-bg-01').style.backgroundColor = '#9ea6b9';
 				}
 
 				if(jsonProcessList[1].processValue === 100){
 					document.querySelector('.process-color-02').style.color = '#37a2da';
+					document.querySelector('.plan-date-02').style.color = '#37a2da';
 					document.querySelector('.process-bg-02').style.backgroundColor = '#37a2da';
 				}else if(jsonProcessList[1].processValue > 0){
 					document.querySelector('.process-color-02').style.color = '#ff9f7f';
+					document.querySelector('.plan-date-02').style.color = '#ff9f7f';
 					document.querySelector('.process-bg-02').style.backgroundColor = '#ff9f7f';
 				}else{
 					document.querySelector('.process-color-02').style.color = '#9ea6b9';
+					document.querySelector('.plan-date-02').style.color = '#9ea6b9';
 					document.querySelector('.process-bg-02').style.backgroundColor = '#9ea6b9';
 				}
 
 				if(jsonProcessList[2].processValue === 100){
 					document.querySelector('.process-color-03').style.color = '#37a2da';
+					document.querySelector('.plan-date-03').style.color = '#37a2da';
 					document.querySelector('.process-bg-03').style.backgroundColor = '#37a2da';
 				}else if(jsonProcessList[2].processValue > 0){
 					document.querySelector('.process-color-03').style.color = '#ff9f7f';
+					document.querySelector('.plan-date-03').style.color = '#ff9f7f';
 					document.querySelector('.process-bg-03').style.backgroundColor = '#ff9f7f';
 				}else{
 					document.querySelector('.process-color-03').style.color = '#9ea6b9';
+					document.querySelector('.plan-date-03').style.color = '#9ea6b9';
 					document.querySelector('.process-bg-03').style.backgroundColor = '#9ea6b9';
 				}
 
 				if(jsonProcessList[3].processValue === 100){
 					document.querySelector('.process-color-04').style.color = '#37a2da';
+					document.querySelector('.plan-date-04').style.color = '#37a2da';
 					document.querySelector('.process-bg-04').style.backgroundColor = '#37a2da';
 				}else if(jsonProcessList[3].processValue > 0){
 					document.querySelector('.process-color-04').style.color = '#ff9f7f';
+					document.querySelector('.plan-date-04').style.color = '#ff9f7f';
 					document.querySelector('.process-bg-04').style.backgroundColor = '#ff9f7f';
 				}else{
 					document.querySelector('.process-color-04').style.color = '#9ea6b9';
+					document.querySelector('.plan-date-04').style.color = '#9ea6b9';
 					document.querySelector('.process-bg-04').style.backgroundColor = '#9ea6b9';
 				}
 
 				if(jsonProcessList[4].processValue === 100){
 					document.querySelector('.process-color-05').style.color = '#37a2da';
+					document.querySelector('.plan-date-05').style.color = '#37a2da';
 					document.querySelector('.process-bg-05').style.backgroundColor = '#37a2da';
 				}else if(jsonProcessList[4].processValue > 0){
 					document.querySelector('.process-color-05').style.color = '#ff9f7f';
+					document.querySelector('.plan-date-05').style.color = '#ff9f7f';
 					document.querySelector('.process-bg-05').style.backgroundColor = '#ff9f7f';
 				}else{
 					document.querySelector('.process-color-05').style.color = '#9ea6b9';
+					document.querySelector('.plan-date-05').style.color = '#9ea6b9';
 					document.querySelector('.process-bg-05').style.backgroundColor = '#9ea6b9';
 				}
 
 				if(jsonProcessList[5].processValue === 100){
 					document.querySelector('.process-color-06').style.color = '#37a2da';
+					document.querySelector('.plan-date-06').style.color = '#37a2da';
 					document.querySelector('.process-bg-06').style.backgroundColor = '#37a2da';
 				}else if(jsonProcessList[5].processValue > 0){
 					document.querySelector('.process-color-06').style.color = '#ff9f7f';
+					document.querySelector('.plan-date-06').style.color = '#ff9f7f';
 					document.querySelector('.process-bg-06').style.backgroundColor = '#ff9f7f';
 				}else{
 					document.querySelector('.process-color-06').style.color = '#9ea6b9';
+					document.querySelector('.plan-date-06').style.color = '#9ea6b9';
 					document.querySelector('.process-bg-06').style.backgroundColor = '#9ea6b9';
 				}
 
 				if(jsonProcessList[6].processValue === 100){
-					document.querySelector('.process-color-01').style.color = '#37a2da';
+					document.querySelector('.process-color-07').style.color = '#37a2da';
+					document.querySelector('.plan-date-07').style.color = '#37a2da';
 					document.querySelector('.process-bg-07').style.backgroundColor = '#37a2da';
 				}else if(jsonProcessList[6].processValue > 0){
 					document.querySelector('.process-color-07').style.color = '#ff9f7f';
+					document.querySelector('.plan-date-07').style.color = '#ff9f7f';
 					document.querySelector('.process-bg-07').style.backgroundColor = '#ff9f7f';
 				}else{
 					document.querySelector('.process-color-07').style.color = '#9ea6b9';
+					document.querySelector('.plan-date-07').style.color = '#9ea6b9';
 					document.querySelector('.process-bg-07').style.backgroundColor = '#9ea6b9';
 				}
 
 				if(jsonProcessList[7].processValue === 100){
 					document.querySelector('.process-color-08').style.color = '#37a2da';
+					document.querySelector('.plan-date-08').style.color = '#37a2da';
 					document.querySelector('.process-bg-08').style.backgroundColor = '#37a2da';
 				}else if(jsonProcessList[7].processValue > 0){
 					document.querySelector('.process-color-08').style.color = '#ff9f7f';
+					document.querySelector('.plan-date-08').style.color = '#ff9f7f';
 					document.querySelector('.process-bg-08').style.backgroundColor = '#ff9f7f';
 				}else{
 					document.querySelector('.process-color-08').style.color = '#9ea6b9';
+					document.querySelector('.plan-date-08').style.color = '#9ea6b9';
 					document.querySelector('.process-bg-08').style.backgroundColor = '#9ea6b9';
 				}
 
 				if(jsonProcessList[8].processValue === 100){
 					document.querySelector('.process-color-09').style.color = '#37a2da';
+					document.querySelector('.plan-date-09').style.color = '#37a2da';
 					document.querySelector('.process-bg-09').style.backgroundColor = '#37a2da';
 				}else if(jsonProcessList[8].processValue > 0){
 					document.querySelector('.process-color-09').style.color = '#ff9f7f';
+					document.querySelector('.plan-date-09').style.color = '#ff9f7f';
 					document.querySelector('.process-bg-09').style.backgroundColor = '#ff9f7f';
 				}else{
 					document.querySelector('.process-color-09').style.color = '#9ea6b9';
+					document.querySelector('.plan-date-09').style.color = '#9ea6b9';
 					document.querySelector('.process-bg-09').style.backgroundColor = '#9ea6b9';
 				}
 
 				if(jsonProcessList[9].processValue === 100){
 					document.querySelector('.process-color-10').style.color = '#37a2da';
+					document.querySelector('.plan-date-10').style.color = '#37a2da';
 					document.querySelector('.process-bg-10').style.backgroundColor = '#37a2da';
 				}else if(jsonProcessList[9].processValue > 0){
 					document.querySelector('.process-color-10').style.color = '#ff9f7f';
+					document.querySelector('.plan-date-10').style.color = '#ff9f7f';
 					document.querySelector('.process-bg-10').style.backgroundColor = '#ff9f7f';
 				}else{
 					document.querySelector('.process-color-10').style.color = '#9ea6b9';
+					document.querySelector('.plan-date-10').style.color = '#9ea6b9';
 					document.querySelector('.process-bg-10').style.backgroundColor = '#9ea6b9';
 				}
 			}
@@ -890,16 +1021,20 @@
 			let keyQuestionStr = "";
 			let projectProcessStr = "";
 			for (let n = 0; n < jsonKeyQueList.length; n++) {
-				keyQuestionStr +=
-						'<tr style="height: 24px;"><td style="font-size: 1vw; width: 100%;font-weight: 400;text-align: left">' +
-						jsonKeyQueList[n].keyQustion + '<br/>'
-						'</td></tr>';
+				if(jsonKeyQueList[n] != null){
+					keyQuestionStr +=
+							'<tr style="height: 24px;"><td style="font-size: 1vw; width: 100%;font-weight: 400;text-align: left">' +
+							jsonKeyQueList[n].keyQustion + '<br/>'
+					'</td></tr>';
+				}
 			}
 			for (let n = 0; n < jsonProjectProcessList.length; n++) {
-				projectProcessStr +=
-						'<tr style="height: 24px;"><td style="font-size: 1vw; width: 100%;font-weight: 400;text-align: left">' +
-						jsonProjectProcessList[n].projectProcess + '<br/>'
-				'</td></tr>';
+				if(jsonProjectProcessList[n] != null){
+					projectProcessStr +=
+							'<tr style="height: 24px;"><td style="font-size: 1vw; width: 100%;font-weight: 400;text-align: left">' +
+							jsonProjectProcessList[n].projectProcess + '<br/>'
+					'</td></tr>';
+				}
 			}
 			$('.scrollContent-02').append(projectProcessStr);
 			$('.scrollContent-03').append(keyQuestionStr);
@@ -918,8 +1053,8 @@
 			let source = echarts.init(document.getElementById("source"));
 			year = document.getElementById("selectYear").value;
 			createSource(source,projectCode,year);
-			// let projectBudget = echarts.init(document.getElementById("projectBudget"));
-			// createProjectBudget(projectBudget,projectCode);
+			let projectBudget = echarts.init(document.getElementById("projectBudget"));
+			createProjectBudget(projectBudget,projectCode);
 		}
 		function nowSize(size){
 			let nowClientWidth = size*(document.documentElement.clientWidth/1698);

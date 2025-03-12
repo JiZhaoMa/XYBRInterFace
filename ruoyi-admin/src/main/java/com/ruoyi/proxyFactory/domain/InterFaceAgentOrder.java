@@ -1,4 +1,4 @@
-package com.ruoyi.domain;
+package com.ruoyi.proxyFactory.domain;
 
 public class InterFaceAgentOrder {
     private String 星源生产PO;

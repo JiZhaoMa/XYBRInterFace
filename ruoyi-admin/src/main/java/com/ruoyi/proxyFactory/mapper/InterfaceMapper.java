@@ -1,8 +1,6 @@
-package com.ruoyi.mapper;
+package com.ruoyi.proxyFactory.mapper;
 
-import com.ruoyi.domain.*;
-import org.mapstruct.Mapper;
-
+import com.ruoyi.proxyFactory.domain.*;
 import java.util.List;
 
 /**
@@ -19,4 +17,5 @@ public interface InterfaceMapper {
     public int insertStockDataList(List<InterFaceStockData> list);
     public int deleteStockData();
     public int insertHistoryStockDataList(List<InterFaceStockData> list);
+    public List<InterFaceDomain> getInterFaceList(InterFaceDomain interFaceDomain);
 }

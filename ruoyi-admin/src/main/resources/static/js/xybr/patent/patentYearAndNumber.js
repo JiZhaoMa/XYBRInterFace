@@ -5,15 +5,14 @@ function createPatentYearNumber(bar,person,dept) {
     let shiYongData = [11,20,30,26];
     let waiGuanData = [11,20,30,26];
     let option = {
-        backgroundColor: '#fff',
+        title: {
+            text: '',
+            subtext: ''
+        },
         tooltip: {
-            trigger: "axis",
-            padding: [8, 10],
+            trigger: 'axis',
             axisPointer: {
-                type: "shadow",
-                textStyle: {
-                    color: "#000"
-                }
+                type: 'shadow'
             }
         },
         legend: {
@@ -73,7 +72,7 @@ function createPatentYearNumber(bar,person,dept) {
             }
 
         },
-        yAxis: [{
+        yAxis: {
             type: 'value',
             axisLabel: {
                 show: false
@@ -87,44 +86,55 @@ function createPatentYearNumber(bar,person,dept) {
             splitLine: {
                 show: false
             }
-        }],
+        },
         series: [{
             name: '发明',
             type: 'bar',
+            barWidth: 30,
+            stack: '数量',
             data: faMingData,
-            barWidth:nowSize(18),//柱子宽度
-            barGap: nowSize(0.5), //柱子之间间距
             itemStyle: {
                 normal: {
-                    color: '#00999b',
-                    opacity: 1,
+                    show: true,
+                    textStyle: {
+                        fontSize: nowSize(12)
+                    },
+                    color: '#00999b'
                 }
             }
         }, {
             name: '实用新型',
             type: 'bar',
-            data: shiYongData,
-            barWidth: nowSize(18),
-            barGap: nowSize(0.5),
+            barWidth:30,
+            stack: '数量',
+            data:  shiYongData,
             itemStyle: {
                 normal: {
-                    color: '#345e37',
-                    opacity: 1,
+                    show: true,
+                    textStyle: {
+                        fontSize: nowSize(12)
+                    },
+                    color: '#345e37'
                 }
             }
         }, {
             name: '外观设计',
             type: 'bar',
-            data: waiGuanData,
-            barWidth: nowSize(18),
-            barGap:nowSize(0.5),
+            barWidth: 30,
+            stack: '数量',
+            data:  waiGuanData,
             itemStyle: {
                 normal: {
-                    color: '#bb2649',
-                    opacity: 1,
+                    show: true,
+                    textStyle: {
+                        fontSize: nowSize(12)
+                    },
+                    color: '#bb2649'
                 }
             }
-        }],
+        },
+
+        ],
         dataZoom : [
             {
                 orient: 'horizontal',
@@ -137,7 +147,7 @@ function createPatentYearNumber(bar,person,dept) {
                 bottom: '4%',
                 zoomLock: false, //指定是否锁定缩放比例。
                 startValue: 0, // 从头开始。
-                endValue: 3,// 一次性展示4个
+                endValue: 4,// 一次性展示4个
                 showDetail: false, // 关闭滚动条提示
                 fillerColor: 'rgba(255, 255, 255,0.5)',
             }

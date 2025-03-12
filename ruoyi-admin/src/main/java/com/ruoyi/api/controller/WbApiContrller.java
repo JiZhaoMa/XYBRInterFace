@@ -134,7 +134,16 @@ public class WbApiContrller {
                                 JSONObject whJson = new JSONObject();
                                 JSONObject WhMan = new JSONObject();
                                 WhMan.put("m_code","majuan");
-                                whJson.put("m_code","03");
+                                if("四联".equals(Fact)){
+                                    whJson.put("m_code","04");
+                                }
+                                if("天宝".equals(Fact)){
+                                    whJson.put("m_code","03");
+                                }
+                                if("卓瑞源".equals(Fact)){
+                                    whJson.put("m_code","29");
+                                }
+                                //whJson.put("m_code","03");
                                 rlInfoJson.put("Wh",whJson);
                                 rlInfoJson.put("WhMan",WhMan);
                                 rlInfoJson.put("StorageType",4);
@@ -206,6 +215,7 @@ public class WbApiContrller {
                     //954615556(供应商)  没有匹配到相应的采购订单，请确认！
                     String content = ItemCode + "(" + Suppier + ")：";
                     mail.sendMail(to,"原材料入库",content + "</br>没有匹配到相应的采购订单，请及时确认！");
+                    AjaxResult ajax = insertRecivmentLog(ItemCode, Suppier, ReciveDate, ReciveNum, 0, "", 0, "没有匹配到相应的采购订单",Fact);
                 }
             }
         }catch (Exception e){

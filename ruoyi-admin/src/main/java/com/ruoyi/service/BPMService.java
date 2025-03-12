@@ -17,4 +17,5 @@ public interface BPMService {
     public JSONObject getPOLine(List<String> list,List<String> idsList,String PurDeptCode,String PurOperCode);
     public List<ArriveQty> getCaiGouDetail();
     public int updateArriveQty(ArriveQty arriveQty);
+    public List<PatentRemind> getPatentList();
 }

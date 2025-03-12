@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.ruoyi.mapper.InterfaceMapper">
+<mapper namespace="com.ruoyi.proxyFactory.mapper.InterfaceMapper">
 	<resultMap type="InterFaceOrder" id="InterFaceOrdergResult">
 		<id     property="星源产品编码"      column="星源产品编码"      />
 		<result property="星源生产PO"    column="星源生产PO"    />
@@ -26,6 +26,35 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="单板组装"    column="单板组装"    />
 		<result property="日期"    column="日期"    />
 	</resultMap>
+	<resultMap type="InterFaceDomain" id="InterFaceDomainResult">
+		<id     property="host"            column="host"      />
+		<result property="url"             column="url"    />
+		<result property="tenantId"        column="tenantId"     />
+		<result property="authorization"   column="authorization"   />
+		<result property="grantType"       column="grantType"    />
+		<result property="scope"           column="scope"      />
+		<result property="username"        column="username"    />
+		<result property="password"        column="password"      />
+		<result property="interFaceName"   column="interFaceName"    />
+		<result property="target"          column="target"    />
+	</resultMap>
+	<select id="getInterFaceList" resultMap="InterFaceDomainResult">
+		SELECT
+		`host`,
+		`url`,
+		`tenantId`,
+		`authorization`,
+		`grantType`,
+		`scope`,
+		`username`,
+		`password`,
+		`interFaceName`,
+		`target`
+		FROM interface_info
+		WHERE status = 1
+		<if test="interFaceName != null and interFaceName !=''"> AND interFaceName = #{interFaceName}</if>
+		<if test="target != null and target !=''"> AND target = #{target}</if>
+	</select>
 	<insert id="insertOrderList" parameterType="java.util.List">
 		insert into 星源工单表(产品编码, 星源生产PO, 下单数量, 整机组装, 老化前, 老化, 老化后, 入库, 工厂名称) values
 		<foreach item="item" index="index" collection="list" separator=",">

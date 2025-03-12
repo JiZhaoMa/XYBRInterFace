@@ -1,4 +1,4 @@
-package com.ruoyi.domain;
+package com.ruoyi.proxyFactory.domain;
 
 public class InterFaceProcessData {
     private String 星源产品编码;

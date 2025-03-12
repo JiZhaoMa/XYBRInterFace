@@ -22,4 +22,5 @@ public interface BPMMapper {
     public int updateCaiGouDetail(@Param("pOLineList") List<POLine> pOLineList,@Param("codeList") List<String> codeList,@Param("orderCode") String orderCode,@Param("supplier") String supplier);
     public List<ArriveQty> getCaiGouDetail();
     public int updateArriveQty(ArriveQty arriveQty);
+    public List<PatentRemind> getPatentList();
 }

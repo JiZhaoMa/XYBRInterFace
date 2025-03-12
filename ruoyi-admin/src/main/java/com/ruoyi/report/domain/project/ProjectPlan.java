@@ -5,6 +5,15 @@ public class ProjectPlan {
     private String projectName;
     private String processName;
     private int processValue;
+    private String planDateValue;
+
+    public String getPlanDateValue() {
+        return planDateValue;
+    }
+
+    public void setPlanDateValue(String planDateValue) {
+        this.planDateValue = planDateValue;
+    }
 
     public String getProjectCode() {
         return projectCode;

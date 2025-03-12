@@ -51,7 +51,7 @@ public class CoclpitController extends BaseController
         List<ZhuanLi> zhuanLiList = cockpitService.getZhuanLiList(monthStr);
         jsonObject.put("zhuanLiList",zhuanLiList);
         jsonObject.put("cockpitData",cockpitData);
-        jsonObject.put("monthList",cockpitData.getMonthList());
+        jsonObject.put("monthList",cockpitData.getMaxMonth());
         jsonObject.put("tenClientList",tenClientList);
         jsonObject.put("performaneList",performaneList);
         jsonObject.put("projectInfoList",projectInfoList);

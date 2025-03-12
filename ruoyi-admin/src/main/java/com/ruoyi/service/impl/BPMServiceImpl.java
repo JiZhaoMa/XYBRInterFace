@@ -210,6 +210,11 @@ public class BPMServiceImpl implements BPMService {
         return bpmMapper.updateArriveQty(arriveQty);
     }
 
+    @Override
+    public List<PatentRemind> getPatentList() {
+        return bpmMapper.getPatentList();
+    }
+
     public JSONObject pushU9CPOLine(JSONArray POJsonArray) throws Exception {
         String param = JSONUtil.toJsonStr(POJsonArray);
         String token = getToken();

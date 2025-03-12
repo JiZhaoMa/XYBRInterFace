@@ -71,11 +71,15 @@ public class ProjectController extends BaseController {
     {
         JSONObject jsonObject = new JSONObject();
         List<String> costTypeList = new ArrayList<>();
-        List<Integer> costList = new ArrayList<>();
+        List<Float> costList = new ArrayList<>();
         Cost cost = new Cost();
         cost.setProjectCode(projectCode);
-        cost = projectService.getCost(cost);
-        if(!ObjectUtil.isEmpty(cost)){
+        List<Cost> costs = projectService.getCost(cost);
+        for(Cost c : costs){
+            costList.add(c.getCostValue());
+            costTypeList.add(c.getCostText());
+        }
+        /*if(!ObjectUtil.isEmpty(cost)){
             if(!ObjectUtil.isEmpty(cost.getCostValue01())){
                 costTypeList.add("结构件");
                 costList.add(cost.getCostValue01());
@@ -108,7 +112,7 @@ public class ProjectController extends BaseController {
                 costTypeList.add("其他");
                 costList.add(cost.getCostValue08());
             }
-        }
+        }*/
         jsonObject.put("costList",costList);
         jsonObject.put("costTypeList",costTypeList);
         return jsonObject;
@@ -127,7 +131,7 @@ public class ProjectController extends BaseController {
         List<Integer> yusuan = new ArrayList<>();
         List<Integer> hesuan = new ArrayList<>();
         if(yusuanlist.size() > 0){
-            yusuan.add(yusuanlist.get(0).getValue12());
+            yusuan.add(yusuanlist.get(0).getValue13());
             yusuan.add(yusuanlist.get(0).getValue01());
             yusuan.add(yusuanlist.get(0).getValue02());
             yusuan.add(yusuanlist.get(0).getValue03());
@@ -139,9 +143,10 @@ public class ProjectController extends BaseController {
             yusuan.add(yusuanlist.get(0).getValue09());
             yusuan.add(yusuanlist.get(0).getValue10());
             yusuan.add(yusuanlist.get(0).getValue11());
+            yusuan.add(yusuanlist.get(0).getValue12());
         }
         if(hesuan.size() > 0){
-            hesuan.add(hesuanlist.get(0).getValue12());
+            hesuan.add(hesuanlist.get(0).getValue13());
             hesuan.add(hesuanlist.get(0).getValue01());
             hesuan.add(hesuanlist.get(0).getValue02());
             hesuan.add(hesuanlist.get(0).getValue03());
@@ -153,6 +158,7 @@ public class ProjectController extends BaseController {
             hesuan.add(hesuanlist.get(0).getValue09());
             hesuan.add(hesuanlist.get(0).getValue10());
             hesuan.add(hesuanlist.get(0).getValue11());
+            hesuan.add(hesuanlist.get(0).getValue12());
         }
         jsonObject.put("yusuanlist",yusuan);
         jsonObject.put("hesuanlist",hesuan);
@@ -243,10 +249,30 @@ public class ProjectController extends BaseController {
                 ziCeWenTiList.add(0);
             }
         }
+        int ceshiSum = 0;
+        int shiZhiSum = 0;
+        int ziCeSum = 0;
+        for(Integer i : ceShiWentiList){
+            ceshiSum += i;
+        }
+        for(Integer i : shiZHiWenTiList){
+            shiZhiSum += i;
+        }
+        for(Integer i : ziCeWenTiList){
+            ziCeSum += i;
+        }
+        ceShiWentiList.add(0,ceshiSum);
+        shiZHiWenTiList.add(0,shiZhiSum);
+        ziCeWenTiList.add(0,ziCeSum);
         jsonObject.put("ceShiWenti",ceShiWentiList);
         jsonObject.put("shiZHiWenTi",shiZHiWenTiList);
         jsonObject.put("ziCeWenTi",ziCeWenTiList);
-        jsonObject.put("stageList",stageList);
+        List<String> stageEndList = new ArrayList<>();
+        stageEndList.add("总计");
+        for(String i : stageList){
+            stageEndList.add(i);
+        }
+        jsonObject.put("stageList",stageEndList);
         return jsonObject;
     }
     @GetMapping("/getProjectList")

@@ -14,6 +14,23 @@ public class Cost {
     private int costValue07;
     private int costValue08;
     private String projectCode;
+    private String costText;
+    private float costValue;
+    public String getCostText() {
+        return costText;
+    }
+
+    public void setCostText(String costText) {
+        this.costText = costText;
+    }
+
+    public float getCostValue() {
+        return costValue;
+    }
+
+    public void setCostValue(float costValue) {
+        this.costValue = costValue;
+    }
 
     public int getChaECost() {
         return chaECost;

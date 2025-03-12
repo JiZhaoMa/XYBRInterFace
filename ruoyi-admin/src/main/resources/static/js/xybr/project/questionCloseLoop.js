@@ -1,9 +1,9 @@
 //饼图
 function createQuestionCloseLoop(bar,projectCode) {
-    let xAxisData = ['已解决', '遗留跟踪', '遗留不跟踪'];
-    let faMingData = [11,20,30];
-    let shiYongData = [11,20,30];
-    let waiGuanData = [11,20,30];
+    let xAxisData = ['总计', '已解决', '遗留跟踪', '遗留不跟踪'];
+    let faMingData = [11,20,30,0];
+    let shiYongData = [11,20,30,0];
+    let waiGuanData = [11,20,30,0];
     let option = {
         backgroundColor: '#fff',
         tooltip: {
@@ -57,7 +57,7 @@ function createQuestionCloseLoop(bar,projectCode) {
             name: '测试问题',
             type: 'bar',
             data: faMingData,
-            barWidth:nowSize(18),//柱子宽度
+            barWidth:nowSize(12),//柱子宽度
             barGap: nowSize(0.3), //柱子之间间距
             itemStyle: {
                 normal: {
@@ -75,7 +75,7 @@ function createQuestionCloseLoop(bar,projectCode) {
             name: '试制问题',
             type: 'bar',
             data: shiYongData,
-            barWidth: nowSize(18),
+            barWidth: nowSize(12),
             barGap: nowSize(0.3),
             itemStyle: {
                 normal: {
@@ -93,7 +93,7 @@ function createQuestionCloseLoop(bar,projectCode) {
             name: '自测问题',
             type: 'bar',
             data: waiGuanData,
-            barWidth: nowSize(18),
+            barWidth: nowSize(12),
             barGap:nowSize(0.3),
             itemStyle: {
                 normal: {

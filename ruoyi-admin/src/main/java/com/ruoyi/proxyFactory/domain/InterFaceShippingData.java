@@ -1,4 +1,4 @@
-package com.ruoyi.domain;
+package com.ruoyi.proxyFactory.domain;
 
 public class InterFaceShippingData {
     private String 产品编码;

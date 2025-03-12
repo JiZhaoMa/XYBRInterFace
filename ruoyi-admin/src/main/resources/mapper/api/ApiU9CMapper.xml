@@ -31,7 +31,9 @@
 		FROM [dbo].[CBO_Supplier_Trl] a, [dbo].[PM_PurchaseOrder] b,[dbo].[PM_POLine] c
 		WHERE a.ID = b.Supplier_Supplier
 		  AND b.ID = c.PurchaseOrder
+		  AND b.Cancel_Canceled != 1
 		  AND c.Status = 2
+		  AND (b.DocNo like 'XYBRCG%' OR b.DocNo like 'XYBREC%')
 		<if test="Suppier != null and Suppier !=''"> AND a.NAME = #{Suppier} </if>
 		<if test="ItemCode != null and ItemCode !=''"> AND c.ItemInfo_ItemCode = #{ItemCode} </if>
 		<if test="ReciveNum != null and ReciveNum !='' and ReciveNum != 0"> AND c.ReqQtyTU = #{ReciveNum} </if>

@@ -44,6 +44,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="lotCode"      column="lotCode"/>
         <result property="activityQty"  column="activityQty"/>
     </resultMap>
+    <resultMap type="PatentRemind" id="PatentRemindResult">
+        <result property="patentNo"    column="patentNo"/>
+        <result property="payDate"     column="payDate"/>
+        <result property="mailTo"     column="mailTo"/>
+    </resultMap>
     <select id="getDepartList" resultMap="DepartmentResult">
         SELECT
             a.NAME AS deptName,
@@ -163,4 +168,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <update id="updateArriveQty">
         update rdm.tlk_采购明细 set ITEM_到货数量 = #{activityQty}, ITEM_到货时间 = NOW() WHERE `ITEM_合同编码` = #{docNo} AND `ITEM_物料编码` = #{itemCode} AND `ITEM_厂家规格型号` = #{lotCode}
     </update>
+    <select id="getPatentList"  resultMap="PatentRemindResult">
+        SELECT
+            `ITEM_受理通知书申请号` AS patentNo,
+            DATE_FORMAT(`ITEM_受理通知书申请日`,'%m-%d') AS payDate,
+            (SELECT `ITEM_邮箱` FROM tlk_邮箱管理 WHERE `ITEM_邮箱类型` = '知识产权管理员' LIMIT 1) AS  mailTo
+        FROM rdm.`tlk_知识产权` WHERE (`ITEM_专利进度` = '发证' OR  `ITEM_专利进度` = '授权待发证') AND DATE_FORMAT(DATE_ADD(`ITEM_受理通知书申请日`, INTERVAL -1 MONTH),'%m') = DATE_FORMAT(NOW(),'%m')
+    </select>
 </mapper>

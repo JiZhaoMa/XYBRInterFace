@@ -30,7 +30,7 @@
                                 <select name="agentName" id="agentName" style="color: #FFFFFF !important; background-color: rgb(21,51,114) !important; width: 25%;">
                                     <option value="">工厂</option>
                                     <option value="天宝">天宝</option>
-                                    <option value="卓瑞源">卓瑞源</option>
+                                    <option value="四联">四联</option>
                                 </select>
                             </li>
                             <li style="position: relative; left: 23%;">
@@ -71,9 +71,9 @@
 </style>
 <th:block th:include="include :: footer" />
 <script th:inline="javascript">
-    //var prefix = "http://localhost/system/xybrOrder";
+    var prefix = "http://localhost/system/xybrOrder";
     //var prefix = "http://192.168.31.52:8084/xybrInterFace/system/xybrOrder";
-    var prefix = "http://123.249.26.42:8084/xybrInterFace/system/xybrOrder";
+    //var prefix = "https://api.xybrpower.cn/xybrInterFace/system/xybrOrder";
     $(function() {
         var options = {
             code: "xybrProductOrder",

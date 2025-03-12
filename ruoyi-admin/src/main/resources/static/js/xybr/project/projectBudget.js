@@ -26,7 +26,7 @@ function createProjectBudget(bar,projectCode) {
         },
         xAxis: {
             type: 'category',
-            data: ['累计','人力','外购样机','研发样机','设备购置','工装','模具','外出试验','认证服务','委外设计','差旅','其他'],
+            data: ['累计','人力','材料','差旅','外出实验','模具','认证','工装治具','委外设计','快递运输','低值易耗','外协合作','质量维护'],
         },
         yAxis: {
             type: 'value',
@@ -36,7 +36,7 @@ function createProjectBudget(bar,projectCode) {
                 name: '预算',
                 type: 'bar',
                 barWidth: nowSize(25),
-                data: [233,11,70,30,26,53,24,19],
+                data: [233,11,70,30,26,53,24,19,12],
                 itemStyle: {
                     normal: {
                         //颜色渐变
@@ -54,7 +54,7 @@ function createProjectBudget(bar,projectCode) {
                 name: '核算',
                 type: 'bar',
                 barWidth:nowSize(25),
-                data:  [333,11,20,80,26,53,24,119],
+                data:  [333,11,20,80,26,53,24,119,12],
                 itemStyle: {
                     normal: {
                         //颜色渐变

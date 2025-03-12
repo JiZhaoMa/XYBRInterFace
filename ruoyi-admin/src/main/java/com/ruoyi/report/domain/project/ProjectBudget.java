@@ -13,7 +13,8 @@ public class ProjectBudget {
     private int value09;  //委外设计
     private int value10;  //差旅
     private int value11;  //其他
-    private int value12;  //合计
+    private int value12;  //质量维护
+    private int value13;  //合计
     private String type;  //预核算
 
     public String getType() {
@@ -126,5 +127,13 @@ public class ProjectBudget {
 
     public void setValue12(int value12) {
         this.value12 = value12;
+    }
+
+    public int getValue13() {
+        return value13;
+    }
+
+    public void setValue13(int value13) {
+        this.value13 = value13;
     }
 }

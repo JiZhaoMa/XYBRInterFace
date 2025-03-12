@@ -27,7 +27,7 @@
             <select name="selectAgent" id="selectAgent" style="background-color: rgb(21,51,114); color: #FFFFFF; border: 0.2px solid #FFF; border-radius: 3px 3px 3px 3px;">
                 <option value="">所有</option>
                 <option value="天宝">天宝</option>
-                <option value="卓瑞源">卓瑞源</option>
+                <option value="四联">四联</option>
             </select>
         </div>
     </div>
@@ -267,8 +267,8 @@
 <script type="text/javascript" th:src="@{/js/xybr/inventory/cunrrentInventory.js}"></script>
 <script type="text/javascript" th:src="@{/js/jquery.min.js}"></script>
 <script type="text/javascript">
-    var urls = "http://123.249.26.42:8084/xybrInterFace/";
-    //var urls = "http://localhost/";
+    //var urls = "https://api.xybrpower.cn/xybrInterFace/";
+    var urls = "http://localhost/";
 
     let inventoryOfCurrentEcharts = echarts.init(document.getElementById("inventoryOfCurrentEcharts"));
     let inventoryOfMonthTitleEcharts = echarts.init(document.getElementById("inventoryOfMonthTitleEcharts"));

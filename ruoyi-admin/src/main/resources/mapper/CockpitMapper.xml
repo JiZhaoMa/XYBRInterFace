@@ -66,7 +66,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="cockpit060"    column="cockpit060"/>
         <result property="cockpit061"    column="cockpit061"/>
         <result property="cockpit062"    column="cockpit062"/>
-        <result property="monthList"     column="monthList"/>
+        <result property="maxMonth"      column="maxMonth"/>
         <result property="currentMonth"  column="currentMonth"/>
         <result property="yearsAgoMonth" column="yearsAgoMonth"/>
         <result property="agoMonth"      column="agoMonth"/>
@@ -274,19 +274,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             ROUND(ITEM_逾期总金额,0) AS cockpit040,
             ROUND(ITEM_库存金额,0) AS cockpit041,
             ITEM_规划产品启动率 AS cockpit050,
-            ROUND(ITEM_总专利数,0) AS cockpit051,
-            ROUND(ITEM_总发明数,0) AS cockpit052,
-            ROUND(ITEM_总实用新型数,0) AS cockpit053,
-            ROUND(ITEM_总外观数,0) AS cockpit054,
-            ROUND(ITEM_年度申请数,0) AS cockpit055,
-            ROUND(ITEM_年度发明数,0) AS cockpit056,
-            ROUND(ITEM_年度实用新型数,0) AS cockpit057,
-            ROUND(ITEM_年度外观数,0) AS cockpit058,
-            ROUND(ITEM_申请中总数,0) AS cockpit059,
-            ROUND(ITEM_申请中发明数,0) AS cockpit060,
-            ROUND(ITEM_申请中实用新型数,0) AS cockpit061,
-            ROUND(ITEM_申请中外观数,0) AS cockpit062,
-            concat(ITEM_first,',',ITEM_second,',',ITEM_third,',',ITEM_fourth,',',ITEM_fifth,',',ITEM_sixth) AS monthList,
+            (SELECT COUNT(1) FROM rdm.`tlk_知识产权` WHERE `ITEM_专利进度` = '发证') AS cockpit051,
+            (SELECT COUNT(1) FROM rdm.`tlk_知识产权` WHERE `ITEM_专利进度` = '发证' AND `ITEM_专利类型` = '发明') AS cockpit052,
+            (SELECT COUNT(1) FROM rdm.`tlk_知识产权` WHERE `ITEM_专利进度` = '发证' AND `ITEM_专利类型` = '实用新型') AS cockpit053,
+            (SELECT COUNT(1) FROM rdm.`tlk_知识产权` WHERE `ITEM_专利进度` = '发证' AND `ITEM_专利类型` = '外观设计') AS cockpit054,
+            (SELECT COUNT(1) FROM rdm.`tlk_知识产权` WHERE `ITEM_专利进度` = '发证' AND DATE_FORMAT(`ITEM_授权公告日`,'%Y') = DATE_FORMAT(STR_TO_DATE(#{monthStr},'%Y-%m-%d'),'%Y')) AS cockpit055,
+            (SELECT COUNT(1) FROM rdm.`tlk_知识产权` WHERE `ITEM_专利进度` = '发证' AND `ITEM_专利类型` = '发明' AND DATE_FORMAT(`ITEM_授权公告日`,'%Y') = DATE_FORMAT(STR_TO_DATE(#{monthStr},'%Y-%m-%d'),'%Y')) AS cockpit056,
+            (SELECT COUNT(1) FROM rdm.`tlk_知识产权` WHERE `ITEM_专利进度` = '发证' AND `ITEM_专利类型` = '实用新型' AND DATE_FORMAT(`ITEM_授权公告日`,'%Y') = DATE_FORMAT(STR_TO_DATE(#{monthStr},'%Y-%m-%d'),'%Y')) AS cockpit057,
+            (SELECT COUNT(1) FROM rdm.`tlk_知识产权` WHERE `ITEM_专利进度` = '发证' AND `ITEM_专利类型` = '外观设计' AND DATE_FORMAT(`ITEM_授权公告日`,'%Y') = DATE_FORMAT(STR_TO_DATE(#{monthStr},'%Y-%m-%d'),'%Y')) AS cockpit058,
+            (SELECT COUNT(1) FROM rdm.`tlk_知识产权` WHERE `ITEM_专利进度` != '发证' AND `ITEM_专利进度` != '驳回' AND `ITEM_专利进度` != '撤案') AS cockpit059,
+            (SELECT COUNT(1) FROM rdm.`tlk_知识产权` WHERE `ITEM_专利进度` != '发证' AND `ITEM_专利进度` != '驳回' AND `ITEM_专利进度` != '撤案' AND `ITEM_专利类型` = '发明') AS cockpit060,
+            (SELECT COUNT(1) FROM rdm.`tlk_知识产权` WHERE `ITEM_专利进度` != '发证' AND `ITEM_专利进度` != '驳回' AND `ITEM_专利进度` != '撤案' AND `ITEM_专利类型` = '实用新型') AS cockpit061,
+            (SELECT COUNT(1) FROM rdm.`tlk_知识产权` WHERE `ITEM_专利进度` != '发证' AND `ITEM_专利进度` != '驳回' AND `ITEM_专利进度` != '撤案' AND `ITEM_专利类型` = '外观设计') AS cockpit062,
+            (SELECT MAX(ITEM_月份) FROM `tlk_报表数据统计`) AS monthList,
             DATE_FORMAT(STR_TO_DATE(#{monthStr},'%Y-%m-%d'),'%Y%m') AS currentMonth,
             DATE_FORMAT(DATE_SUB(STR_TO_DATE(#{monthStr},'%Y-%m-%d'), INTERVAL 1 YEAR),'%Y%m') AS yearsAgoMonth,
             DATE_FORMAT(DATE_SUB(STR_TO_DATE(#{monthStr},'%Y-%m-%d'), INTERVAL 1 MONTH),'%Y%m') AS agoMonth
@@ -295,7 +295,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <select id="getYuQiClientData" parameterType="String" resultMap="YuQiClientDataResult">
         SELECT DATE_FORMAT(ITEM_月份,'%Y%m'), `ITEM_销售额`, `ITEM_客户名称`,
                ROUND(ITEM_ONETONINE,2) AS ONETONINE,ROUND(ITEM_NINETOTWEL,2) AS NINETOTWEL,ROUND(ITEM_TWELUP,2) AS TWELUP FROM `tlk_逾期客户`
-        WHERE DATE_FORMAT(ITEM_月份,'%Y%m') = #{monthStr}
+        WHERE DATE_FORMAT(ITEM_月份,'%Y%m') = DATE_FORMAT(STR_TO_DATE(#{monthStr},'%Y-%m-%d'),'%Y%m')
         ORDER BY `ITEM_销售额` DESC
     </select>
     <select id="getStockData" parameterType="String" resultMap="StockDataResult">
@@ -349,21 +349,21 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             `ITEM_TOP3NAME` AS stock047,
             ITEM_月份
         FROM `tlk_库存结构`
-        WHERE DATE_FORMAT(ITEM_月份,'%Y%m') = #{monthStr}
+        WHERE DATE_FORMAT(ITEM_月份,'%Y%m') = DATE_FORMAT(STR_TO_DATE(#{monthStr},'%Y-%m-%d'),'%Y%m')
     </select>
     <select id="getJiangBneMuBiao" parameterType="java.util.List" resultMap="JiangBneMuBiaoResult">
         SELECT RIGHT(DATE_FORMAT(`ITEM_月份`,'%Y%m'),2) AS month, `ITEM_达成率`, `ITEM_产品名称` FROM `tlk_降本目标达成率` WHERE
-        DATE_FORMAT(`ITEM_月份`,'%Y') = LEFT(#{monthStr},4) AND DATE_FORMAT(`ITEM_月份`,'%Y%m') &lt;= #{monthStr}
+        DATE_FORMAT(`ITEM_月份`,'%Y') = LEFT(#{monthStr},4) AND DATE_FORMAT(`ITEM_月份`,'%Y%m') &lt;= DATE_FORMAT(STR_TO_DATE(#{monthStr},'%Y-%m-%d'),'%Y%m')
         order by ITEM_月份
     </select>
     <select id="getAnShiJiaoFu" parameterType="java.util.List" resultMap="AnShiJiaoFuResult">
         SELECT RIGHT(DATE_FORMAT(`ITEM_月份`,'%Y%m'),2) AS month, `ITEM_交付率`, `ITEM_产品名称` FROM `tlk_按时交付率` WHERE
-        DATE_FORMAT(`ITEM_月份`,'%Y') = LEFT(#{monthStr},4) AND DATE_FORMAT(`ITEM_月份`,'%Y%m') &lt;= #{monthStr}
+        DATE_FORMAT(`ITEM_月份`,'%Y') = LEFT(#{monthStr},4) AND DATE_FORMAT(`ITEM_月份`,'%Y%m') &lt;= DATE_FORMAT(STR_TO_DATE(#{monthStr},'%Y-%m-%d'),'%Y%m')
         order by ITEM_月份
     </select>
     <select id="getMaoLi" parameterType="java.util.List" resultMap="MaoLiResult">
         SELECT RIGHT(DATE_FORMAT(`ITEM_月份`,'%Y%m'),2) AS month, `ITEM_毛利`, `ITEM_产品名称` FROM `tlk_毛利` WHERE
-        DATE_FORMAT(`ITEM_月份`,'%Y') = LEFT(#{monthStr},4) AND DATE_FORMAT(`ITEM_月份`,'%Y%m') &lt;= #{monthStr}
+        DATE_FORMAT(`ITEM_月份`,'%Y') = LEFT(#{monthStr},4) AND DATE_FORMAT(`ITEM_月份`,'%Y%m') &lt;= DATE_FORMAT(STR_TO_DATE(#{monthStr},'%Y-%m-%d'),'%Y%m')
         order by ITEM_月份
     </select>
     <select id="getQIJianFeiYongRate" parameterType="CockpitData" resultMap="QIJianFeiYongRateResult">
@@ -373,17 +373,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </select>
     <select id="getChanPinZhiTongRate" parameterType="java.util.List" resultMap="ChanPinZhiTongRateResult">
         SELECT RIGHT(DATE_FORMAT(`ITEM_月份`,'%Y%m'),2) AS month, `ITEM_直通率`, `ITEM_产品名称` FROM `tlk_产品直通率` WHERE
-        DATE_FORMAT(`ITEM_月份`,'%Y') = LEFT(#{monthStr},4) AND DATE_FORMAT(`ITEM_月份`,'%Y%m') &lt;= #{monthStr}
+        DATE_FORMAT(`ITEM_月份`,'%Y') = LEFT(#{monthStr},4) AND DATE_FORMAT(`ITEM_月份`,'%Y%m') &lt;= DATE_FORMAT(STR_TO_DATE(#{monthStr},'%Y-%m-%d'),'%Y%m')
         order by ITEM_月份
     </select>
     <select id="getShiChangGuZhangRate" parameterType="java.util.List" resultMap="ShiChangGuZhangRateResult">
         SELECT RIGHT(DATE_FORMAT(`ITEM_月份`,'%Y%m'),2) AS month, `ITEM_故障率`, `ITEM_量产周期` FROM `tlk_市场故障率` WHERE
-        DATE_FORMAT(`ITEM_月份`,'%Y') = LEFT(#{monthStr},4) AND DATE_FORMAT(`ITEM_月份`,'%Y%m') &lt;= #{monthStr}
+        DATE_FORMAT(`ITEM_月份`,'%Y') = LEFT(#{monthStr},4) AND DATE_FORMAT(`ITEM_月份`,'%Y%m') &lt;= DATE_FORMAT(STR_TO_DATE(#{monthStr},'%Y-%m-%d'),'%Y%m')
         order by ITEM_月份
     </select>
     <select id="getKaiXiangBuLiangRate" parameterType="java.util.List" resultMap="KaiXiangBuLiangRateResult">
         SELECT RIGHT(DATE_FORMAT(`ITEM_月份`,'%Y%m'),2) AS month, `ITEM_开箱不良率`, `ITEM_量产周期` FROM `tlk_开箱不良率` WHERE
-        DATE_FORMAT(`ITEM_月份`,'%Y') = LEFT(#{monthStr},4) AND DATE_FORMAT(`ITEM_月份`,'%Y%m') &lt;= #{monthStr}
+        DATE_FORMAT(`ITEM_月份`,'%Y') = LEFT(#{monthStr},4) AND DATE_FORMAT(`ITEM_月份`,'%Y%m') &lt;= DATE_FORMAT(STR_TO_DATE(#{monthStr},'%Y-%m-%d'),'%Y%m')
         order by ITEM_月份
     </select>
     <select id="getChanPinQiDongRate" parameterType="String" resultMap="ChanPinQiDongRateResult">
@@ -391,7 +391,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
                ROUND(ITEM_规划产品数量,0) AS ITEM_规划产品数量,
                      ROUND(ITEM_启动产品数量,0) AS ITEM_启动产品数量,
             RIGHT(DATE_FORMAT(ITEM_月份,'%Y%m'),2) AS month
-        FROM tlk_已规划产品启动率 WHERE DATE_FORMAT(ITEM_月份,'%Y%m') = #{monthStr}
+        FROM tlk_已规划产品启动率 WHERE DATE_FORMAT(ITEM_月份,'%Y%m') = DATE_FORMAT(STR_TO_DATE(#{monthStr},'%Y-%m-%d'),'%Y%m')
         order by ITEM_规划产品数量
     </select>
     <select id="getZhuanLiList" parameterType="String" resultMap="ZhuanLiResult">

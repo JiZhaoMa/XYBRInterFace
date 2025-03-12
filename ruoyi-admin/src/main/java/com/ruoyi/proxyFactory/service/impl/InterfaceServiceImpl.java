@@ -1,8 +1,8 @@
-package com.ruoyi.service.impl;
+package com.ruoyi.proxyFactory.service.impl;
 
-import com.ruoyi.domain.*;
-import com.ruoyi.mapper.InterfaceMapper;
-import com.ruoyi.service.InterfaceService;
+import com.ruoyi.proxyFactory.domain.*;
+import com.ruoyi.proxyFactory.mapper.InterfaceMapper;
+import com.ruoyi.proxyFactory.service.InterfaceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,7 +14,7 @@ import java.util.List;
  * @date: 2024/3/13 11:26
  */
 @Service
-public class InterfaceServiceImpl implements InterfaceService{
+public class InterfaceServiceImpl implements InterfaceService {
     @Autowired
     private InterfaceMapper interfaceMapper;
     @Override
@@ -55,5 +55,10 @@ public class InterfaceServiceImpl implements InterfaceService{
     @Override
     public int insertHistoryStockDataList(List<InterFaceStockData> list) {
         return interfaceMapper.insertHistoryStockDataList(list);
+    }
+
+    @Override
+    public List<InterFaceDomain> getInterFaceList(InterFaceDomain interFaceDomain) {
+        return interfaceMapper.getInterFaceList(interFaceDomain);
     }
 }

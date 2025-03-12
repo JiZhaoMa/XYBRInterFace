@@ -9,7 +9,7 @@ public interface ProjectService {
     List<QuestionCloseLoop> getQuestionCloseLoop(QuestionCloseLoop questionCloseLoop);
     List<Risk> getRisk(Risk risk);
     List<SourceInve> getSourceInve(SourceInve sourceInve);
-    Cost getCost(Cost cost);
+    List<Cost> getCost(Cost cost);
     Cost getCostRate(Cost cost);
     CostComp getCostComp(CostComp costComp);
     BudgetExpen getBudgetExpen(BudgetExpen budgetExpen);

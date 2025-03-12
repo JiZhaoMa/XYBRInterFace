@@ -1,6 +1,6 @@
-package com.ruoyi.service;
+package com.ruoyi.proxyFactory.service;
 
-import com.ruoyi.domain.*;
+import com.ruoyi.proxyFactory.domain.*;
 
 import java.util.List;
 
@@ -19,4 +19,5 @@ public interface InterfaceService {
     public int insertStockDataList(List<InterFaceStockData> StockData);
     public int deleteStockData();
     public int insertHistoryStockDataList(List<InterFaceStockData> StockData);
+    public List<InterFaceDomain> getInterFaceList(InterFaceDomain interFaceDomain);
 }

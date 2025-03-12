@@ -16,7 +16,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         SELECT
             `ITEM_专利类型` AS appType,
             COUNT(1) AS appNumber
-        FROM `tlk_知识产权`
+        FROM rdm.`tlk_知识产权`
         WHERE 1 = 1
         <if test="dept != null and dept != ''">
             AND ITEM_部门 = #{dept}
@@ -42,7 +42,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         SELECT
             `ITEM_专利类型` AS appType,
             `ITEM_专利进度` AS process,
-            COUNT(1)  AS appNumber FROM `tlk_知识产权`
+            COUNT(1)  AS appNumber FROM rdm.`tlk_知识产权`
         WHERE 1 = 1
         <if test="dept != null and dept != ''">
             AND ITEM_部门 = #{dept}
@@ -68,7 +68,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         SELECT
             `ITEM_专利类型` AS appType,
             `ITEM_部门` AS dept,
-            COUNT(1)  AS appNumber FROM `tlk_知识产权`
+            COUNT(1)  AS appNumber FROM rdm.`tlk_知识产权`
         WHERE 1 = 1
         <if test="dept != null and dept != ''">
             AND ITEM_部门 = #{dept}
@@ -94,7 +94,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         SELECT
             `ITEM_专利类型` AS appType,
             `ITEM_第一发明人` AS person,
-            COUNT(1)  AS appNumber FROM `tlk_知识产权`
+            COUNT(1)  AS appNumber FROM rdm.`tlk_知识产权`
         WHERE 1 = 1
         <if test="dept != null and dept != ''">
             AND ITEM_部门 = #{dept}
@@ -120,7 +120,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         SELECT
             `ITEM_专利类型` AS appType,
             `ITEM_代理机构` AS proxy,
-            COUNT(1)  AS appNumber FROM `tlk_知识产权`
+            COUNT(1)  AS appNumber FROM rdm.`tlk_知识产权`
         WHERE 1 = 1
         <if test="dept != null and dept != ''">
             AND ITEM_部门 = #{dept}
@@ -146,7 +146,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         SELECT
             `ITEM_专利类型` AS appType,
             DATE_FORMAT(`ITEM_授权公告日`,'%Y') AS year,
-            COUNT(1)  AS appNumber FROM `tlk_知识产权`
+            COUNT(1)  AS appNumber FROM rdm.`tlk_知识产权`
         WHERE `ITEM_授权公告日` is not null
         <if test="dept != null and dept != ''">
             AND ITEM_部门 = #{dept}
@@ -161,7 +161,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         SELECT
             COUNT(1)  AS appNumber ,
             `ITEM_专利进度` AS process
-        FROM `tlk_知识产权`
+        FROM rdm.`tlk_知识产权`
         WHERE 1 = 1
         <if test="dept != null and dept != ''">
             AND ITEM_部门 = #{dept}

@@ -64,10 +64,18 @@ public class CockpitData {
     private String cockpit060;
     private String cockpit061;
     private String cockpit062;
-    private String monthList;
+    private String maxMonth;
     private String currentMonth;
     private String yearsAgoMonth;
     private String agoMonth;
+
+    public String getMaxMonth() {
+        return maxMonth;
+    }
+
+    public void setMaxMonth(String maxMonth) {
+        this.maxMonth = maxMonth;
+    }
 
     public String getCockpit059() {
         return cockpit059;
@@ -197,13 +205,6 @@ public class CockpitData {
         this.agoMonth = agoMonth;
     }
 
-    public String getMonthList() {
-        return monthList;
-    }
-
-    public void setMonthList(String monthList) {
-        this.monthList = monthList;
-    }
 
     public String getCockpit042() {
         return cockpit042;
