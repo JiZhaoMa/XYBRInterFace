@@ -161,4 +161,23 @@ snowflake:
   worker-id: 1
 
 
+#U9C:
+#  url: "http://192.168.31.11/u9c/webapi/"
+#  clientid: "XYBR"
+#  clientsecret: "d8e920a49c63462d982c245f8cdc2e3d"
+#  entCode: "01"
+#  userCode: "admin"
+#  orgCode: "001"
+
+U9C:
+  url: "http://120.46.188.100/u9c/webapi/"
+  clientid: "XYBRAPI"
+  clientsecret: "981636ce30ae4310bf19559d3c331c71"
+  entCode: "01"
+  userCode: "admin"
+  orgCode: "001"
+
+excel:
+  directory:
+    path: "\\\\share01\\生产测试数据存档\\SLDATA\\FCT\\FCT"
 

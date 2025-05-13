@@ -32,6 +32,26 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="lotCode"      column="lotCode"/>
         <result property="activityQty"  column="activityQty"/>
     </resultMap>
+    <resultMap type="ItemInfo" id="ItemInfoResult">
+        <result property="code"          column="code"/>
+        <result property="supplier"      column="supplier"/>
+        <result property="lotCode"       column="lotCode"/>
+        <result property="price"         column="price"/>
+        <result property="sharingRatio"  column="sharingRatio"/>
+    </resultMap>
+    <resultMap type="Customer" id="CustomerResult">
+        <result property="ID"          column="ID"/>
+        <result property="code"          column="code"/>
+        <result property="customer"      column="customer"/>
+    </resultMap>
+    <select id="getU9CCustomerInfo" resultMap="CustomerResult">
+        SELECT
+            a.ID,
+            a.Code AS code,
+            b.Name AS customer
+        FROM CBO_Customer a, CBO_Customer_Trl b
+        WHERE a.ID = b.ID
+    </select>
     <select id="getU9CDeptByName" resultMap="Department01Result">
         SELECT
             a.Code AS u9cCode,
@@ -94,5 +114,44 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
           AND ItemInfo_ItemCode = #{itemCode}
           AND POLotCode = #{lotCode}
         GROUP BY SrcDoc_SrcDocNo,ItemInfo_ItemCode,POLotCode
+    </select>
+    <select id="selectPriceInfoOfXyPurch" resultMap="ItemInfoResult">
+        SELECT
+            #{code} AS code,
+            #{itemStatus} AS itemStatus,
+            #{purchAttr} AS purchAttr,
+            SUM(b.Price * d.SupplierQuota) / NULLIF(SUM(d.SupplierQuota), 0) AS price
+        FROM
+            PPR_PurPriceList a
+                INNER JOIN PPR_PurPriceLine b ON a.ID = b.PurPriceList
+                INNER JOIN CBO_Supplier c ON a.Supplier = c.ID
+                INNER JOIN CBO_SupplySource d ON c.Code = d.SupplierInfo_Code
+                AND b.ItemInfo_ItemCode = d.ItemInfo_ItemCode
+        WHERE
+            b.ItemInfo_ItemCode = #{code}
+    </select>
+    <select id="selectPriceInfoOfProxyPurch" resultMap="ItemInfoResult">
+        SELECT
+            b.Price  AS price,
+            #{supplier} AS supplier,
+            #{code} AS code,
+            #{itemStatus} AS itemStatus,
+            #{purchAttr} AS purchAttr
+        FROM PPR_PurPriceList a, PPR_PurPriceLine b, CBO_Supplier c
+        WHERE a.ID = b.PurPriceList
+          AND a.Supplier = c.ID
+          AND c.Code = #{supplier}
+          AND b.ItemInfo_ItemCode = #{code}
+    </select>
+    <select id="selectPriceInfoOfRdmStage" resultMap="ItemInfoResult">
+        SELECT
+            OrderPriceTC AS price,
+            #{supplier} AS supplier,
+            #{code} AS code,
+            #{lotCode} AS lotCode,
+            #{itemStatus} AS itemStatus,
+            #{purchAttr} AS purchAttr
+        FROM PM_POLine
+        WHERE ID = (SELECT top 1 POLine FROM PM_POShipLine po1 WHERE po1.ItemInfo_ItemCode = #{code} AND po1.ItemLot_LotCode = #{lotCode} order by po1.CreatedOn desc)
     </select>
 </mapper>

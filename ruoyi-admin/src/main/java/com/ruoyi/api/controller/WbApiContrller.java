@@ -150,9 +150,15 @@ public class WbApiContrller {
                                 rlInfoJson.put("ConfirmDate",ReciveDate);
                                 dtoJson.put("BusinessDate",ReciveDate);
                                 if(materialList.size() == 1){
-                                    dtoJson.put("Amount1",ReciveNum);
-                                    dtoJson.put("RcvQtyPU",ReciveNum);
-                                    shenYuReciveNum -= ReciveNum;
+                                    if(m.getReciveNum() > shenYuReciveNum){
+                                        dtoJson.put("Amount1",shenYuReciveNum);
+                                        dtoJson.put("RcvQtyPU",shenYuReciveNum);
+                                        shenYuReciveNum = 0;
+                                    }else{
+                                        dtoJson.put("Amount1",m.getReciveNum());
+                                        dtoJson.put("RcvQtyPU",m.getReciveNum());
+                                        shenYuReciveNum -= m.getReciveNum();
+                                    }
                                 }else{
                                     if(shenYuReciveNum > m.getReciveNum()){
                                         dtoJson.put("Amount1",m.getReciveNum());
@@ -182,13 +188,13 @@ public class WbApiContrller {
                                 resultJson = hadelU9cApi(recivmentUrl,jsonArray.toJSONString(),"原材料入库");
                                 String resultMsg = "Sucess";
                                 if(!(boolean)resultJson.get("Success")){
-                                    mail.sendMail(to,"原材料入库","物料：" + ItemCode + ";供应商：" + Suppier + "入库数量: " + ReciveNum + "</br>入库失败：" + resultJson.get("ResMsg").toString());
+                                    mail.sendMail(to,"原材料入库",Fact+", 物料：" + ItemCode + ";供应商：" + Suppier + "入库数量: " + ReciveNum + "</br>入库失败：" + resultJson.get("ResMsg").toString());
                                     resultMsg = resultJson.get("ResMsg").toString();
                                 }else{
                                     JSONArray dataArr = (JSONArray)resultJson.get("Data");
                                     JSONObject object = dataArr.getJSONObject(0);
                                     if(!(boolean)object.get("IsSucess")){
-                                        mail.sendMail(to,"原材料入库","物料：" + ItemCode + ";供应商：" + Suppier + "入库数量: " + ReciveNum + "</br>入库失败：" + object.get("ErrorMsg").toString());
+                                        mail.sendMail(to,"原材料入库",Fact+", 物料：" + ItemCode + ";供应商：" + Suppier + "入库数量: " + ReciveNum + "</br>入库失败：" + object.get("ErrorMsg").toString());
                                         resultMsg = object.get("ErrorMsg").toString();
                                     }else{
                                         resultMsg = resultJson.get("Data").toString();
@@ -208,12 +214,12 @@ public class WbApiContrller {
                     if(shenYuReciveNum > 0){
                         //入库数量小于供应商发货数量
                         //954615556 物料供应商发货100，剩余10未入库，请确认！
-                        String content = ItemCode + "(" + Suppier + ")：" ;
+                        String content = Fact + ", " + ItemCode + "(" + Suppier + ")：" ;
                         mail.sendMail(to,"原材料入库",content + "</br>入库数量小于供应商发货数量，请及时确认！");
                     }
                 }else{
                     //954615556(供应商)  没有匹配到相应的采购订单，请确认！
-                    String content = ItemCode + "(" + Suppier + ")：";
+                    String content = Fact + ", " + ItemCode + "(" + Suppier + ")：";
                     mail.sendMail(to,"原材料入库",content + "</br>没有匹配到相应的采购订单，请及时确认！");
                     AjaxResult ajax = insertRecivmentLog(ItemCode, Suppier, ReciveDate, ReciveNum, 0, "", 0, "没有匹配到相应的采购订单",Fact);
                 }
@@ -280,13 +286,13 @@ public class WbApiContrller {
                 resultJson = hadelU9cApi(recivmentUrl,jsonArray.toJSONString(),"成品入库");
                 String resultMsg = "";
                 if(!(boolean)resultJson.get("Success")){
-                    mail.sendMail(to,"成品入库","生产订单：" + POStr + "入库数量: " + ReciveNum + "</br>入库失败：" + resultJson.get("ResMsg").toString());
+                    mail.sendMail(to,"成品入库",Fact + ", 生产订单：" + POStr + "入库数量: " + ReciveNum + "</br>入库失败：" + resultJson.get("ResMsg").toString());
                     resultMsg = resultJson.get("ResMsg").toString();
                 }else{
                     JSONArray dataArr = (JSONArray)resultJson.get("Data");
                     JSONObject object = dataArr.getJSONObject(0);
                     if(!(boolean)object.get("IsSucess")){
-                        mail.sendMail(to,"成品入库","生产订单：" + POStr + "入库数量: " + ReciveNum + "</br>入库失败：" + object.get("ErrorMsg").toString());
+                        mail.sendMail(to,"成品入库",Fact + ", 生产订单：" + POStr + "入库数量: " + ReciveNum + "</br>入库失败：" + object.get("ErrorMsg").toString());
                         resultMsg = object.get("ErrorMsg").toString();
                     }else{
                         resultMsg = resultJson.get("Data").toString();

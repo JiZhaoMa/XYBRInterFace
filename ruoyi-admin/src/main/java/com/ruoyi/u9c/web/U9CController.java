@@ -1,8 +1,11 @@
 package com.ruoyi.u9c.web;
 
 import com.ruoyi.common.core.controller.BaseController;
+import com.ruoyi.common.core.domain.AjaxResult;
 import com.ruoyi.common.json.JSONObject;
+import com.ruoyi.common.utils.StringUtils;
 import com.ruoyi.domain.ArriveQty;
+import com.ruoyi.domain.Customer;
 import com.ruoyi.domain.FixedFiled;
 import com.ruoyi.domain.Supplier;
 import com.ruoyi.report.domain.selfTest.PriorityQuestion;
@@ -10,9 +13,12 @@ import com.ruoyi.report.service.SelfTestService;
 import com.ruoyi.service.BPMService;
 import com.ruoyi.service.U9CService;
 import com.ruoyi.u9c.domain.InvTrans;
+import com.ruoyi.u9c.domain.ItemInfo;
+import com.ruoyi.u9c.domain.ItemLotCodeInfo;
 import com.ruoyi.u9c.service.InvTransBpmServive;
 import com.ruoyi.u9c.service.InvTransService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -124,5 +130,75 @@ public class U9CController extends BaseController {
     public void synFixedField() throws Exception {
         List<FixedFiled> list = u9CService.getU9CFixedFiled();
         bpmService.insertFixedFiled(list);
+    }
+    /*
+    U9C的料品单价信息同步到BPM
+     */
+    @GetMapping("/synItemOfPrice")
+    @ResponseBody
+    public void synItemOfPrice() throws Exception {
+        List<FixedFiled> list = u9CService.getU9CFixedFiled();
+        bpmService.insertFixedFiled(list);
+    }
+    /*
+    BPM料品信息同步到U9C
+     */
+    @GetMapping("/synItemOf/{itemCode}")
+    @ResponseBody
+    public AjaxResult synItemOf(@PathVariable("itemCode")String itemCode) throws Exception {
+        try{
+            ItemInfo itemInfo = new ItemInfo();
+            itemInfo.setCode(itemCode);
+            return u9CService.synItemOf(itemInfo);
+        }catch (Exception e){
+            return AjaxResult.error(StringUtils.format("调用U9C接口新增料品信息失败: " +  e.toString()));
+        }
+    }
+    /*
+    BPM批号主档信息同步到U9C
+     */
+    @GetMapping("/synItemOfLotCode/{itemCode}/{lotCode}/{preLevel}")
+    @ResponseBody
+    public void synItemOfLotCode(String itemCode,String lotCode,String preLevel) throws Exception {
+        ItemLotCodeInfo itemLotCodeInfo = new ItemLotCodeInfo();
+        itemLotCodeInfo.setItemCode(itemCode);
+        itemLotCodeInfo.setLotCode(lotCode);
+        itemLotCodeInfo.setPreLevel(preLevel);
+        u9CService.synItemOfLotCode(itemLotCodeInfo);
+    }
+    /*
+    BPM料品更新信息同步到U9C
+     */
+    @GetMapping("/updateItemOf/{itemCode}")
+    @ResponseBody
+    public AjaxResult updateItemOf(@PathVariable("itemCode")String itemCode) throws Exception {
+        try{
+            ItemInfo itemInfo = new ItemInfo();
+            itemInfo.setCode(itemCode);
+            return u9CService.updateItemOf(itemInfo);
+        }catch (Exception e){
+            return AjaxResult.error(StringUtils.format("调用U9C接口修改料品信息失败: " +  e.toString()));
+        }
+    }
+    /*
+    BPM批号主档信息同步到U9C
+     */
+    @GetMapping("/updateItemOfLotCode/{itemCode}")
+    @ResponseBody
+    public void updateItemOfLotCode(String itemCode) throws Exception {
+        ItemLotCodeInfo itemLotCodeInfo = new ItemLotCodeInfo();
+        itemLotCodeInfo.setItemCode(itemCode);
+        u9CService.synItemOfLotCode(itemLotCodeInfo);
+    }
+    @GetMapping("/getPrice/{itemCode}")
+    @ResponseBody
+    public String getPrice(String itemCode) throws Exception {
+        return "1111";
+    }
+    @GetMapping("/synCustomer")
+    @ResponseBody
+    public void synCustomer() throws Exception {
+        List<Customer> list = u9CService.getU9CCustomerInfo();
+        bpmService.insertCustomer(list);
     }
 }

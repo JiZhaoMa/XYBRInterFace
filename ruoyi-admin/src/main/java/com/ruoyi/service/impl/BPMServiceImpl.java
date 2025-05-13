@@ -19,6 +19,7 @@ import com.ruoyi.service.BPMSalveDataSourceService;
 import com.ruoyi.service.BPMService;
 import com.ruoyi.service.U9CService;
 import com.ruoyi.task.U9COrgTask;
+import com.ruoyi.u9c.domain.ItemInfo;
 import com.ruoyi.u9c.domain.POLine;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -213,6 +214,33 @@ public class BPMServiceImpl implements BPMService {
     @Override
     public List<PatentRemind> getPatentList() {
         return bpmMapper.getPatentList();
+    }
+
+    @Override
+    public List<ItemInfo> getItemInfoList() {
+        return bpmMapper.getItemInfoList();
+    }
+
+    @Override
+    public int updateItemOverRallPrice() {
+        bpmMapper.updateItemXYOverRallPrice();
+        return bpmMapper.updateItemRdmOverRallPrice();
+    }
+
+    @Override
+    public int updateItemPrice(ItemInfo itemInfo) {
+        return bpmMapper.updateItemPrice(itemInfo);
+    }
+
+    @Override
+    public int InsertItemPrice(ItemInfo itemInfo) {
+        return bpmMapper.InsertItemPrice(itemInfo);
+    }
+
+    @Override
+    public int insertCustomer(List<Customer> list) {
+        bpmMapper.deleteCustomer();
+        return bpmMapper.insertCustomer(list);
     }
 
     public JSONObject pushU9CPOLine(JSONArray POJsonArray) throws Exception {

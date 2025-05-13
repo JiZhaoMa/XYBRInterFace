@@ -49,6 +49,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="payDate"     column="payDate"/>
         <result property="mailTo"     column="mailTo"/>
     </resultMap>
+    <resultMap type="ItemInfo" id="ItemInfoResult">
+        <result property="code"          column="code"/>
+        <result property="supplier"      column="supplier"/>
+        <result property="lotCode"       column="lotCode"/>
+        <result property="price"         column="price"/>
+        <result property="sharingRatio"  column="sharingRatio"/>
+        <result property="purchAttr"     column="purchAttr"/>
+        <result property="itemStatus"      column="itemStatus"/>
+    </resultMap>
     <select id="getDepartList" resultMap="DepartmentResult">
         SELECT
             a.NAME AS deptName,
@@ -82,6 +91,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             (#{item.id},#{item.code},#{item.name})
         </foreach>
     </insert>
+    <insert id="insertCustomer" parameterType="java.util.List">
+        insert into activity.tem_customer(ID, CODE, NAME) values
+        <foreach item="item" index="index" collection="list" separator=",">
+            (#{item.ID},#{item.code},#{item.customer})
+        </foreach>
+    </insert>
+    <delete id="deleteCustomer">
+        DELETE FROM activity.tem_customer
+    </delete>
     <delete id="deleteFixedFiled">
         DELETE FROM activity.tem_fixedfiled
     </delete>
@@ -175,4 +193,60 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             (SELECT `ITEM_邮箱` FROM tlk_邮箱管理 WHERE `ITEM_邮箱类型` = '知识产权管理员' LIMIT 1) AS  mailTo
         FROM rdm.`tlk_知识产权` WHERE (`ITEM_专利进度` = '发证' OR  `ITEM_专利进度` = '授权待发证') AND DATE_FORMAT(DATE_ADD(`ITEM_受理通知书申请日`, INTERVAL -1 MONTH),'%m') = DATE_FORMAT(NOW(),'%m')
     </select>
+    <select id="getItemInfoList"  resultMap="ItemInfoResult">
+        SELECT
+            b.`ITEM_器件编码` AS code,
+            b.`ITEM_编码状态` AS itemStatus,
+            b.`ITEM_采购属性` AS purchAttr,
+            a.`ITEM_批号` AS lotCode,
+            a.`ITEM_供应商编码` AS supplier
+        FROM rdm.`tlk_研发器件库厂家型号表` a, rdm.`tlk_研发器件库` b
+        WHERE a.PARENT = b.ID AND b.`ITEM_编码状态` = '已认证' AND b.`ITEM_采购属性` != ''
+        UNION
+        SELECT
+            b.`ITEM_器件编码` AS code,
+            b.`ITEM_编码状态` AS itemStatus,
+            b.`ITEM_采购属性` AS purchAttr,
+            a.`ITEM_批号` AS lotCode,
+            a.`ITEM_供应商编码` AS supplier
+        FROM rdm.`tlk_研发器件库厂家型号表` a, rdm.`tlk_研发器件库` b
+        WHERE a.PARENT = b.ID AND b.`ITEM_编码状态` != '已认证'
+    </select>
+    <insert id="InsertItemPrice">
+        insert into activity.tem_itemprice(itemCode, lotCode, supplier,price,sharingRatio) values
+        (#{code},#{lotCode},#{supplier},#{price},#{sharingRatio})
+    </insert>
+    <update id="updateItemPrice">
+        <if test="itemStatus =='已认证'">
+            <if test="purchAttr =='星源'">
+                UPDATE rdm.`tlk_研发器件库` a, rdm.`tlk_器件库单价信息表` b
+                SET b.ITEM_单价 = #{price}
+                WHERE a.`ITEM_器件编码` = #{code} AND a.ID = b.PARENT AND b.`ITEM_采购方` = '西安星源博锐新能源技术有限公司'
+            </if>
+            <if test="purchAttr =='外协'">
+                UPDATE rdm.`tlk_研发器件库` a, rdm.`tlk_器件库单价信息表` b
+                SET b.ITEM_单价 = #{price}
+                WHERE a.`ITEM_器件编码` = #{code} AND a.ID = b.PARENT AND b.`ITEM_采购方` = #{supplier}
+            </if>
+        </if>
+        <if test="itemStatus !='已认证'">
+            UPDATE rdm.`tlk_研发器件库` a, rdm.`tlk_研发器件库厂家型号表` b
+            SET b.ITEM_单价 = #{price}
+            WHERE a.`ITEM_器件编码` = #{code} AND a.ID = b.PARENT AND b.`ITEM_供应商编码` = #{supplier} AND b.`ITEM_批号` = #{lotCode}
+        </if>
+    </update>
+    <update id="updateItemOverRallPrice">
+        UPDATE rdm.tlk_器件库单价信息表 AS price_info
+            JOIN (
+            SELECT model.PARENT, SUM(model.ITEM_单价 * model.ITEM_分摊比) AS weighted_avg_price
+            FROM rdm.tlk_研发器件库 AS device JOIN rdm.tlk_研发器件库厂家型号表 AS model ON device.ID = model.PARENT WHERE device.ITEM_编码状态 = '已认证' AND device.ITEM_采购属性 = '星源' AND (model.ITEM_单价 != null OR model.ITEM_单价 > 0) AND model.ITEM_分摊比 != null
+            GROUP BY model.PARENT
+            UNION
+            SELECT model.PARENT, SUM(model.ITEM_单价) / COUNT(1) AS weighted_avg_price
+            FROM rdm.tlk_研发器件库 AS device JOIN rdm.tlk_研发器件库厂家型号表 AS model ON device.ID = model.PARENT WHERE device.ITEM_编码状态 != '已认证' AND (model.ITEM_单价 != null OR model.ITEM_单价 > 0)
+            GROUP BY model.PARENT
+            ) AS weighted_avg
+        ON price_info.PARENT = weighted_avg.PARENT
+            SET price_info.ITEM_单价 = weighted_avg.weighted_avg_price
+    </update>
 </mapper>

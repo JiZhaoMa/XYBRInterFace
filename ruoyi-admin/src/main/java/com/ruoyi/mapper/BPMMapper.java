@@ -1,6 +1,7 @@
 package com.ruoyi.mapper;
 
 import com.ruoyi.domain.*;
+import com.ruoyi.u9c.domain.ItemInfo;
 import com.ruoyi.u9c.domain.POLine;
 import org.apache.ibatis.annotations.Param;
 
@@ -23,4 +24,11 @@ public interface BPMMapper {
     public List<ArriveQty> getCaiGouDetail();
     public int updateArriveQty(ArriveQty arriveQty);
     public List<PatentRemind> getPatentList();
+    public List<ItemInfo> getItemInfoList();
+    public int updateItemXYOverRallPrice();
+    public int updateItemRdmOverRallPrice();
+    public int updateItemPrice(ItemInfo itemInfo);
+    public int InsertItemPrice(ItemInfo itemInfo);
+    public int insertCustomer(List<Customer> list);
+    public int deleteCustomer();
 }

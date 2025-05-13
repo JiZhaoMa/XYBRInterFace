@@ -56,7 +56,7 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
     @Override
-    public List<ProjectBudget> getProjectBudget(ProjectBudget projectBudget) {
+    public ProjectBudget getProjectBudget(ProjectBudget projectBudget) {
         return projectMapper.getProjectBudget(projectBudget);
     }
 

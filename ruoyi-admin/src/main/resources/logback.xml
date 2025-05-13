@@ -70,12 +70,15 @@
             <pattern>${log.pattern}</pattern>
         </encoder>
     </appender>
-	
 	<!-- 系统模块日志级别控制  -->
 	<logger name="com.ruoyi" level="info" />
 	<!-- Spring日志级别控制  -->
 	<logger name="org.springframework" level="warn" />
-
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss} %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
 	<root level="info">
 		<appender-ref ref="console" />
 	</root>

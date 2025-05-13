@@ -12,9 +12,10 @@ spring:
 #                username: xybr
 #                password: xybr@2024
 
-#                url: jdbc:mysql://192.168.32.199:3306/activity?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8&nullCatalogMeansCurrent=true
+#                enabled: true
+#                url: jdbc:mysql://123.249.26.42:3307/activity?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8&nullCatalogMeansCurrent=true&allowMultiQueries=true
 #                username: root
-#                password: Teemlink2010
+#                password: China2022@
 #                driver-class-name: com.mysql.cj.jdbc.Driver
 
 #                url: jdbc:mysql://localhost:3306/activity?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8&nullCatalogMeansCurrent=true
@@ -28,19 +29,19 @@ spring:
                 driver-class-name: com.mysql.cj.jdbc.Driver
             # 从库数据源
             slave:
-                # 从数据源开关/默认关闭
-#                enabled: true
-#                url: jdbc:mysql://192.168.31.52:3307/oa?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8&nullCatalogMeansCurrent=true&allowMultiQueries=true
-#                username: root
-#                password: Teemlink2010
-#                driver-class-name: com.mysql.cj.jdbc.Driver
+                 # 从数据源开关/默认关闭
+                enabled: true
+                url: jdbc:mysql://192.168.31.52:3307/oa?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8&nullCatalogMeansCurrent=true&allowMultiQueries=true
+                username: root
+                password: Teemlink2010
+                driver-class-name: com.mysql.cj.jdbc.Driver
 #            slave:
 #                # 从数据源开关/默认关闭
-                enabled: true
-                url: jdbc:mysql://123.249.26.42:3307/oa?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8&nullCatalogMeansCurrent=true&allowMultiQueries=true
-                username: root
-                password: China2022@
-                driver-class-name: com.mysql.cj.jdbc.Driver
+#                enabled: true
+#                url: jdbc:mysql://123.249.26.42:3307/oa?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8&nullCatalogMeansCurrent=true&allowMultiQueries=true
+#                username: root
+#                password: China2022@
+#                driver-class-name: com.mysql.cj.jdbc.Driver
             u9c:
                 # 从数据源开关/默认关闭
                 enabled: true
@@ -48,6 +49,11 @@ spring:
                 username: sa
                 password: XYBR@1234
                 driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
+#                enabled: true
+#                url: jdbc:sqlserver://192.168.31.11:1433;DatabaseName=U9cloud;useUnicode=true;characterEncoding=utf8
+#                username: sa
+#                password: cheasy*88341190
+#                driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
             # 初始连接数
             initialSize: 5
             # 最小连接池数量
@@ -110,7 +116,6 @@ spring:
                 max-active: 8
                 # #连接池最大阻塞等待时间（使用负值表示没有限制）
                 max-wait: -1ms
-
     mail:
         protocol: smtp
         # 配置 SMTP 服务器地址

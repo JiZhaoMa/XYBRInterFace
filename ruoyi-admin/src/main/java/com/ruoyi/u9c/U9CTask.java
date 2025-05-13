@@ -2,15 +2,13 @@ package com.ruoyi.u9c;
 
 import com.ruoyi.common.utils.StringUtils;
 import com.ruoyi.domain.ArriveQty;
+import com.ruoyi.domain.Customer;
 import com.ruoyi.domain.FixedFiled;
 import com.ruoyi.domain.Supplier;
 import com.ruoyi.mapper.U9CMapper;
 import com.ruoyi.service.BPMService;
 import com.ruoyi.service.U9CService;
-import com.ruoyi.u9c.domain.ARBill;
-import com.ruoyi.u9c.domain.InvTrans;
-import com.ruoyi.u9c.domain.SaleContract;
-import com.ruoyi.u9c.domain.Voucher;
+import com.ruoyi.u9c.domain.*;
 import com.ruoyi.u9c.service.*;
 import com.ruoyi.u9c.service.impl.ARBillServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,6 +40,8 @@ public class U9CTask {
     SaleContractBPMService saleContractBPMService;
     @Autowired
     SaleContractService saleContractService;
+    @Autowired
+    ItemOfPriceService itemOfPriceService;
     public void getItemInfoList() {
         List<InvTrans> list = invTransService.getInvTransList();
         if(list.size() > 0){
@@ -142,5 +142,18 @@ public class U9CTask {
                 bpmService.updateArriveQty(arriveQty);
             }
         }
+    }
+    /*
+    同步器件库单价
+     */
+    public void synItemOfPrice(){
+        itemOfPriceService.synItemOfPrice();
+    }
+    /*
+    同步U9C客户信息到BPM
+     */
+    public void synCustomer(){
+        List<Customer> list = u9CService.getU9CCustomerInfo();
+        bpmService.insertCustomer(list);
     }
 }

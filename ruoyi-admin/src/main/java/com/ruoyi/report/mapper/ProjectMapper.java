@@ -13,7 +13,7 @@ public interface ProjectMapper {
     Cost getCostRate(Cost cost);
     CostComp getCostComp(CostComp costComp);
     BudgetExpen getBudgetExpen(BudgetExpen budgetExpen);
-    List<ProjectBudget> getProjectBudget(ProjectBudget projectBudget);
+    ProjectBudget getProjectBudget(ProjectBudget projectBudget);
     List<EcLedger> getEcLedger(EcLedger ecLedger);
     List<ProjectChange> getProjectChange(ProjectChange projectChange);
     List<Project> getProject();

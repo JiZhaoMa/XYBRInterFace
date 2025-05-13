@@ -2,6 +2,7 @@ package com.ruoyi.service;
 
 import com.alibaba.fastjson.JSONObject;
 import com.ruoyi.domain.*;
+import com.ruoyi.u9c.domain.ItemInfo;
 import com.ruoyi.u9c.domain.POLine;
 import org.apache.ibatis.annotations.Param;
 
@@ -18,4 +19,9 @@ public interface BPMService {
     public List<ArriveQty> getCaiGouDetail();
     public int updateArriveQty(ArriveQty arriveQty);
     public List<PatentRemind> getPatentList();
+    public List<ItemInfo> getItemInfoList();
+    public int updateItemOverRallPrice();
+    public int updateItemPrice(ItemInfo itemInfo);
+    public int InsertItemPrice(ItemInfo itemInfo);
+    public int insertCustomer(List<Customer> list);
 }

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+		PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.api.mapper.MesPassRecordsMapper">
+
+	<insert id="insertRecords" parameterType="java.util.List">
+		insert into mes_pass_records(po, item_code, serial_no, station, station_time, result, logs, customer, receive_location, fact) values
+		<foreach item="item" index="index" collection="list" separator=",">
+			(#{item.po},#{item.itemCode},#{item.serialNo},#{item.station},#{item.stationTime},#{item.result},#{item.logs},#{item.customer},#{item.receivLocation},#{item.fact})
+		</foreach>
+	</insert>
+</mapper>

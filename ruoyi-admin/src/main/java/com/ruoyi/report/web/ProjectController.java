@@ -125,40 +125,40 @@ public class ProjectController extends BaseController {
         ProjectBudget pb = new ProjectBudget();
         pb.setType("预算");
         pb.setProjectCode(projectCode);
-        List<ProjectBudget> yusuanlist = projectService.getProjectBudget(pb);
+        ProjectBudget yusuanlist = projectService.getProjectBudget(pb);
         pb.setType("核算");
-        List<ProjectBudget> hesuanlist = projectService.getProjectBudget(pb);
+        ProjectBudget hesuanlist = projectService.getProjectBudget(pb);
         List<Integer> yusuan = new ArrayList<>();
         List<Integer> hesuan = new ArrayList<>();
-        if(yusuanlist.size() > 0){
-            yusuan.add(yusuanlist.get(0).getValue13());
-            yusuan.add(yusuanlist.get(0).getValue01());
-            yusuan.add(yusuanlist.get(0).getValue02());
-            yusuan.add(yusuanlist.get(0).getValue03());
-            yusuan.add(yusuanlist.get(0).getValue04());
-            yusuan.add(yusuanlist.get(0).getValue05());
-            yusuan.add(yusuanlist.get(0).getValue06());
-            yusuan.add(yusuanlist.get(0).getValue07());
-            yusuan.add(yusuanlist.get(0).getValue08());
-            yusuan.add(yusuanlist.get(0).getValue09());
-            yusuan.add(yusuanlist.get(0).getValue10());
-            yusuan.add(yusuanlist.get(0).getValue11());
-            yusuan.add(yusuanlist.get(0).getValue12());
+        if(yusuanlist != null){
+            yusuan.add(yusuanlist.getValue13());
+            yusuan.add(yusuanlist.getValue01());
+            yusuan.add(yusuanlist.getValue02());
+            yusuan.add(yusuanlist.getValue03());
+            yusuan.add(yusuanlist.getValue04());
+            yusuan.add(yusuanlist.getValue05());
+            yusuan.add(yusuanlist.getValue06());
+            yusuan.add(yusuanlist.getValue07());
+            yusuan.add(yusuanlist.getValue08());
+            yusuan.add(yusuanlist.getValue09());
+            yusuan.add(yusuanlist.getValue10());
+            yusuan.add(yusuanlist.getValue11());
+            yusuan.add(yusuanlist.getValue12());
         }
-        if(hesuan.size() > 0){
-            hesuan.add(hesuanlist.get(0).getValue13());
-            hesuan.add(hesuanlist.get(0).getValue01());
-            hesuan.add(hesuanlist.get(0).getValue02());
-            hesuan.add(hesuanlist.get(0).getValue03());
-            hesuan.add(hesuanlist.get(0).getValue04());
-            hesuan.add(hesuanlist.get(0).getValue05());
-            hesuan.add(hesuanlist.get(0).getValue06());
-            hesuan.add(hesuanlist.get(0).getValue07());
-            hesuan.add(hesuanlist.get(0).getValue08());
-            hesuan.add(hesuanlist.get(0).getValue09());
-            hesuan.add(hesuanlist.get(0).getValue10());
-            hesuan.add(hesuanlist.get(0).getValue11());
-            hesuan.add(hesuanlist.get(0).getValue12());
+        if(hesuanlist != null){
+            hesuan.add(hesuanlist.getValue13());
+            hesuan.add(hesuanlist.getValue01());
+            hesuan.add(hesuanlist.getValue02());
+            hesuan.add(hesuanlist.getValue03());
+            hesuan.add(hesuanlist.getValue04());
+            hesuan.add(hesuanlist.getValue05());
+            hesuan.add(hesuanlist.getValue06());
+            hesuan.add(hesuanlist.getValue07());
+            hesuan.add(hesuanlist.getValue08());
+            hesuan.add(hesuanlist.getValue09());
+            hesuan.add(hesuanlist.getValue10());
+            hesuan.add(hesuanlist.getValue11());
+            hesuan.add(hesuanlist.getValue12());
         }
         jsonObject.put("yusuanlist",yusuan);
         jsonObject.put("hesuanlist",hesuan);
