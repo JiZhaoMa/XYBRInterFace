@@ -173,6 +173,7 @@ public class U9CServiceImpl implements U9CService {
         descFlexFieldJson.put("PubDescSeg8",itemInfo.getReach()); //
 
         JSONObject purchInfoJson = new JSONObject();
+        purchInfoJson.put("BudgetControlType", -1); //预算控制方式
         purchInfoJson.put("PriceSource", 2); //取价来源
         purchInfoJson.put("QuotaSupplier",1); //配额供应商
         purchInfoJson.put("PurchaseQuotaMode",1); //配额方式

@@ -20,7 +20,7 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 
 
-@Component("u9cOrgTask")
+/*@Component("u9cOrgTask")*/
 public class U9COrgTask {
     private static final Logger log = LoggerFactory.getLogger(U9COrgTask.class);
     private static final String url = "http://120.46.188.100/u9c/webapi/";

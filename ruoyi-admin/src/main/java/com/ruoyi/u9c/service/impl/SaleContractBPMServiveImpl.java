@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class SaleContractServiveImpl implements SaleContractBPMService {
+public class SaleContractBPMServiveImpl implements SaleContractBPMService {
     @Autowired
     SaleContractBPMMapper saleContractBPMMapper;
 
@@ -21,5 +21,10 @@ public class SaleContractServiveImpl implements SaleContractBPMService {
             return saleContractBPMMapper.insertSaleContrace(list);
         }
         return 0;
+    }
+
+    @Override
+    public List<SaleContract> getSCList(String docId) {
+        return saleContractBPMMapper.getSCList(docId);
     }
 }

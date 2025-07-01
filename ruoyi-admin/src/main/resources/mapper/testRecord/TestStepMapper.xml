@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.testRecord.mapper.TestStepMapper">
+    <insert id="insert" parameterType="java.util.List">
+        INSERT INTO test_steps
+        (id,test_record_id,step_number,parent_step_id,test_item,display_name,spec_range,result,test_time,data_type,raw_data)
+        VALUES
+        <foreach collection="list" item="step" separator=",">
+            (
+            #{step.id},
+            #{step.testRecordId},
+            #{step.stepNumber}, <!-- 主步骤为null，子步骤自动关联 -->
+            #{step.parentStepId},
+            #{step.testItem},
+            #{step.displayName},
+            #{step.specRange},
+            #{step.result},
+            #{step.testTime},
+            #{step.dataType},
+            #{step.rawData}
+            )
+        </foreach>
+    </insert>
+</mapper>

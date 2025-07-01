@@ -12,48 +12,48 @@ spring:
 #                username: xybr
 #                password: xybr@2024
 
-#                enabled: true
+                enabled: true
 #                url: jdbc:mysql://123.249.26.42:3307/activity?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8&nullCatalogMeansCurrent=true&allowMultiQueries=true
 #                username: root
 #                password: China2022@
 #                driver-class-name: com.mysql.cj.jdbc.Driver
 
-#                url: jdbc:mysql://localhost:3306/activity?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8&nullCatalogMeansCurrent=true
-#                username: root
-#                password: chirspaul@3
-#                driver-class-name: com.mysql.cj.jdbc.Driver
-                enabled: true
-                url: jdbc:mysql://192.168.31.52:3307/activity?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8&nullCatalogMeansCurrent=true&allowMultiQueries=true
+                url: jdbc:mysql://localhost:3306/activity?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8&nullCatalogMeansCurrent=true
                 username: root
-                password: Teemlink2010
+                password: chirspaul@3
                 driver-class-name: com.mysql.cj.jdbc.Driver
-            # 从库数据源
-            slave:
-                 # 从数据源开关/默认关闭
-                enabled: true
-                url: jdbc:mysql://192.168.31.52:3307/oa?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8&nullCatalogMeansCurrent=true&allowMultiQueries=true
-                username: root
-                password: Teemlink2010
-                driver-class-name: com.mysql.cj.jdbc.Driver
-#            slave:
-#                # 从数据源开关/默认关闭
 #                enabled: true
-#                url: jdbc:mysql://123.249.26.42:3307/oa?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8&nullCatalogMeansCurrent=true&allowMultiQueries=true
+#                url: jdbc:mysql://192.168.31.23:3306/activity?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8&nullCatalogMeansCurrent=true&allowMultiQueries=true
 #                username: root
-#                password: China2022@
+#                password: xybr123456
 #                driver-class-name: com.mysql.cj.jdbc.Driver
-            u9c:
+            # 从库数据源
+#            slave:
+                 # 从数据源开关/默认关闭
+#                enabled: true
+#                url: jdbc:mysql://192.168.31.52:3307/oa?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8&nullCatalogMeansCurrent=true&allowMultiQueries=true
+#                username: root
+#                password: Teemlink2010
+#                driver-class-name: com.mysql.cj.jdbc.Driver
+            slave:
                 # 从数据源开关/默认关闭
                 enabled: true
-                url: jdbc:sqlserver://120.46.188.100:1433;DatabaseName=U9CEDB;useUnicode=true;characterEncoding=utf8
-                username: sa
-                password: XYBR@1234
-                driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
+                url: jdbc:mysql://123.249.26.42:3307/activity?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8&nullCatalogMeansCurrent=true&allowMultiQueries=true
+                username: root
+                password: China2022@
+                driver-class-name: com.mysql.cj.jdbc.Driver
+            u9c:
+                # 从数据源开关/默认关闭
 #                enabled: true
-#                url: jdbc:sqlserver://192.168.31.11:1433;DatabaseName=U9cloud;useUnicode=true;characterEncoding=utf8
+#                url: jdbc:sqlserver://120.46.188.100:1433;DatabaseName=U9CEDB;useUnicode=true;characterEncoding=utf8
 #                username: sa
-#                password: cheasy*88341190
+#                password: XYBR@1234
 #                driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
+                enabled: true
+                url: jdbc:sqlserver://192.168.31.11:1433;DatabaseName=U9cloud;useUnicode=true;characterEncoding=utf8
+                username: sa
+                password: cheasy*88341190
+                driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
             # 初始连接数
             initialSize: 5
             # 最小连接池数量

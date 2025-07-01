@@ -243,6 +243,16 @@ public class BPMServiceImpl implements BPMService {
         return bpmMapper.insertCustomer(list);
     }
 
+    @Override
+    public String getPriceByItemCode(String itemCode, String fact) {
+        return bpmMapper.getPriceByItemCode(itemCode,fact);
+    }
+
+    @Override
+    public String getProxyPrice(String product, String fact) {
+        return bpmMapper.getProxyPrice(product,fact);
+    }
+
     public JSONObject pushU9CPOLine(JSONArray POJsonArray) throws Exception {
         String param = JSONUtil.toJsonStr(POJsonArray);
         String token = getToken();

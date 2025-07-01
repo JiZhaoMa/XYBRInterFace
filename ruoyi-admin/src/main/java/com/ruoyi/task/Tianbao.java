@@ -26,7 +26,7 @@ import java.util.List;
  * @return: null
  * @throws: 
  **/
-@Component("tianBaoTask")
+/*@Component("tianBaoTask")*/
 public class Tianbao {
     private static final Logger log = LoggerFactory.getLogger(Tianbao.class);
     @Autowired

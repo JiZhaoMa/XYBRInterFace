@@ -1,61 +1,119 @@
 package com.ruoyi.testRecord.domain;
 
+import com.ruoyi.testRecord.config.IdGenerator;
 import lombok.Data;
 
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
 
-@Data
-@Entity
-@Table(name = "test_steps")
 public class TestStep {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
-    @ManyToOne
-    @JoinColumn(name = "file_id", nullable = false)
-    private TestFile file;
-
-    private Integer stepNumber;
-
-    @Column(length = 255)
+    private String id;
+    private String testRecordId;
+    private String stepNumber;
     private String testItem;
-
-    @Column(length = 255)
     private String displayName;
-
-    @Column(length = 255)
-    private String resultSpec;
-
-    @Column(length = 50)
-    private String productResult;
-
-    @Column(length = 50)
+    private String specRange;
+    private String result;
     private String testTime;
+    private String dataType;    // MAIN或DETAIL
+    private String rawData;     // 存储详细数据的JSON
+    private String parentStepId;
+    private List<TestStep> details; // 子步骤列表
 
-    @ManyToOne
-    @JoinColumn(name = "parent_step_id")
-    private TestStep parentStep;
+    public String getDataType() {
+        return dataType;
+    }
 
-    @Column(length = 255)
-    private String detailName;
+    public void setDataType(String dataType) {
+        this.dataType = dataType;
+    }
 
-    @Column(length = 255)
-    private String detailSpec;
+    public String getParentStepId() {
+        return parentStepId;
+    }
 
-    @Column(length = 255)
-    private String detailValue;
+    public void setParentStepId(String parentStepId) {
+        this.parentStepId = parentStepId;
+    }
 
-    @Column(updatable = false)
-    private Date createTime;
+    public String getRawData() {
+        return rawData;
+    }
 
-    @OneToMany(mappedBy = "parentStep", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<TestStep> details;
+    public void setRawData(String rawData) {
+        this.rawData = rawData;
+    }
 
-    @PrePersist
-    protected void onCreate() {
-        createTime = new Date();
+    public List<TestStep> getDetails() {
+        return details;
+    }
+
+    public void setDetails(List<TestStep> details) {
+        this.details = details;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getTestRecordId() {
+        return testRecordId;
+    }
+
+    public void setTestRecordId(String testRecordId) {
+        this.testRecordId = testRecordId;
+    }
+
+    public String getStepNumber() {
+        return stepNumber;
+    }
+
+    public void setStepNumber(String stepNumber) {
+        this.stepNumber = stepNumber;
+    }
+
+    public String getTestItem() {
+        return testItem;
+    }
+
+    public void setTestItem(String testItem) {
+        this.testItem = testItem;
+    }
+
+    public String getDisplayName() {
+        return displayName;
+    }
+
+    public void setDisplayName(String displayName) {
+        this.displayName = displayName;
+    }
+
+    public String getSpecRange() {
+        return specRange;
+    }
+
+    public void setSpecRange(String specRange) {
+        this.specRange = specRange;
+    }
+
+    public String getResult() {
+        return result;
+    }
+
+    public void setResult(String result) {
+        this.result = result;
+    }
+
+    public String getTestTime() {
+        return testTime;
+    }
+
+    public void setTestTime(String testTime) {
+        this.testTime = testTime;
     }
 }

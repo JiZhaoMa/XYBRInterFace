@@ -18,4 +18,10 @@ public class SaleContractServiceImpl implements SaleContractService {
     public List<SaleContract> getSaleContractList() {
         return saleContractMapper.getSaleContractList();
     }
+
+    @Override
+    public int updateTotalMnyTC(List<SaleContract> list) {
+        saleContractMapper.updateSC(list.get(0));
+        return saleContractMapper.updateTotalMnyTC(list);
+    }
 }

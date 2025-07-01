@@ -31,4 +31,6 @@ public interface BPMMapper {
     public int InsertItemPrice(ItemInfo itemInfo);
     public int insertCustomer(List<Customer> list);
     public int deleteCustomer();
+    public String getPriceByItemCode(@Param("itemCode") String itemCode,@Param("fact") String fact);
+    public String getProxyPrice(@Param("product") String product,@Param("fact") String fact);
 }

@@ -4,11 +4,20 @@ public class SaleContract {
     private String docNo;
     private String businessDate;
     private String itemName;
+    private String itemCode;
     private int orderPrice;
     private int contactQtyPU;
-    private int totalMnyTC;
+    private float totalMnyTC;
     private String customerName;
     private int deliverQty;
+
+    public String getItemCode() {
+        return itemCode;
+    }
+
+    public void setItemCode(String itemCode) {
+        this.itemCode = itemCode;
+    }
 
     public String getDocNo() {
         return docNo;
@@ -50,11 +59,11 @@ public class SaleContract {
         this.contactQtyPU = contactQtyPU;
     }
 
-    public int getTotalMnyTC() {
+    public float getTotalMnyTC() {
         return totalMnyTC;
     }
 
-    public void setTotalMnyTC(int totalMnyTC) {
+    public void setTotalMnyTC(float totalMnyTC) {
         this.totalMnyTC = totalMnyTC;
     }
 

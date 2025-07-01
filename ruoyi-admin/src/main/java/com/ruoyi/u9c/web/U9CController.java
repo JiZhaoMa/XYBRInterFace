@@ -15,8 +15,11 @@ import com.ruoyi.service.U9CService;
 import com.ruoyi.u9c.domain.InvTrans;
 import com.ruoyi.u9c.domain.ItemInfo;
 import com.ruoyi.u9c.domain.ItemLotCodeInfo;
+import com.ruoyi.u9c.domain.SaleContract;
 import com.ruoyi.u9c.service.InvTransBpmServive;
 import com.ruoyi.u9c.service.InvTransService;
+import com.ruoyi.u9c.service.SaleContractBPMService;
+import com.ruoyi.u9c.service.SaleContractService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -25,6 +28,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.websocket.server.PathParam;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -41,6 +45,10 @@ public class U9CController extends BaseController {
     InvTransBpmServive invTransBpmServive;
     @Autowired
     BPMService bpmService;
+    @Autowired
+    SaleContractBPMService saleContractBPMService;
+    @Autowired
+    SaleContractService saleContractService;
     @GetMapping("/getAssetCode/{assetCard}")
     @ResponseBody
     public JSONObject getAssetCode(@PathVariable("assetCard")String assetCard)
@@ -190,15 +198,26 @@ public class U9CController extends BaseController {
         itemLotCodeInfo.setItemCode(itemCode);
         u9CService.synItemOfLotCode(itemLotCodeInfo);
     }
-    @GetMapping("/getPrice/{itemCode}")
+    @GetMapping("/getPrice")
     @ResponseBody
-    public String getPrice(String itemCode) throws Exception {
-        return "1111";
+    public String getPrice(@PathParam("itemCode") String itemCode, @PathParam("fact")String fact) throws Exception {
+        return bpmService.getPriceByItemCode(itemCode,fact);
+    }
+    @GetMapping("/getProxyPrice")
+    @ResponseBody
+    public String getProxyPrice(@PathParam("product") String product, @PathParam("fact")String fact) throws Exception {
+        return bpmService.getProxyPrice(product,fact);
     }
     @GetMapping("/synCustomer")
     @ResponseBody
     public void synCustomer() throws Exception {
         List<Customer> list = u9CService.getU9CCustomerInfo();
         bpmService.insertCustomer(list);
+    }
+    @GetMapping("/updateTotalMnyTC")
+    @ResponseBody
+    public void updateTotalMnyTC(@PathParam("docId") String docId) throws Exception {
+        List<SaleContract> list = saleContractBPMService.getSCList(docId);
+        saleContractService.updateTotalMnyTC(list);
     }
 }

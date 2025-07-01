@@ -24,4 +24,6 @@ public interface BPMService {
     public int updateItemPrice(ItemInfo itemInfo);
     public int InsertItemPrice(ItemInfo itemInfo);
     public int insertCustomer(List<Customer> list);
+    public String getPriceByItemCode(String itemCode,String fact);
+    public String getProxyPrice(String product,String fact);
 }

@@ -12,18 +12,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="parentU9cCode"       column="parentU9cCode"/>
     </resultMap>
     <resultMap type="User" id="UserResult">
-        <result property="u9cCode"        column="u9cCode"/>
-        <result property="name"             column="name"/>
+        <result property="u9cCode"             column="u9cCode"/>
+        <result property="name"                column="name"/>
         <result property="deptId"              column="deptId"/>
     </resultMap>
     <resultMap type="Supplier" id="SupplierResult">
-        <result property="id"        column="id"/>
-        <result property="name"             column="name"/>
+        <result property="id"                column="id"/>
+        <result property="name"              column="name"/>
         <result property="code"              column="code"/>
     </resultMap>
     <resultMap type="FixedFiled" id="FixedFiledResult">
-        <result property="id"        column="id"/>
-        <result property="name"             column="name"/>
+        <result property="id"                column="id"/>
+        <result property="name"              column="name"/>
         <result property="code"              column="code"/>
     </resultMap>
     <resultMap type="ArriveQty" id="ArriveQtyResult">
@@ -31,6 +31,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="itemCode"     column="itemCode"/>
         <result property="lotCode"      column="lotCode"/>
         <result property="activityQty"  column="activityQty"/>
+        <result property="arrDate"      column="arrDate"/>
     </resultMap>
     <resultMap type="ItemInfo" id="ItemInfoResult">
         <result property="code"          column="code"/>
@@ -108,7 +109,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             SrcDoc_SrcDocNo AS docNo,
             ItemInfo_ItemCode AS itemCode,
             POLotCode AS lotCode,
-            SUM(ArriveQtySU) AS activityQty
+            SUM(ArriveQtySU) AS activityQty,
+            MAX(CreatedOn) AS arrDate
         FROM [dbo].[PM_RcvLine]
         WHERE SrcDoc_SrcDocNo = #{docNo}
           AND ItemInfo_ItemCode = #{itemCode}
@@ -152,6 +154,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             #{itemStatus} AS itemStatus,
             #{purchAttr} AS purchAttr
         FROM PM_POLine
-        WHERE ID = (SELECT top 1 POLine FROM PM_POShipLine po1 WHERE po1.ItemInfo_ItemCode = #{code} AND po1.ItemLot_LotCode = #{lotCode} order by po1.CreatedOn desc)
+        WHERE ID = (SELECT top 1 POLine FROM PM_POShipLine po1 WHERE po1.ItemInfo_ItemCode = #{code} AND po1.ItemLot_LotCode = #{lotCode} order by po1.POLine desc)
     </select>
 </mapper>

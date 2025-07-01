@@ -10,6 +10,7 @@ import org.springframework.stereotype.Component;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
+import java.util.List;
 
 @Component
 public class Mail {
@@ -26,6 +27,20 @@ public class Mail {
             MimeMessageHelper helper = new MimeMessageHelper(message);
             helper.setFrom(from);
             helper.setTo(to);
+            helper.setSubject(subject);
+            helper.setText(content ,true);
+            mailSender.send(helper.getMimeMessage());
+        } catch (MessagingException e) {
+            logger.error("发送邮件失败：" + e.getMessage());
+            throw new RuntimeException(e);
+        }
+    }
+    public void sendMailToList(List<String> to, String subject, String content) {
+        try {
+            MimeMessage message = mailSender.createMimeMessage();
+            MimeMessageHelper helper = new MimeMessageHelper(message);
+            helper.setFrom(from);
+            helper.setTo(to.toArray(new String[0]));
             helper.setSubject(subject);
             helper.setText(content ,true);
             mailSender.send(helper.getMimeMessage());

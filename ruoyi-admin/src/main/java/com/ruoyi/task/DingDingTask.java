@@ -20,7 +20,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@Component("dingDingTask")
+/*@Component("dingDingTask")*/
 public class DingDingTask {
     private static final Logger log = LoggerFactory.getLogger(Tianbao.class);
     private static final String url = "https://oapi.dingtalk.com/gettoken";

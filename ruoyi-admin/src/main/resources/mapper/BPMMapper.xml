@@ -184,7 +184,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
           AND `ITEM_数量` > `ITEM_到货数量`
     </select>
     <update id="updateArriveQty">
-        update rdm.tlk_采购明细 set ITEM_到货数量 = #{activityQty}, ITEM_到货时间 = NOW() WHERE `ITEM_合同编码` = #{docNo} AND `ITEM_物料编码` = #{itemCode} AND `ITEM_厂家规格型号` = #{lotCode}
+        update rdm.tlk_采购明细 set ITEM_到货数量 = #{activityQty}, ITEM_到货时间 = #{arrDate} WHERE `ITEM_合同编码` = #{docNo} AND `ITEM_物料编码` = #{itemCode} AND `ITEM_厂家规格型号` = #{lotCode}
     </update>
     <select id="getPatentList"  resultMap="PatentRemindResult">
         SELECT
@@ -198,8 +198,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             b.`ITEM_器件编码` AS code,
             b.`ITEM_编码状态` AS itemStatus,
             b.`ITEM_采购属性` AS purchAttr,
-            a.`ITEM_批号` AS lotCode,
-            a.`ITEM_供应商编码` AS supplier
+            a.`ITEM_批号` AS lotCode
         FROM rdm.`tlk_研发器件库厂家型号表` a, rdm.`tlk_研发器件库` b
         WHERE a.PARENT = b.ID AND b.`ITEM_编码状态` = '已认证' AND b.`ITEM_采购属性` != ''
         UNION
@@ -207,8 +206,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             b.`ITEM_器件编码` AS code,
             b.`ITEM_编码状态` AS itemStatus,
             b.`ITEM_采购属性` AS purchAttr,
-            a.`ITEM_批号` AS lotCode,
-            a.`ITEM_供应商编码` AS supplier
+            a.`ITEM_批号` AS lotCode
         FROM rdm.`tlk_研发器件库厂家型号表` a, rdm.`tlk_研发器件库` b
         WHERE a.PARENT = b.ID AND b.`ITEM_编码状态` != '已认证'
     </select>
@@ -226,22 +224,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="purchAttr =='外协'">
                 UPDATE rdm.`tlk_研发器件库` a, rdm.`tlk_器件库单价信息表` b
                 SET b.ITEM_单价 = #{price}
-                WHERE a.`ITEM_器件编码` = #{code} AND a.ID = b.PARENT AND b.`ITEM_采购方` = #{supplier}
+                WHERE a.`ITEM_器件编码` = #{code} AND a.ID = b.PARENT AND b.`ITEM_采购方编码` = #{supplier}
             </if>
         </if>
         <if test="itemStatus !='已认证'">
             UPDATE rdm.`tlk_研发器件库` a, rdm.`tlk_研发器件库厂家型号表` b
             SET b.ITEM_单价 = #{price}
-            WHERE a.`ITEM_器件编码` = #{code} AND a.ID = b.PARENT AND b.`ITEM_供应商编码` = #{supplier} AND b.`ITEM_批号` = #{lotCode}
+            WHERE a.`ITEM_器件编码` = #{code} AND a.ID = b.PARENT AND b.`ITEM_批号` = #{lotCode}
         </if>
     </update>
     <update id="updateItemOverRallPrice">
         UPDATE rdm.tlk_器件库单价信息表 AS price_info
             JOIN (
-            SELECT model.PARENT, SUM(model.ITEM_单价 * model.ITEM_分摊比) AS weighted_avg_price
-            FROM rdm.tlk_研发器件库 AS device JOIN rdm.tlk_研发器件库厂家型号表 AS model ON device.ID = model.PARENT WHERE device.ITEM_编码状态 = '已认证' AND device.ITEM_采购属性 = '星源' AND (model.ITEM_单价 != null OR model.ITEM_单价 > 0) AND model.ITEM_分摊比 != null
-            GROUP BY model.PARENT
-            UNION
             SELECT model.PARENT, SUM(model.ITEM_单价) / COUNT(1) AS weighted_avg_price
             FROM rdm.tlk_研发器件库 AS device JOIN rdm.tlk_研发器件库厂家型号表 AS model ON device.ID = model.PARENT WHERE device.ITEM_编码状态 != '已认证' AND (model.ITEM_单价 != null OR model.ITEM_单价 > 0)
             GROUP BY model.PARENT
@@ -249,4 +243,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         ON price_info.PARENT = weighted_avg.PARENT
             SET price_info.ITEM_单价 = weighted_avg.weighted_avg_price
     </update>
+    <select id="getPriceByItemCode" resultType="string">
+        SELECT rdm.GetItemPriceDirect(#{itemCode},#{fact})
+    </select>
+    <select id="getProxyPrice" resultType="string">
+        SELECT ITEM_代工费 FROM supply.tlk_代工费用 WHERE ITEM_代工厂 = #{fact} AND ITEM_产品 = #{product}
+    </select>
 </mapper>

@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>测试数据直通率</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            height: 100vh;
+            margin: 0;
+        }
+        .report-query{
+            height: 15%;
+            width: 100%;
+            background-color: #37a2da;
+            color: #FFF;
+            font-weight: bold;
+            justify-content: center;
+            align-items: center;
+            display: flex;
+        }
+        .report-plan-third{
+            height: 15%;
+            width: 90%;
+            position: absolute;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            left: 5%;
+            top: 70%;
+        }
+        .report-first{
+            height: 100%;
+            width: 20%;
+            justify-content: center;
+            align-items: center;
+            display: flex;
+            color: #bb2649;
+            font-weight: bold;
+        }
+        .report-row-first{
+            width: 90%;
+            height: 10%;
+            position: relative;
+            left: 3%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .report-row-second{
+            width: 90%;
+            height: 35%;
+            position: relative;
+            top: 5%;
+            left: 3%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .left{
+            width: 40%;
+            height: 100%;
+            border: 0.2px solid #0663A2;
+            border-radius: 10px 10px 10px 10px;
+        }
+        .title{
+            width: 40%;
+            height: 10%;
+            background-color: #FFFFFF;
+            color: #0663A2;
+            top: -6%;
+            position: relative;
+            text-align: center;
+            left: 5%;
+        }
+        .center{
+            width: 30%;
+            height: 100%;
+            left: 2%;
+            position: relative;
+            border: 0.2px solid #0663A2;
+            border-radius: 10px 10px 10px 10px;
+        }
+        .right{
+            width: 40%;
+            height: 100%;
+            left: 4%;
+            position: relative;
+            border: 0.2px solid #0663A2;
+            border-radius: 10px 10px 10px 10px;
+        }
+        .echarts-bar{
+            width: 95%;
+            height: 95%;
+            top: -5%;
+            left: 2%;
+        }
+        .select{
+            background-color: #37a2da;
+            color: #fff;
+            border: 0.2px solid #37a2da;
+            width: 35%;
+        }
+    </style>
+</head>
+<body id="body">
+<div class="report-query">
+
+</div>
+<div class="report-row-first">
+    <div class="report-first">
+        <span>综合直通率：</span>
+        <span id="countNum">98.50%</span>
+    </div>
+</div>
+<div class="report-row-second">
+    <div class="left">
+        <div class="title">
+            <span>直通率</span>
+        </div>
+        <div class="echarts-bar" id="reportGroupByDept"></div>
+    </div>
+    <div class="right">
+        <div class="title">
+            <span>测试项目失败排行榜</span>
+        </div>
+        <div class="echarts-bar" id="reportGroupByPerson"></div>
+    </div>
+</div>
+<div class="report-plan-third">
+    <div class="report-first">
+        <span>20kw综合直通率：</span>
+        <span id="countNum">98.50%</span>
+    </div>
+    <div class="report-first">
+        <span>30kw综合直通率：</span>
+        <span id="cheAnNum">98.50%</span>
+    </div>
+    <div class="report-first">
+        <span>40kw大综合直通率：</span>
+        <span id="xiaZhengNum">98.50%</span>
+    </div>
+    <div class="report-first">
+        <span>40kw小综合直通率：</span>
+        <span id="boHuiNum">98.50%</span>
+    </div>
+</div>
+<script type="text/javascript" th:src="@{/js/plugins/echarts.min.js}"></script>
+<script type="text/javascript" th:src="@{/js/xybr/report/appType.js}"></script>
+<script type="text/javascript" th:src="@{/js/xybr/report/reportYearAndNumber.js}"></script>
+<script type="text/javascript" th:src="@{/js/xybr/report/reportGroupByDept.js}"></script>
+<script type="text/javascript" th:src="@{/js/xybr/report/reportGroupByPerson.js}"></script>
+<script type="text/javascript" th:src="@{/js/xybr/report/reportGroupByProxy.js}"></script>
+<script type="text/javascript" th:src="@{/js/xybr/report/reportGroupByType.js}"></script>
+<script type="text/javascript" th:src="@{/js/jquery.min.js}"></script>
+<script type="text/javascript">
+
+</script>
+</body>
+</html>

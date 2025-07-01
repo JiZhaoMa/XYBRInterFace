@@ -17,8 +17,9 @@ import org.springframework.util.ObjectUtils;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
-@Component("u9cTask")
+/*@Component("u9cTask")*/
 public class U9CTask {
     @Autowired
     InvTransService invTransService;
@@ -42,9 +43,10 @@ public class U9CTask {
     SaleContractService saleContractService;
     @Autowired
     ItemOfPriceService itemOfPriceService;
-    public void getItemInfoList() {
+    public void getItemInfoList() throws InterruptedException {
         List<InvTrans> list = invTransService.getInvTransList();
         if(list.size() > 0){
+            TimeUnit.MINUTES.sleep(1);
             //删除料品库存历史信息
             invTransBpmServive.deleteInvTransHis();
             //插入历史信息表

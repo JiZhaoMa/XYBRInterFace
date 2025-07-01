@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 
-@Component("bpmTask")
+/*@Component("bpmTask")*/
 public class BpmTask {
     private static final Logger log = LoggerFactory.getLogger(BpmTask.class);
     @Autowired

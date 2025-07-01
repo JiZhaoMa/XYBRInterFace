@@ -4,8 +4,16 @@ public class ArriveQty {
     private String docNo;
     private String itemCode;
     private int activityQty;
-
     private String lotCode;
+    private String arrDate;
+
+    public String getArrDate() {
+        return arrDate;
+    }
+
+    public void setArrDate(String arrDate) {
+        this.arrDate = arrDate;
+    }
 
     public String getLotCode() {
         return lotCode;

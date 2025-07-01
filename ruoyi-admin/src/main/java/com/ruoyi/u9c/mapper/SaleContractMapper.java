@@ -7,4 +7,6 @@ import java.util.List;
 
 public interface SaleContractMapper {
     public List<SaleContract> getSaleContractList();
+    public int updateTotalMnyTC(List<SaleContract> list);
+    public int updateSC(SaleContract saleContract);
 }

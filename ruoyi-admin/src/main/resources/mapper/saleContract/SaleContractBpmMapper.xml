@@ -3,6 +3,11 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ruoyi.u9c.mapper.SaleContractBPMMapper">
+    <resultMap type="SaleContract" id="SaleContractResult">
+        <result property="docNo"         column="docNo"/>
+        <result property="itemCode"      column="itemCode"/>
+        <result property="totalMnyTC"    column="totalMnyTC"/>
+    </resultMap>
     <insert id="insertSaleContrace" parameterType="java.util.List">
         insert into report_salecontract(docNo, businessDate, itemName, orderPrice, contactQtyPU, totalMnyTC, customerName,deliverQty ) values
         <foreach item="item" index="index" collection="list" separator=",">
@@ -12,4 +17,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <delete id="deletSaleContrace">
         delete from report_salecontract
     </delete>
+    <select id="getSCList" resultMap="SaleContractResult">
+        SELECT
+            a.ITEM_产品编码 AS itemCode,
+            COALESCE(a.ITEM_总价, 0) AS totalMnyTC,
+            b.ITEM_星源合同编码 AS docNo
+        FROM marketsql.tlk_合同内容 a,marketsql.tlk_销售合同 b
+        WHERE b.ITEM_星源合同编码 = #{docNo} AND a.PARENT = b.ID
+    </select>
 </mapper>

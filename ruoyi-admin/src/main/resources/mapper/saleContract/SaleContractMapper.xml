@@ -40,4 +40,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
                 LEFT JOIN (SELECT SUM(OrderByQtyPU) as deliverQty,SaleContractLine  FROM [dbo].[SM_SOLine] GROUP BY SaleContractLine) d ON h.ID = d.SaleContractLine
         ORDER BY h.businessDate DESC
     </select>
+    <update id="updateTotalMnyTC">
+        <foreach item="sc" index="index" collection="list" separator=";">
+            UPDATE  a
+            SET a.TotalMnyTC = #{sc.totalMnyTC},
+            a.ShipperOrg = '1002301060110009'
+            FROM [dbo].[SM_SCLine] a
+            INNER JOIN [dbo].[SM_SaleContract] b ON a.SaleContract = b.ID
+            WHERE b.DocNo = #{sc.docNo} AND a.ItemInfo_ItemCode = #{sc.itemCode}
+        </foreach>
+    </update>
+    <update id="updateSC">
+        UPDATE [dbo].[SM_SaleContract] SET IsPriceIncludeTax = 1, ARTerm= '1002301060210059',PreRecObject= -1 WHERE DocNo = #{docNo}
+    </update>
 </mapper>

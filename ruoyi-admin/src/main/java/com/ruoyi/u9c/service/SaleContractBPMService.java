@@ -6,4 +6,5 @@ import java.util.List;
 
 public interface SaleContractBPMService {
     int insertSaleContrace(List<SaleContract> list);
+    public List<SaleContract> getSCList(String docId);
 }

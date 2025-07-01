@@ -7,4 +7,5 @@ import java.util.List;
 public interface SaleContractBPMMapper {
     int deletSaleContrace();
     int insertSaleContrace(List<SaleContract> list);
+    public List<SaleContract> getSCList(String docId);
 }

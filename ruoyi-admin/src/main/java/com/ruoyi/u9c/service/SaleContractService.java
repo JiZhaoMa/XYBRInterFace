@@ -6,4 +6,5 @@ import java.util.List;
 
 public interface SaleContractService {
     public List<SaleContract> getSaleContractList();
+    public int updateTotalMnyTC(List<SaleContract> list);
 }

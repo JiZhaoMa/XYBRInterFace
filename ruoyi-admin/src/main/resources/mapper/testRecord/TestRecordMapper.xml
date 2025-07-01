@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.testRecord.mapper.TestRecordMapper">
+    <resultMap type="TestRecord" id="TestRecordResult">
+        <result property="testItem"        column="test_item"/>
+        <result property="testStation"     column="test_station"/>
+        <result property="testProgram"     column="test_program"/>
+        <result property="barcode"         column="barcode"/>
+        <result property="filePath"        column="file_path"/>
+        <result property="failItem"        column="failItem"/>
+        <result property="startTime"       column="start_time"/>
+        <result property="fact"            column="fact"/>
+        <result property="productCode"     column="product_code"/>
+        <result property="project"         column="project"/>
+    </resultMap>
+    <insert id="insert" parameterType="com.ruoyi.testRecord.domain.TestRecord">
+        INSERT INTO activity.test_records
+        (id,barcode,product_code,test_station,test_program,test_result,start_time,test_duration,file_path,fact)
+        VALUES
+            (
+                #{id},
+                #{barcode},
+                #{productCode},
+                #{testStation},
+                #{testProgram},
+                #{testResult},
+                #{startTime},
+                #{testDuration},
+                #{filePath},
+                #{fact}
+            )
+    </insert>
+    <insert id="insertWarningHis" parameterType="com.ruoyi.testRecord.domain.TestRecord">
+        INSERT INTO activity.work_test_warning
+        (fact,product_code,project,barcode,test_time,test_station,test_program,test_item,file_path)
+        VALUES
+            (
+                #{fact},
+                #{productCode},
+                #{project},
+                #{barcode},
+                #{startTime},
+                #{testStation},
+                #{testProgram},
+                #{testItem},
+                #{filePath}
+            )
+    </insert>
+    <select id="queryFailData" resultMap="TestRecordResult">
+        SELECT
+            CONCAT(a.test_item,'-',a.display_name) AS test_item,
+            c.test_station,
+            c.test_program,
+            c.barcode,
+            c.file_path,
+            DATE_FORMAT(c.start_time, '%Y-%m-%d %H:%i:%s') AS start_time,
+            c.fact,
+            c.product_code,
+            (SELECT d.ITEM_项目名称 FROM rdm.tlk_研发器件库 d WHERE c.product_code = d.ITEM_器件编码 or d.ITEM_物料描述 like CONCAT('%',c.product_code,'%')) AS project
+        FROM activity.test_steps a,
+             (SELECT * FROM activity.`test_steps` WHERE ID = #{failItem}) b,
+             activity.test_records c
+        WHERE a.test_item = b.test_item
+          AND a.test_record_id = c.ID
+          AND a.result = 'FAIL'
+          AND c.test_station = #{testStation}
+          AND c.product_code = #{productCode}
+          AND c.start_time >= DATE_SUB(CURDATE(), INTERVAL 7 DAY)
+          ORDER BY c.start_time DESC
+    </select>
+    <select id="queryEmails" resultType="string">
+        SELECT ITEM_邮箱
+        FROM operation.tlk_工装测试预警邮箱配置
+    </select>
+    <select id="queryFolder" resultType="string">
+        SELECT ITEM_目录
+        FROM operation.tlk_工装测试文件目录
+    </select>
+    <select id="queryWarningHis" resultType="int">
+        SELECT COUNT(1) FROM  work_test_warning WHERE project = #{project} AND test_item = #{testItem} AND test_station= #{testStation} and DATE_FORMAT(create_time,'%Y-%m-%d') = DATE_FORMAT(NOW(),'%Y-%m-%d')
+    </select>
+</mapper>
