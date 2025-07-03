@@ -49,26 +49,30 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             )
     </insert>
     <select id="queryFailData" resultMap="TestRecordResult">
-        SELECT
-            CONCAT(a.test_item,'-',a.display_name) AS test_item,
-            c.test_station,
-            c.test_program,
-            c.barcode,
-            c.file_path,
-            DATE_FORMAT(c.start_time, '%Y-%m-%d %H:%i:%s') AS start_time,
-            c.fact,
-            c.product_code,
-            (SELECT d.ITEM_项目名称 FROM rdm.tlk_研发器件库 d WHERE c.product_code = d.ITEM_器件编码 or d.ITEM_物料描述 like CONCAT('%',c.product_code,'%')) AS project
-        FROM activity.test_steps a,
-             (SELECT * FROM activity.`test_steps` WHERE ID = #{failItem}) b,
-             activity.test_records c
-        WHERE a.test_item = b.test_item
-          AND a.test_record_id = c.ID
-          AND a.result = 'FAIL'
-          AND c.test_station = #{testStation}
-          AND c.product_code = #{productCode}
-          AND c.start_time >= DATE_SUB(CURDATE(), INTERVAL 7 DAY)
-          ORDER BY c.start_time DESC
+        SELECT h.* FROM (
+            SELECT
+                CONCAT(a.test_item,'-',a.display_name) AS test_item,
+                c.test_station,
+                c.test_program,
+                c.barcode,
+                c.file_path,
+                DATE_FORMAT(c.start_time, '%Y-%m-%d %H:%i:%s') AS start_time,
+                c.fact,
+                c.product_code,
+                (SELECT d.ITEM_项目名称 FROM rdm.tlk_研发器件库 d WHERE c.product_code = d.ITEM_器件编码 or d.ITEM_物料描述 like CONCAT('%',c.product_code,'%')) AS project
+            FROM activity.test_steps a,
+                 (SELECT * FROM activity.`test_steps` WHERE ID = #{failItem}) b,
+                 activity.test_records c
+            WHERE a.test_item = b.test_item
+              AND a.display_name = b.display_name
+              AND a.test_record_id = c.ID
+              AND a.result = 'FAIL'
+              AND c.test_station = #{testStation}
+              AND c.product_code = #{productCode}
+              AND c.start_time >= DATE_SUB(CURDATE(), INTERVAL 7 DAY)
+              ORDER BY c.start_time DESC
+            ) h
+        GROUP BY h.barcode
     </select>
     <select id="queryEmails" resultType="string">
         SELECT ITEM_邮箱
@@ -79,6 +83,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         FROM operation.tlk_工装测试文件目录
     </select>
     <select id="queryWarningHis" resultType="int">
-        SELECT COUNT(1) FROM  work_test_warning WHERE project = #{project} AND test_item = #{testItem} AND test_station= #{testStation} and DATE_FORMAT(create_time,'%Y-%m-%d') = DATE_FORMAT(NOW(),'%Y-%m-%d')
+        SELECT COUNT(1) FROM  work_test_warning WHERE product_code = #{productCode} AND project = #{project} AND test_item = #{testItem} AND test_station= #{testStation} and DATE_FORMAT(create_time,'%Y-%m-%d') = DATE_FORMAT(NOW(),'%Y-%m-%d')
     </select>
 </mapper>

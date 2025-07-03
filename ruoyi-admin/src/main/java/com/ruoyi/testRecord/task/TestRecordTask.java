@@ -32,7 +32,7 @@ public class TestRecordTask {
     TestRecordMapper testRecordMapper;
     public void queryList(Integer hours) throws InterruptedException {
         List<String> folders = testDataService.queryFolder();
-        ExecutorService executor = Executors.newFixedThreadPool(THREAD_POOL_SIZE);
+        ExecutorService executor = Executors.newFixedThreadPool(1);
         CountDownLatch latch = new CountDownLatch(1); // 用于等待所有任务完成
         Instant cutoffTime = Instant.now().minus(hours, ChronoUnit.HOURS);
         for (String folder : folders) {
